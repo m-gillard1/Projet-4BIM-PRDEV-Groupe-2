@@ -3,6 +3,13 @@ from tkinter import PhotoImage
 from PIL import Image,ImageTk
 
 
+
 # Create the main window
 root = tk.Tk()
 root.title("Face Determination Software")
+
+
+
+
+# Run the main loop
+root.mainloop()
