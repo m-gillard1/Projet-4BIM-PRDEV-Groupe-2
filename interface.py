@@ -69,7 +69,7 @@ view_main_image_frame.pack(side=tk.LEFT,fill=tk.Y)
 
 
 #Creation d'une jauge :
-def jauge(info,w,h):
+def jauge(place):
     max_val = 10
     value = tk.DoubleVar()
     value.set(5)
@@ -88,13 +88,17 @@ def jauge(info,w,h):
         canvas.create_rectangle(0,0,jauge_width,height,fill="green",outline="")
         
     def mouvement(click):
-    
+        dessin()
 
     #creation du canvas
     canvas = tk.Canvas(master,width = 200, height = 20)
     canvas.pack(padx=10,pady=10)
 
-        
+    #creation du slider
+    slider = tk.Scale(info,from_=0,to=max_value,orient=tk.VERTICAL,variable=value,command=mouvement)
+    slider.pack(fill=tk.y)
+
+    #Dessin
     dessin()
 
 
