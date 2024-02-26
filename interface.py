@@ -38,6 +38,8 @@ choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
 
 ######### --Modif for the left side-- #########
 
+
+
 ####### --Bottom side: selection des meilleures images-- ########
 
 best_choices_frame = tk.Frame(left_frame,width=left_width,height=left_height,bg="gray75")
@@ -50,6 +52,10 @@ best_choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
 # Create a grid of frames
 favorites = [[tk.Frame(best_choices_container_frame, bg="lightgreen") for _ in range(5)] for _ in range(2)]
 
+
+
+
+
 ######## --Top side: Selection d'une image et action dessus-- ########
 
 main_image_frame = tk.Frame(left_frame,width=left_width,height=(screen_height-left_height),bg="gray85")
@@ -60,6 +66,22 @@ modif_main_image_frame.pack(side=tk.RIGHT,fill=tk.Y)
 
 view_main_image_frame = tk.Frame(main_image_frame,width=(left_width-top_left_width),height=(screen_height-left_height),bg="gray82")
 view_main_image_frame.pack(side=tk.LEFT,fill=tk.Y)
+
+
+#Creation d'une jauge :
+def jauge(info):
+    max_val = 10
+    value = tk.DoubleVar()
+    value.set(5)
+
+    def dessin():
+
+    def mouvement(click):
+    
+
+    dessin()
+
+
 
 ###############################################################################
 
