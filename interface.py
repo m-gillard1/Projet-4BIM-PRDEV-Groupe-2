@@ -2,9 +2,48 @@ import tkinter as tk
 from tkinter import PhotoImage
 from PIL import Image,ImageTk
 
+########## __FONCTIONS__ ##########
+
 def toggle_fullscreen(event=None):
     root.attributes('-fullscreen', not root.attributes('-fullscreen'))
 
+#Creation d'une jauge :
+def jauge(place):
+    max_val = 10
+    value = tk.DoubleVar()
+    value.set(5)
+
+    def dessin():
+        width = canvas.winfo_width()
+        height = canvas.winfo_height()
+
+        #Dessin du background
+        canvas.create_rectangle(0,0,width,height,fill="lightgray",outline="")
+
+        #Calculer la largeure de la jauge basée sur la valeur actuelle
+        jauge_width = (value.get() / max_value) * width
+
+        #Dessin de la jauge
+        canvas.create_rectangle(0,0,jauge_width,height,fill="green",outline="")
+        
+    def mouvement(click):
+        dessin()
+
+    #creation du canvas
+    canvas = tk.Canvas(master,width = 200, height = 20)
+    canvas.pack(padx=10,pady=10)
+
+    #creation du slider
+    slider = tk.Scale(info,from_=0,to=max_value,orient=tk.VERTICAL,variable=value,command=mouvement)
+    slider.pack(fill=tk.y)
+
+    #Dessin
+    dessin()
+
+
+    
+########## __MAIN__ ##########
+    
 # Create the main window
 root = tk.Tk()
 root.title("Face Determination Software")
@@ -59,6 +98,7 @@ favorites = [[tk.Frame(best_choices_container_frame, bg="lightgreen") for _ in r
 ######## --Top side: Selection d'une image et action dessus-- ########
 
 main_image_frame = tk.Frame(left_frame,width=left_width,height=(screen_height-left_height),bg="gray85")
+
 main_image_frame.pack(side=tk.TOP,fill=tk.X)
 
 modif_main_image_frame = tk.Frame(main_image_frame,width=top_left_width,height=(screen_height-left_height),bg="gray80")
@@ -68,38 +108,7 @@ view_main_image_frame = tk.Frame(main_image_frame,width=(left_width-top_left_wid
 view_main_image_frame.pack(side=tk.LEFT,fill=tk.Y)
 
 
-#Creation d'une jauge :
-def jauge(place):
-    max_val = 10
-    value = tk.DoubleVar()
-    value.set(5)
 
-    def dessin():
-        width = canvas.winfo_width()
-        height = canvas.winfo_height()
-
-        #Dessin du background
-        canvas.create_rectangle(0,0,width,height,fill="lightgray",outline="")
-
-        #Calculer la largeure de la jauge basée sur la valeur actuelle
-        jauge_width = (value.get() / max_value) * width
-
-        #Dessin de la jauge
-        canvas.create_rectangle(0,0,jauge_width,height,fill="green",outline="")
-        
-    def mouvement(click):
-        dessin()
-
-    #creation du canvas
-    canvas = tk.Canvas(master,width = 200, height = 20)
-    canvas.pack(padx=10,pady=10)
-
-    #creation du slider
-    slider = tk.Scale(info,from_=0,to=max_value,orient=tk.VERTICAL,variable=value,command=mouvement)
-    slider.pack(fill=tk.y)
-
-    #Dessin
-    dessin()
 
 
 
