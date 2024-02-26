@@ -46,7 +46,8 @@ best_choices_container_frame =  tk.Frame(best_choices_frame,width=left_width*0.9
 best_choices_container_frame.pack(fill="both", expand=True)
 best_choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
 
-
+# Create a grid of frames
+favorites = [[tk.Frame(best_choices_container_frame, bg="lightgreen") for _ in range(5)] for _ in range(2)]
         
 # Bind toggle_fullscreen to F11 key
 root.bind("<F11>", toggle_fullscreen)
