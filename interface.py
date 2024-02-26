@@ -9,6 +9,7 @@ def toggle_fullscreen(event=None):
 
 #Creation d'une jauge :
 def jauge(place):
+    
     max_val = 10
     value = tk.DoubleVar()
     value.set(5)
@@ -21,7 +22,7 @@ def jauge(place):
         canvas.create_rectangle(0,0,width,height,fill="lightgray",outline="")
 
         #Calculer la largeure de la jauge basée sur la valeur actuelle
-        jauge_width = (value.get() / max_value) * width
+        jauge_width = (value.get() / max_val) * width
 
         #Dessin de la jauge
         canvas.create_rectangle(0,0,jauge_width,height,fill="green",outline="")
@@ -30,12 +31,12 @@ def jauge(place):
         dessin()
 
     #creation du canvas
-    canvas = tk.Canvas(master,width = 200, height = 20)
+    canvas = tk.Canvas(place,width = 200, height = 40)
     canvas.pack(padx=10,pady=10)
 
     #creation du slider
-    slider = tk.Scale(info,from_=0,to=max_value,orient=tk.VERTICAL,variable=value,command=mouvement)
-    slider.pack(fill=tk.y)
+    slider = tk.Scale(place,from_=0,to=max_val,orient=tk.VERTICAL,variable=value,command=mouvement)
+    slider.pack(fill=tk.Y)
 
     #Dessin
     dessin()
@@ -91,10 +92,6 @@ best_choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
 # Create a grid of frames
 favorites = [[tk.Frame(best_choices_container_frame, bg="lightgreen") for _ in range(5)] for _ in range(2)]
 
-
-
-
-
 ######## --Top side: Selection d'une image et action dessus-- ########
 
 main_image_frame = tk.Frame(left_frame,width=left_width,height=(screen_height-left_height),bg="gray85")
@@ -107,7 +104,7 @@ modif_main_image_frame.pack(side=tk.RIGHT,fill=tk.Y)
 view_main_image_frame = tk.Frame(main_image_frame,width=(left_width-top_left_width),height=(screen_height-left_height),bg="gray82")
 view_main_image_frame.pack(side=tk.LEFT,fill=tk.Y)
 
-
+jauge = jauge(modif_main_image_frame)
 
 
 
