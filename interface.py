@@ -18,7 +18,7 @@ left_width = screen_width * 3 // 7
 right_width = screen_width * 4 // 7
 choices_height = screen_height * 2 // 3
 left_height = screen_height * 3 // 8
-top_left_width = left_width * 2 // 5
+top_left_width = left_width * 9 // 20
 
 # Create frames for left and right sections
 left_frame = tk.Frame(root, width=left_width, height=screen_height, bg="gray80")
@@ -55,10 +55,11 @@ favorites = [[tk.Frame(best_choices_container_frame, bg="lightgreen") for _ in r
 main_image_frame = tk.Frame(left_frame,width=left_width,height=(screen_height-left_height),bg="gray85")
 main_image_frame.pack(side=tk.TOP,fill=tk.X)
 
+modif_main_image_frame = tk.Frame(main_image_frame,width=top_left_width,height=(screen_height-left_height),bg="gray80")
+modif_main_image_frame.pack(side=tk.RIGHT,fill=tk.Y)
 
-
-
-
+view_main_image_frame = tk.Frame(main_image_frame,width=(left_width-top_left_width),height=(screen_height-left_height),bg="gray82")
+view_main_image_frame.pack(side=tk.LEFT,fill=tk.Y)
 
 ###############################################################################
 
