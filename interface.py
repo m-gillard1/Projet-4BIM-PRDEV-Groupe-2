@@ -13,7 +13,7 @@ root.title("Face Determination Software")
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
 
-# Calculate the width for the left and right frames
+# Calculate the width and height
 left_width = screen_width * 3 // 7
 right_width = screen_width * 4 // 7
 choices_height = screen_height * 2 // 3
@@ -26,7 +26,7 @@ left_frame.pack(side=tk.LEFT, fill=tk.Y)
 right_frame.pack(side=tk.RIGHT, fill=tk.Y)
 
 
-# Modif for the right side
+######### --Modif for the right side-- #########
 
 choices_frame = tk.Frame(right_frame,width=right_width, height = choices_height, bg = "gray70")
 choices_frame.pack(side=tk.TOP, fill=tk.X)
@@ -35,13 +35,16 @@ choices_container_frame =  tk.Frame(choices_frame,width=right_width*0.9, height 
 choices_container_frame.pack(fill="both", expand=True)
 choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
 
-#Modif for the left side
-best_choices_frame = tk.Frame(left_frame,width=left_width,height=left_height,bg="gray10")
-rate_image_frame = tk.Frame(left_frame,width=left_width,height=(screen_height-left_height),bg="gray20")
+######### --Modif for the left side-- #########
+
+best_choices_frame = tk.Frame(left_frame,width=left_width,height=left_height,bg="gray75")
+rate_image_frame = tk.Frame(left_frame,width=left_width,height=(screen_height-left_height),bg="gray85")
 best_choices_frame.pack(side=tk.BOTTOM,fill = tk.X)
 rate_image_frame.pack(side=tk.TOP,fill=tk.X)
 
-
+best_choices_container_frame =  tk.Frame(best_choices_frame,width=left_width*0.95, height = left_height*0.95, bg = "white")
+best_choices_container_frame.pack(fill="both", expand=True)
+best_choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
 
 
         
