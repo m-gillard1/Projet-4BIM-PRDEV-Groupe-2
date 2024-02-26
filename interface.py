@@ -17,7 +17,8 @@ screen_height = root.winfo_screenheight()
 left_width = screen_width * 3 // 7
 right_width = screen_width * 4 // 7
 choices_height = screen_height * 2 // 3
-left_height = screen_height * 2 // 5
+left_height = screen_height * 3 // 8
+top_left_width = left_width * 2 // 5
 
 # Create frames for left and right sections
 left_frame = tk.Frame(root, width=left_width, height=screen_height, bg="gray80")
@@ -37,10 +38,10 @@ choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
 
 ######### --Modif for the left side-- #########
 
+####### --Bottom side: selection des meilleures images-- ########
+
 best_choices_frame = tk.Frame(left_frame,width=left_width,height=left_height,bg="gray75")
-rate_image_frame = tk.Frame(left_frame,width=left_width,height=(screen_height-left_height),bg="gray85")
 best_choices_frame.pack(side=tk.BOTTOM,fill = tk.X)
-rate_image_frame.pack(side=tk.TOP,fill=tk.X)
 
 best_choices_container_frame =  tk.Frame(best_choices_frame,width=left_width*0.95, height = left_height*0.95, bg = "white")
 best_choices_container_frame.pack(fill="both", expand=True)
@@ -48,7 +49,19 @@ best_choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
 
 # Create a grid of frames
 favorites = [[tk.Frame(best_choices_container_frame, bg="lightgreen") for _ in range(5)] for _ in range(2)]
-        
+
+######## --Top side: Selection d'une image et action dessus-- ########
+
+main_image_frame = tk.Frame(left_frame,width=left_width,height=(screen_height-left_height),bg="gray85")
+main_image_frame.pack(side=tk.TOP,fill=tk.X)
+
+
+
+
+
+
+###############################################################################
+
 # Bind toggle_fullscreen to F11 key
 root.bind("<F11>", toggle_fullscreen)
 
