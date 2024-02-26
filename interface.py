@@ -22,21 +22,26 @@ left_height = screen_height * 2 // 5
 # Create frames for left and right sections
 left_frame = tk.Frame(root, width=left_width, height=screen_height, bg="gray80")
 right_frame = tk.Frame(root, width=right_width, height=screen_height, bg="gray50")
-choices_frame = tk.Frame(right_frame,width=right_width, height = choices_height, bg = "gray70")
-container_frame =  tk.Frame(choices_frame,width=right_width*0.9, height = choices_height*0.9, bg = "white")
-best_choices_frame = tk.Frame(left_frame,width=left_width,height=left_height,bg="gray10")
-rate_image_frame = tk.Frame(left_frame,width=left_width,height=(screen_height-left_height),bg="gray20")
-
-# Pack the frames to the left and right respectively
 left_frame.pack(side=tk.LEFT, fill=tk.Y)
 right_frame.pack(side=tk.RIGHT, fill=tk.Y)
+
+
+# Modif for the right side
+
+choices_frame = tk.Frame(right_frame,width=right_width, height = choices_height, bg = "gray70")
 choices_frame.pack(side=tk.TOP, fill=tk.X)
+
+choices_container_frame =  tk.Frame(choices_frame,width=right_width*0.9, height = choices_height*0.9, bg = "white")
+choices_container_frame.pack(fill="both", expand=True)
+choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
+
+#Modif for the left side
+best_choices_frame = tk.Frame(left_frame,width=left_width,height=left_height,bg="gray10")
+rate_image_frame = tk.Frame(left_frame,width=left_width,height=(screen_height-left_height),bg="gray20")
 best_choices_frame.pack(side=tk.BOTTOM,fill = tk.X)
 rate_image_frame.pack(side=tk.TOP,fill=tk.X)
 
-# Create a frame to contain the grid of frames
-container_frame.pack(fill="both", expand=True)
-container_frame.place(relx=0.5,rely=0.5,anchor="center")
+
 
 
         
