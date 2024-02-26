@@ -75,9 +75,20 @@ def jauge(info):
     value.set(5)
 
     def dessin():
+        width = canvas.winfo_width()
+        height = canvas.winfo_height()
 
+        #Dessin du background
+        canvas.create_rectangle(0,0,width,height,fill="lightgray",outline="")
+
+        #Calculer la largeure de la jauge basée sur la valeur actuelle
+        jauge_width = (value.get() / max_value) * width
+
+        #Dessin de la jauge
+        canvas.create_rectangle(0,0,jauge_width,height,fill="green",outline="")
+        
     def mouvement(click):
-    
+        
 
     dessin()
 
