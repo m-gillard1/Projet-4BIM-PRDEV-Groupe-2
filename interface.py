@@ -14,32 +14,12 @@ def jauge(place):
     value = tk.DoubleVar()
     value.set(5)
 
-    def dessin():
-        width = canvas.winfo_width()
-        height = canvas.winfo_height()
-
-        #Dessin du background
-        canvas.create_rectangle(0,0,width,height,fill="lightgray",outline="")
-
-        #Calculer la largeure de la jauge basée sur la valeur actuelle
-        jauge_width = (value.get() / max_val) * width
-
-        #Dessin de la jauge
-        canvas.create_rectangle(0,0,jauge_width,height,fill="green",outline="")
-        
     def mouvement(click):
         dessin()
-
-    #creation du canvas
-    canvas = tk.Canvas(place,width = 200, height = 40)
-    canvas.pack(padx=10,pady=10)
 
     #creation du slider
     slider = tk.Scale(place,from_=0,to=max_val,orient=tk.VERTICAL,variable=value,command=mouvement)
     slider.pack(fill=tk.Y)
-
-    #Dessin
-    dessin()
 
 
     
