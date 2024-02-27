@@ -75,6 +75,25 @@ choices_container_frame =  tk.Frame(choices_frame,width=right_width*0.9, height 
 choices_container_frame.pack(fill="both", expand=True)
 choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
 
+######### Creation et ajout des boutons dans choices_container (en haut à droite)
+suspect_1 = tk.Button(choices_container_frame, text='suspect1' )
+suspect_1.grid(row=0,column=0)
+suspect_2 = tk.Button(choices_container_frame, text='suspect2' )
+suspect_2.grid(row=0,column=1)
+suspect_3 = tk.Button(choices_container_frame, text='suspect3' )
+suspect_3.grid(row=0,column=2)
+suspect_4 = tk.Button(choices_container_frame, text='suspect4' )
+suspect_4.grid(row=1,column=0)
+suspect_5 = tk.Button(choices_container_frame, text='suspect5' )
+suspect_5.grid(row=1,column=1)
+suspect_6 = tk.Button(choices_container_frame, text='suspect6' )
+suspect_6.grid(row=1,column=2)
+suspect_7 = tk.Button(choices_container_frame, text='suspect7' )
+suspect_7.grid(row=2,column=0)
+suspect_8 = tk.Button(choices_container_frame, text='suspect8' )
+suspect_8.grid(row=2,column=1)
+suspect_9 = tk.Button(choices_container_frame, text='suspect9' )
+suspect_9.grid(row=2,column=2)
 ######### --Modif for the left side-- #########
 
 
