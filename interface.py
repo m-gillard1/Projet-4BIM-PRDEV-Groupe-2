@@ -28,7 +28,7 @@ def jauge(place,h):
         dessin()
 
     #creation du slider
-    slider = tk.Scale(place,from_=0,to=max_val,orient=tk.VERTICAL,variable=value,command=mouvement,length = (h*0.50),resolution= 0.1)
+    slider = tk.Scale(place,from_=0,to=max_val,orient=tk.VERTICAL,variable=value,command=mouvement,length = (h*0.50),resolution= 0.1,bg="lightgray",highlightbackground="lightgray")
     slider.pack(side=tk.LEFT)
 
     
@@ -149,10 +149,10 @@ main_image_frame.pack(side=tk.TOP,fill=tk.X)
 modif_main_image_frame = tk.Frame(main_image_frame,width=top_left_width,height=(screen_height-left_height),bg="black")
 modif_main_image_frame.pack(side=tk.RIGHT,fill=tk.Y)
 
-jauge_frame = tk.Frame(modif_main_image_frame,width=jauge_width,height=(screen_height-left_height),bg="white")
+jauge_frame = tk.Frame(modif_main_image_frame,width=jauge_width,height=(screen_height-left_height),bg="lightgray")
 jauge_frame.pack(side=tk.LEFT,fill=tk.Y)
 
-buttons_modif_main_frame = tk.Frame(modif_main_image_frame,width=(top_left_width-jauge_width),height=(screen_height-left_height),bg="black")
+buttons_modif_main_frame = tk.Frame(modif_main_image_frame,width=(top_left_width-jauge_width),height=(screen_height-left_height),bg="lightgray")
 buttons_modif_main_frame.pack(side=tk.RIGHT,fill=tk.Y)
 
 
