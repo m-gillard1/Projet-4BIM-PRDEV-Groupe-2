@@ -152,12 +152,19 @@ modif_main_image_frame.pack(side=tk.RIGHT,fill=tk.Y)
 jauge_frame = tk.Frame(modif_main_image_frame,width=jauge_width,height=(screen_height-left_height),bg="lightgray")
 jauge_frame.pack(side=tk.LEFT,fill=tk.Y)
 
+jauge = jauge(jauge_frame,(screen_height-left_height))
+
 buttons_modif_main_frame = tk.Frame(modif_main_image_frame,width=(top_left_width-jauge_width),height=(screen_height-left_height),bg="lightgray")
 buttons_modif_main_frame.pack(side=tk.RIGHT,fill=tk.Y)
 
+button1 = tk.Button(buttons_modif_main_frame, text="Button 1")
+button1.pack(side=tk.TOP, fill=tk.X, padx=10, pady=5)
 
-jauge = jauge(jauge_frame,(screen_height-left_height))
+button2 = tk.Button(buttons_modif_main_frame, text="Button 2")
+button2.pack(side=tk.TOP, fill=tk.X, padx=10, pady=5)
 
+button3 = tk.Button(buttons_modif_main_frame, text="Button 3")
+button3.pack(side=tk.TOP, fill=tk.X, padx=10, pady=5)
 
 view_main_image_frame = tk.Frame(main_image_frame,width=(left_width-top_left_width),height=(screen_height-left_height),bg="lightgray")
 view_main_image_frame.pack(side=tk.LEFT,fill=tk.Y)
