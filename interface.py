@@ -12,8 +12,7 @@ def toggle_fullscreen(event=None):
 def Selected_Suspect_event(event):
     suspect = event.widget
     image_suspect = suspect.cget('image')
-    print(event.x)
-    suspect_principal = tk.Label(view_main_image_frame, image=image_suspect, padx=50, pady=50)
+    suspect_principal = tk.Label(view_main_image_frame , image=image_suspect, width=360, height=520)
     suspect_principal.pack()
     
 
