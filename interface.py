@@ -54,16 +54,20 @@ jauge_width = top_left_width * 2 // 15
 left_frame = tk.Frame(root, width=left_width, height=screen_height, bg="gray80")
 right_frame = tk.Frame(root, width=right_width, height=screen_height, bg="gray50")
 left_frame.pack(side=tk.LEFT, fill=tk.Y)
+left_frame.pack_propagate(False) 
 right_frame.pack(side=tk.RIGHT, fill=tk.Y)
+right_frame.pack_propagate(False) 
 
 
 ######### --Modif for the right side-- #########
 
 choices_frame = tk.Frame(right_frame,width=right_width, height = choices_height, bg = "gray70")
 choices_frame.pack(side=tk.TOP, fill=tk.X)
+choices_frame.pack_propagate(False) 
 
 choices_container_frame =  tk.Frame(choices_frame,width=right_width*0.9, height = choices_height*0.9, bg = "white")
 choices_container_frame.pack(fill="both", expand=True)
+choices_container_frame.pack_propagate(False) 
 choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
 
 ######### Creation et ajout des boutons dans choices_container (en haut à droite)
@@ -132,9 +136,11 @@ suspect_9.bind("<Button-1>", Selected_Suspect_event)
 
 best_choices_frame = tk.Frame(left_frame,width=left_width,height=left_height,bg="gray75")
 best_choices_frame.pack(side=tk.BOTTOM,fill = tk.X)
+best_choices_frame.pack_propagate(False) 
 
 best_choices_container_frame =  tk.Frame(best_choices_frame,width=left_width*0.95, height = left_height*0.95, bg = "white")
 best_choices_container_frame.pack(fill="both", expand=True)
+best_choices_container_frame.pack_propagate(False) 
 best_choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
 
 # Create a grid of frames
@@ -145,17 +151,21 @@ favorites = [[tk.Frame(best_choices_container_frame, bg="lightgreen") for _ in r
 
 main_image_frame = tk.Frame(left_frame,width=left_width,height=(screen_height-left_height),bg="gray85")
 main_image_frame.pack(side=tk.TOP,fill=tk.X)
+main_image_frame.pack_propagate(False) 
 
 modif_main_image_frame = tk.Frame(main_image_frame,width=top_left_width,height=(screen_height-left_height),bg="black")
 modif_main_image_frame.pack(side=tk.RIGHT,fill=tk.Y)
+modif_main_image_frame.pack_propagate(False) 
 
 jauge_frame = tk.Frame(modif_main_image_frame,width=jauge_width,height=(screen_height-left_height),bg="lightgray")
 jauge_frame.pack(side=tk.LEFT,fill=tk.Y)
+jauge_frame.pack_propagate(False) 
 
 jauge = jauge(jauge_frame,(screen_height-left_height))
 
 buttons_modif_main_frame = tk.Frame(modif_main_image_frame,width=(top_left_width-jauge_width),height=(screen_height-left_height),bg="lightgray")
 buttons_modif_main_frame.pack(side=tk.RIGHT,fill=tk.Y)
+buttons_modif_main_frame.pack_propagate(False) 
 
 button1 = tk.Button(buttons_modif_main_frame, text="Button 1")
 button1.pack(side=tk.TOP, fill=tk.X, padx=10, pady=5)
@@ -168,6 +178,7 @@ button3.pack(side=tk.TOP, fill=tk.X, padx=10, pady=5)
 
 view_main_image_frame = tk.Frame(main_image_frame,width=(left_width-top_left_width),height=(screen_height-left_height),bg="lightgray")
 view_main_image_frame.pack(side=tk.LEFT,fill=tk.Y)
+view_main_image_frame.pack_propagate(False) 
 
 photo_Q_mark = PhotoImage(file = "instruction.png")
 
