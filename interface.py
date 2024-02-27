@@ -7,6 +7,18 @@ from PIL import Image,ImageTk
 def toggle_fullscreen(event=None):
     root.attributes('-fullscreen', not root.attributes('-fullscreen'))
 
+#fonction appelée par les boutons suspects en haut à droite #
+
+def Selected_Suspect_event(event):
+    suspect = event.widget
+    image_suspect = suspect.cget('image')
+    print(event.x)
+    suspect_principal = tk.Label(view_main_image_frame, image=image_suspect, padx=50, pady=50)
+    suspect_principal.pack()
+    
+
+
+
 #Creation d'une jauge :
 def jauge(place):
     max_val = 10
@@ -78,48 +90,53 @@ choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
 ######### Creation et ajout des boutons dans choices_container (en haut à droite)
 photo_1 = PhotoImage(file = "image_sample/0_superposee.png") 
 photo_resized_1 = photo_1.subsample(3,3)
-suspect_1 = tk.Button(choices_container_frame, image = photo_resized_1 )
-suspect_1.grid(row=0,column=0)
+suspect_1 = tk.Button(choices_container_frame, image = photo_resized_1, command=lambda: Selected_Suspect_event)
+suspect_1.grid(row=0,column=0, padx=20, pady=5)
+suspect_1.bind("<Button-1>", Selected_Suspect_event)
 
 photo_2 = PhotoImage(file = "image_sample/1_superposee.png") 
 photo_resized_2 = photo_2.subsample(3,3)
 suspect_2 = tk.Button(choices_container_frame, image = photo_resized_2 )
-suspect_2.grid(row=0,column=1)
+suspect_2.grid(row=0,column=1, padx=20, pady=5)
 
 photo_3 = PhotoImage(file = "image_sample/2_superposee.png") 
 photo_resized_3 = photo_3.subsample(3,3)
 suspect_3 = tk.Button(choices_container_frame, image = photo_resized_3 )
-suspect_3.grid(row=0,column=2)
+suspect_3.grid(row=0,column=2, padx=20, pady=5)
 
 photo_4 = PhotoImage(file = "image_sample/3_superposee.png") 
 photo_resized_4 = photo_4.subsample(3,3)
 suspect_4 = tk.Button(choices_container_frame, image = photo_resized_4 )
-suspect_4.grid(row=1,column=0)
+suspect_4.grid(row=1,column=0, padx=20, pady=5)
 
 photo_5 = PhotoImage(file = "image_sample/4_superposee.png") 
 photo_resized_5 = photo_5.subsample(3,3)
 suspect_5 = tk.Button(choices_container_frame, image = photo_resized_5 )
-suspect_5.grid(row=1,column=1)
+suspect_5.grid(row=1,column=1, padx=20, pady=5)
 
 photo_6 = PhotoImage(file = "image_sample/5_superposee.png") 
 photo_resized_6 = photo_6.subsample(3,3)
 suspect_6 = tk.Button(choices_container_frame, image = photo_resized_6 )
-suspect_6.grid(row=1,column=2)
+suspect_6.grid(row=1,column=2, padx=20, pady=5)
 
 photo_7 = PhotoImage(file = "image_sample/6_superposee.png") 
 photo_resized_7 = photo_7.subsample(3,3)
 suspect_7 = tk.Button(choices_container_frame, image = photo_resized_7 )
-suspect_7.grid(row=2,column=0)
+suspect_7.grid(row=2,column=0, padx=20, pady=5)
 
 photo_8 = PhotoImage(file = "image_sample/7_superposee.png") 
 photo_resized_8 = photo_8.subsample(3,3)
 suspect_8 = tk.Button(choices_container_frame, image = photo_resized_8 )
-suspect_8.grid(row=2,column=1)
+suspect_8.grid(row=2,column=1, padx=20, pady=5)
 
 photo_9 = PhotoImage(file = "image_sample/8_superposee.png") 
 photo_resized_9 = photo_9.subsample(3,3)
 suspect_9 = tk.Button(choices_container_frame, image = photo_resized_9 )
-suspect_9.grid(row=2,column=2)
+suspect_9.grid(row=2,column=2, padx=20, pady=5)
+
+
+
+
 ######### --Modif for the left side-- #########
 
 
