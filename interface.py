@@ -18,7 +18,7 @@ def Selected_Suspect_event(event):
 
 
 #Creation d'une jauge :
-def jauge(place):
+def jauge(place,h):
     
     max_val = 10
     value = tk.DoubleVar()
@@ -28,7 +28,7 @@ def jauge(place):
         dessin()
 
     #creation du slider
-    slider = tk.Scale(place,from_=0,to=max_val,orient=tk.VERTICAL,variable=value,command=mouvement)
+    slider = tk.Scale(place,from_=0,to=max_val,orient=tk.VERTICAL,variable=value,command=mouvement,length = h*0.50,resolution= 0.1)
     slider.pack(fill=tk.Y)
 
 
@@ -140,22 +140,25 @@ best_choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
 # Create a grid of frames
 favorites = [[tk.Frame(best_choices_container_frame, bg="lightgreen") for _ in range(5)] for _ in range(2)]
 
+
 ######## --Top side: Selection d'une image et action dessus-- ########
 
 main_image_frame = tk.Frame(left_frame,width=left_width,height=(screen_height-left_height),bg="gray85")
 
 main_image_frame.pack(side=tk.TOP,fill=tk.X)
 
-modif_main_image_frame = tk.Frame(main_image_frame,width=top_left_width,height=(screen_height-left_height),bg="gray80")
+modif_main_image_frame = tk.Frame(main_image_frame,width=top_left_width,height=(screen_height-left_height),bg="black")
 modif_main_image_frame.pack(side=tk.RIGHT,fill=tk.Y)
 
-view_main_image_frame = tk.Frame(main_image_frame,width=(left_width-top_left_width),height=(screen_height-left_height),bg="gray82")
+view_main_image_frame = tk.Frame(main_image_frame,width=(left_width-top_left_width),height=(screen_height-left_height),bg="gray42")
 view_main_image_frame.pack(side=tk.LEFT,fill=tk.Y)
+
 photo_Q_mark = PhotoImage(file = "instruction.png")
+
 suspect_principal = tk.Label(view_main_image_frame , image=photo_Q_mark, width=360, height=520)
 suspect_principal.pack()
 
-jauge = jauge(modif_main_image_frame)
+jauge = jauge(modif_main_image_frame,(screen_height-left_height))
 
 
 
