@@ -28,9 +28,8 @@ def jauge(place,h):
         dessin()
 
     #creation du slider
-    slider = tk.Scale(place,from_=0,to=max_val,orient=tk.VERTICAL,variable=value,command=mouvement,length = h*0.50,resolution= 0.1)
-    slider.pack(side = tk.LEFT,fill=tk.Y)
-
+    slider = tk.Scale(place,from_=0,to=max_val,orient=tk.VERTICAL,variable=value,command=mouvement,length = (h*0.50),resolution= 0.1)
+    slider.pack(side=tk.LEFT)
 
     
 ########## __MAIN__ ##########
@@ -48,7 +47,7 @@ left_width = screen_width * 3 // 7
 right_width = screen_width * 4 // 7
 choices_height = screen_height * 2 // 3
 left_height = screen_height * 3 // 8
-top_left_width = left_width * 9 // 20
+top_left_width = left_width * 1 // 2
 jauge_width = top_left_width * 2 // 15
 
 # Create frames for left and right sections
@@ -160,13 +159,16 @@ buttons_modif_main_frame.pack(side=tk.RIGHT,fill=tk.Y)
 jauge = jauge(jauge_frame,(screen_height-left_height))
 
 
-view_main_image_frame = tk.Frame(main_image_frame,width=(left_width-top_left_width),height=(screen_height-left_height),bg="gray42")
+view_main_image_frame = tk.Frame(main_image_frame,width=(left_width-top_left_width),height=(screen_height-left_height),bg="lightgray")
 view_main_image_frame.pack(side=tk.LEFT,fill=tk.Y)
 
-#photo_Q_mark = PhotoImage(file = "instruction.png")
+photo_Q_mark = PhotoImage(file = "instruction.png")
 
-#suspect_principal = tk.Label(view_main_image_frame , image=photo_Q_mark, width=360, height=520,bg="lightgray")
-#suspect_principal.pack(side=tk.LEFT,fill=tk.Y)
+main_image_width = (left_width-top_left_width)
+main_image_height = (520*main_image_width) / 360
+
+suspect_principal = tk.Label(view_main_image_frame , image=photo_Q_mark, width=main_image_width, height=main_image_height,bg="lightgray")
+suspect_principal.pack(fill="both",expand=True)
 
 
 
