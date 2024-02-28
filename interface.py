@@ -60,16 +60,21 @@ right_frame.pack_propagate(False)
 
 
 ######### --Modif for the right side-- #########
-
+### choices frame = partie supérieur de la partie de droite ###
 choices_frame = tk.Frame(right_frame,width=right_width, height = choices_height, bg = "gray70")
 choices_frame.pack(side=tk.TOP, fill=tk.X)
 choices_frame.pack_propagate(False) 
 
+### intérieur de la partie supérieur de la partie de droite, contient les suspects ###
 choices_container_frame =  tk.Frame(choices_frame,width=right_width*0.9, height = choices_height*0.9, bg = "white")
 choices_container_frame.pack(fill="both", expand=True)
 choices_container_frame.pack_propagate(False) 
 choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
 
+### partie inférieur de la partie de droite, contient les boutons d'options ###
+Menu_Option_Frame = tk.Frame(right_frame,width=right_width*0.9, height = choices_height*0.4, bg = "gray10")
+Menu_Option_Frame.pack(side=tk.TOP, fill=tk.X)
+Menu_Option_Frame.pack_propagate(False) 
 ######### Creation et ajout des boutons dans choices_container (en haut à droite)
 photo_1 = PhotoImage(file = "image_vague_1/52_superposee.png") 
 photo_resized_1 = photo_1.subsample(3,3)
@@ -197,12 +202,12 @@ view_main_image_frame = tk.Frame(main_image_frame,width=(left_width-top_left_wid
 view_main_image_frame.pack(side=tk.LEFT,fill=tk.Y)
 view_main_image_frame.pack_propagate(False) 
 
-photo_Q_mark = PhotoImage(file = "instruction.png")
-
 main_image_width = (left_width-top_left_width)
 main_image_height = (520*main_image_width) / 360
 
-suspect_principal = tk.Label(view_main_image_frame , image=photo_Q_mark, width=main_image_width, height=main_image_height,bg="lightgray")
+### Label contenant l'image/texte en haut à gauche lors du lancement du logiciel, nécessaire car définissant taille des frames
+Image_Instruction = PhotoImage(file = "instruction.png")
+suspect_principal = tk.Label(view_main_image_frame , image=Image_Instruction, width=main_image_width, height=main_image_height,bg="lightgray")
 suspect_principal.pack(fill="both",expand=True)
 
 
