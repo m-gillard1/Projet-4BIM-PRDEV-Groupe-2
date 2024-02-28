@@ -16,7 +16,9 @@ def Selected_Suspect_event(event):
     suspect_principal.configure(image=image_suspect)
     
 
-
+def Restart_event(event):
+    suspect_principal.configure(image=Image_Instruction)
+    Vague_actuelle=1
 
 #Creation d'une jauge :
 def jauge(place,h):
@@ -154,8 +156,9 @@ suspect_12.bind("<Button-1>", Selected_Suspect_event)
 
 ##### Création et ajout des boutons dans le frame menu option #####
 
-Bouton_restart = tk.Button(Menu_Option_Frame,text='Start Over',height=12, width=20)
+Bouton_restart = tk.Button(Menu_Option_Frame,text='Start Over',height=12, width=20, command=lambda: Restart_event)
 Bouton_restart.grid(row=1, column=3, padx=100, pady=10)
+Bouton_restart.bind("<Button-1>", Restart_event)
 
 Bouton_refresh = tk.Button(Menu_Option_Frame,text='Refresh',height=12, width=20)
 Bouton_refresh.grid(row=1, column=2, padx=0, pady=10)
@@ -234,6 +237,9 @@ suspect_principal.pack(fill="both",expand=True)
 
 # Bind toggle_fullscreen to F11 key
 root.bind("<F11>", toggle_fullscreen)
+
+# Numéro de la vague de suspect présente en haut à droite initialement, incrémentée à chaque refresh
+Vague_actuelle = 1
 
 
 # Run the main loop
