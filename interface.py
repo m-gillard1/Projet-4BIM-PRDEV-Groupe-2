@@ -7,8 +7,9 @@ from PIL import Image,ImageTk
 def toggle_fullscreen(event=None):
     root.attributes('-fullscreen', not root.attributes('-fullscreen'))
 
-#fonction appelée par les boutons suspects en haut à droite #
 
+#fonction appelée par les boutons suspects en haut à droite #
+#remplace l'image du suspect selctionné en haut gauche pour le noter ensuite#
 def Selected_Suspect_event(event):
     suspect = event.widget
     image_suspect = suspect.cget('image')
@@ -60,6 +61,7 @@ right_frame.pack_propagate(False)
 
 
 ######### --Modif for the right side-- #########
+
 ### choices frame = partie supérieur de la partie de droite ###
 choices_frame = tk.Frame(right_frame,width=right_width, height = choices_height, bg = "gray70")
 choices_frame.pack(side=tk.TOP, fill=tk.X)
@@ -75,7 +77,8 @@ choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
 Menu_Option_Frame = tk.Frame(right_frame,width=right_width*0.9, height = choices_height*0.4, bg = "gray10")
 Menu_Option_Frame.pack(side=tk.TOP, fill=tk.X)
 Menu_Option_Frame.pack_propagate(False) 
-######### Creation et ajout des boutons dans choices_container (en haut à droite)
+
+##### Creation et ajout des boutons dans choices_container (en haut à droite) #####
 photo_1 = PhotoImage(file = "image_vague_1/52_superposee.png") 
 photo_resized_1 = photo_1.subsample(3,3)
 suspect_1 = tk.Button(choices_container_frame, image = photo_resized_1, command=lambda: Selected_Suspect_event)
@@ -149,7 +152,16 @@ suspect_12.grid(row=2,column=3, padx=20, pady=5)
 suspect_12.bind("<Button-1>", Selected_Suspect_event)
 
 
+##### Création et ajout des boutons dans le frame menu option #####
 
+Bouton_restart = tk.Button(Menu_Option_Frame,text='Start Over',height=12, width=20)
+Bouton_restart.grid(row=1, column=3, padx=100, pady=10)
+
+Bouton_refresh = tk.Button(Menu_Option_Frame,text='Refresh',height=12, width=20)
+Bouton_refresh.grid(row=1, column=2, padx=0, pady=10)
+
+Bouton_garbage= tk.Button(Menu_Option_Frame,text='Garbage Bin',height=12, width=20)
+Bouton_garbage.grid(row=1, column=1, padx=100, pady=10)
 ######### --Modif for the left side-- #########
 
 
