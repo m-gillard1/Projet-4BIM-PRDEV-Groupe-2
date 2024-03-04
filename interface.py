@@ -40,7 +40,7 @@ def jauge(place,h):
     value.set(5)
 
     def mouvement(click):
-        dessin()
+        return
 
     #creation du slider
     slider = tk.Scale(place,from_=0,to=max_val,orient=tk.VERTICAL,variable=value,command=mouvement,length = (h*0.50),resolution= 0.1,bg="lightgray",highlightbackground="lightgray")
@@ -67,7 +67,7 @@ jauge_width = top_left_width * 2 // 15
 
 # Create frames for left and right sections
 left_frame = tk.Frame(root, width=left_width, height=screen_height, bg="gray80")
-right_frame = tk.Frame(root, width=right_width, height=screen_height, bg="gray50")
+right_frame = tk.Frame(root, width=right_width, height=screen_height, bg="pink")
 left_frame.pack(side=tk.LEFT, fill=tk.Y)
 left_frame.pack_propagate(False) 
 right_frame.pack(side=tk.RIGHT, fill=tk.Y)
@@ -88,9 +88,10 @@ choices_container_frame.pack_propagate(False)
 choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
 
 ### partie inférieur de la partie de droite, contient les boutons d'options ###
-Menu_Option_Frame = tk.Frame(right_frame,width=right_width*0.9, height = choices_height*0.4, bg = "gray10")
-Menu_Option_Frame.pack(side=tk.TOP, fill=tk.X)
+Menu_Option_Frame = tk.Frame(right_frame,width=right_width, height = (screen_height-choices_height), bg = "gray10")
 Menu_Option_Frame.pack_propagate(False) 
+Menu_Option_Frame.pack(side=tk.BOTTOM, fill=tk.X)
+
 
 ##### Creation et ajout des boutons dans choices_container (en haut à droite) #####
 photo_1 = PhotoImage(file = "image_vague_1/52_superposee.png") 
@@ -175,7 +176,7 @@ Bouton_restart.bind("<Button-1>", Restart_event)
 Bouton_refresh = tk.Button(Menu_Option_Frame,text='Refresh',height=12, width=20)
 Bouton_refresh.grid(row=1, column=2, padx=0, pady=10)
 
-Bouton_garbage= tk.Button(Menu_Option_Frame,text='Garbage Bin',height=12, width=20)
+Bouton_garbage= tk.Button(Menu_Option_Frame,text='Garbage Bin',height=50, width=20)
 Bouton_garbage.grid(row=1, column=1, padx=100, pady=10)
 ######### --Modif for the left side-- #########
 
