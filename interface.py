@@ -15,10 +15,22 @@ def Selected_Suspect_event(event):
     image_suspect = suspect.cget('image')
     suspect_principal.configure(image=image_suspect)
     
-
+#fonction appelée par le bouton restart
+# réinitialise à l'état d'origine (affichage, contenu des dossiers, numérotation vague, notations) 
 def Restart_event(event):
     suspect_principal.configure(image=Image_Instruction)
     Vague_actuelle=1
+
+def Refresh_event(event):
+    Genere_Suspect
+    Vague_actuelle+=1
+    suspect_principal.configure(image=Image_Instruction)
+
+    return
+
+
+def Genere_Suspect():
+    return
 
 #Creation d'une jauge :
 def jauge(place,h):
@@ -204,14 +216,10 @@ buttons_modif_main_frame = tk.Frame(modif_main_image_frame,width=(top_left_width
 buttons_modif_main_frame.pack(side=tk.RIGHT,fill=tk.Y)
 buttons_modif_main_frame.pack_propagate(False) 
 
-button1 = tk.Button(buttons_modif_main_frame, text="Button 1")
+button1 = tk.Button(buttons_modif_main_frame, text="Save Mark")
 button1.pack(side=tk.TOP, fill=tk.X, padx=10, pady=5)
 
-button2 = tk.Button(buttons_modif_main_frame, text="Button 2")
-button2.pack(side=tk.TOP, fill=tk.X, padx=10, pady=5)
 
-button3 = tk.Button(buttons_modif_main_frame, text="Button 3")
-button3.pack(side=tk.TOP, fill=tk.X, padx=10, pady=5)
 
 view_main_image_frame = tk.Frame(main_image_frame,width=(left_width-top_left_width),height=(screen_height-left_height),bg="lightgray")
 view_main_image_frame.pack(side=tk.LEFT,fill=tk.Y)
