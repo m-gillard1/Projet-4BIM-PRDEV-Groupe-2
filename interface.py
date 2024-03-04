@@ -90,7 +90,7 @@ choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
 ### partie inférieur de la partie de droite, contient les boutons d'options ###
 Menu_Option_Frame = tk.Frame(right_frame,width=right_width, height = (screen_height-choices_height), bg = "gray10")
 Menu_Option_Frame.pack_propagate(False) 
-Menu_Option_Frame.pack(side=tk.BOTTOM, fill=tk.X)
+Menu_Option_Frame.pack(side=tk.TOP, fill='both')
 
 
 ##### Creation et ajout des boutons dans choices_container (en haut à droite) #####
@@ -168,16 +168,21 @@ suspect_12.bind("<Button-1>", Selected_Suspect_event)
 
 
 ##### Création et ajout des boutons dans le frame menu option #####
-
-Bouton_restart = tk.Button(Menu_Option_Frame,text='Start Over',height=12, width=20, command=lambda: Restart_event)
-Bouton_restart.grid(row=1, column=3, padx=100, pady=10)
+Menu_Option_Frame.update()
+height_menu = Menu_Option_Frame.winfo_height()
+width_menu = Menu_Option_Frame.winfo_width()
+Bouton_restart = tk.Button(Menu_Option_Frame,text='Start Over',height=height_menu//45, width=width_menu//50, command=lambda: Restart_event)
+Bouton_restart.grid(row=1, column=2, padx=100, pady=12)
 Bouton_restart.bind("<Button-1>", Restart_event)
 
-Bouton_refresh = tk.Button(Menu_Option_Frame,text='Refresh',height=12, width=20)
-Bouton_refresh.grid(row=1, column=2, padx=0, pady=10)
+Bouton_refresh = tk.Button(Menu_Option_Frame,text='Refresh',height=height_menu//45, width=width_menu//50)
+Bouton_refresh.grid(row=2, column=1, padx=0, pady=12)
 
-Bouton_garbage= tk.Button(Menu_Option_Frame,text='Garbage Bin',height=50, width=20)
-Bouton_garbage.grid(row=1, column=1, padx=100, pady=10)
+Bouton_garbage= tk.Button(Menu_Option_Frame,text='Garbage Bin',height=height_menu//45, width=width_menu//50)
+Bouton_garbage.grid(row=1, column=1, padx=100, pady=12)
+
+Bouton_Supp= tk.Button(Menu_Option_Frame,text='Bouton Supp',height=height_menu//45, width=width_menu//50)
+Bouton_Supp.grid(row=2, column=2, padx=100, pady=12)
 ######### --Modif for the left side-- #########
 
 
