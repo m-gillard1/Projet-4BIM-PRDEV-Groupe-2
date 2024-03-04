@@ -40,3 +40,11 @@ def creation_dictionnaire(chemin):
                     # Création d'une nouvelle liste pour cet individu et ajout du nom de l'image avec le numéro du fichier
                     images_par_individu[individual_id] = [(fichier)]
         return  images_par_individu
+
+
+if __name__ == "__main__":
+    #Chemin du répertoire contenant les images non superposées
+    chemin = "C:/Users/Selma/Downloads/CelebAMask-HQ/CelebAMask-HQ/CelebAMask-HQ-mask-anno"
+    #Dictionnaire
+    images_par_individu=creation_dictionnaire(chemin)
+    print(images_par_individu)
