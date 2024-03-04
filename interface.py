@@ -175,18 +175,18 @@ height_menu = Menu_Option_Frame.winfo_height()
 width_menu = Menu_Option_Frame.winfo_width()
 pad_horizontal = width_menu // 15
 pad_vertical = height_menu // 22
-Bouton_restart = tk.Button(Menu_Option_Frame,text='Start Over',height=height_menu//47, width=width_menu//20, command=lambda: Restart_event)
+Bouton_restart = tk.Button(Menu_Option_Frame,text='Start Over',height=height_menu//47, width=width_menu//20,background='red', command=lambda: Restart_event)
 Bouton_restart.grid(row=1, column=2, padx=pad_horizontal, pady=pad_vertical, sticky='nswe')
 Bouton_restart.bind("<Button-1>", Restart_event)
 
-Bouton_refresh = tk.Button(Menu_Option_Frame,text='Refresh',height=height_menu//47, width=width_menu//20)
+Bouton_refresh = tk.Button(Menu_Option_Frame,text='Refresh',height=height_menu//47, width=width_menu//20, background='lightblue')
 Bouton_refresh.grid(row=2, column=1, padx=pad_horizontal, pady=pad_vertical, sticky='nswe')
 
-Bouton_garbage= tk.Button(Menu_Option_Frame,text='Garbage Bin',height=height_menu//47, width=width_menu//20)
+Bouton_garbage= tk.Button(Menu_Option_Frame,text='Garbage Bin',height=height_menu//47, width=width_menu//20, background='lightgreen')
 Bouton_garbage.grid(row=1, column=1, padx=pad_horizontal, pady=pad_vertical, sticky='nswe')
 
-Bouton_Supp= tk.Button(Menu_Option_Frame,text='Bouton Supp',height=height_menu//47, width=width_menu//20)
-Bouton_Supp.grid(row=2, column=2, padx=pad_horizontal, pady=pad_vertical, sticky='nswe')
+Bouton_FIN= tk.Button(Menu_Option_Frame,text='Finish', height=height_menu//47, width=width_menu//20, background='yellow')
+Bouton_FIN.grid(row=2, column=2, padx=pad_horizontal, pady=pad_vertical, sticky='nswe')
 ######### --Modif for the left side-- #########
 
 
