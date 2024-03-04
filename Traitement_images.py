@@ -116,8 +116,14 @@ def superposition(chemin_2 ,chemin_3, images_par_individu , i, j ):
 
 
 if __name__ == "__main__":
+    ## Test de "creation_dictionnaire(chemin)"
     #Chemin du répertoire contenant les images non superposées
     chemin = "C:/Users/Selma/Downloads/CelebAMask-HQ/CelebAMask-HQ/CelebAMask-HQ-mask-anno"
     #Dictionnaire
     images_par_individu=creation_dictionnaire(chemin)
     #print(images_par_individu)
+
+    ## Test de "superposition(chemin_2 ,chemin_3, images_par_individu , i, j )"
+    chemin_2= "C:/Users/Selma/Downloads/CelebAMask-HQ/CelebAMask-HQ/CelebAMask-HQ-mask-anno/Test"
+    chemin_3 = "C:/Users/Selma/Downloads/CelebAMask-HQ/CelebAMask-HQ/CelebAMask-HQ-mask-anno/0/"
+    superposition(chemin_2, chemin_3, images_par_individu , 0, 10 )
