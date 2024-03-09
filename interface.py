@@ -43,7 +43,7 @@ class Suspect(tk.Button):
     
     def garbage(self):
         self.note = 0  # Réinitialise la note à 0
-        self.config(highlightbackground='red') 
+        self.update_color()
 
     def update_color(self):
         if self.note >= 9 :
@@ -56,12 +56,9 @@ class Suspect(tk.Button):
             border_color = "orange"
         else:
             border_color = "red"
-            
+
         # Définit la couleur de la bordure du bouton
         self.config(highlightbackground=border_color)
-
-
-
 
 
 #fonction appelée par le bouton restart
@@ -81,6 +78,7 @@ def Refresh_event(event):
 def Genere_Suspect():
     return
 
+"""
 #Creation d'une jauge :
 def jauge(place,h):
     
@@ -94,7 +92,7 @@ def jauge(place,h):
     #creation du slider
     slider = tk.Scale(place,from_=0,to=max_val,orient=tk.VERTICAL,variable=value,command=mouvement,length = (h*0.50),resolution= 0.1,bg="lightgray",highlightbackground="lightgray")
     slider.pack(side=tk.LEFT)
-
+"""
 
 
     
