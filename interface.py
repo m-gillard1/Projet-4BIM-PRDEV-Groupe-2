@@ -19,6 +19,7 @@ class Suspect(tk.Button):
         self.photo_image = ImageTk.PhotoImage(photo_resized)
         self.config(image=self.photo_image, command=self.selected_suspect_event)
 
+
     #fonction appelée par les boutons suspects en haut à droite #
     #remplace l'image du suspect selctionné en haut gauche pour le noter ensuite#
     def selected_suspect_event(self):
@@ -26,6 +27,14 @@ class Suspect(tk.Button):
         image_suspect = suspect.cget('image')
         print(image_suspect)
         suspect_principal.configure(image=image_suspect)
+    
+    def increment_note(self):
+        if self.note <10:
+            self.note += 1
+        
+    def decrement_note(self):
+        if self.note >0:
+            self.note -= 1  
 
 
 
