@@ -34,10 +34,12 @@ class Suspect(tk.Button):
     def increment_note(self):
         if self.note <10:
             self.note += 1
+            self.update_color()
         
     def decrement_note(self):
         if self.note >0:
-            self.note -= 1  
+            self.note -= 1 
+            self.update_color() 
     
     def garbage(self):
         self.note = 0  # Réinitialise la note à 0
@@ -54,6 +56,7 @@ class Suspect(tk.Button):
             border_color = "orange"
         else:
             border_color = "red"
+            
         # Définit la couleur de la bordure du bouton
         self.config(highlightbackground=border_color)
 
