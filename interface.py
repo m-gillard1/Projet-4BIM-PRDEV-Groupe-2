@@ -11,7 +11,7 @@ def toggle_fullscreen(event=None):
 
 
 class Suspect(tk.Button):
-    def __init__(self, master, image_path, note, width, height **kwargs):
+    def __init__(self, master, image_path, note, width, height, **kwargs):
         super().__init__(master, **kwargs)
         self.note = note
         photo = Image.open(image_path)
@@ -21,8 +21,8 @@ class Suspect(tk.Button):
 
     #fonction appelée par les boutons suspects en haut à droite #
     #remplace l'image du suspect selctionné en haut gauche pour le noter ensuite#
-    def selected_suspect_event(event):
-        suspect = event.widget
+    def selected_suspect_event(self):
+        suspect = self
         image_suspect = suspect.cget('image')
         print(image_suspect)
         suspect_principal.configure(image=image_suspect)
@@ -60,11 +60,6 @@ def jauge(place,h):
     #creation du slider
     slider = tk.Scale(place,from_=0,to=max_val,orient=tk.VERTICAL,variable=value,command=mouvement,length = (h*0.50),resolution= 0.1,bg="lightgray",highlightbackground="lightgray")
     slider.pack(side=tk.LEFT)
-
-def suspect(name)
-
-
-
 
 
 
@@ -119,92 +114,43 @@ Menu_Option_Frame.pack(side=tk.TOP, fill='both')
 
 ##### Creation et ajout des boutons dans choices_container (en haut à droite) #####
 photo_width = int(right_width*0.18)
-photo_heigth = int(right_width*0.18)
+photo_height = int(right_width*0.18)
 
+suspect_1 = Suspect(choices_container_frame, "image_vague_1/52_superposee.png",5,photo_width,photo_height)
+suspect_1.grid(row=0, column=0, padx=photo_width//50, pady=photo_height//50)
 
-photo_1 = Image.open("image_vague_1/52_superposee.png")
-photo_resized_1 = photo_1.resize((photo_width, photo_heigth))
-photo_image_1 = ImageTk.PhotoImage(photo_resized_1) 
-suspect_1 = tk.Button(choices_container_frame, image = photo_image_1, command=lambda: Selected_Suspect_event)
-suspect_1.grid(row=0,column=0, padx=choices_width//50, pady=choices_height//50)
-suspect_1.bind("<Button-1>", Selected_Suspect_event)
+suspect_2 = Suspect(choices_container_frame, "image_vague_1/138_superposee.png",5,photo_width,photo_height)
+suspect_2.grid(row=0, column=1, padx=photo_width//50, pady=photo_height//50)
 
-photo_2 = Image.open("image_vague_1/138_superposee.png")
-photo_resized_2 = photo_2.resize((photo_width, photo_heigth))
-photo_image_2 = ImageTk.PhotoImage(photo_resized_2) 
-suspect_2 = tk.Button(choices_container_frame, image = photo_image_2 , command=lambda: Selected_Suspect_event)
-suspect_2.grid(row=0,column=1, padx=choices_width//50, pady=choices_height//50)
-suspect_2.bind("<Button-1>", Selected_Suspect_event)
+suspect_3 = Suspect(choices_container_frame, "image_vague_1/142_superposee.png",5,photo_width,photo_height)
+suspect_3.grid(row=0, column=2, padx=photo_width//50, pady=photo_height//50)
 
-photo_3 = Image.open("image_vague_1/142_superposee.png")
-photo_resized_3 = photo_3.resize((photo_width, photo_heigth))
-photo_image_3 = ImageTk.PhotoImage(photo_resized_3) 
-suspect_3 = tk.Button(choices_container_frame, image = photo_image_3 , command=lambda: Selected_Suspect_event)
-suspect_3.grid(row=0,column=2, padx=choices_width//50, pady=choices_height//50)
-suspect_3.bind("<Button-1>", Selected_Suspect_event)
+suspect_4 = Suspect(choices_container_frame, "image_vague_1/842_superposee.png",5,photo_width,photo_height)
+suspect_4.grid(row=0, column=3, padx=photo_width//50, pady=photo_height//50)
 
-photo_4 = Image.open("image_vague_1/842_superposee.png")
-photo_resized_4 = photo_4.resize((photo_width, photo_heigth))
-photo_image_4 = ImageTk.PhotoImage(photo_resized_4) 
-suspect_4 = tk.Button(choices_container_frame, image = photo_image_4 , command=lambda: Selected_Suspect_event)
-suspect_4.grid(row=1,column=0, padx=choices_width//50, pady=choices_height//50)
-suspect_4.bind("<Button-1>", Selected_Suspect_event)
+suspect_5 = Suspect(choices_container_frame, "image_vague_1/643_superposee.png",5,photo_width,photo_height)
+suspect_5.grid(row=1, column=0, padx=photo_width//50, pady=photo_height//50)
 
-photo_5 = Image.open("image_vague_1/643_superposee.png")
-photo_resized_5 = photo_5.resize((photo_width, photo_heigth))
-photo_image_5 = ImageTk.PhotoImage(photo_resized_5) 
-suspect_5 = tk.Button(choices_container_frame, image = photo_image_5 , command=lambda: Selected_Suspect_event)
-suspect_5.grid(row=1,column=1, padx=choices_width//50, pady=choices_height//50)
-suspect_5.bind("<Button-1>", Selected_Suspect_event)
+suspect_6 = Suspect(choices_container_frame, "image_vague_1/623_superposee.png",5,photo_width,photo_height)
+suspect_6.grid(row=1, column=1, padx=photo_width//50, pady=photo_height//50)
 
-photo_6 = Image.open("image_vague_1/623_superposee.png")
-photo_resized_6 = photo_6.resize((photo_width, photo_heigth))
-photo_image_6 = ImageTk.PhotoImage(photo_resized_6) 
-suspect_6 = tk.Button(choices_container_frame, image = photo_image_6 , command=lambda: Selected_Suspect_event)
-suspect_6.grid(row=1,column=2, padx=choices_width//50, pady=choices_height//50)
-suspect_6.bind("<Button-1>", Selected_Suspect_event)
+suspect_7 = Suspect(choices_container_frame, "image_vague_1/567_superposee.png",5,photo_width,photo_height)
+suspect_7.grid(row=1, column=2, padx=photo_width//50, pady=photo_height//50)
 
-photo_7 = Image.open("image_vague_1/567_superposee.png")
-photo_resized_7 = photo_7.resize((photo_width, photo_heigth))
-photo_image_7 = ImageTk.PhotoImage(photo_resized_7) 
-suspect_7 = tk.Button(choices_container_frame, image = photo_image_7 , command=lambda: Selected_Suspect_event)
-suspect_7.grid(row=2,column=0, padx=choices_width//50, pady=choices_height//50)
-suspect_7.bind("<Button-1>", Selected_Suspect_event)
+suspect_8 = Suspect(choices_container_frame, "image_vague_1/451_superposee.png",5,photo_width,photo_height)
+suspect_8.grid(row=1, column=3, padx=photo_width//50, pady=photo_height//50)
 
-photo_8 = Image.open("image_vague_1/451_superposee.png")
-photo_resized_8 = photo_8.resize((photo_width, photo_heigth))
-photo_image_8 = ImageTk.PhotoImage(photo_resized_8) 
-suspect_8 = tk.Button(choices_container_frame, image = photo_image_8 , command=lambda: Selected_Suspect_event)
-suspect_8.grid(row=2,column=1, padx=choices_width//50, pady=choices_height//50)
-suspect_8.bind("<Button-1>", Selected_Suspect_event)
+suspect_9 = Suspect(choices_container_frame, "image_vague_1/286_superposee.png",5,photo_width,photo_height)
+suspect_9.grid(row=2, column=0, padx=photo_width//50, pady=photo_height//50)
 
-photo_9 = Image.open("image_vague_1/286_superposee.png")
-photo_resized_9 = photo_9.resize((photo_width, photo_heigth))
-photo_image_9 = ImageTk.PhotoImage(photo_resized_9) 
-suspect_9 = tk.Button(choices_container_frame, image = photo_image_9 , command=lambda: Selected_Suspect_event)
-suspect_9.grid(row=2,column=2, padx=choices_width//50, pady=choices_height//50)
-suspect_9.bind("<Button-1>", Selected_Suspect_event)
+suspect_10 = Suspect(choices_container_frame, "image_vague_1/284_superposee.png",5,photo_width,photo_height)
+suspect_10.grid(row=2, column=1, padx=photo_width//50, pady=photo_height//50)
 
-photo_10 = Image.open("image_vague_1/284_superposee.png")
-photo_resized_10 = photo_10.resize((photo_width, photo_heigth))
-photo_image_10 = ImageTk.PhotoImage(photo_resized_10) 
-suspect_10 = tk.Button(choices_container_frame, image = photo_image_10 , command=lambda: Selected_Suspect_event)
-suspect_10.grid(row=0,column=3, padx=choices_width//50, pady=choices_height//50)
-suspect_10.bind("<Button-1>", Selected_Suspect_event)
+suspect_11 = Suspect(choices_container_frame, "image_vague_1/842_superposee.png",5,photo_width,photo_height)
+suspect_11.grid(row=2, column=2, padx=photo_width//50, pady=photo_height//50)
 
-photo_11 = Image.open("image_vague_1/842_superposee.png")
-photo_resized_11 = photo_11.resize((photo_width, photo_heigth))
-photo_image_11 = ImageTk.PhotoImage(photo_resized_11) 
-suspect_11 = tk.Button(choices_container_frame, image = photo_image_11 , command=lambda: Selected_Suspect_event)
-suspect_11.grid(row=1,column=3, padx=choices_width//50, pady=choices_height//50)
-suspect_11.bind("<Button-1>", Selected_Suspect_event)
-
-photo_12 = Image.open("image_vague_1/842_superposee.png")
-photo_resized_12 = photo_12.resize((photo_width, photo_heigth))
-photo_image_12 = ImageTk.PhotoImage(photo_resized_12) 
-suspect_12 = tk.Button(choices_container_frame, image = photo_image_12 , command=lambda: Selected_Suspect_event)
-suspect_12.grid(row=2,column=3, padx=choices_width//50, pady=choices_height//50)
-suspect_12.bind("<Button-1>", Selected_Suspect_event)
+suspect_12 = Suspect(choices_container_frame, "image_vague_1/842_superposee.png",5,photo_width,photo_height)
+suspect_12.grid(row=2, column=3, padx=photo_width//50, pady=photo_height//50)
 
 
 ##### Création et ajout des boutons dans le frame menu option #####
