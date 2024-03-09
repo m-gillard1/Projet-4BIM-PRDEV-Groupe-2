@@ -20,6 +20,7 @@ class Suspect(tk.Button):
         photo_resized = photo.resize((width, height))
         self.photo_image = ImageTk.PhotoImage(photo_resized)
         self.config(image=self.photo_image, command=self.selected_suspect_event)
+        self.update_color()
 
 
     #fonction appelée par les boutons suspects en haut à droite #
@@ -41,6 +42,20 @@ class Suspect(tk.Button):
     def garbage(self):
         self.note = 0  # Réinitialise la note à 0
         self.config(highlightbackground='red') 
+
+    def update_color(self):
+        if self.note > 9 :
+            border_color = "green"
+        elif self.note > 6:
+            border_color = "yellow"
+        elif self.note > 3:
+            border_color = "orange"
+        else:
+            border_color = "red"
+        
+        # Définit la couleur de la bordure du bouton
+        self.config(highlightbackground=border_color)
+
 
 
 
