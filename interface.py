@@ -8,14 +8,28 @@ def toggle_fullscreen(event=None):
     root.attributes('-fullscreen', not root.attributes('-fullscreen'))
 
 
-#fonction appelée par les boutons suspects en haut à droite #
-#remplace l'image du suspect selctionné en haut gauche pour le noter ensuite#
-def Selected_Suspect_event(event):
-    suspect = event.widget
-    image_suspect = suspect.cget('image')
-    print(image_suspect)
-    suspect_principal.configure(image=image_suspect)
-    
+
+
+class Suspect(tk.Button):
+    def __init__(self, master, image_path, note, width, height **kwargs):
+        super().__init__(master, **kwargs)
+        self.note = note
+        photo = Image.open(image_path)
+        photo_resized = photo.resize((width, height))
+        self.photo_image = ImageTk.PhotoImage(photo_resized)
+        self.config(image=self.photo_image, command=self.selected_suspect_event)
+
+    #fonction appelée par les boutons suspects en haut à droite #
+    #remplace l'image du suspect selctionné en haut gauche pour le noter ensuite#
+    def selected_suspect_event(event):
+        suspect = event.widget
+        image_suspect = suspect.cget('image')
+        print(image_suspect)
+        suspect_principal.configure(image=image_suspect)
+
+
+
+
 #fonction appelée par le bouton restart
 # réinitialise à l'état d'origine (affichage, contenu des dossiers, numérotation vague, notations) 
 def Restart_event(event):
@@ -46,6 +60,13 @@ def jauge(place,h):
     #creation du slider
     slider = tk.Scale(place,from_=0,to=max_val,orient=tk.VERTICAL,variable=value,command=mouvement,length = (h*0.50),resolution= 0.1,bg="lightgray",highlightbackground="lightgray")
     slider.pack(side=tk.LEFT)
+
+def suspect(name)
+
+
+
+
+
 
     
 ########## __MAIN__ ##########
