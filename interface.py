@@ -44,15 +44,16 @@ class Suspect(tk.Button):
         self.config(highlightbackground='red') 
 
     def update_color(self):
-        if self.note > 9 :
-            border_color = "green"
-        elif self.note > 6:
-            border_color = "yellow"
+        if self.note >= 9 :
+            border_color = "dark green"
+        elif self.note >= 7:
+            border_color = "green yellow"
         elif self.note > 3:
+            border_color = self.original_border_color
+        elif self.note > 1:
             border_color = "orange"
         else:
             border_color = "red"
-        
         # Définit la couleur de la bordure du bouton
         self.config(highlightbackground=border_color)
 
