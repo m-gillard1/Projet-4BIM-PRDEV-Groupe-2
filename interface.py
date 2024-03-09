@@ -14,6 +14,8 @@ class Suspect(tk.Button):
     def __init__(self, master, image_path, note, width, height, **kwargs):
         super().__init__(master, **kwargs)
         self.note = note
+        self.original_border_color = self.cget('highlightbackground')
+
         photo = Image.open(image_path)
         photo_resized = photo.resize((width, height))
         self.photo_image = ImageTk.PhotoImage(photo_resized)
@@ -35,6 +37,10 @@ class Suspect(tk.Button):
     def decrement_note(self):
         if self.note >0:
             self.note -= 1  
+    
+    def garbage(self):
+        self.note = 0  # Réinitialise la note à 0
+        self.config(highlightbackground='red') 
 
 
 
