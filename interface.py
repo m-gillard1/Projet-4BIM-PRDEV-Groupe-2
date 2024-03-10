@@ -21,13 +21,12 @@ class Suspect(tk.Button):
         photo_resized = photo.resize((width, height))
         self.photo_image = ImageTk.PhotoImage(photo_resized)
         self.config(image=self.photo_image, command=self.selected_suspect_event)
-        self.update_color()
+
 
 
     #fonction appelée par les boutons suspects en haut à droite #
     #remplace l'image du suspect selctionné en haut gauche pour le noter ensuite#
     def selected_suspect_event(self):
-        print('in')
         global suspect_actuel
         suspect_actuel = self
         print(suspect_actuel.note)
@@ -35,7 +34,7 @@ class Suspect(tk.Button):
         suspect_principal.configure(image=image_suspect)
     
     def increment_note(self):
-        print( "+++")
+        
         global suspect_actuel
         if suspect_actuel.note <10:
             suspect_actuel.note += 1
@@ -44,7 +43,6 @@ class Suspect(tk.Button):
 
             
     def decrement_note(self):
-        print("---")
         global suspect_actuel
         if suspect_actuel.note >0:
             suspect_actuel.note -= 1 
@@ -56,19 +54,26 @@ class Suspect(tk.Button):
         suspect_actuel.update_color()
 
     def update_color(self):
-        if self.note >= 9 :
+        print('in')
+        global suspect_actuel
+        if suspect_actuel.note >= 9 :
+            print('test1')
             border_color = "dark green"
-        elif self.note >= 7:
+        elif suspect_actuel.note >= 7:
+            print('test2')
             border_color = "green yellow"
-        elif self.note > 3:
+        elif suspect_actuel.note > 3:
+            print('test3')
             border_color = self.original_border_color
-        elif self.note > 1:
+        elif suspect_actuel.note > 1:
+            print('test4')
             border_color = "orange"
         else:
+            print('test5')
             border_color = "red"
-
+        
         # Définit la couleur de la bordure du bouton
-        self.config(highlightbackground=border_color)
+        suspect_actuel.config(highlightbackground=border_color)
 
 
 #fonction appelée par le bouton restart
