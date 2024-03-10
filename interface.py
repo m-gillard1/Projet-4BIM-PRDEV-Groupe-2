@@ -248,6 +248,7 @@ Bouton_refresh.grid(row=2, column=1, padx=pad_horizontal, pady=pad_vertical, sti
 
 Bouton_garbage= tk.Button(Menu_Option_Frame,text='Garbage Bin',height=height_menu//47, width=width_menu//20, background='lightgreen')
 Bouton_garbage.grid(row=1, column=1, padx=pad_horizontal, pady=pad_vertical, sticky='nswe')
+Bouton_garbage.bind("<Button-1>" , Suspect.garbage )
 
 Bouton_FIN= tk.Button(Menu_Option_Frame,text='Finish', height=height_menu//47, width=width_menu//20, background='yellow')
 Bouton_FIN.grid(row=2, column=2, padx=pad_horizontal, pady=pad_vertical, sticky='nswe')
