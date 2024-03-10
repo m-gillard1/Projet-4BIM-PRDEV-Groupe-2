@@ -8,22 +8,30 @@ def toggle_fullscreen(event=None):
     root.attributes('-fullscreen', not root.attributes('-fullscreen'))
 
 
+Dico_note ={}
 
+class Favori(tk.Button):
+    def __init__(self,**kwargs):
+        super().init(best_choices_container_frame, **kwargs)
+        
+
+    
 
 class Suspect(tk.Button):
     def __init__(self, master, image_path, note, width, height, **kwargs):
         super().__init__(master, **kwargs)
         self.note = note
         self.original_border_color = self.cget('highlightbackground')
-        self.id = self.winfo_name()
-
+        self.id = image_path
+        global Dico_note
+        Dico_note[self.id]= self.note
         photo = Image.open(image_path)
         photo_resized = photo.resize((width, height))
         self.photo_image = ImageTk.PhotoImage(photo_resized)
         self.config(image=self.photo_image, command=self.selected_suspect_event)
 
 
-
+    
     #fonction appelée par les boutons suspects en haut à droite #
     #remplace l'image du suspect selctionné en haut gauche pour le noter ensuite#
     def selected_suspect_event(self):
@@ -40,6 +48,11 @@ class Suspect(tk.Button):
             suspect_actuel.note += 1
             print(suspect_actuel.note)
             suspect_actuel.update_color()
+        global Dico_note
+        Dico_note[suspect_actuel.id]= suspect_actuel.note
+        suspect_actuel.Ajout_Favori()
+        print(Dico_note.values())
+        print(suspect_actuel.ranking())   
 
             
     def decrement_note(self):
@@ -47,14 +60,20 @@ class Suspect(tk.Button):
         if suspect_actuel.note >0:
             suspect_actuel.note -= 1 
             suspect_actuel.update_color() 
+        global Dico_note
+        Dico_note[suspect_actuel.id]= suspect_actuel.note
     
     def garbage(self):
         global suspect_actuel
         suspect_actuel.note = 0  # Réinitialise la note à 0
         suspect_actuel.update_color()
+        global Dico_note
+        Dico_note[suspect_actuel.id]= suspect_actuel.note
+        print(Dico_note.keys())
+        print(Dico_note.values())
+        print(suspect_actuel.ranking())
 
     def update_color(self):
-        print('in')
         global suspect_actuel
         if suspect_actuel.note >= 9 :
             print('test1')
@@ -74,6 +93,23 @@ class Suspect(tk.Button):
         
         # Définit la couleur de la bordure du bouton
         suspect_actuel.config(highlightbackground=border_color)
+   
+    
+    def ranking(self):
+        rank=1
+        rating=suspect_actuel.note
+        for notes in Dico_note.values():
+            if (rating<notes):
+                rank+=1
+        return rank
+    
+    def Ajout_Favori(self):
+        global suspect_actuel
+        rank = suspect_actuel.ranking()
+        if (rank<10 and self.note>7):
+            print('favori')
+            
+        return
 
 
 #fonction appelée par le bouton restart
