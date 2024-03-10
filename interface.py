@@ -75,6 +75,8 @@ class Suspect(tk.Button):
 
     def update_color(self):
         global suspect_actuel
+        self.config(highlightthickness=10)
+        
         if suspect_actuel.note >= 9 :
             print('test1')
             border_color = "dark green"
