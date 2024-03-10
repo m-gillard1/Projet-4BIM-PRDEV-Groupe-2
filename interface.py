@@ -290,7 +290,7 @@ buttonP.bind("<Button-1>",Suspect.increment_note)
 
 buttonM = tk.Button(modif_main_image_frame, text="-",bg="red")
 buttonM.pack(side=tk.TOP, fill="both",expand=True, padx=20, pady=10)
-
+buttonM.bind("<Button-1>",Suspect.decrement_note)
 
 """
 jauge_frame = tk.Frame(modif_main_image_frame,width=jauge_width,height=(screen_height-left_height),bg="lightgray")
