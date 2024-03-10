@@ -15,6 +15,7 @@ class Suspect(tk.Button):
         super().__init__(master, **kwargs)
         self.note = note
         self.original_border_color = self.cget('highlightbackground')
+        self.id = self.winfo_name()
 
         photo = Image.open(image_path)
         photo_resized = photo.resize((width, height))
@@ -26,24 +27,33 @@ class Suspect(tk.Button):
     #fonction appelée par les boutons suspects en haut à droite #
     #remplace l'image du suspect selctionné en haut gauche pour le noter ensuite#
     def selected_suspect_event(self):
-        suspect = self
-        image_suspect = suspect.cget('image')
-        print(image_suspect)
+        print('in')
+        global suspect_actuel
+        suspect_actuel = self
+        print(suspect_actuel.note)
+        image_suspect = suspect_actuel.cget('image')
         suspect_principal.configure(image=image_suspect)
     
     def increment_note(self):
-        if self.note <10:
-            self.note += 1
-            self.update_color()
-        
+        print( "+++")
+        global suspect_actuel
+        if suspect_actuel.note <10:
+            suspect_actuel.note += 1
+            print(suspect_actuel.note)
+            suspect_actuel.update_color()
+
+            
     def decrement_note(self):
-        if self.note >0:
-            self.note -= 1 
-            self.update_color() 
+        print("---")
+        global suspect_actuel
+        if suspect_actuel.note >0:
+            suspect_actuel.note -= 1 
+            suspect_actuel.update_color() 
     
     def garbage(self):
-        self.note = 0  # Réinitialise la note à 0
-        self.update_color()
+        global suspect_actuel
+        suspect_actuel.note = 0  # Réinitialise la note à 0
+        suspect_actuel.update_color()
 
     def update_color(self):
         if self.note >= 9 :
@@ -68,7 +78,7 @@ def Restart_event(event):
     Vague_actuelle=1
 
 def Refresh_event(event):
-    Genere_Suspect
+    Genere_Suspect()
     Vague_actuelle+=1
     suspect_principal.configure(image=Image_Instruction)
 
@@ -143,26 +153,29 @@ Menu_Option_Frame = tk.Frame(right_frame,width=right_width, height = (screen_hei
 Menu_Option_Frame.pack_propagate(False) 
 Menu_Option_Frame.pack(side=tk.TOP, fill='both')
 
-photo_10 = Image.open("image_vague_1/284_superposee.png")
-photo_resized_10 = photo_10.resize((photo_width, photo_heigth))
-photo_image_10 = ImageTk.PhotoImage(photo_resized_10) 
-suspect_10 = tk.Button(choices_container_frame, image = photo_image_10 , command=lambda: Selected_Suspect_event)
-suspect_10.grid(row=0,column=3, padx=choices_width//50, pady=choices_height//50)
-suspect_10.bind("<Button-1>", Selected_Suspect_event)
+###
+### photo_10 = Image.open("image_vague_1/284_superposee.png")
+### photo_resized_10 = photo_10.resize((photo_width, photo_heigth))
+### photo_image_10 = ImageTk.PhotoImage(photo_resized_10) 
+### suspect_10 = tk.Button(choices_container_frame, image = photo_image_10 , command=lambda: Selected_Suspect_event)
+### suspect_10.grid(row=0,column=3, padx=choices_width//50, pady=choices_height//50)
+### suspect_10.bind("<Button-1>", Selected_Suspect_event)
+### 
+### photo_11 = Image.open("image_vague_1/842_superposee.png")
+### photo_resized_11 = photo_11.resize((photo_width, photo_heigth))
+### photo_image_11 = ImageTk.PhotoImage(photo_resized_11) 
+### suspect_11 = tk.Button(choices_container_frame, image = photo_image_11 , command=lambda: Selected_Suspect_event)
+### suspect_11.grid(row=1,column=3, padx=choices_width//50, pady=choices_height//50)
+### suspect_11.bind("<Button-1>", Selected_Suspect_event)
+### 
+### photo_12 = Image.open("image_vague_1/842_superposee.png")
+### photo_resized_12 = photo_12.resize((photo_width, photo_heigth))
+### photo_image_12 = ImageTk.PhotoImage(photo_resized_12) 
+### suspect_12 = tk.Button(choices_container_frame, image = photo_image_12 , command=lambda: Selected_Suspect_event)
+### suspect_12.grid(row=2,column=3, padx=choices_width//50, pady=choices_height//50)
+### suspect_12.bind("<Button-1>", Selected_Suspect_event)
+### 
 
-photo_11 = Image.open("image_vague_1/842_superposee.png")
-photo_resized_11 = photo_11.resize((photo_width, photo_heigth))
-photo_image_11 = ImageTk.PhotoImage(photo_resized_11) 
-suspect_11 = tk.Button(choices_container_frame, image = photo_image_11 , command=lambda: Selected_Suspect_event)
-suspect_11.grid(row=1,column=3, padx=choices_width//50, pady=choices_height//50)
-suspect_11.bind("<Button-1>", Selected_Suspect_event)
-
-photo_12 = Image.open("image_vague_1/842_superposee.png")
-photo_resized_12 = photo_12.resize((photo_width, photo_heigth))
-photo_image_12 = ImageTk.PhotoImage(photo_resized_12) 
-suspect_12 = tk.Button(choices_container_frame, image = photo_image_12 , command=lambda: Selected_Suspect_event)
-suspect_12.grid(row=2,column=3, padx=choices_width//50, pady=choices_height//50)
-suspect_12.bind("<Button-1>", Selected_Suspect_event)
 
 ##### Creation et ajout des boutons dans choices_container (en haut à droite) #####
 photo_width = int(right_width*0.18)
@@ -261,6 +274,8 @@ favorites = [[tk.Frame(best_choices_container_frame, bg="lightgreen") for _ in r
 
 ######## --Top side: Selection d'une image et action dessus-- ########
 
+suspect_actuel = None
+
 main_image_frame = tk.Frame(left_frame,width=left_width,height=(screen_height-left_height),bg="gray85")
 main_image_frame.pack(side=tk.TOP,fill=tk.X)
 main_image_frame.pack_propagate(False) 
@@ -271,6 +286,7 @@ modif_main_image_frame.pack_propagate(False)
 
 buttonP = tk.Button(modif_main_image_frame, text="+",bg="green")
 buttonP.pack(side=tk.TOP, fill="both",expand=True, padx=20, pady=10)
+buttonP.bind("<Button-1>",Suspect.increment_note)
 
 buttonM = tk.Button(modif_main_image_frame, text="-",bg="red")
 buttonM.pack(side=tk.TOP, fill="both",expand=True, padx=20, pady=10)
