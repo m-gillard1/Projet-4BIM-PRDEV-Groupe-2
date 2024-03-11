@@ -50,3 +50,9 @@ def lowest_cost_pop(sorted_image_list):
     Ns = nombre_image // 2
     low_pop = sorted_image_list[0:Ns]
     return low_pop
+
+if __name__=='__main__':
+    #Test fonction pop_sort(image_list)
+    image_list = [[[3],[7, 2]], [[1],[9, 5]], [[4], [6, 1]], [[2], [8, 3]]]
+    print('test pop_sort - ok ')
+    print(pop_sort(image_list))
