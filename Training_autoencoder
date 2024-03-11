@@ -44,3 +44,35 @@ def my_loader_function(path):
         PIL.Image.Image: The opened image object.
     """
     return Image.open(open(path, 'r+b'))
+
+def train_autoencoder(model, train_loader, criterion, optimizer, num_epochs=50):
+    """
+    Trains the autoencoder model.
+
+    Args:
+        model (nn.Module): Autoencoder model.
+        train_loader (torch.utils.data.DataLoader): DataLoader for training data.
+        criterion (torch.nn.modules.loss._Loss): Loss function.
+        optimizer (torch.optim.Optimizer): Optimizer for model parameters.
+        num_epochs (int): Number of epochs to train the model.
+
+    Returns:
+        None
+    """
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    print("Training on:", device)
+    model.to(device)
+
+    for epoch in range(num_epochs):
+        for data in train_loader:
+            img, _ = data
+            img = img.to(device)
+            optimizer.zero_grad()
+            output = model(img)
+            loss = criterion(output, img)
+            loss.backward()
+            optimizer.step()
+
+        if epoch % 5 == 0:
+            print('Epoch [{}/{}], Loss: {:.4f}'.format(epoch+1, num_epochs, loss.item()))
+
