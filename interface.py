@@ -11,9 +11,8 @@ def toggle_fullscreen(event=None):
 Dico_note ={}
 
 class Favori(tk.Button):
-    def __init__(self,**kwargs):
-        super().init(best_choices_container_frame, **kwargs)
-        
+    def __init__(self,position, wide, **kwargs):
+        super().__init__(best_choices_container_frame,width=wide,  **kwargs)
 
     
 
@@ -75,8 +74,6 @@ class Suspect(tk.Button):
 
     def update_color(self):
         global suspect_actuel
-        self.config(highlightthickness=10)
-        
         if suspect_actuel.note >= 9 :
             print('test1')
             border_color = "dark green"
@@ -110,7 +107,6 @@ class Suspect(tk.Button):
         rank = suspect_actuel.ranking()
         if (rank<10 and self.note>7):
             print('favori')
-            
         return
 
 
@@ -313,7 +309,9 @@ best_choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
 # Create a grid of frames
 favorites = [[tk.Frame(best_choices_container_frame, bg="lightgreen") for _ in range(5)] for _ in range(2)]
 
-
+fav_1 = Favori(1,photo_width)
+fav_1.config(text="favori1")
+fav_1.grid(row=1, column=1)
 
 
 ######## --Top side: Selection d'une image et action dessus-- ########
