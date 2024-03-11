@@ -56,3 +56,7 @@ if __name__=='__main__':
     image_list = [[[3],[7, 2]], [[1],[9, 5]], [[4], [6, 1]], [[2], [8, 3]]]
     print('test pop_sort - ok ')
     print(pop_sort(image_list))
+
+    #Test fonction lowest_cost_pop(sorted_image_list)
+    print('test lowest cost - ok ')
+    print(lowest_cost_pop(pop_sort(image_list)))
