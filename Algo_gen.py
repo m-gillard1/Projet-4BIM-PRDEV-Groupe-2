@@ -1,3 +1,4 @@
+#Importation de librairies
 from random import *
 import math
 import numpy as np
