@@ -49,6 +49,8 @@ class Suspect(tk.Button):
             print(suspect_actuel.note)
             suspect_actuel.update_color()
         global Dico_note
+        global note_label
+        note_label.config(text="Note: "+str(suspect_actuel.note))
         Dico_note[suspect_actuel.id]= suspect_actuel.note
         suspect_actuel.Ajout_Favori()
         print(Dico_note.values())
@@ -60,6 +62,8 @@ class Suspect(tk.Button):
         if suspect_actuel.note >0:
             suspect_actuel.note -= 1 
             suspect_actuel.update_color() 
+        global note_label
+        note_label.config(text="Note: "+str(suspect_actuel.note))
         global Dico_note
         Dico_note[suspect_actuel.id]= suspect_actuel.note
     
@@ -67,6 +71,8 @@ class Suspect(tk.Button):
         global suspect_actuel
         suspect_actuel.note = 0  # Réinitialise la note à 0
         suspect_actuel.update_color()
+        global note_label
+        note_label.config(text="Note: "+str(suspect_actuel.note))
         global Dico_note
         Dico_note[suspect_actuel.id]= suspect_actuel.note
         print(Dico_note.keys())
@@ -75,7 +81,7 @@ class Suspect(tk.Button):
 
     def update_color(self):
         global suspect_actuel
-        #self.config(highlightthickness=10)
+        
         if suspect_actuel.note >= 9 :
             print('test1')
             border_color = "dark green"
@@ -165,7 +171,6 @@ def Init_suspects(choices_container_frame,photo_width,photo_height):
 
     suspect_12 = Suspect(choices_container_frame, "image_vague_1/842_superposee.png",5,photo_width,photo_height)
     suspect_12.grid(row=2, column=3, padx=photo_width//50, pady=photo_height//50)
-
 
 def Start_Over():
 
@@ -410,18 +415,24 @@ Bouton_garbage.grid(row=1, column=1, padx=pad_horizontal, pady=pad_vertical, sti
 Menu_Option_Frame.update()
 height_menu = Menu_Option_Frame.winfo_height()
 width_menu = Menu_Option_Frame.winfo_width()
+
 pad_horizontal = width_menu // 15
 pad_vertical = height_menu // 22
+
 Bouton_restart = tk.Button(Menu_Option_Frame,text='Start Over',height=height_menu//47, width=width_menu//20,background='red', command=lambda: Restart_event)
 Bouton_restart.grid(row=1, column=2, padx=pad_horizontal, pady=pad_vertical, sticky='nswe')
 Bouton_restart.bind("<Button-1>", Restart_event)
+
 Bouton_refresh = tk.Button(Menu_Option_Frame,text='Refresh',height=height_menu//47, width=width_menu//20, background='lightblue')
 Bouton_refresh.grid(row=2, column=1, padx=pad_horizontal, pady=pad_vertical, sticky='nswe')
+
 Bouton_garbage= tk.Button(Menu_Option_Frame,text='Garbage Bin',height=height_menu//47, width=width_menu//20, background='lightgreen')
 Bouton_garbage.grid(row=1, column=1, padx=pad_horizontal, pady=pad_vertical, sticky='nswe')
 Bouton_garbage.bind("<Button-1>" , Suspect.garbage )
+
 Bouton_FIN= tk.Button(Menu_Option_Frame,text='Finish', height=height_menu//47, width=width_menu//20, background='yellow')
 Bouton_FIN.grid(row=2, column=2, padx=pad_horizontal, pady=pad_vertical, sticky='nswe')
+
 ######### --Modif for the left side-- #########
 ####### --Bottom side: selection des meilleures images-- ########
 best_choices_frame = tk.Frame(left_frame,width=left_width,height=left_height,bg="gray75")
@@ -444,13 +455,16 @@ main_image_frame.pack_propagate(False)
 modif_main_image_frame = tk.Frame(main_image_frame,width=top_left_width,height=(screen_height-left_height),bg="lightgray")
 modif_main_image_frame.pack(side=tk.RIGHT,fill=tk.Y)
 modif_main_image_frame.pack_propagate(False) 
+
 buttonP = tk.Button(modif_main_image_frame, text="+",bg="green")
-buttonP.pack(side=tk.TOP, fill="both",expand=True, padx=20, pady=10)
+buttonP.pack(side=tk.TOP, fill="both",expand=True)
 buttonP.bind("<Button-1>",Suspect.increment_note)
-#note_label = tk.Label(modif_main_image_frame,text="Note: " + str(note))
-#note_label.pack(side=tk.TOP,fill="both",expand=True,padx=20,pady=10)
+
+note_label = tk.Label(modif_main_image_frame,text="Note: " + str(5))
+note_label.pack(side=tk.TOP,fill="both",expand=True)
+
 buttonM = tk.Button(modif_main_image_frame, text="-",bg="red")
-buttonM.pack(side=tk.TOP, fill="both",expand=True, padx=20, pady=10)
+buttonM.pack(side=tk.TOP, fill="both",expand=True)
 buttonM.bind("<Button-1>",Suspect.decrement_note)
 """
 jauge_frame = tk.Frame(modif_main_image_frame,width=jauge_width,height=(screen_height-left_height),bg="lightgray")
@@ -466,6 +480,7 @@ button1.pack(side=tk.TOP, fill=tk.X, padx=10, pady=5)
 view_main_image_frame = tk.Frame(main_image_frame,width=(left_width-top_left_width),height=(screen_height-left_height),bg="lightgray")
 view_main_image_frame.pack_propagate(False) 
 view_main_image_frame.pack(side=tk.LEFT,fill=tk.Y)
+
 main_image_width = (left_width-top_left_width)
 main_image_height = (520*main_image_width) / 360
 ### Label contenant l'image/texte en haut à gauche lors du lancement du logiciel, nécessaire car définissant taille des frames
