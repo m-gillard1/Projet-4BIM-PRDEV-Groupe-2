@@ -85,6 +85,41 @@ def cross_over(best_image_list, Tc):
 
     return new_P
 
+def one_loop(image_list, Tc):
+    """
+    Calcule la moyenne des couts, le cout minimum et definit la population finale de vecteurs.
+
+    Paramètres :
+    ----------
+    image_list: list
+        list de vecteur comprenant la note de l'image et le vecteur issue de celle-ci
+
+    (Tm: float
+        Taux de mutation.)
+
+    Tc: float
+        Taux de croisement.
+
+    Retourne :
+    ---------
+    list: Liste contenant la population dinale de vecteurs.
+    """
+    nombre_image=len(image_list)
+    taille_vect_image=len(image_list[0][1])
+
+    # Trie la population et sélectionne les Ns = N/2 meilleurs vecteurs en fonction du coût
+    sorted_image_list = pop_sort(image_list)
+    best_popu = lowest_cost_pop(sorted_image_list)
+
+    # Applique (des mutations et /ou) des croisements aux meilleurs vecteurs
+    popu_cross = cross_over(best_popu, Tc)
+
+    # Crée une nouvelle population en fusionnant les meilleurs vecteurs et les vecteurs mutés
+    popu_final = np.concatenate((popu_cross, best_popu), axis=0)
+
+    pop = popu_final
+    return pop
+
 if __name__=='__main__':
     #Test de la fonction pop_sort(image_list)
     image_list = [[[3],[7, 2]], [[1],[9, 5]], [[4], [6, 1]], [[2], [8, 3]]]
