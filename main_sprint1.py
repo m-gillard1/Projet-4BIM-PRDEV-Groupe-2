@@ -5,8 +5,8 @@
 #######################################################################
 ### Importer les fonctions de l'autoencodeur et de l'algo génétique ###
 #######################################################################
-import algo_gen_sprint1.py
-import test_autoencodeur.py
+import Algo_gen.py
+# voir Thibald import autoencodeur
 import interface.py
 
 ######################
