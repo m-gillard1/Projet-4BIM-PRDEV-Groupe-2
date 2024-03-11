@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+from PIL import Image
 
 class Autoencoder(nn.Module):
     def __init__(self):
@@ -31,3 +32,15 @@ class Autoencoder(nn.Module):
         x = self.encoder(x) 
         x = self.decoder(x) 
         return x 
+
+def my_loader_function(path):
+    """
+    Custom loader function to open an image file from the given path.
+
+    Args:
+        path (str): The path to the image file.
+
+    Returns:
+        PIL.Image.Image: The opened image object.
+    """
+    return Image.open(open(path, 'r+b'))
