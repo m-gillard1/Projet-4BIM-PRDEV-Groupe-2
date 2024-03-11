@@ -104,3 +104,6 @@ def main():
 
     # Save the model
     torch.save(model.state_dict(), 'conv_autoencoder.pth')
+
+if __name__ == "__main__":
+    main()
