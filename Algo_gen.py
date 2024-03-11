@@ -51,6 +51,40 @@ def lowest_cost_pop(sorted_image_list):
     low_pop = sorted_image_list[0:Ns]
     return low_pop
 
+def cross_over(best_image_list, Tc):
+    """
+    Fait des croisements entre vecteurs d'image.
+
+    Paramètres :
+    ----------
+    image_list: list
+        list de vecteurs comprenant la note de l'image et le vecteur issue de celle-ci
+
+    Tc: float
+        Taux de croisement.
+
+    Retourne :
+    ---------
+    new_P : list
+        Liste contenant les vecteurs d'images ayant ou non subis des croisement. // avec ou sans note meme problème qu'avant
+    """
+    new_P = np.copy(best_image_list) ## image_list ou sorted_image_list ?
+
+    for i in range(0, len(new_P)):
+        if random() < Tc:
+            print('cross over !! ',i)
+            indc = randint(0, len(new_P) - 1) #choisi l'image avec laquelle il va échanger entre 0 et 10
+            posc = randint(0, len(new_P[i][1]) - 1) # choisi a quelle position du vecteur on coupe entre 0 et 20
+            print(indc)
+            print(posc)
+            print(len(new_P[i][1]))
+            tmp = new_P[i][1][posc:len(new_P[i][1])]
+            print(tmp)
+            new_P[i][1][posc:len(new_P[i][1])] = new_P[indc][1][posc:len(new_P[i][1])]
+            new_P[indc][1][posc:len(new_P[i][1])] = tmp
+
+    return new_P
+
 if __name__=='__main__':
     #Test fonction pop_sort(image_list)
     image_list = [[[3],[7, 2]], [[1],[9, 5]], [[4], [6, 1]], [[2], [8, 3]]]
