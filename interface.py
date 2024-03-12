@@ -21,7 +21,6 @@ class Favori(tk.Button):
         super().__init__(best_choices_container_frame,width=wide, height=h, **kwargs)
 
     def Make_favorite (self,id, note, image ):
-        print('large'+ str(self.large))
         self.note=note
         self.id=id
         photo = Image.open(self.id)
