@@ -7,12 +7,28 @@ from PIL import Image,ImageTk
 def toggle_fullscreen(event=None):
     root.attributes('-fullscreen', not root.attributes('-fullscreen'))
 
-
 Dico_note ={}
+
 
 class Favori(tk.Button):
     def __init__(self,position, wide, **kwargs):
-        super().__init__(best_choices_container_frame,width=wide,  **kwargs)
+        h = int (wide*0.5)
+        self.photo_image= None
+        self.note=None
+        self.id=None
+        
+        super().__init__(best_choices_container_frame,width=wide, height=h, **kwargs)
+
+    def Make_favorite (self,id, note, image ):
+        print(self)
+        print(id)
+        print(note)
+        print('passe ici')
+        self.photo_image= image
+        self.note=note
+        self.id=id
+        self.config(image=self.photo_image)
+        return
 
     
 
@@ -115,6 +131,7 @@ class Suspect(tk.Button):
         rank = suspect_actuel.ranking()
         if (rank<10 and self.note>7):
             print('favori')
+            Favori.Make_favorite(fav_1, suspect_actuel.id, suspect_actuel.note, suspect_actuel.photo_image)
         return
 
 
@@ -122,6 +139,7 @@ class Suspect(tk.Button):
 # réinitialise à l'état d'origine (affichage, contenu des dossiers, numérotation vague, notations) 
 def Restart_event(event):
     suspect_principal.configure(image=Image_Instruction)
+    Start_Over()
     Vague_actuelle=1
 
 def Refresh_event(event):
@@ -173,7 +191,8 @@ def Init_suspects(choices_container_frame,photo_width,photo_height):
     suspect_12.grid(row=2, column=3, padx=photo_width//50, pady=photo_height//50)
 
 def Start_Over():
-
+    global Dico_note 
+    Dico_note ={}
 
     ########## __Relance__ ##########
    
@@ -280,9 +299,50 @@ def Start_Over():
     # Create a grid of frames
     favorites = [[tk.Frame(best_choices_container_frame, bg="lightgreen") for _ in range(5)] for _ in range(2)]
 
-    fav_1 = Favori(1,photo_width)
-    fav_1.config(text="favori1")
-    fav_1.grid(row=1, column=1)
+    fav_dim = int(left_width*0.021)
+
+    fav_1 = Favori(1,fav_dim)
+    fav_1.config(text="favori 1")
+    fav_1.grid(row=1, column=1, padx=fav_dim, pady=fav_dim)
+
+    fav_2 = Favori(2, fav_dim)
+    fav_2.config(text='favori 2')
+    fav_2.grid(row=1, column = 2, padx=fav_dim, pady=fav_dim)
+
+    fav_3 = Favori(3,fav_dim)
+    fav_3.config(text="favori 3")
+    fav_3.grid(row=1, column=3, padx=fav_dim, pady=fav_dim)
+
+    fav_4 = Favori(4, fav_dim)
+    fav_4.config(text='favori 4')
+    fav_4.grid(row=1, column = 4, padx=fav_dim, pady=fav_dim)
+
+    fav_5 = Favori(5,fav_dim)
+    fav_5.config(text="favori 5")
+    fav_5.grid(row=1, column=5, padx=fav_dim, pady=fav_dim)
+
+    fav_6 = Favori(6, fav_dim)
+    fav_6.config(text='favori 6')
+    fav_6.grid(row=2, column = 1, padx=fav_dim, pady=fav_dim)
+
+    fav_7 = Favori(7,fav_dim)
+    fav_7.config(text="favori 7")
+    fav_7.grid(row=2, column=2, padx=fav_dim, pady=fav_dim)
+
+    fav_8 = Favori(8, fav_dim)
+    fav_8.config(text='favori 8')
+    fav_8.grid(row=2, column = 3, padx=fav_dim, pady=fav_dim)
+
+    fav_9 = Favori(9,fav_dim)
+    fav_9.config(text="favori 9")
+    fav_9.grid(row=2, column=4, padx=fav_dim, pady=fav_dim)
+
+    fav_10 = Favori(10, fav_dim)
+    fav_10.config(text='favori 10')
+    fav_10.grid(row=2, column = 5, padx=fav_dim, pady=fav_dim)
+
+
+    
 
 
     ######## --Top side: Selection d'une image et action dessus-- ########
@@ -444,9 +504,49 @@ best_choices_container_frame.pack_propagate(False)
 best_choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
 # Create a grid of frames
 favorites = [[tk.Frame(best_choices_container_frame, bg="lightgreen") for _ in range(5)] for _ in range(2)]
-fav_1 = Favori(1,photo_width)
-fav_1.config(text="favori1")
-fav_1.grid(row=1, column=1)
+fav_dim = int(left_width*0.021)
+
+fav_1 = Favori(1,fav_dim)
+fav_1.config(text="favori 1")
+fav_1.grid(row=1, column=1, padx=fav_dim, pady=fav_dim)
+
+fav_2 = Favori(2, fav_dim)
+fav_2.config(text='favori 2')
+fav_2.grid(row=1, column = 2, padx=fav_dim, pady=fav_dim)
+
+fav_3 = Favori(3,fav_dim)
+fav_3.config(text="favori 3")
+fav_3.grid(row=1, column=3, padx=fav_dim, pady=fav_dim)
+
+fav_4 = Favori(4, fav_dim)
+fav_4.config(text='favori 4')
+fav_4.grid(row=1, column = 4, padx=fav_dim, pady=fav_dim)
+
+fav_5 = Favori(5,fav_dim)
+fav_5.config(text="favori 5")
+fav_5.grid(row=1, column=5, padx=fav_dim, pady=fav_dim)
+
+fav_6 = Favori(6, fav_dim)
+fav_6.config(text='favori 6')
+fav_6.grid(row=2, column = 1, padx=fav_dim, pady=fav_dim)
+
+fav_7 = Favori(7,fav_dim)
+fav_7.config(text="favori 7")
+fav_7.grid(row=2, column=2, padx=fav_dim, pady=fav_dim)
+
+fav_8 = Favori(8, fav_dim)
+fav_8.config(text='favori 8')
+fav_8.grid(row=2, column = 3, padx=fav_dim, pady=fav_dim)
+
+fav_9 = Favori(9,fav_dim)
+fav_9.config(text="favori 9")
+fav_9.grid(row=2, column=4, padx=fav_dim, pady=fav_dim)
+
+fav_10 = Favori(10, fav_dim)
+fav_10.config(text='favori 10')
+fav_10.grid(row=2, column = 5, padx=fav_dim, pady=fav_dim)
+
+
 ######## --Top side: Selection d'une image et action dessus-- ########
 suspect_actuel = None
 main_image_frame = tk.Frame(left_frame,width=left_width,height=(screen_height-left_height),bg="gray85")
