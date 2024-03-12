@@ -13,6 +13,7 @@ Dico_note ={}
 class Favori(tk.Button):
     def __init__(self,position, wide, **kwargs):
         h = int (wide*0.5)
+        self.large=h*15
         self.photo_image= None
         self.note=None
         self.id=None
@@ -20,14 +21,13 @@ class Favori(tk.Button):
         super().__init__(best_choices_container_frame,width=wide, height=h, **kwargs)
 
     def Make_favorite (self,id, note, image ):
-        print(self)
-        print(id)
-        print(note)
-        print('passe ici')
-        self.photo_image= image
+        print('large'+ str(self.large))
         self.note=note
         self.id=id
-        self.config(image=self.photo_image)
+        photo = Image.open(self.id)
+        photo_resized = photo.resize((self.large, self.large))
+        self.photo_image = ImageTk.PhotoImage(photo_resized)
+        self.config(height=self.large, width=self.large,image=self.photo_image)
         return
 
     
