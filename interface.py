@@ -131,7 +131,7 @@ class Suspect(tk.Button):
         rank = suspect_actuel.ranking()
         if (rank<10 and self.note>7):
             print('favori')
-            Favori.Make_favorite(fav_1, suspect_actuel.id, suspect_actuel.note, suspect_actuel.photo_image)
+            Favori.Make_favorite(Dico_rang_fav[rank], suspect_actuel.id, suspect_actuel.note, suspect_actuel.photo_image)
         return
 
 
@@ -342,7 +342,16 @@ def Start_Over():
     fav_10.grid(row=2, column = 5, padx=fav_dim, pady=fav_dim)
 
 
-    
+    Dico_rang_fav ={1: fav_1,
+                2: fav_2,
+                3:fav_3,
+                4:fav_4,
+                5:fav_5,
+                6:fav_6,
+                7:fav_7,
+                8:fav_8,
+                9:fav_9,
+                10:fav_10}
 
 
     ######## --Top side: Selection d'une image et action dessus-- ########
@@ -546,7 +555,16 @@ fav_10 = Favori(10, fav_dim)
 fav_10.config(text='favori 10')
 fav_10.grid(row=2, column = 5, padx=fav_dim, pady=fav_dim)
 
-
+Dico_rang_fav ={1: fav_1,
+                2: fav_2,
+                3:fav_3,
+                4:fav_4,
+                5:fav_5,
+                6:fav_6,
+                7:fav_7,
+                8:fav_8,
+                9:fav_9,
+                10:fav_10}
 ######## --Top side: Selection d'une image et action dessus-- ########
 suspect_actuel = None
 main_image_frame = tk.Frame(left_frame,width=left_width,height=(screen_height-left_height),bg="gray85")
