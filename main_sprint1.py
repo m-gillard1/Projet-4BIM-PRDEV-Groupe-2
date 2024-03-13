@@ -19,6 +19,14 @@ import interface.py
 #############################################################
 # Martin Théo
 
+# liste de note aléatoire en attendant lien fonctionnel avec l'IHM
+note = np.zeros(nb_image_par_vague)
+i=0
+for i in range(nb_image_par_vague): 
+    print(i)
+    note[i] = int(uniform(0, 11)) # note aléatoire en attendant le lien avec l'IHM
+
+#print(note)
 
 ##########################
 ### Encoder les images ###
