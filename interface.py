@@ -175,10 +175,15 @@ def Refresh_event(event):
     Init_suspects(choices_container_frame,Liste_path,photo_width,photo_height)
     return
 
+#Dico note est un dictionnaire qui contient en clé les path des images (string) et en value les notes associées aux images (int). Exemple de contenu :
+#{'image_vague_1/1.png': 5, 'image_vague_1/2.png': 5, 'image_vague_1/3.png': 5, 'image_vague_1/4.png': 5, 'image_vague_1/5.png': 5, 'image_vague_1/6.png': 5, 'image_vague_1/7.png': 5, 'image_vague_1/8.png': 5, 'image_vague_1/9.png': 5}
 
-def Genere_Suspect(Dico, Num_Vague ):
-    #cree un dossier qui s'appelle 'vague_[Num_Vague]'
-    return
+#fonction Gene_Suspect :
+#genere 12 nouvelles images de suspects dans un dossier nommée vague_n\: Par exemple pour n=2, on veut en sortie 12 images au format .png telles que:  "\vague_2\image_1.png", "\vague_2\image_2.png, ... , "\vague_2\image_11.png "
+# return une liste contenant les paths des 12 image
+def Genere_Suspect(Dico ):
+    Liste_Path_nouvelle_vague=[]
+    return (Liste_Path_nouvelle_vague)
 
 def Init_suspects(choices_container_frame,Liste_img,photo_width,photo_height):
 
