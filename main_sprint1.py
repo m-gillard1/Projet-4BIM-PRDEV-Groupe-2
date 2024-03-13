@@ -40,7 +40,18 @@ for i in range(nb_image_par_vague):
 ##########################
 ### Encoder les images ###
 ##########################
-## Thibald
+
+encoded_image_list=[]
+count=0
+
+for image in os.listdir(path_im_vague1) : 
+    #print(count)
+    #print(image)
+    encoded_image=Autoencoder_to_use.NumpyEncoding(path_im_vague1+image)
+    encoded_image_list.append(encoded_image)
+    count+=1
+
+print(encoded_image_list)
 
 ######################################################
 ### Récupérer les .npy en sortie de l'autoencodeur ###
