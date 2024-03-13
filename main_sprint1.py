@@ -7,10 +7,11 @@
 #######################################################################
 
 import Algo_gen
-#import Autoencoder_to_use
+import Autoencoder_to_use
 
 from random import *
 import numpy as np
+import os
 #import interface.py
 
 nb_image_par_vague=12
