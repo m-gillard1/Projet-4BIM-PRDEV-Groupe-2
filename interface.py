@@ -28,6 +28,22 @@ class Favori(tk.Button):
         self.photo_image = ImageTk.PhotoImage(photo_resized)
         self.config(height=self.large, width=self.large,image=self.photo_image)
         return
+    
+    def Update_Fav (Dico_note):
+        print('ici1')
+        sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
+        lim = 1
+        for i in sorted_id_by_note : 
+            if lim < 10 :
+                if (i[1]>7):
+                    path = i[0]
+                    print(path)
+                    photo = Image.open(path)
+                    photo_resized = photo.resize((Dico_rang_fav[lim].large, Dico_rang_fav[lim].large,))
+                    print(Dico_rang_fav[lim].id)
+                    Dico_rang_fav[lim].photo_image = ImageTk.PhotoImage(photo_resized)
+                    Dico_rang_fav[lim].config(height=Dico_rang_fav[lim].large,width=Dico_rang_fav[lim].large, image=Dico_rang_fav[lim].photo_image)
+                    lim+=1
 
     
 
@@ -70,6 +86,7 @@ class Suspect(tk.Button):
         suspect_actuel.Ajout_Favori()
         print(Dico_note.values())
         print(suspect_actuel.ranking())   
+        Favori.Update_Fav(Dico_note=Dico_note)
 
             
     def decrement_note(self):
@@ -81,6 +98,7 @@ class Suspect(tk.Button):
         note_label.config(text="Note: "+str(suspect_actuel.note))
         global Dico_note
         Dico_note[suspect_actuel.id]= suspect_actuel.note
+        Favori.Update_Fav(Dico_note=Dico_note)
     
     def garbage(self):
         global suspect_actuel
@@ -93,6 +111,7 @@ class Suspect(tk.Button):
         print(Dico_note.keys())
         print(Dico_note.values())
         print(suspect_actuel.ranking())
+        Favori.Update_Fav(Dico_note=Dico_note)
 
     def update_color(self):
         global suspect_actuel
@@ -564,6 +583,9 @@ Dico_rang_fav ={1: fav_1,
                 8:fav_8,
                 9:fav_9,
                 10:fav_10}
+
+Dico_rank = {}
+
 ######## --Top side: Selection d'une image et action dessus-- ########
 suspect_actuel = None
 main_image_frame = tk.Frame(left_frame,width=left_width,height=(screen_height-left_height),bg="gray85")
