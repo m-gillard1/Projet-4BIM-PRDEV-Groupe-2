@@ -36,7 +36,7 @@ class Autoencoder(nn.Module):
         x = self.decoder(x) 
         return x 
 
-def my_loader_function(path):
+def OpenImage(path):
     """
     Custom loader function to open an image file from the given path.
 
@@ -90,7 +90,7 @@ def main():
     transform = transforms.ToTensor()
 
     # Load dataset
-    train_dataset = datasets.ImageFolder(root="C:/Users/thiba/Documents/INSA_2023-2024/S2/Software_dev/ImagesClassées/train_data_0_23999", transform=transform, loader=my_loader_function)
+    train_dataset = datasets.ImageFolder(root="C:/Users/thiba/Documents/INSA_2023-2024/S2/Software_dev/ImagesClassées/train_data_0_23999", transform=transform, loader=OpenImage)
     #the autoencoder has been trained on local due to the size of the dataset not supported by git hence the 
     # Define the dataloader
     train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=64, shuffle=True)
