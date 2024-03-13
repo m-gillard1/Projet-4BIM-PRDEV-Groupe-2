@@ -12,10 +12,12 @@ import Autoencoder_to_use
 from random import *
 import numpy as np
 import os
+from PIL import Image
 #import interface.py
 
 nb_image_par_vague=12
 path_im_vague1="C:/Users/auror/Downloads/SPRINT1/image_vague_1"
+path_result_vague1 ="C:/Users/auror/Downloads/SPRINT1/image_vague_1/result/"
 taux_cross_over=0.3
 
 ######################
@@ -107,10 +109,15 @@ for image in image_after_algo_list :
 
 
 
-############################################
-### Décoder les nparray obtenus en image ###
-############################################
-## Thibald
+#########################################################################
+### Décoder les nparray obtenus en image + sauvegarde dans un dossier ###
+#########################################################################
+count_4=0
+for numpy in new_image_encoded : 
+    count_4+=1
+    image_decoded=Autoencoder_to_use.NumpyDecoding(numpy)
+    image_decoded.save(path_result_vague1+'new_image'+str(count_4)+'.png')
+    print(count_4)
 
 
 
