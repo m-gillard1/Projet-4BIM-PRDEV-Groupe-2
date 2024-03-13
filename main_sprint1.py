@@ -16,7 +16,7 @@ from PIL import Image
 #import interface.py
 
 nb_image_par_vague=12
-path_im_vague1="C:/Users/auror/Downloads/SPRINT1/image_vague_1"
+path_im_vague1="C:/Users/auror/Downloads/SPRINT1/data/image_vague_1"
 path_result_vague1 ="C:/Users/auror/Downloads/SPRINT1/image_vague_1/result/"
 taux_cross_over=0.3
 
@@ -34,7 +34,7 @@ taux_cross_over=0.3
 note = np.zeros(nb_image_par_vague)
 i=0
 for i in range(nb_image_par_vague): 
-    print(i)
+    #print(i)
     note[i] = int(uniform(0, 11)) # note aléatoire en attendant le lien avec l'IHM
 
 #print(note)
