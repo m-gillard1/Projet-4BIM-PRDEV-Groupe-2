@@ -3,3 +3,30 @@ import torch
 from torchvision import transforms
 from PIL import Image
 import numpy as np
+
+def NumpyEncoding(imToEncode):
+    # Instantiate the autoencoder model
+    autoencoder = autoE.Autoencoder()
+
+    # Load the trained weights
+    autoencoder.load_state_dict(torch.load("conv_autoencoder.pth"))
+
+    # Set the model to evaluation mode
+    autoencoder.eval()
+
+    # Define transformations to be applied to new data samples
+    transform = transforms.ToTensor() # Convert PIL Image to tensor
+
+    #Open the image
+    image=Image.open(imToEncode)
+
+    #Tranform to a tensor adding batch dimension
+    image_tensor=transform(image).unsqueeze(0)
+
+    #Encode the image 
+    encoded_image=autoencoder.encoder(image_tensor)
+
+    #Tranform it to a Numpy Array
+    encoded_image_np=encoded_image.detach().numpy()
+
+    return encoded_image_np
