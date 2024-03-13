@@ -40,15 +40,15 @@ class Favori(tk.Button):
                     print(path)
                     photo = Image.open(path)
                     photo_resized = photo.resize((Dico_rang_fav[lim].large, Dico_rang_fav[lim].large,))
-                    print(Dico_rang_fav[lim].id)
                     Dico_rang_fav[lim].photo_image = ImageTk.PhotoImage(photo_resized)
+                    print(Dico_rang_fav[lim])
                     Dico_rang_fav[lim].config(height=Dico_rang_fav[lim].large,width=Dico_rang_fav[lim].large, image=Dico_rang_fav[lim].photo_image)
                     lim+=1
-        first_non_fav= Favori.get_first_non_fav(sorted_id_by_note)
-        print('first non fav' + str(first_non_fav))
-        for i in range (first_non_fav, 10):
-            print (Dico_rang_fav[i])
-            Favori.Clear_fav (Dico_rang_fav[i])
+        #first_non_fav= Favori.get_first_non_fav(sorted_id_by_note)
+        #print('first non fav' + str(first_non_fav))
+        #for j in range (first_non_fav, 10):
+        #    Dico_rang_fav[j].__init__(position=1,wide = int(left_width*0.021))
+            #Favori.Clear_fav (Dico_rang_fav[i])
             
     def get_first_non_fav(dico_sorted):
         pos = 0 
@@ -58,7 +58,7 @@ class Favori(tk.Button):
         return pos
             
     def Clear_fav (self):
-        self.config(text= str(self.winfo_name()), image='')
+        self.config(text= str(self.winfo_name()), image='', height=self.large, width=self.large)
 
         
 
@@ -84,7 +84,6 @@ class Suspect(tk.Button):
         global suspect_actuel
         suspect_actuel = self
         note_label.config(text = 'Note: ' + str(self.note))
-        print(suspect_actuel.note)
         image_suspect = suspect_actuel.cget('image')
         suspect_principal.configure(image=image_suspect)
     
@@ -93,15 +92,14 @@ class Suspect(tk.Button):
         global suspect_actuel
         if suspect_actuel.note <10:
             suspect_actuel.note += 1
-            print(suspect_actuel.note)
+            
             suspect_actuel.update_color()
         global Dico_note
         global note_label
         note_label.config(text="Note: "+str(suspect_actuel.note))
         Dico_note[suspect_actuel.id]= suspect_actuel.note
         suspect_actuel.Ajout_Favori()
-        print(Dico_note.values())
-        print(suspect_actuel.ranking())   
+           
         Favori.Update_Fav(Dico_note=Dico_note)
 
             
@@ -124,28 +122,21 @@ class Suspect(tk.Button):
         note_label.config(text="Note: "+str(suspect_actuel.note))
         global Dico_note
         Dico_note[suspect_actuel.id]= suspect_actuel.note
-        print(Dico_note.keys())
-        print(Dico_note.values())
-        print(suspect_actuel.ranking())
+        
         Favori.Update_Fav(Dico_note=Dico_note)
 
     def update_color(self):
         global suspect_actuel
         
         if suspect_actuel.note >= 9 :
-            print('test1')
             border_color = "dark green"
         elif suspect_actuel.note >= 7:
-            print('test2')
             border_color = "green yellow"
         elif suspect_actuel.note > 3:
-            print('test3')
             border_color = self.original_border_color
         elif suspect_actuel.note > 1:
-            print('test4')
             border_color = "orange"
         else:
-            print('test5')
             border_color = "red"
         
         # Définit la couleur de la bordure du bouton
@@ -228,244 +219,8 @@ def Init_suspects(choices_container_frame,Liste_img,photo_width,photo_height):
     suspect_12.grid(row=2, column=3, padx=photo_width//50, pady=photo_height//50)
 
 def Start_Over():
-    global Dico_note 
-    Dico_note ={}
-
-    ########## __Relance__ ##########
-   
-    global root
-    # Define the width and height of the screen
-    screen_width = root.winfo_screenwidth()
-    screen_height = root.winfo_screenheight()
-
-     # Calculate the width and height
-    left_width = screen_width * 3 // 7
-    right_width = screen_width * 4 // 7
-    choices_height = screen_height * 2 // 3
-    left_height = screen_height * 3 // 8
-    top_left_width = left_width * 1 // 4 
-    #jauge_width = top_left_width * 2 // 15
-
-    # Create frames for left and right sections
-    left_frame = tk.Frame(root, width=left_width, height=screen_height, bg="gray80")
-    right_frame = tk.Frame(root, width=right_width, height=screen_height, bg="black")
-    left_frame.pack(side=tk.LEFT, fill=tk.Y)
-    left_frame.pack_propagate(False) 
-    right_frame.pack(side=tk.RIGHT, fill=tk.Y)
-    right_frame.pack_propagate(False) 
-
-    #Favori.Clear_all_fav()
-    ######### --Modif for the right side-- #########
-
-    ### choices frame = partie supérieur de la partie de droite ###
-    choices_frame = tk.Frame(right_frame,width=right_width, height = choices_height, bg = "gray70")
-    choices_frame.pack(side=tk.TOP, fill=tk.X)
-    choices_frame.pack_propagate(False) 
-
-    ### intérieur de la partie supérieur de la partie de droite, contient les suspects ###
-    choices_container_frame =  tk.Frame(choices_frame,width=right_width*0.9, height = choices_height*0.9, bg = "white")
-    choices_container_frame.pack(fill="both", expand=True)
-    choices_container_frame.pack_propagate(False) 
-    choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
-    choices_container_frame.update()
-    choices_height = (choices_container_frame.winfo_height()//1)
-    choices_width = choices_container_frame.winfo_width()
-    ### partie inférieur de la partie de droite, contient les boutons d'options ###
-    Menu_Option_Frame = tk.Frame(right_frame,width=right_width, height = (screen_height-choices_height), bg = "gray10")
-    Menu_Option_Frame.pack_propagate(False) 
-    Menu_Option_Frame.pack(side=tk.TOP, fill='both')
-
-    
-
-    ##### Creation et ajout des boutons dans choices_container (en haut à droite) #####
-    photo_width = int(right_width*0.18)
-    photo_height = int(right_width*0.18)
-    Liste_vague1= ["image_vague_1/1.png", "image_vague_1/2.png", "image_vague_1/3.png","image_vague_1/4.png","image_vague_1/5.png","image_vague_1/6.png","image_vague_1/7.png","image_vague_1/8.png","image_vague_1/9.png","image_vague_1/10.png", "image_vague_1/11.png","image_vague_1/12.png"]
-    Init_suspects(choices_container_frame,Liste_vague1,photo_width,photo_height)
-
-    ##### Création et ajout des boutons dans le frame menu option #####
-    Menu_Option_Frame.update()
-    height_menu = Menu_Option_Frame.winfo_height()
-    width_menu = Menu_Option_Frame.winfo_width()
-    pad_horizontal = width_menu // 15
-    pad_vertical = height_menu // 22
-    Bouton_restart = tk.Button(Menu_Option_Frame,text='Start Over',height=height_menu//47, width=width_menu//20,background='red', command=lambda: Restart_event)
-    Bouton_restart.grid(row=1, column=2, padx=pad_horizontal, pady=pad_vertical, sticky='nswe')
-    Bouton_restart.bind("<Button-1>", Restart_event)
-
-    Bouton_refresh = tk.Button(Menu_Option_Frame,text='Refresh',height=height_menu//47, width=width_menu//20, background='lightblue')
-    Bouton_refresh.grid(row=2, column=1, padx=pad_horizontal, pady=pad_vertical, sticky='nswe')
-
-    Bouton_garbage= tk.Button(Menu_Option_Frame,text='Garbage Bin',height=height_menu//47, width=width_menu//20, background='lightgreen')
-    Bouton_garbage.grid(row=1, column=1, padx=pad_horizontal, pady=pad_vertical, sticky='nswe')
-
-    ##### Création et ajout des boutons dans le frame menu option #####
-    Menu_Option_Frame.update()
-    height_menu = Menu_Option_Frame.winfo_height()
-    width_menu = Menu_Option_Frame.winfo_width()
-    pad_horizontal = width_menu // 15
-    pad_vertical = height_menu // 22
-    Bouton_restart = tk.Button(Menu_Option_Frame,text='Start Over',height=height_menu//47, width=width_menu//20,background='red', command=lambda: Restart_event)
-    Bouton_restart.grid(row=1, column=2, padx=pad_horizontal, pady=pad_vertical, sticky='nswe')
-    Bouton_restart.bind("<Button-1>", Restart_event)
-
-    Bouton_refresh = tk.Button(Menu_Option_Frame,text='Refresh',height=height_menu//47, width=width_menu//20, background='lightblue')
-    Bouton_refresh.grid(row=2, column=1, padx=pad_horizontal, pady=pad_vertical, sticky='nswe')
-
-    Bouton_garbage= tk.Button(Menu_Option_Frame,text='Garbage Bin',height=height_menu//47, width=width_menu//20, background='lightgreen')
-    Bouton_garbage.grid(row=1, column=1, padx=pad_horizontal, pady=pad_vertical, sticky='nswe')
-    Bouton_garbage.bind("<Button-1>" , Suspect.garbage )
-
-    Bouton_FIN= tk.Button(Menu_Option_Frame,text='Finish', height=height_menu//47, width=width_menu//20, background='yellow')
-    Bouton_FIN.grid(row=2, column=2, padx=pad_horizontal, pady=pad_vertical, sticky='nswe')
-    ######### --Modif for the left side-- #########
-
-
-
-    ####### --Bottom side: selection des meilleures images-- ########
-
-    best_choices_frame = tk.Frame(left_frame,width=left_width,height=left_height,bg="gray75")
-    best_choices_frame.pack(side=tk.BOTTOM,fill = tk.X)
-    best_choices_frame.pack_propagate(False) 
-
-    best_choices_container_frame =  tk.Frame(best_choices_frame,width=left_width*0.95, height = left_height*0.95, bg = "white")
-    best_choices_container_frame.pack(fill="both", expand=True)
-    best_choices_container_frame.pack_propagate(False) 
-    best_choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
-
-    # Create a grid of frames
-    favorites = [[tk.Frame(best_choices_container_frame, bg="lightgreen") for _ in range(5)] for _ in range(2)]
-
-    fav_dim = int(left_width*0.021)
-
-    fav_1 = Favori(1,fav_dim)
-    fav_1.config(text="favori 1")
-    fav_1.grid(row=1, column=1, padx=fav_dim, pady=fav_dim)
-
-    fav_2 = Favori(2, fav_dim)
-    fav_2.config(text='favori 2')
-    fav_2.grid(row=1, column = 2, padx=fav_dim, pady=fav_dim)
-
-    fav_3 = Favori(3,fav_dim)
-    fav_3.config(text="favori 3")
-    fav_3.grid(row=1, column=3, padx=fav_dim, pady=fav_dim)
-
-    fav_4 = Favori(4, fav_dim)
-    fav_4.config(text='favori 4')
-    fav_4.grid(row=1, column = 4, padx=fav_dim, pady=fav_dim)
-
-    fav_5 = Favori(5,fav_dim)
-    fav_5.config(text="favori 5")
-    fav_5.grid(row=1, column=5, padx=fav_dim, pady=fav_dim)
-
-    fav_6 = Favori(6, fav_dim)
-    fav_6.config(text='favori 6')
-    fav_6.grid(row=2, column = 1, padx=fav_dim, pady=fav_dim)
-
-    fav_7 = Favori(7,fav_dim)
-    fav_7.config(text="favori 7")
-    fav_7.grid(row=2, column=2, padx=fav_dim, pady=fav_dim)
-
-    fav_8 = Favori(8, fav_dim)
-    fav_8.config(text='favori 8')
-    fav_8.grid(row=2, column = 3, padx=fav_dim, pady=fav_dim)
-
-    fav_9 = Favori(9,fav_dim)
-    fav_9.config(text="favori 9")
-    fav_9.grid(row=2, column=4, padx=fav_dim, pady=fav_dim)
-
-    fav_10 = Favori(10, fav_dim)
-    fav_10.config(text='favori 10')
-    fav_10.grid(row=2, column = 5, padx=fav_dim, pady=fav_dim)
-
-
-    Dico_rang_fav ={1: fav_1,
-                2: fav_2,
-                3:fav_3,
-                4:fav_4,
-                5:fav_5,
-                6:fav_6,
-                7:fav_7,
-                8:fav_8,
-                9:fav_9,
-                10:fav_10}
-
-
-    ######## --Top side: Selection d'une image et action dessus-- ########
-
-    suspect_actuel = None
-
-    main_image_frame = tk.Frame(left_frame,width=left_width,height=(screen_height-left_height),bg="gray85")
-    main_image_frame.pack(side=tk.TOP,fill=tk.X)
-    main_image_frame.pack_propagate(False) 
-
-    modif_main_image_frame = tk.Frame(main_image_frame,width=top_left_width,height=(screen_height-left_height),bg="lightgray")
-    modif_main_image_frame.pack(side=tk.RIGHT,fill=tk.Y)
-    modif_main_image_frame.pack_propagate(False) 
-    
-    modif_main_image_frame.update()
-    photo_updown_size = modif_main_image_frame.winfo_width()
-
-    photo_up_raw = Image.open("up.png")
-    photo_up_resized = photo_up_raw.resize((photo_updown_size, photo_updown_size))
-    Image_up = ImageTk.PhotoImage(photo_up_resized)
-    button_up = tk.Button(modif_main_image_frame, image=Image_up,bg="lightgray")
-    button_up.pack(side=tk.TOP, fill="both",expand=True)
-    button_up.bind("<Button-1>",Suspect.increment_note)
-
-    note_label = tk.Label(modif_main_image_frame,text="Note: " + str(5))
-    note_label.pack(side=tk.TOP,fill="both",expand=True)
-
-    photo_down_raw = Image.open("down.png")
-    photo_down_resized = photo_down_raw.resize((photo_updown_size, photo_updown_size))
-    Image_down = ImageTk.PhotoImage(photo_down_resized)
-    button_down = tk.Button(modif_main_image_frame, image=Image_down,bg="lightgray")
-    button_down.pack(side=tk.BOTTOM, fill="both",expand=True)
-    button_down.bind("<Button-1>",Suspect.decrement_note)
-    """
-    jauge_frame = tk.Frame(modif_main_image_frame,width=jauge_width,height=(screen_height-left_height),bg="lightgray")
-    jauge_frame.pack(side=tk.LEFT,fill=tk.Y)
-    jauge_frame.pack_propagate(False) 
-
-    jauge = jauge(jauge_frame,(screen_height-left_height))
-
-    buttons_modif_main_frame = tk.Frame(modif_main_image_frame,width=(top_left_width-jauge_width),height=(screen_height-left_height),bg="lightgray")
-    buttons_modif_main_frame.pack(side=tk.RIGHT,fill=tk.Y)
-    buttons_modif_main_frame.pack_propagate(False) 
-
-    button1 = tk.Button(buttons_modif_main_frame, text="Save Mark")
-    button1.pack(side=tk.TOP, fill=tk.X, padx=10, pady=5)
-    """
-
-
-    view_main_image_frame = tk.Frame(main_image_frame,width=(left_width-top_left_width),height=(screen_height-left_height),bg="lightgray")
-    view_main_image_frame.pack(side=tk.LEFT,fill=tk.Y)
-    view_main_image_frame.pack_propagate(False) 
-
-    main_image_width = (left_width-top_left_width)
-    main_image_height = (520*main_image_width) / 360
-
-    ### Label contenant l'image/texte en haut à gauche lors du lancement du logiciel, nécessaire car définissant taille des frames
-    Image_Instruction = PhotoImage(file = "instruction.png")
-    suspect_principal = tk.Label(view_main_image_frame , image=Image_Instruction, width=main_image_width, height=main_image_height,bg="lightgray")
-    suspect_principal.pack(fill="both",expand=True)
-
-
-    """
-    #Creation d'une jauge :
-    def jauge(place,h):
-        
-        max_val = 10
-        value = tk.DoubleVar()
-        value.set(5)
-
-        def mouvement(click):
-            return
-
-        #creation du slider
-        slider = tk.Scale(place,from_=0,to=max_val,orient=tk.VERTICAL,variable=value,command=mouvement,length = (h*0.50),resolution= 0.1,bg="lightgray",highlightbackground="lightgray")
-        slider.pack(side=tk.LEFT)
-    """
+    Init_suspects(choices_container_frame, Liste_vague1, photo_width, photo_height)
+    note_label.config(text = "Pas d'image sélectionnée")
 
 
 
