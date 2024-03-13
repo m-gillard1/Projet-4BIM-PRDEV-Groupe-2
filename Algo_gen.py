@@ -72,14 +72,14 @@ def cross_over(best_image_list, Tc):
 
     for i in range(0, len(new_P)):
         if random() < Tc:
-            print('cross over !! ',i)
+            #print('cross over !! ',i)
             indc = randint(0, len(new_P) - 1) #choisi l'image avec laquelle il va échanger entre 0 et 10
             posc = randint(0, len(new_P[i][1]) - 1) # choisi a quelle position du vecteur on coupe entre 0 et 20
-            print(indc)
-            print(posc)
-            print(len(new_P[i][1]))
+            #print(indc)
+            #print(posc)
+            #print(len(new_P[i][1]))
             tmp = new_P[i][1][posc:len(new_P[i][1])]
-            print(tmp)
+            #print(tmp)
             new_P[i][1][posc:len(new_P[i][1])] = new_P[indc][1][posc:len(new_P[i][1])]
             new_P[indc][1][posc:len(new_P[i][1])] = tmp
 
