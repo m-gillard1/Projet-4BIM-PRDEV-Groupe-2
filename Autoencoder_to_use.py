@@ -29,7 +29,7 @@ def NumpyEncoding(imToEncode):
     transform = transforms.ToTensor() # Convert PIL Image to tensor
 
     #Open the image
-    image=Image.open(imToEncode)
+    image=autoE.OpenImage(imToEncode)
 
     #Tranform to a tensor adding batch dimension
     image_tensor=transform(image).unsqueeze(0)
