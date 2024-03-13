@@ -30,3 +30,27 @@ def NumpyEncoding(imToEncode):
     encoded_image_np=encoded_image.detach().numpy()
 
     return encoded_image_np
+
+def NumpyDecoding(npToDecode):
+    # Instantiate the autoencoder model
+    autoencoder = auto.Autoencoder()
+
+    # Load the trained weights
+    autoencoder.load_state_dict(torch.load("conv_autoencoder.pth"))
+
+    # Set the model to evaluation mode
+    autoencoder.eval()
+
+    #Define the tranform
+    transform2 = transforms.ToPILImage()
+
+    #Tranform the np array back into a torch 
+    encoded_image=torch.from_numpy(npToDecode.astype(np.float32))
+
+    #Decode it 
+    decoded_image=autoencoder.decoder(encoded_image)
+
+    #Tranform it as an image (removing batch dimension)
+    decoded_image_pil=transform2(decoded_image.squeeze(0))
+
+    return decoded_image_pil
