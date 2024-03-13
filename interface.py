@@ -161,8 +161,9 @@ def Restart_event(event):
     Vague_actuelle=1
 
 def Refresh_event(event):
-    Genere_Suspect()
     Vague_actuelle+=1
+    Liste_path = Genere_Suspect(Dico_note, Vague_actuelle)
+    #dans "\vague_2\image_1", "\vague2|image2... n"
     suspect_principal.configure(image=Image_Instruction)
     return
 
@@ -170,42 +171,42 @@ def Refresh_event(event):
 def Genere_Suspect():
     return
 
-def Init_suspects(choices_container_frame,photo_width,photo_height):
+def Init_suspects(choices_container_frame,Liste_img,photo_width,photo_height):
 
-    suspect_1 = Suspect(choices_container_frame, "image_vague_1/52_superposee.png",5,photo_width,photo_height)
+    suspect_1 = Suspect(choices_container_frame,Liste_img[0],5,photo_width,photo_height)
     suspect_1.grid(row=0, column=0, padx=photo_width//50, pady=photo_height//50)
 
-    suspect_2 = Suspect(choices_container_frame, "image_vague_1/138_superposee.png",5,photo_width,photo_height)
+    suspect_2 = Suspect(choices_container_frame, Liste_img[1],5,photo_width,photo_height)
     suspect_2.grid(row=0, column=1, padx=photo_width//50, pady=photo_height//50)
 
-    suspect_3 = Suspect(choices_container_frame, "image_vague_1/142_superposee.png",5,photo_width,photo_height)
+    suspect_3 = Suspect(choices_container_frame, Liste_img[2],5,photo_width,photo_height)
     suspect_3.grid(row=0, column=2, padx=photo_width//50, pady=photo_height//50)
 
-    suspect_4 = Suspect(choices_container_frame, "image_vague_1/842_superposee.png",5,photo_width,photo_height)
+    suspect_4 = Suspect(choices_container_frame, Liste_img[3],5,photo_width,photo_height)
     suspect_4.grid(row=0, column=3, padx=photo_width//50, pady=photo_height//50)
 
-    suspect_5 = Suspect(choices_container_frame, "image_vague_1/643_superposee.png",5,photo_width,photo_height)
+    suspect_5 = Suspect(choices_container_frame, Liste_img[4],5,photo_width,photo_height)
     suspect_5.grid(row=1, column=0, padx=photo_width//50, pady=photo_height//50)
 
-    suspect_6 = Suspect(choices_container_frame, "image_vague_1/623_superposee.png",5,photo_width,photo_height)
+    suspect_6 = Suspect(choices_container_frame, Liste_img[5],5,photo_width,photo_height)
     suspect_6.grid(row=1, column=1, padx=photo_width//50, pady=photo_height//50)
 
-    suspect_7 = Suspect(choices_container_frame, "image_vague_1/567_superposee.png",5,photo_width,photo_height)
+    suspect_7 = Suspect(choices_container_frame, Liste_img[6],5,photo_width,photo_height)
     suspect_7.grid(row=1, column=2, padx=photo_width//50, pady=photo_height//50)
 
-    suspect_8 = Suspect(choices_container_frame, "image_vague_1/451_superposee.png",5,photo_width,photo_height)
+    suspect_8 = Suspect(choices_container_frame, Liste_img[7],5,photo_width,photo_height)
     suspect_8.grid(row=1, column=3, padx=photo_width//50, pady=photo_height//50)
 
-    suspect_9 = Suspect(choices_container_frame, "image_vague_1/286_superposee.png",5,photo_width,photo_height)
+    suspect_9 = Suspect(choices_container_frame, Liste_img[8],5,photo_width,photo_height)
     suspect_9.grid(row=2, column=0, padx=photo_width//50, pady=photo_height//50)
 
-    suspect_10 = Suspect(choices_container_frame, "image_vague_1/284_superposee.png",5,photo_width,photo_height)
+    suspect_10 = Suspect(choices_container_frame, Liste_img[9],5,photo_width,photo_height)
     suspect_10.grid(row=2, column=1, padx=photo_width//50, pady=photo_height//50)
 
-    suspect_11 = Suspect(choices_container_frame, "image_vague_1/842_superposee.png",5,photo_width,photo_height)
+    suspect_11 = Suspect(choices_container_frame, Liste_img[10],5,photo_width,photo_height)
     suspect_11.grid(row=2, column=2, padx=photo_width//50, pady=photo_height//50)
 
-    suspect_12 = Suspect(choices_container_frame, "image_vague_1/842_superposee.png",5,photo_width,photo_height)
+    suspect_12 = Suspect(choices_container_frame, Liste_img[11],5,photo_width,photo_height)
     suspect_12.grid(row=2, column=3, padx=photo_width//50, pady=photo_height//50)
 
 def Start_Over():
@@ -261,8 +262,8 @@ def Start_Over():
     ##### Creation et ajout des boutons dans choices_container (en haut à droite) #####
     photo_width = int(right_width*0.18)
     photo_height = int(right_width*0.18)
-
-    Init_suspects(choices_container_frame,photo_width,photo_height)
+    Liste_vague1= ["image_vague_1/1.png", "image_vague_1/2.png", "image_vague_1/3.png","image_vague_1/4.png","image_vague_1/5.png","image_vague_1/6.png","image_vague_1/7.png","image_vague_1/8.png","image_vague_1/9.png","image_vague_1/10.png", "image_vague_1/11.png""image_vague_1/12.png"]
+    Init_suspects(choices_container_frame,Liste_vague1,photo_width,photo_height)
 
     ##### Création et ajout des boutons dans le frame menu option #####
     Menu_Option_Frame.update()
@@ -484,7 +485,8 @@ Menu_Option_Frame.pack(side=tk.TOP, fill='both')
 ##### Creation et ajout des boutons dans choices_container (en haut à droite) #####
 photo_width = int(right_width*0.18)
 photo_height = int(right_width*0.18)
-Init_suspects(choices_container_frame,photo_width,photo_height)
+Liste_vague1= ["image_vague_1/1.png", "image_vague_1/2.png", "image_vague_1/3.png","image_vague_1/4.png","image_vague_1/5.png","image_vague_1/6.png","image_vague_1/7.png","image_vague_1/8.png","image_vague_1/9.png","image_vague_1/10.png", "image_vague_1/11.png","image_vague_1/12.png"]
+Init_suspects(choices_container_frame,Liste_vague1,photo_width,photo_height)
 ##### Création et ajout des boutons dans le frame menu option #####
 Menu_Option_Frame.update()
 height_menu = Menu_Option_Frame.winfo_height()
