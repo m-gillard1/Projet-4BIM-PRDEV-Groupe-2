@@ -89,8 +89,13 @@ print(image_note_list)
 ### Algorithme génétique (cross over) ###
 #########################################
         
-image_note_list = [[[3, None],[7, 2]], [[1, None],[9, 5]], [[4, None], [6, 1]], [[2, None], [8, 3]]]
-print(Algo_gen.one_loop(image_note_list,taux_cross_over))
+print("algo génétique")
+## pour test        
+#image_note_list = [[[3, None],[7, 2]], [[1, None],[9, 5]], [[4, None], [6, 1]], [[2, None], [8, 3]]]
+image_after_algo_list=Algo_gen.one_loop(image_note_list,taux_cross_over)
+
+print("algo OK!")
+
 
 
 ############################################
