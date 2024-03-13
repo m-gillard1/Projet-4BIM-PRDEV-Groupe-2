@@ -96,6 +96,7 @@ image_after_algo_list=Algo_gen.one_loop(image_note_list,taux_cross_over)
 new_image_encoded=[]
 count_3=0
 
+## création de la liste avec uniquement les numpy a décoder pour la prochaine vague
 for image in image_after_algo_list :
     new_image_numpy=image[1]
     image_reshape=new_image_numpy.reshape(1,256,32,32)
