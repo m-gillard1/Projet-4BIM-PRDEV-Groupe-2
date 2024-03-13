@@ -225,7 +225,7 @@ def Start_Over():
     right_width = screen_width * 4 // 7
     choices_height = screen_height * 2 // 3
     left_height = screen_height * 3 // 8
-    top_left_width = left_width * 1 // 3 
+    top_left_width = left_width * 1 // 4 
     #jauge_width = top_left_width * 2 // 15
 
     # Create frames for left and right sections
@@ -384,18 +384,26 @@ def Start_Over():
     modif_main_image_frame = tk.Frame(main_image_frame,width=top_left_width,height=(screen_height-left_height),bg="lightgray")
     modif_main_image_frame.pack(side=tk.RIGHT,fill=tk.Y)
     modif_main_image_frame.pack_propagate(False) 
+    
+    modif_main_image_frame.update()
+    photo_updown_size = modif_main_image_frame.winfo_width()
 
-    buttonP = tk.Button(modif_main_image_frame, text="+",bg="green")
-    buttonP.pack(side=tk.TOP, fill="both",expand=True, padx=20, pady=10)
-    buttonP.bind("<Button-1>",Suspect.increment_note)
+    photo_up_raw = Image.open("up.png")
+    photo_up_resized = photo_up_raw.resize((photo_updown_size, photo_updown_size))
+    Image_up = ImageTk.PhotoImage(photo_up_resized)
+    button_up = tk.Button(modif_main_image_frame, image=Image_up,bg="lightgray")
+    button_up.pack(side=tk.TOP, fill="both",expand=True)
+    button_up.bind("<Button-1>",Suspect.increment_note)
 
-    #note_label = tk.Label(modif_main_image_frame,text="Note: " + str(note))
-    #note_label.pack(side=tk.TOP,fill="both",expand=True,padx=20,pady=10)
+    note_label = tk.Label(modif_main_image_frame,text="Note: " + str(5))
+    note_label.pack(side=tk.TOP,fill="both",expand=True)
 
-    buttonM = tk.Button(modif_main_image_frame, text="-",bg="red")
-    buttonM.pack(side=tk.TOP, fill="both",expand=True, padx=20, pady=10)
-    buttonM.bind("<Button-1>",Suspect.decrement_note)
-
+    photo_down_raw = Image.open("down.png")
+    photo_down_resized = photo_down_raw.resize((photo_updown_size, photo_updown_size))
+    Image_down = ImageTk.PhotoImage(photo_down_resized)
+    button_down = tk.Button(modif_main_image_frame, image=Image_down,bg="lightgray")
+    button_down.pack(side=tk.BOTTOM, fill="both",expand=True)
+    button_down.bind("<Button-1>",Suspect.decrement_note)
     """
     jauge_frame = tk.Frame(modif_main_image_frame,width=jauge_width,height=(screen_height-left_height),bg="lightgray")
     jauge_frame.pack(side=tk.LEFT,fill=tk.Y)
@@ -455,7 +463,7 @@ left_width = screen_width * 3 // 7
 right_width = screen_width * 4 // 7
 choices_height = screen_height * 2 // 3
 left_height = screen_height * 3 // 8
-top_left_width = left_width * 1 // 3 
+top_left_width = left_width * 1 // 4 
 #jauge_width = top_left_width * 2 // 15
 # Create frames for left and right sections
 left_frame = tk.Frame(root, width=left_width, height=screen_height, bg="gray80")
@@ -597,16 +605,26 @@ modif_main_image_frame = tk.Frame(main_image_frame,width=top_left_width,height=(
 modif_main_image_frame.pack(side=tk.RIGHT,fill=tk.Y)
 modif_main_image_frame.pack_propagate(False) 
 
-buttonP = tk.Button(modif_main_image_frame, text="+",bg="green")
-buttonP.pack(side=tk.TOP, fill="both",expand=True)
-buttonP.bind("<Button-1>",Suspect.increment_note)
+modif_main_image_frame.update()
+photo_updown_size = modif_main_image_frame.winfo_width()
+
+photo_up_raw = Image.open("up.png")
+photo_up_resized = photo_up_raw.resize((photo_updown_size, photo_updown_size))
+Image_up = ImageTk.PhotoImage(photo_up_resized)
+button_up = tk.Button(modif_main_image_frame, image=Image_up,bg="lightgray")
+button_up.pack(side=tk.TOP, fill="both",expand=True)
+button_up.bind("<Button-1>",Suspect.increment_note)
 
 note_label = tk.Label(modif_main_image_frame,text="Note: " + str(5))
 note_label.pack(side=tk.TOP,fill="both",expand=True)
 
-buttonM = tk.Button(modif_main_image_frame, text="-",bg="red")
-buttonM.pack(side=tk.TOP, fill="both",expand=True)
-buttonM.bind("<Button-1>",Suspect.decrement_note)
+photo_down_raw = Image.open("down.png")
+photo_down_resized = photo_down_raw.resize((photo_updown_size, photo_updown_size))
+Image_down = ImageTk.PhotoImage(photo_down_resized)
+button_down = tk.Button(modif_main_image_frame, image=Image_down,bg="lightgray")
+button_down.pack(side=tk.BOTTOM, fill="both",expand=True)
+button_down.bind("<Button-1>",Suspect.decrement_note)
+
 """
 jauge_frame = tk.Frame(modif_main_image_frame,width=jauge_width,height=(screen_height-left_height),bg="lightgray")
 jauge_frame.pack(side=tk.LEFT,fill=tk.Y)
