@@ -5,9 +5,15 @@
 #######################################################################
 ### Importer les fonctions de l'autoencodeur et de l'algo génétique ###
 #######################################################################
-import Algo_gen.py
-# voir Thibald import autoencodeur
-import interface.py
+
+import Algo_gen
+#import Autoencoder_to_use
+
+from random import *
+import numpy as np
+#import interface.py
+
+
 
 ######################
 ### Exécuter l'IHM ###
