@@ -62,7 +62,9 @@ for i in range(nb_image_par_vague):
 ### Algorithme génétique (cross over) ###
 #########################################
         
-# Aurore Selma
+image_note_list = [[[3, None],[7, 2]], [[1, None],[9, 5]], [[4, None], [6, 1]], [[2, None], [8, 3]]]
+print(Algo_gen.one_loop(image_note_list,taux_cross_over))
+
 
 ############################################
 ### Décoder les nparray obtenus en image ###
