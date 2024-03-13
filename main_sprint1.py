@@ -78,14 +78,14 @@ for numpy in encoded_image_list:
         taille_vecteur_image =flatten_numpy_image.size
         note_numpy = np.zeros(taille_vecteur_image)
         note_numpy[0] = note[count]
-        print(note[count])
-        print(count)
+        #print(note[count])
+        #print(count)
         note_numpy [1:taille_vecteur_image] = None
         element=np.array([note_numpy,flatten_numpy_image])
         image_note_list.append(element)
         count+=1
 
-print(image_note_list)
+#print(image_note_list)
 
 #########################################
 ### Algorithme génétique (cross over) ###
@@ -105,7 +105,7 @@ for image in image_after_algo_list :
     #print(type(image_reshape[0][1][1][1]))
     new_image_encoded.append(image_reshape)
     count_3+=1
-    print(count_3)
+    #print(count_3)
 
 
 
@@ -117,7 +117,7 @@ for numpy in new_image_encoded :
     count_4+=1
     image_decoded=Autoencoder_to_use.NumpyDecoding(numpy)
     image_decoded.save(path_result_vague1+'new_image'+str(count_4)+'.png')
-    print(count_4)
+    #print(count_4)
 
 
 
