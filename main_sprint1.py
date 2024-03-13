@@ -16,7 +16,7 @@ from PIL import Image
 #import interface.py
 
 nb_image_par_vague=12
-path_im_vague1="C:/Users/auror/Downloads/SPRINT1/data/image_vague_1"
+path_im_vague1="C:/Users/auror/Downloads/SPRINT1/image_vague_1/data"
 path_result_vague1 ="C:/Users/auror/Downloads/SPRINT1/image_vague_1/result/"
 taux_cross_over=0.3
 
