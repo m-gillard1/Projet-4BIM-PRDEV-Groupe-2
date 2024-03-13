@@ -35,7 +35,7 @@ class Favori(tk.Button):
         lim = 1
         for i in sorted_id_by_note : 
             if lim < 10 :
-                if (i[1]>7):
+                if (i[1]>6):
                     path = i[0]
                     print(path)
                     photo = Image.open(path)
@@ -44,8 +44,23 @@ class Favori(tk.Button):
                     Dico_rang_fav[lim].photo_image = ImageTk.PhotoImage(photo_resized)
                     Dico_rang_fav[lim].config(height=Dico_rang_fav[lim].large,width=Dico_rang_fav[lim].large, image=Dico_rang_fav[lim].photo_image)
                     lim+=1
+        first_non_fav= Favori.get_first_non_fav(sorted_id_by_note)
+        print('first non fav' + str(first_non_fav))
+        for i in range (first_non_fav, 10):
+            print (Dico_rang_fav[i])
+            Favori.Clear_fav (Dico_rang_fav[i])
+            
+    def get_first_non_fav(dico_sorted):
+        pos = 0 
+        for i in dico_sorted : 
+            if i[1]>6:
+                pos+=1
+        return pos
+            
+    def Clear_fav (self):
+        self.config(text= str(self.winfo_name()), image='')
 
-    
+        
 
 class Suspect(tk.Button):
     def __init__(self, master, image_path, note, width, height, **kwargs):
@@ -68,6 +83,7 @@ class Suspect(tk.Button):
     def selected_suspect_event(self):
         global suspect_actuel
         suspect_actuel = self
+        note_label.config(text = 'Note: ' + str(self.note))
         print(suspect_actuel.note)
         image_suspect = suspect_actuel.cget('image')
         suspect_principal.configure(image=image_suspect)
@@ -147,7 +163,7 @@ class Suspect(tk.Button):
     def Ajout_Favori(self):
         global suspect_actuel
         rank = suspect_actuel.ranking()
-        if (rank<10 and self.note>7):
+        if (rank<10 and self.note>6):
             print('favori')
             Favori.Make_favorite(Dico_rang_fav[rank], suspect_actuel.id, suspect_actuel.note, suspect_actuel.photo_image)
         return
@@ -163,12 +179,14 @@ def Restart_event(event):
 def Refresh_event(event):
     Vague_actuelle+=1
     Liste_path = Genere_Suspect(Dico_note, Vague_actuelle)
-    #dans "\vague_2\image_1", "\vague2|image2... n"
+    #genere 12 nouvelles images de suspects  "\vague_2\image_1", "\vague2|image2... n"
     suspect_principal.configure(image=Image_Instruction)
+    Init_suspects(choices_container_frame,Liste_path,photo_width,photo_height)
     return
 
 
-def Genere_Suspect():
+def Genere_Suspect(Dico, Num_Vague ):
+    #cree un dossier qui s'appelle 'vague_[Num_Vague]'
     return
 
 def Init_suspects(choices_container_frame,Liste_img,photo_width,photo_height):
@@ -236,7 +254,7 @@ def Start_Over():
     right_frame.pack(side=tk.RIGHT, fill=tk.Y)
     right_frame.pack_propagate(False) 
 
-
+    #Favori.Clear_all_fav()
     ######### --Modif for the right side-- #########
 
     ### choices frame = partie supérieur de la partie de droite ###
@@ -262,7 +280,7 @@ def Start_Over():
     ##### Creation et ajout des boutons dans choices_container (en haut à droite) #####
     photo_width = int(right_width*0.18)
     photo_height = int(right_width*0.18)
-    Liste_vague1= ["image_vague_1/1.png", "image_vague_1/2.png", "image_vague_1/3.png","image_vague_1/4.png","image_vague_1/5.png","image_vague_1/6.png","image_vague_1/7.png","image_vague_1/8.png","image_vague_1/9.png","image_vague_1/10.png", "image_vague_1/11.png""image_vague_1/12.png"]
+    Liste_vague1= ["image_vague_1/1.png", "image_vague_1/2.png", "image_vague_1/3.png","image_vague_1/4.png","image_vague_1/5.png","image_vague_1/6.png","image_vague_1/7.png","image_vague_1/8.png","image_vague_1/9.png","image_vague_1/10.png", "image_vague_1/11.png","image_vague_1/12.png"]
     Init_suspects(choices_container_frame,Liste_vague1,photo_width,photo_height)
 
     ##### Création et ajout des boutons dans le frame menu option #####
