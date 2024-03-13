@@ -89,12 +89,20 @@ print(image_note_list)
 ### Algorithme génétique (cross over) ###
 #########################################
         
-print("algo génétique")
 ## pour test        
 #image_note_list = [[[3, None],[7, 2]], [[1, None],[9, 5]], [[4, None], [6, 1]], [[2, None], [8, 3]]]
 image_after_algo_list=Algo_gen.one_loop(image_note_list,taux_cross_over)
 
-print("algo OK!")
+new_image_encoded=[]
+count_3=0
+
+for image in image_after_algo_list :
+    new_image_numpy=image[1]
+    image_reshape=new_image_numpy.reshape(1,256,32,32)
+    #print(type(image_reshape[0][1][1][1]))
+    new_image_encoded.append(image_reshape)
+    count_3+=1
+    print(count_3)
 
 
 
