@@ -13,7 +13,9 @@ from random import *
 import numpy as np
 #import interface.py
 
-
+nb_image_par_vague=12
+path_im_vague1="C:/Users/auror/Downloads/SPRINT1/image_vague_1"
+taux_cross_over=0.3
 
 ######################
 ### Exécuter l'IHM ###
