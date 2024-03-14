@@ -15,12 +15,6 @@ import os
 from PIL import Image
 #import interface.py
 
-nb_image_par_vague=12
-numero_vague=1
-path_im_vague=("C:/Users/auror/Downloads/SPRINT1/image_vague_"+str(numero_vague)+"/")
-path_result_vague =("C:/Users/auror/Downloads/SPRINT1/image_vague_"+str(numero_vague+1)+"/")
-taux_cross_over=0.3
-
 ######################
 ### Exécuter l'IHM ###
 ######################
@@ -39,8 +33,6 @@ def creation_list_note(nb_image_par_vague) :
         note[count_0] = int(uniform(0, 11)) # note aléatoire en attendant le lien avec l'IHM
     return note
     
-note=creation_list_note(nb_image_par_vague)
-
 ##########################
 ### Encoder les images ###
 ##########################
@@ -55,9 +47,7 @@ def encoded_image (path_im_vague) :
         count_1+=1
         
     return encoded_image_list
-
-encoded_image_list=encoded_image(path_im_vague)
-
+    
 ###############################################
 ### Récupérer les notes en sortie de l'IHM ###
 ###############################################
@@ -85,13 +75,11 @@ def data_structure_note_image(encoded_image_list) :
         
     return image_note_list
 
-image_note_list=data_structure_note_image(encoded_image_list)
-
 #########################################
 ### Algorithme génétique (cross over) ###
 #########################################
 
-def algo_genetique (image_note_list) :
+def algo_genetique (image_note_list, taux_cross_over) :
     
     image_after_algo_list=Algo_gen.one_loop(image_note_list,taux_cross_over)
     
@@ -106,13 +94,11 @@ def algo_genetique (image_note_list) :
         count_3+=1
 
     return new_image_encoded
-    
-new_image_encoded=algo_genetique(image_note_list)
 
 #########################################################################
 ### Décoder les nparray obtenus en image + sauvegarde dans un dossier ###
 #########################################################################
-def sauv_img (new_image_encoded) : 
+def sauv_img (new_image_encoded, path_result_vague) : 
     
     count_4=0
     
@@ -122,8 +108,23 @@ def sauv_img (new_image_encoded) :
         image_decoded.save(path_result_vague+str(count_4)+'.png')
         #print(count_4)
 
-sauv_img(new_image_encoded)
-
 ##############################################
 ### Retourner le nouveau pool de 12 images ###
 ##############################################
+
+
+if __name__=='__main__': 
+
+    nb_image_par_vague=12
+    numero_vague=3
+    path_im_vague=("C:/Users/auror/Downloads/SPRINT1/image_vague_"+str(numero_vague)+"/")
+    path_result_vague =("C:/Users/auror/Downloads/SPRINT1/image_vague_"+str(numero_vague+1)+"/")
+    taux_cross_over=0.3
+
+
+    note=creation_list_note(nb_image_par_vague)
+    encoded_image_list=encoded_image(path_im_vague)
+    image_note_list=data_structure_note_image(encoded_image_list)
+    new_image_encoded=algo_genetique(image_note_list, taux_cross_over)
+    sauv_img(new_image_encoded,path_result_vague)
+
