@@ -16,8 +16,9 @@ from PIL import Image
 #import interface.py
 
 nb_image_par_vague=12
-path_im_vague1="C:/Users/auror/Downloads/SPRINT1/image_vague_1/data/"
-path_result_vague1 ="C:/Users/auror/Downloads/SPRINT1/image_vague_1/result/"
+numero_vague=1
+path_im_vague=("C:/Users/auror/Downloads/SPRINT1/image_vague_"+str(numero_vague)+"/")
+path_result_vague =("C:/Users/auror/Downloads/SPRINT1/image_vague_"+str(numero_vague+1)+"/")
 taux_cross_over=0.3
 
 ######################
@@ -46,10 +47,10 @@ for i in range(nb_image_par_vague):
 encoded_image_list=[]
 count=0
 
-for image in os.listdir(path_im_vague1) : 
+for image in os.listdir(path_im_vague) : 
     #print(count)
     #print(image)
-    encoded_image=Autoencoder_to_use.NumpyEncoding(path_im_vague1+image)
+    encoded_image=Autoencoder_to_use.NumpyEncoding(path_im_vague+image)
     encoded_image_list.append(encoded_image)
     count+=1
 
@@ -116,7 +117,7 @@ count_4=0
 for numpy in new_image_encoded : 
     count_4+=1
     image_decoded=Autoencoder_to_use.NumpyDecoding(numpy)
-    image_decoded.save(path_result_vague1+'new_image'+str(count_4)+'.png')
+    image_decoded.save(path_result_vague+str(count_4)+'.png')
     #print(count_4)
 
 
