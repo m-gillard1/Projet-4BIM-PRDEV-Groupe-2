@@ -188,9 +188,9 @@ def Refresh_event(event):
 def Genere_Suspect(Dico, Vague_actuelle ):
     
     # Parcourir le dictionnaire et afficher chaque clé et valeur
+    note_list=[]
     for img, note in Dico.items():
         print(f"{img} a {note} points.")
-        note_list=[]
         note_list.append(note)
 
     # Génération des nouvelles images :   
