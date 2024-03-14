@@ -81,7 +81,7 @@ if __name__=='__main__':
 
     ## REVOIR LES TESTS
     # test encoding
-    vect=NumpyEncoding("C:/Users/auror/Downloads/SPRINT1/image_vague_1/52_superposee.png")
+    vect=NumpyEncoding("C:/Users/auror/Downloads/SPRINT1/image_vague_1/1.png")
     print(vect)
 
     # test decoding
