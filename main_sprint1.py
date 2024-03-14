@@ -90,24 +90,24 @@ image_note_list=data_structure_note_image(encoded_image_list)
 #########################################
 ### Algorithme génétique (cross over) ###
 #########################################
-        
-## pour test        
-#image_note_list = [[[3, None],[7, 2]], [[1, None],[9, 5]], [[4, None], [6, 1]], [[2, None], [8, 3]]]
-image_after_algo_list=Algo_gen.one_loop(image_note_list,taux_cross_over)
 
-new_image_encoded=[]
-count_3=0
+def algo_genetique (image_note_list) :
+    
+    image_after_algo_list=Algo_gen.one_loop(image_note_list,taux_cross_over)
+    
+    new_image_encoded=[]
+    count_3=0
+    
+    ## création de la liste avec uniquement les numpy a décoder pour la prochaine vague
+    for image in image_after_algo_list :
+        new_image_numpy=image[1]
+        image_reshape=new_image_numpy.reshape(1,256,32,32) # remettre sous forme matricielle
+        new_image_encoded.append(image_reshape)
+        count_3+=1
 
-## création de la liste avec uniquement les numpy a décoder pour la prochaine vague
-for image in image_after_algo_list :
-    new_image_numpy=image[1]
-    image_reshape=new_image_numpy.reshape(1,256,32,32)
-    #print(type(image_reshape[0][1][1][1]))
-    new_image_encoded.append(image_reshape)
-    count_3+=1
-    #print(count_3)
-
-
+    return new_image_encoded
+    
+new_image_encoded=algo_genetique(image_note_list)
 
 #########################################################################
 ### Décoder les nparray obtenus en image + sauvegarde dans un dossier ###
