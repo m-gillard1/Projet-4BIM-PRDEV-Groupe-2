@@ -99,7 +99,12 @@ def algo_genetique (image_note_list, taux_cross_over) :
 ### Décoder les nparray obtenus en image + sauvegarde dans un dossier ###
 #########################################################################
 def sauv_img (new_image_encoded, path_result_vague) : 
-    
+
+    # verfier si le dossier existe sinon le creer
+    if not os.path.exists(path_result_vague):
+        # Créez le dossier
+        os.makedirs(path_result_vague)
+        
     count_4=0
     
     for numpy in new_image_encoded : 
