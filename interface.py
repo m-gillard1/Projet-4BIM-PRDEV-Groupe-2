@@ -169,7 +169,8 @@ def Restart_event(event):
     Start_Over()
     Vague_actuelle=1
 
-def Refresh_event(event):
+def Refresh_event(event,Vague_actuelle):
+    #global Vague_actuelle
     print('REFRESH REFRESH')
     Vague_actuelle+=1
     Liste_path = Genere_Suspect(Dico_note, Vague_actuelle)
@@ -241,6 +242,7 @@ def Init_suspects(choices_container_frame,Liste_img,photo_width,photo_height):
     suspect_12.grid(row=2, column=3, padx=photo_width//50, pady=photo_height//50)
 
 def Start_Over():
+    Vague_actuelle = 1
     Init_suspects(choices_container_frame, Liste_vague1, photo_width, photo_height)
     note_label.config(text = "Pas d'image sélectionnée")
 
@@ -288,6 +290,7 @@ Menu_Option_Frame.pack(side=tk.TOP, fill='both')
 ##### Creation et ajout des boutons dans choices_container (en haut à droite) #####
 photo_width = int(right_width*0.18)
 photo_height = int(right_width*0.18)
+Vague_actuelle = 1
 Liste_vague1= ["image_vague_1/1.png", "image_vague_1/2.png", "image_vague_1/3.png","image_vague_1/4.png","image_vague_1/5.png","image_vague_1/6.png","image_vague_1/7.png","image_vague_1/8.png","image_vague_1/9.png","image_vague_1/10.png", "image_vague_1/11.png","image_vague_1/12.png"]
 Init_suspects(choices_container_frame,Liste_vague1,photo_width,photo_height)
 
@@ -434,21 +437,10 @@ suspect_principal.pack(fill="both",expand=True)
   
 
 
-
-
-
-
-
-
-
-
 ###############################################################################
 
 # Bind toggle_fullscreen to F11 key
 root.bind("<F11>", toggle_fullscreen)
-
-# Numéro de la vague de suspect présente en haut à droite initialement, incrémentée à chaque refresh
-Vague_actuelle = 1
 
 
 # Run the main loop
