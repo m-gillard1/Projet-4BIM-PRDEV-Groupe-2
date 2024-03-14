@@ -112,14 +112,17 @@ new_image_encoded=algo_genetique(image_note_list)
 #########################################################################
 ### Décoder les nparray obtenus en image + sauvegarde dans un dossier ###
 #########################################################################
-count_4=0
-for numpy in new_image_encoded : 
-    count_4+=1
-    image_decoded=Autoencoder_to_use.NumpyDecoding(numpy)
-    image_decoded.save(path_result_vague+str(count_4)+'.png')
-    #print(count_4)
+def sauv_img (new_image_encoded) : 
+    
+    count_4=0
+    
+    for numpy in new_image_encoded : 
+        count_4+=1
+        image_decoded=Autoencoder_to_use.NumpyDecoding(numpy)
+        image_decoded.save(path_result_vague+str(count_4)+'.png')
+        #print(count_4)
 
-
+sauv_img(new_image_encoded)
 
 ##############################################
 ### Retourner le nouveau pool de 12 images ###
