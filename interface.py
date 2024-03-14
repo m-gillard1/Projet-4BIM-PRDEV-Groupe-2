@@ -172,8 +172,8 @@ def Restart_event(event):
 def Refresh_event(event):
     global Vague_actuelle
     print('REFRESH REFRESH')
-    Vague_actuelle+=1
     Liste_path = Genere_Suspect(Dico_note, Vague_actuelle)
+    Vague_actuelle+=1
     #genere 12 nouvelles images de suspects  "\vague_2\image_1", "\vague2|image2... n"
     suspect_principal.configure(image=Image_Instruction)
     Init_suspects(choices_container_frame,Liste_path,photo_width,photo_height)
