@@ -58,11 +58,6 @@ def encoded_image (path_im_vague) :
 
 encoded_image_list=encoded_image(path_im_vague)
 
-######################################################
-### Récupérer les .npy en sortie de l'autoencodeur ###
-######################################################
-# Aurore, Selma
-
 ###############################################
 ### Récupérer les notes en sortie de l'IHM ###
 ###############################################
@@ -73,22 +68,24 @@ encoded_image_list=encoded_image(path_im_vague)
 ### Créer structure de données pour l'algorithme génétique [[[float note],[np.array image encodée]],[]] ###
 ###########################################################################################################
 
-count_2=0
-image_note_list=[]
+def data_structure_note_image(encoded_image_list) :
+    
+    count_2=0
+    image_note_list=[]
+    
+    for numpy in encoded_image_list:
+            flatten_numpy_image=np.array(numpy.flatten())
+            taille_vecteur_image =flatten_numpy_image.size
+            note_numpy = np.zeros(taille_vecteur_image)
+            note_numpy[0] = note[count_2]
+            note_numpy [1:taille_vecteur_image] = None
+            element=np.array([note_numpy,flatten_numpy_image])
+            image_note_list.append(element)
+            count_2+=1
+        
+    return image_note_list
 
-for numpy in encoded_image_list:
-        flatten_numpy_image=np.array(numpy.flatten())
-        taille_vecteur_image =flatten_numpy_image.size
-        note_numpy = np.zeros(taille_vecteur_image)
-        note_numpy[0] = note[count_2]
-        #print(note[count_2])
-        #print(count_2)
-        note_numpy [1:taille_vecteur_image] = None
-        element=np.array([note_numpy,flatten_numpy_image])
-        image_note_list.append(element)
-        count_2+=1
-
-#print(image_note_list)
+image_note_list=data_structure_note_image(encoded_image_list)
 
 #########################################
 ### Algorithme génétique (cross over) ###
