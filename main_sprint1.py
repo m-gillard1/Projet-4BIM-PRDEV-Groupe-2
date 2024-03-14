@@ -45,15 +45,18 @@ note=creation_list_note(nb_image_par_vague)
 ### Encoder les images ###
 ##########################
 
-encoded_image_list=[]
-count_1=0
+def encoded_image (path_im_vague) :
+    encoded_image_list=[]
+    count_1=0
+    
+    for image in os.listdir(path_im_vague) : 
+        encoded_image=Autoencoder_to_use.NumpyEncoding(path_im_vague+image)
+        encoded_image_list.append(encoded_image)
+        count_1+=1
+        
+    return encoded_image_list
 
-for image in os.listdir(path_im_vague) : 
-    encoded_image=Autoencoder_to_use.NumpyEncoding(path_im_vague+image)
-    encoded_image_list.append(encoded_image)
-    count_1+=1
-
-#print(encoded_image_list)
+encoded_image_list=encoded_image(path_im_vague)
 
 ######################################################
 ### Récupérer les .npy en sortie de l'autoencodeur ###
