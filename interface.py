@@ -170,6 +170,7 @@ def Restart_event(event):
     Vague_actuelle=1
 
 def Refresh_event(event):
+    print('REFRESH REFRESH')
     Vague_actuelle+=1
     Liste_path = Genere_Suspect(Dico_note, Vague_actuelle)
     #genere 12 nouvelles images de suspects  "\vague_2\image_1", "\vague2|image2... n"
