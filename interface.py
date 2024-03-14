@@ -290,24 +290,8 @@ photo_width = int(right_width*0.18)
 photo_height = int(right_width*0.18)
 Liste_vague1= ["image_vague_1/1.png", "image_vague_1/2.png", "image_vague_1/3.png","image_vague_1/4.png","image_vague_1/5.png","image_vague_1/6.png","image_vague_1/7.png","image_vague_1/8.png","image_vague_1/9.png","image_vague_1/10.png", "image_vague_1/11.png","image_vague_1/12.png"]
 Init_suspects(choices_container_frame,Liste_vague1,photo_width,photo_height)
-<<<<<<< HEAD
 
-=======
-##### Création et ajout des boutons dans le frame menu option #####
-Menu_Option_Frame.update()
-height_menu = Menu_Option_Frame.winfo_height()
-width_menu = Menu_Option_Frame.winfo_width()
-pad_horizontal = width_menu // 15
-pad_vertical = height_menu // 22
-Bouton_restart = tk.Button(Menu_Option_Frame,text='Start Over',height=height_menu//47, width=width_menu//20,background='red', command=lambda: Restart_event)
-Bouton_restart.grid(row=1, column=2, padx=pad_horizontal, pady=pad_vertical, sticky='nswe')
-Bouton_restart.bind("<Button-1>", Restart_event)
-Bouton_refresh = tk.Button(Menu_Option_Frame,text='Refresh',height=height_menu//47, width=width_menu//20, background='lightblue')
-Bouton_refresh.grid(row=2, column=1, padx=pad_horizontal, pady=pad_vertical, sticky='nswe')
-Bouton_refresh.bind("<Button-1>", Refresh_event)
-Bouton_garbage= tk.Button(Menu_Option_Frame,text='Garbage Bin',height=height_menu//47, width=width_menu//20, background='lightgreen')
-Bouton_garbage.grid(row=1, column=1, padx=pad_horizontal, pady=pad_vertical, sticky='nswe')
->>>>>>> d48c5284d4ba4f1fd6b7d926512650f3110ac0ad
+
 ##### Création et ajout des boutons dans le frame menu option #####
 Menu_Option_Frame.update()
 height_menu = Menu_Option_Frame.winfo_height()
@@ -323,6 +307,7 @@ Bouton_restart.bind("<Button-1>", Restart_event)
 Bouton_refresh = tk.Button(Menu_Option_Frame,text='Refresh',height=height_menu//47, width=width_menu//20, background='lightblue')
 Bouton_refresh.grid(row=2, column=1, padx=pad_horizontal, pady=pad_vertical, sticky='nswe')
 Bouton_refresh.bind("<Button-1>", Refresh_event)
+
 Bouton_garbage= tk.Button(Menu_Option_Frame,text='Garbage Bin',height=height_menu//47, width=width_menu//20, background='lightgreen')
 Bouton_garbage.grid(row=1, column=1, padx=pad_horizontal, pady=pad_vertical, sticky='nswe')
 Bouton_garbage.bind("<Button-1>" , Suspect.garbage )
