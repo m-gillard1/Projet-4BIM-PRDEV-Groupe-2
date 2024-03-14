@@ -30,7 +30,7 @@ taux_cross_over=0.3
 ### Récupérer les images utilisées par l'IHM et leur note ###
 #############################################################
 
-def creation_list_note() :
+def creation_list_note(nb_image_par_vague) :
     # liste de note aléatoire en attendant lien fonctionnel avec l'IHM
     note = np.zeros(nb_image_par_vague)
     count_0=0
@@ -39,7 +39,7 @@ def creation_list_note() :
         note[count_0] = int(uniform(0, 11)) # note aléatoire en attendant le lien avec l'IHM
     return note
     
-note=creation_list_note()
+note=creation_list_note(nb_image_par_vague)
 
 ##########################
 ### Encoder les images ###
