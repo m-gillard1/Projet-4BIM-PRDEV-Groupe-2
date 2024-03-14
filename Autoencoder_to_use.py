@@ -75,3 +75,16 @@ def NumpyDecoding(npToDecode):
     decoded_image_pil=transform2(decoded_image.squeeze(0))
 
     return decoded_image_pil
+
+
+if __name__=='__main__': 
+
+    ## REVOIR LES TESTS
+    # test encoding
+    vect=NumpyEncoding("C:/Users/auror/Downloads/SPRINT1/image_vague_1/52_superposee.png")
+    print(vect)
+
+    # test decoding
+    image = NumpyDecoding(vect)
+
+    
