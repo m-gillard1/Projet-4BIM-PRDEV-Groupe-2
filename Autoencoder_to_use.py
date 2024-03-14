@@ -86,5 +86,6 @@ if __name__=='__main__':
 
     # test decoding
     image = NumpyDecoding(vect)
+    # afficher l'image
 
     
