@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import PhotoImage
 from PIL import Image,ImageTk
 
+import main_sprint1
+
 ########## __FONCTIONS__ ##########
 
 def toggle_fullscreen(event=None):
@@ -181,8 +183,22 @@ def Refresh_event(event):
 #fonction Gene_Suspect :
 #genere 12 nouvelles images de suspects dans un dossier nommée vague_n\: Par exemple pour n=2, on veut en sortie 12 images au format .png telles que:  "\vague_2\image_1.png", "\vague_2\image_2.png, ... , "\vague_2\image_11.png "
 # return une liste contenant les paths des 12 image
-def Genere_Suspect(Dico ):
-    Liste_Path_nouvelle_vague=[]
+def Genere_Suspect(Dico, Vague_actuelle ):
+    
+    # Parcourir le dictionnaire et afficher chaque clé et valeur
+    for img, note in Dico.items():
+        print(f"{img} a {note} points.")
+        note_list=[]
+        note_list.append(note)
+
+    # Génération des nouvelles images :   
+        # prend en entree le numero de la vague et les notes
+        # va chercher les images de la vague correspondante
+        # génère les nouvelles images
+        # renvoie la liste des path svers les nouvelles images
+    Liste_Path_nouvelle_vague=main_sprint1.IHM_loop(Vague_actuelle, note_list)
+    
+    print(Liste_Path_nouvelle_vague)
     return (Liste_Path_nouvelle_vague)
 
 def Init_suspects(choices_container_frame,Liste_img,photo_width,photo_height):
