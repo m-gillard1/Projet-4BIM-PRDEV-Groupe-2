@@ -58,7 +58,7 @@ def encoded_image (path_im_vague) :
 ### Créer structure de données pour l'algorithme génétique [[[float note],[np.array image encodée]],[]] ###
 ###########################################################################################################
 
-def data_structure_note_image(encoded_image_list) :
+def data_structure_note_image(encoded_image_list, note) :
     
     count_2=0
     image_note_list=[]
@@ -116,20 +116,27 @@ def sauv_img (new_image_encoded, path_result_vague) :
 ##############################################
 ### Retourner le nouveau pool de 12 images ###
 ##############################################
+def main_loop (nb_vague) :
 
+    for vague in range(nb_vague) :
+
+        vague=vague+1
+        numero_vague=vague
+
+        nb_image_par_vague=12
+
+        path_im_vague=("C:/Users/auror/Downloads/SPRINT1/image_vague_"+str(numero_vague)+"/")
+        path_result_vague =("C:/Users/auror/Downloads/SPRINT1/image_vague_"+str(numero_vague+1)+"/")
+
+        taux_cross_over=0.3
+        
+        note=creation_list_note(nb_image_par_vague)
+        encoded_image_list=encoded_image(path_im_vague)
+        image_note_list=data_structure_note_image(encoded_image_list,note)
+        new_image_encoded=algo_genetique(image_note_list, taux_cross_over)
+        sauv_img(new_image_encoded,path_result_vague)
 
 if __name__=='__main__': 
 
-    nb_image_par_vague=12
-    numero_vague=3
-    path_im_vague=("C:/Users/auror/Downloads/SPRINT1/image_vague_"+str(numero_vague)+"/")
-    path_result_vague =("C:/Users/auror/Downloads/SPRINT1/image_vague_"+str(numero_vague+1)+"/")
-    taux_cross_over=0.3
-
-
-    note=creation_list_note(nb_image_par_vague)
-    encoded_image_list=encoded_image(path_im_vague)
-    image_note_list=data_structure_note_image(encoded_image_list)
-    new_image_encoded=algo_genetique(image_note_list, taux_cross_over)
-    sauv_img(new_image_encoded,path_result_vague)
+    main_loop(8)
 
