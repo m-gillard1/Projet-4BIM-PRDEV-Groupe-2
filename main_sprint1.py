@@ -46,14 +46,12 @@ note=creation_list_note(nb_image_par_vague)
 ##########################
 
 encoded_image_list=[]
-count=0
+count_1=0
 
 for image in os.listdir(path_im_vague) : 
-    #print(count)
-    #print(image)
     encoded_image=Autoencoder_to_use.NumpyEncoding(path_im_vague+image)
     encoded_image_list.append(encoded_image)
-    count+=1
+    count_1+=1
 
 #print(encoded_image_list)
 
@@ -72,20 +70,20 @@ for image in os.listdir(path_im_vague) :
 ### Créer structure de données pour l'algorithme génétique [[[float note],[np.array image encodée]],[]] ###
 ###########################################################################################################
 
-count=0
+count_2=0
 image_note_list=[]
-for numpy in encoded_image_list:
 
+for numpy in encoded_image_list:
         flatten_numpy_image=np.array(numpy.flatten())
         taille_vecteur_image =flatten_numpy_image.size
         note_numpy = np.zeros(taille_vecteur_image)
-        note_numpy[0] = note[count]
-        #print(note[count])
-        #print(count)
+        note_numpy[0] = note[count_2]
+        #print(note[count_2])
+        #print(count_2)
         note_numpy [1:taille_vecteur_image] = None
         element=np.array([note_numpy,flatten_numpy_image])
         image_note_list.append(element)
-        count+=1
+        count_2+=1
 
 #print(image_note_list)
 
