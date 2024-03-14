@@ -169,8 +169,8 @@ def Restart_event(event):
     Start_Over()
     Vague_actuelle=1
 
-def Refresh_event(event,Vague_actuelle):
-    #global Vague_actuelle
+def Refresh_event(event):
+    global Vague_actuelle
     print('REFRESH REFRESH')
     Vague_actuelle+=1
     Liste_path = Genere_Suspect(Dico_note, Vague_actuelle)
