@@ -300,6 +300,7 @@ Bouton_restart.grid(row=1, column=2, padx=pad_horizontal, pady=pad_vertical, sti
 Bouton_restart.bind("<Button-1>", Restart_event)
 Bouton_refresh = tk.Button(Menu_Option_Frame,text='Refresh',height=height_menu//47, width=width_menu//20, background='lightblue')
 Bouton_refresh.grid(row=2, column=1, padx=pad_horizontal, pady=pad_vertical, sticky='nswe')
+Bouton_refresh.bind("<Button-1>", Refresh_event)
 Bouton_garbage= tk.Button(Menu_Option_Frame,text='Garbage Bin',height=height_menu//47, width=width_menu//20, background='lightgreen')
 Bouton_garbage.grid(row=1, column=1, padx=pad_horizontal, pady=pad_vertical, sticky='nswe')
 ##### Création et ajout des boutons dans le frame menu option #####
