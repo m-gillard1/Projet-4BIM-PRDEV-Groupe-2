@@ -15,10 +15,14 @@ Dico_note ={}
 class Favori(tk.Button):
     def __init__(self,position, wide, **kwargs):
         h = int (wide*0.5)
+        self.wd = wide
+        self.ht = h
         self.large=h*15
         self.photo_image= None
         self.note=None
         self.id=None
+        self.col = column
+        self.row=row
         
         super().__init__(best_choices_container_frame,width=wide, height=h, **kwargs)
 
