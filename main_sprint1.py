@@ -106,13 +106,18 @@ def sauv_img (new_image_encoded, path_result_vague) :
         os.makedirs(path_result_vague)
         
     count_4=0
-    
+    List_path=[]
+
+    # enregistrer les images et leur chemin
     for numpy in new_image_encoded : 
         count_4+=1
         image_decoded=Autoencoder_to_use.NumpyDecoding(numpy)
         image_decoded.save(path_result_vague+str(count_4)+'.png')
-        #print(count_4)
-
+        # pour IHM list des path :
+        List_path.append(path_result_vague+str(count_4)+'.png')
+    
+    return List_path
+    
 ##############################################
 ### Retourner le nouveau pool de 12 images ###
 ##############################################
