@@ -142,7 +142,31 @@ def main_loop (nb_vague) :
         new_image_encoded=algo_genetique(image_note_list, taux_cross_over)
         sauv_img(new_image_encoded,path_result_vague)
 
+
+################
+### IHM LOOP ###
+################
+        
+def IHM_loop (numero_vague,note) :
+        
+    nb_image_par_vague=12
+
+    path_im_vague=("C:/Users/auror/Downloads/SPRINT1/image_vague_"+str(numero_vague)+"/")
+    path_result_vague =("C:/Users/auror/Downloads/SPRINT1/image_vague_"+str(numero_vague+1)+"/")
+
+    taux_cross_over=0.8
+        
+    encoded_image_list=encoded_image(path_im_vague)
+    image_note_list=data_structure_note_image(encoded_image_list,note)
+    new_image_encoded=algo_genetique(image_note_list, taux_cross_over)
+    list_path_img=[]
+    list_path_img=sauv_img(new_image_encoded,path_result_vague)
+
+    return list_path_img 
+
+
+
 if __name__=='__main__': 
 
-    main_loop(8)
+    #main_loop(8)
 
