@@ -51,7 +51,7 @@ class Favori(tk.Button):
                     Dico_rang_fav[lim].config(height=Dico_rang_fav[lim].large,width=Dico_rang_fav[lim].large, image=Dico_rang_fav[lim].photo_image)
                     lim+=1
                     
-         for j in range (10):
+        for j in range (10):
             le_fav = Dico_rang_fav[j+1]
             la_note = sorted_id_by_note[j][1]
             h = le_fav.large
