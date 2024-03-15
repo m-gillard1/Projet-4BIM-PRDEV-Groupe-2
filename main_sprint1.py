@@ -118,9 +118,10 @@ def sauv_img (new_image_encoded, path_result_vague) :
     
     return List_path
     
-##############################################
-### Retourner le nouveau pool de 12 images ###
-##############################################
+######################
+### PRINCIPAL LOOP ###
+######################
+
 def main_loop (nb_vague) :
 
     for vague in range(nb_vague) :
@@ -130,8 +131,8 @@ def main_loop (nb_vague) :
 
         nb_image_par_vague=12
 
-        path_im_vague=("C:/Users/auror/Downloads/SPRINT1/image_vague_"+str(numero_vague)+"/")
-        path_result_vague =("C:/Users/auror/Downloads/SPRINT1/image_vague_"+str(numero_vague+1)+"/")
+        path_im_vague=("image_vague_"+str(numero_vague)+"/")
+        path_result_vague =("image_vague_"+str(numero_vague+1)+"/")
 
         taux_cross_over=0.3
         
