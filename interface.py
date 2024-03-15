@@ -195,7 +195,7 @@ def Refresh_event(event):
 #genere 12 nouvelles images de suspects dans un dossier nommée vague_n\: Par exemple pour n=2, on veut en sortie 12 images au format .png telles que:  "\vague_2\image_1.png", "\vague_2\image_2.png, ... , "\vague_2\image_11.png "
 # return une liste contenant les paths des 12 image
 def Genere_Suspect(Dico, Vague_actuelle ):
-    
+    print(Vague_actuelle)
     # Parcourir le dictionnaire et afficher chaque clé et valeur
     note_list=[]
     for img, note in Dico.items():
