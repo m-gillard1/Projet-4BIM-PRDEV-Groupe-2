@@ -339,6 +339,7 @@ best_choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
 # Create a grid of frames
 favorites = [[tk.Frame(best_choices_container_frame, bg="lightgreen") for _ in range(5)] for _ in range(2)]
 fav_dim = int(left_width*0.021)
+print(fav_dim)
 
 fav_1 = Favori(1,fav_dim)
 fav_1.config(text="favori 1")
