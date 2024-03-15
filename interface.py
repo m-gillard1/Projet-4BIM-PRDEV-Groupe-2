@@ -13,7 +13,7 @@ Dico_note ={}
 
 
 class Favori(tk.Button):
-    def __init__(self,position, wide, **kwargs):
+    def __init__(self,position, wide, column, row, **kwargs):
         h = int (wide*0.5)
         self.wd = wide
         self.ht = h
@@ -341,43 +341,43 @@ favorites = [[tk.Frame(best_choices_container_frame, bg="lightgreen") for _ in r
 fav_dim = int(left_width*0.021)
 print(fav_dim)
 
-fav_1 = Favori(1,fav_dim)
+fav_1 = Favori(1,fav_dim, 1, 1)
 fav_1.config(text="favori 1")
 fav_1.grid(row=1, column=1, padx=fav_dim, pady=fav_dim)
 
-fav_2 = Favori(2, fav_dim)
+fav_2 = Favori(2, fav_dim, 1, 2)
 fav_2.config(text='favori 2')
 fav_2.grid(row=1, column = 2, padx=fav_dim, pady=fav_dim)
 
-fav_3 = Favori(3,fav_dim)
+fav_3 = Favori(3,fav_dim, 1, 3)
 fav_3.config(text="favori 3")
 fav_3.grid(row=1, column=3, padx=fav_dim, pady=fav_dim)
 
-fav_4 = Favori(4, fav_dim)
+fav_4 = Favori(4, fav_dim, 1, 4)
 fav_4.config(text='favori 4')
 fav_4.grid(row=1, column = 4, padx=fav_dim, pady=fav_dim)
 
-fav_5 = Favori(5,fav_dim)
+fav_5 = Favori(5,fav_dim, 1, 5)
 fav_5.config(text="favori 5")
 fav_5.grid(row=1, column=5, padx=fav_dim, pady=fav_dim)
 
-fav_6 = Favori(6, fav_dim)
+fav_6 = Favori(6, fav_dim, 1, 6)
 fav_6.config(text='favori 6')
 fav_6.grid(row=2, column = 1, padx=fav_dim, pady=fav_dim)
 
-fav_7 = Favori(7,fav_dim)
+fav_7 = Favori(7,fav_dim, 1, 7)
 fav_7.config(text="favori 7")
 fav_7.grid(row=2, column=2, padx=fav_dim, pady=fav_dim)
 
-fav_8 = Favori(8, fav_dim)
+fav_8 = Favori(8, fav_dim, 1, 8)
 fav_8.config(text='favori 8')
 fav_8.grid(row=2, column = 3, padx=fav_dim, pady=fav_dim)
 
-fav_9 = Favori(9,fav_dim)
+fav_9 = Favori(9,fav_dim, 1, 9)
 fav_9.config(text="favori 9")
 fav_9.grid(row=2, column=4, padx=fav_dim, pady=fav_dim)
 
-fav_10 = Favori(10, fav_dim)
+fav_10 = Favori(10, fav_dim, 1, 10)
 fav_10.config(text='favori 10')
 fav_10.grid(row=2, column = 5, padx=fav_dim, pady=fav_dim)
 
