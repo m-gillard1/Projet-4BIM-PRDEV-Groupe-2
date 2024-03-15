@@ -50,12 +50,20 @@ class Favori(tk.Button):
                     print(Dico_rang_fav[lim])
                     Dico_rang_fav[lim].config(height=Dico_rang_fav[lim].large,width=Dico_rang_fav[lim].large, image=Dico_rang_fav[lim].photo_image)
                     lim+=1
-        #first_non_fav= Favori.get_first_non_fav(sorted_id_by_note)
-        #print('first non fav' + str(first_non_fav))
-        #for j in range (first_non_fav, 10):
-        #    Dico_rang_fav[j].__init__(position=1,wide = int(left_width*0.021))
-            #Favori.Clear_fav (Dico_rang_fav[i])
-            
+                    
+         for j in range (10):
+            le_fav = Dico_rang_fav[j+1]
+            la_note = sorted_id_by_note[j][1]
+            h = le_fav.large
+            w = le_fav.large
+            if (la_note<7):
+                le_fav.note=None
+                name = str(le_fav.winfo_name())
+                text_to_print=name[1:]
+                le_fav.config(text=text_to_print, image='', padx=11, pady=11,height=le_fav.ht, width=le_fav.wd)
+
+        
+       
     def get_first_non_fav(dico_sorted):
         pos = 0 
         for i in dico_sorted : 
