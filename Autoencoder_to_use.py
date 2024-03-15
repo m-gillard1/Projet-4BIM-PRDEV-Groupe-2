@@ -20,7 +20,7 @@ def NumpyEncoding(imToEncode):
     autoencoder = autoE.Autoencoder()
 
     # Load the trained weights
-    autoencoder.load_state_dict(torch.load("C:/Users/auror/Downloads/SPRINT1/conv_autoencoder.pth",map_location=torch.device('cpu')))
+    autoencoder.load_state_dict(torch.load("conv_autoencoder.pth",map_location=torch.device('cpu')))
 
     # Set the model to evaluation mode
     autoencoder.eval()
@@ -57,7 +57,7 @@ def NumpyDecoding(npToDecode):
     autoencoder = autoE.Autoencoder()
 
     # Load the trained weights
-    autoencoder.load_state_dict(torch.load("C:/Users/auror/Downloads/SPRINT1/conv_autoencoder.pth",map_location=torch.device('cpu')))
+    autoencoder.load_state_dict(torch.load("conv_autoencoder.pth",map_location=torch.device('cpu')))
 
     # Set the model to evaluation mode
     autoencoder.eval()
