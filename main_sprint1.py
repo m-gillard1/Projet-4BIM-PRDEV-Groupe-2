@@ -170,3 +170,6 @@ if __name__=='__main__':
 
     #main_loop(8)
 
+    note_list=creation_list_note(12)
+    print(IHM_loop(1,note_list))
+
