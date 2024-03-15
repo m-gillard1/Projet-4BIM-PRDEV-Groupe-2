@@ -60,9 +60,7 @@ class Favori(tk.Button):
                 le_fav.note=None
                 name = str(le_fav.winfo_name())
                 text_to_print=name[1:]
-                le_fav.config(text=text_to_print, image='', padx=11, pady=11,height=le_fav.ht, width=le_fav.wd)
-
-        
+                le_fav.config(text=text_to_print, image='', padx=11, pady=11,height=le_fav.ht, width=le_fav.wd)      
        
     def get_first_non_fav(dico_sorted):
         pos = 0 
@@ -113,18 +111,17 @@ class Suspect(tk.Button):
         note_label.config(text="Note: "+str(suspect_actuel.note))
         Dico_note[suspect_actuel.id]= suspect_actuel.note
         suspect_actuel.Ajout_Favori()
-           
         Favori.Update_Fav(Dico_note=Dico_note)
 
             
     def decrement_note(self):
         global suspect_actuel
         if suspect_actuel.note >0:
-            suspect_actuel.note -= 1 
+            suspect_actuel.note = suspect_actuel.note - 1 
             suspect_actuel.update_color() 
         global note_label
-        note_label.config(text="Note: "+str(suspect_actuel.note))
         global Dico_note
+        note_label.config(text="Note: "+str(suspect_actuel.note))
         Dico_note[suspect_actuel.id]= suspect_actuel.note
         Favori.Update_Fav(Dico_note=Dico_note)
     
