@@ -122,7 +122,7 @@ def one_loop(image_list, Tc):
 
 if __name__=='__main__':
     #Test de la fonction pop_sort(image_list)
-    image_list = [[[3],[7, 2]], [[1],[9, 5]], [[4], [6, 1]], [[2], [8, 3]]]
+    image_list = [[[3, None],[7, 2]], [[1, None],[9, 5]], [[4, None], [6, 1]], [[2, None], [8, 3]]]
     print('test pop_sort - ok ')
     print(pop_sort(image_list))
 
