@@ -20,7 +20,7 @@ def NumpyEncoding(imToEncode):
     autoencoder = autoE.Autoencoder()
 
     # Load the trained weights
-    autoencoder.load_state_dict(torch.load("conv_autoencoder.pth"))
+    autoencoder.load_state_dict(torch.load("conv_autoencoder.pth",map_location=torch.device('cpu')))
 
     # Set the model to evaluation mode
     autoencoder.eval()
@@ -54,10 +54,10 @@ def NumpyDecoding(npToDecode):
     """
 
     # Instantiate the autoencoder model
-    autoencoder = auto.Autoencoder()
+    autoencoder = autoE.Autoencoder()
 
     # Load the trained weights
-    autoencoder.load_state_dict(torch.load("conv_autoencoder.pth"))
+    autoencoder.load_state_dict(torch.load("conv_autoencoder.pth",map_location=torch.device('cpu')))
 
     # Set the model to evaluation mode
     autoencoder.eval()
