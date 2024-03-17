@@ -24,6 +24,7 @@ from PIL import Image
 ### Récupérer les images utilisées par l'IHM et leur note ###
 #############################################################
 
+#inutile
 def creation_list_note(nb_image_par_vague) :
     # liste de note aléatoire en attendant lien fonctionnel avec l'IHM
     note = np.zeros(nb_image_par_vague)
@@ -59,30 +60,30 @@ def encoded_image (path_im_vague) :
 ###########################################################################################################
 
 ### on utilise directement ceux labelisés comme favoris plus besoin de note
-# def data_structure_note_image(encoded_image_list, note) :
-#
-#     count_2=0
-#     image_note_list=[]
-#
-#     for numpy in encoded_image_list:
-#             flatten_numpy_image=np.array(numpy.flatten())
-#             taille_vecteur_image =flatten_numpy_image.size
-#             note_numpy = np.zeros(taille_vecteur_image)
-#             note_numpy[0] = note[count_2]
-#             note_numpy [1:taille_vecteur_image] = None
-#             element=np.array([note_numpy,flatten_numpy_image])
-#             image_note_list.append(element)
-#             count_2+=1
-#
-#     return image_note_list
+def data_structure_note_image(encoded_image_list, note) :
+
+    count_2=0
+    image_note_list=[]
+
+    for numpy in encoded_image_list:
+            flatten_numpy_image=np.array(numpy.flatten())
+            taille_vecteur_image =flatten_numpy_image.size
+            note_numpy = np.zeros(taille_vecteur_image)
+            note_numpy[0] = note[count_2]
+            note_numpy [1:taille_vecteur_image] = None
+            element=np.array([note_numpy,flatten_numpy_image])
+            image_note_list.append(element)
+            count_2+=1
+
+    return image_note_list
 
 #########################################
 ### Algorithme génétique (cross over) ###
 #########################################
 
-def algo_genetique (encoded_image_list, taux_cross_over) :
+def algo_genetique_sans_note (encoded_image_list, taux_cross_over) :
 
-    image_after_algo_list=Algo_gen.one_loop(encoded_image_list,taux_cross_over)
+    image_after_algo_list=Algo_gen.cross_over_sans_note(encoded_image_list,taux_cross_over)
 
     new_image_encoded=[]
     count_3=0
@@ -90,9 +91,8 @@ def algo_genetique (encoded_image_list, taux_cross_over) :
     ## si image note supérieur à 7 (favoris)
 
     ## création de la liste avec uniquement les numpy a décoder pour la prochaine vague
-    for image in image_after_algo_list :
-        new_image_numpy=image[1]
-        image_reshape=new_image_numpy.reshape(1,256,32,32) # remettre sous forme matricielle
+    for image_numpy in image_after_algo_list :
+        image_reshape=image_numpy.reshape(1,256,32,32) # remettre sous forme matricielle
         new_image_encoded.append(image_reshape)
         count_3+=1
 
@@ -141,16 +141,16 @@ def main_loop (nb_vague) :
 
         note=creation_list_note(nb_image_par_vague)
         encoded_image_list=encoded_image(path_im_vague)
-        image_note_list=data_structure_note_image(encoded_image_list,note)
-        new_image_encoded=algo_genetique(image_note_list, taux_cross_over)
+        #image_note_list=data_structure_note_image(encoded_image_list,note) # pas utile sans note
+        new_image_encoded=algo_genetique_sans_note(encoded_image_list, taux_cross_over)
         sauv_img(new_image_encoded,path_result_vague)
 
 
-################
+################s
 ### IHM LOOP ###
 ################
 
-def IHM_loop (numero_vague,note) :
+def IHM_loop (numero_vague) :
 
     nb_image_par_vague=12
 
@@ -160,8 +160,8 @@ def IHM_loop (numero_vague,note) :
     taux_cross_over=0.8
 
     encoded_image_list=encoded_image(path_im_vague)
-    image_note_list=data_structure_note_image(encoded_image_list,note)
-    new_image_encoded=algo_genetique(image_note_list, taux_cross_over)
+    #image_note_list=data_structure_note_image(encoded_image_list,note)
+    new_image_encoded=algo_genetique_sans_note(encoded_image_list, taux_cross_over)
     list_path_img=[]
     list_path_img=sauv_img(new_image_encoded,path_result_vague)
 
@@ -173,5 +173,5 @@ if __name__=='__main__':
 
     #main_loop(8)
 
-    note_list=creation_list_note(12)
-    print(IHM_loop(1,note_list))
+    #note_list=creation_list_note(12)
+    print(IHM_loop(1))
