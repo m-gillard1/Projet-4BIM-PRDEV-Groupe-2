@@ -181,6 +181,9 @@ def Restart_event(event):
 def Refresh_event(event):
     global Vague_actuelle
     print('REFRESH REFRESH')
+
+    # recupérer les favoris plus besoin du dico note 
+
     Liste_path = Genere_Suspect(Dico_note, Vague_actuelle)
     nb_new_img_from_db=12-len(Liste_path) # nombre de nouvelles images à ajouter de la base de données
     # completer liste path en consequence
@@ -217,6 +220,7 @@ def Genere_Suspect(Dico, Vague_actuelle ):
     return (Liste_Path_nouvelle_vague)
 
 def Add_Suspect_from_DB(nb_new_img_from_db):
+    # chercher une image dans la DB
     return # un path vers une new image de la DB
 
 def Init_suspects(choices_container_frame,Liste_img,photo_width,photo_height):

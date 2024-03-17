@@ -49,7 +49,7 @@ def encoded_image (path_im_vague) :
     return encoded_image_list
 
 ###############################################
-### Récupérer les notes en sortie de l'IHM ###
+### Récupérer les favoris en sortie de l'IHM ###
 ###############################################
 
 # Aurore, Martin, Théo
@@ -58,33 +58,36 @@ def encoded_image (path_im_vague) :
 ### Créer structure de données pour l'algorithme génétique [[[float note],[np.array image encodée]],[]] ###
 ###########################################################################################################
 
-def data_structure_note_image(encoded_image_list, note) :
-
-    count_2=0
-    image_note_list=[]
-
-    for numpy in encoded_image_list:
-            flatten_numpy_image=np.array(numpy.flatten())
-            taille_vecteur_image =flatten_numpy_image.size
-            note_numpy = np.zeros(taille_vecteur_image)
-            note_numpy[0] = note[count_2]
-            note_numpy [1:taille_vecteur_image] = None
-            element=np.array([note_numpy,flatten_numpy_image])
-            image_note_list.append(element)
-            count_2+=1
-
-    return image_note_list
+### on utilise directement ceux labelisés comme favoris plus besoin de note
+# def data_structure_note_image(encoded_image_list, note) :
+#
+#     count_2=0
+#     image_note_list=[]
+#
+#     for numpy in encoded_image_list:
+#             flatten_numpy_image=np.array(numpy.flatten())
+#             taille_vecteur_image =flatten_numpy_image.size
+#             note_numpy = np.zeros(taille_vecteur_image)
+#             note_numpy[0] = note[count_2]
+#             note_numpy [1:taille_vecteur_image] = None
+#             element=np.array([note_numpy,flatten_numpy_image])
+#             image_note_list.append(element)
+#             count_2+=1
+#
+#     return image_note_list
 
 #########################################
 ### Algorithme génétique (cross over) ###
 #########################################
 
-def algo_genetique (image_note_list, taux_cross_over) :
+def algo_genetique (encoded_image_list, taux_cross_over) :
 
-    image_after_algo_list=Algo_gen.one_loop(image_note_list,taux_cross_over)
+    image_after_algo_list=Algo_gen.one_loop(encoded_image_list,taux_cross_over)
 
     new_image_encoded=[]
     count_3=0
+
+    ## si image note supérieur à 7 (favoris)
 
     ## création de la liste avec uniquement les numpy a décoder pour la prochaine vague
     for image in image_after_algo_list :
