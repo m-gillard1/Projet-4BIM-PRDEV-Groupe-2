@@ -183,7 +183,9 @@ def Refresh_event(event):
     print('REFRESH REFRESH')
     Liste_path = Genere_Suspect(Dico_note, Vague_actuelle)
     nb_new_img_from_db=12-len(Liste_path) # nombre de nouvelles images à ajouter de la base de données
-    # completer liste path en consequence 
+    # completer liste path en consequence
+    for i in range(nb_new_img_from_db) :
+        Liste_path.append(Add_Suspect_from_DB(nb_new_img_from_db))
     Vague_actuelle+=1
     #genere 12 nouvelles images de suspects  "\vague_2\image_1", "\vague2|image2... n"
     suspect_principal.configure(image=Image_Instruction)
@@ -213,6 +215,9 @@ def Genere_Suspect(Dico, Vague_actuelle ):
 
     print(Liste_Path_nouvelle_vague)
     return (Liste_Path_nouvelle_vague)
+
+def Add_Suspect_from_DB(nb_new_img_from_db):
+    return # un path vers une new image de la DB
 
 def Init_suspects(choices_container_frame,Liste_img,photo_width,photo_height):
 
