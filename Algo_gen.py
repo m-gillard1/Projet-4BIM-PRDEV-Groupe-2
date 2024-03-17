@@ -110,14 +110,14 @@ def cross_over_sans_note(best_image_list, Tc):
         if random() < Tc:
             #print('cross over !! ',i)
             indc = randint(0, len(new_P) - 1) #choisi l'image avec laquelle il va échanger entre 0 et 10
-            posc = randint(0, len(new_P[i][1]) - 1) # choisi a quelle position du vecteur on coupe entre 0 et 20
+            posc = randint(0, len(new_P[i]) - 1) # choisi a quelle position du vecteur on coupe entre 0 et 20
             #print(indc)
             #print(posc)
             #print(len(new_P[i][1]))
-            tmp = new_P[i][1][posc:len(new_P[i][1])]
+            tmp = new_P[i][posc:len(new_P[i])]
             #print(tmp)
-            new_P[i][1][posc:len(new_P[i][1])] = new_P[indc][1][posc:len(new_P[i][1])]
-            new_P[indc][1][posc:len(new_P[i][1])] = tmp
+            new_P[i][posc:len(new_P[i])] = new_P[indc][posc:len(new_P[i])]
+            new_P[indc][posc:len(new_P[i])] = tmp
 
     return new_P
 
@@ -158,14 +158,19 @@ def one_loop_avec_note(image_list, Tc):
 
 if __name__=='__main__':
     #Test de la fonction pop_sort(image_list)
-    image_list = [[[3, None],[7, 2]], [[1, None],[9, 5]], [[4, None], [6, 1]], [[2, None], [8, 3]]]
+    image_note_list = [[[3, None],[7, 2]], [[1, None],[9, 5]], [[4, None], [6, 1]], [[2, None], [8, 3]]]
     print('test pop_sort - ok ')
-    print(pop_sort(image_list))
+    print(pop_sort(image_note_list))
 
     #Test de la fonction lowest_cost_pop(sorted_image_list)
     print('test lowest cost - ok ')
-    print(lowest_cost_pop(pop_sort(image_list)))
+    print(lowest_cost_pop(pop_sort(image_note_list)))
 
     # Test de la fonction cross_over(best_image_list, Tc)
-    print('test cross over :')
-    print(cross_over(image_list,0.1))
+    print('test cross over avec note :')
+    print(cross_over_avec_note(image_note_list,0.1))
+
+    image_list = [ [7, 2], [9, 5], [6, 1], [8, 3] ]
+    # Test de la fonction cross_over(best_image_list, Tc)
+    print('test cross over sans note:')
+    print(cross_over_sans_note(image_list,0.6))
