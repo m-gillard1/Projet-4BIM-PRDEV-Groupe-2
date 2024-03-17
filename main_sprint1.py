@@ -150,7 +150,7 @@ def main_loop (nb_vague) :
 ### IHM LOOP ###
 ################
 
-def IHM_loop (numero_vague) :
+def IHM_loop (numero_vague,note) :
 
     nb_image_par_vague=12
 
@@ -160,8 +160,17 @@ def IHM_loop (numero_vague) :
     taux_cross_over=0.8
 
     encoded_image_list=encoded_image(path_im_vague)
-    #image_note_list=data_structure_note_image(encoded_image_list,note)
-    new_image_encoded=algo_genetique_sans_note(encoded_image_list, taux_cross_over)
+    image_note_list=data_structure_note_image(encoded_image_list,note)
+
+    # boucle pour extraire les favoris
+    print(image_note_list)
+    img_fav=[]
+    for img in image_note_list :
+        if (img[0][0] >= 7) :
+            img_fav.append(img[1])
+    print(img_fav)
+
+    new_image_encoded=algo_genetique_sans_note(img_fav, taux_cross_over)
     list_path_img=[]
     list_path_img=sauv_img(new_image_encoded,path_result_vague)
 
@@ -173,5 +182,5 @@ if __name__=='__main__':
 
     #main_loop(8)
 
-    #note_list=creation_list_note(12)
-    print(IHM_loop(1))
+    note_list=creation_list_note(12)
+    print(IHM_loop(1,note_list))
