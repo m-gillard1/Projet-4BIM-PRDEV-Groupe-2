@@ -104,8 +104,8 @@ def one_loop(image_list, Tc):
     ---------
     list: Liste contenant la population dinale de vecteurs.
     """
-    nombre_image=len(image_list)
-    taille_vect_image=len(image_list[0][1])
+    #nombre_image=len(image_list)
+    #taille_vect_image=len(image_list[0][1])
 
     # Trie la population et sélectionne les Ns = N/2 meilleurs vecteurs en fonction du coût
     sorted_image_list = pop_sort(image_list)
@@ -114,10 +114,10 @@ def one_loop(image_list, Tc):
     # Applique (des mutations et /ou) des croisements aux meilleurs vecteurs
     popu_cross = cross_over(best_popu, Tc)
 
-    # Crée une nouvelle population en fusionnant les meilleurs vecteurs et les vecteurs mutés
-    popu_final = np.concatenate((popu_cross, best_popu), axis=0)
+    # # Crée une nouvelle population en fusionnant les meilleurs vecteurs et les vecteurs mutés
+    # popu_final = np.concatenate((popu_cross, best_popu), axis=0)
 
-    pop = popu_final
+    pop = popu_cross ## retourne seulement les images issues du cross over les autres osnt deja conservées dans les favoris
     return pop
 
 if __name__=='__main__':
