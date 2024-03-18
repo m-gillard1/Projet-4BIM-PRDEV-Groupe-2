@@ -182,7 +182,7 @@ def Refresh_event(event):
     global Vague_actuelle
     print('REFRESH REFRESH')
 
-    # recupérer les favoris plus besoin du dico note 
+    # recupérer les favoris plus besoin du dico note
 
     Liste_path = Genere_Suspect(Dico_note, Vague_actuelle)
     nb_new_img_from_db=12-len(Liste_path) # nombre de nouvelles images à ajouter de la base de données
@@ -204,6 +204,7 @@ def Refresh_event(event):
 def Genere_Suspect(Dico, Vague_actuelle ):
     print(Vague_actuelle)
     # Parcourir le dictionnaire et afficher chaque clé et valeur
+    # constituer la liste de note associée à chaque image
     note_list=[]
     for img, note in Dico.items():
         print(f"{img} a {note} points.")
@@ -214,7 +215,7 @@ def Genere_Suspect(Dico, Vague_actuelle ):
         # va chercher les images de la vague correspondante
         # génère les nouvelles images
         # renvoie la liste des path svers les nouvelles images
-    Liste_Path_nouvelle_vague=main_sprint1.IHM_loop(Vague_actuelle, note_list)
+    Liste_Path_nouvelle_vague=main_sprint1.IHM_loop(Vague_actuelle,note_list)
 
     print(Liste_Path_nouvelle_vague)
     return (Liste_Path_nouvelle_vague)

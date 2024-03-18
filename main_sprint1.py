@@ -69,6 +69,9 @@ def data_structure_note_image(encoded_image_list, note) :
             flatten_numpy_image=np.array(numpy.flatten())
             taille_vecteur_image =flatten_numpy_image.size
             note_numpy = np.zeros(taille_vecteur_image)
+            print(note_numpy)
+            print(count_2)
+            print(note)
             note_numpy[0] = note[count_2]
             note_numpy [1:taille_vecteur_image] = None
             element=np.array([note_numpy,flatten_numpy_image])
@@ -88,8 +91,6 @@ def algo_genetique_sans_note (encoded_image_list, taux_cross_over) :
     new_image_encoded=[]
     count_3=0
 
-    ## si image note supérieur à 7 (favoris)
-
     ## création de la liste avec uniquement les numpy a décoder pour la prochaine vague
     for image_numpy in image_after_algo_list :
         image_reshape=image_numpy.reshape(1,256,32,32) # remettre sous forme matricielle
@@ -97,6 +98,8 @@ def algo_genetique_sans_note (encoded_image_list, taux_cross_over) :
         count_3+=1
 
     return new_image_encoded
+
+
 
 #########################################################################
 ### Décoder les nparray obtenus en image + sauvegarde dans un dossier ###
@@ -170,7 +173,7 @@ def IHM_loop (numero_vague,note) :
             img_fav.append(img[1])
     print(img_fav)
 
-    new_image_encoded=algo_genetique_sans_note(img_fav, taux_cross_over)
+    new_image_encoded=algo_genetique_avec_note(img_fav, taux_cross_over)
     list_path_img=[]
     list_path_img=sauv_img(new_image_encoded,path_result_vague)
 
