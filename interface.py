@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import PhotoImage
 from PIL import Image,ImageTk
 
-import main_sprint1
+#import main_sprint1
 
 ########## __FONCTIONS__ ##########
 
