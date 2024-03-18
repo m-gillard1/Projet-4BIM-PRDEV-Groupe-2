@@ -307,6 +307,7 @@ def Init_favori(fav_dim):
 def Start_Over():
     Vague_actuelle = 1
     Init_suspects(choices_container_frame, Liste_vague1, photo_width, photo_height)
+    Init_favori(fav_dim)
     note_label.config(text = "Pas d'image sélectionnée")
 
 
@@ -392,7 +393,6 @@ best_choices_container_frame.pack_propagate(False)
 best_choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
 # Create a grid of frames
 
-
 fav_dim = int(left_width*0.021)
 Init_favori(fav_dim)
 
@@ -427,17 +427,7 @@ button_down = tk.Button(modif_main_image_frame, image=Image_down,bg="lightgray")
 button_down.pack(side=tk.BOTTOM, fill="both",expand=True)
 button_down.bind("<Button-1>",Suspect.decrement_note)
 
-"""
-jauge_frame = tk.Frame(modif_main_image_frame,width=jauge_width,height=(screen_height-left_height),bg="lightgray")
-jauge_frame.pack(side=tk.LEFT,fill=tk.Y)
-jauge_frame.pack_propagate(False) 
-jauge = jauge(jauge_frame,(screen_height-left_height))
-buttons_modif_main_frame = tk.Frame(modif_main_image_frame,width=(top_left_width-jauge_width),height=(screen_height-left_height),bg="lightgray")
-buttons_modif_main_frame.pack(side=tk.RIGHT,fill=tk.Y)
-buttons_modif_main_frame.pack_propagate(False) 
-button1 = tk.Button(buttons_modif_main_frame, text="Save Mark")
-button1.pack(side=tk.TOP, fill=tk.X, padx=10, pady=5)
-"""
+
 view_main_image_frame = tk.Frame(main_image_frame,width=(left_width-top_left_width),height=(screen_height-left_height),bg="lightgray")
 view_main_image_frame.pack_propagate(False) 
 view_main_image_frame.pack(side=tk.LEFT,fill=tk.Y)
@@ -448,6 +438,7 @@ main_image_height = (520*main_image_width) / 360
 Image_Instruction = PhotoImage(file = "instruction.png")
 suspect_principal = tk.Label(view_main_image_frame , image=Image_Instruction, width=main_image_width, height=main_image_height,bg="lightgray")
 suspect_principal.pack(fill="both",expand=True)
+note_label.config(text = "Pas d'image sélectionnée")
   
 
 
