@@ -249,6 +249,61 @@ def Init_suspects(choices_container_frame,Liste_img,photo_width,photo_height):
     suspect_12 = Suspect(choices_container_frame, Liste_img[11],5,photo_width,photo_height)
     suspect_12.grid(row=2, column=3, padx=photo_width//50, pady=photo_height//50)
 
+
+def Init_favori(fav_dim):
+    fav_1 = Favori(1,fav_dim, 1, 1)
+    fav_1.config(text="favori 1")
+    fav_1.grid(row=1, column=1, padx=fav_dim, pady=fav_dim)
+    
+    fav_2 = Favori(2, fav_dim, 1, 2)
+    fav_2.config(text='favori 2')
+    fav_2.grid(row=1, column = 2, padx=fav_dim, pady=fav_dim)
+    
+    fav_3 = Favori(3,fav_dim, 1, 3)
+    fav_3.config(text="favori 3")
+    fav_3.grid(row=1, column=3, padx=fav_dim, pady=fav_dim)
+    
+    fav_4 = Favori(4, fav_dim, 1, 4)
+    fav_4.config(text='favori 4')
+    fav_4.grid(row=1, column = 4, padx=fav_dim, pady=fav_dim)
+    
+    fav_5 = Favori(5,fav_dim, 1, 5)
+    fav_5.config(text="favori 5")
+    fav_5.grid(row=1, column=5, padx=fav_dim, pady=fav_dim)
+    
+    fav_6 = Favori(6, fav_dim, 1, 6)
+    fav_6.config(text='favori 6')
+    fav_6.grid(row=2, column = 1, padx=fav_dim, pady=fav_dim)
+    
+    fav_7 = Favori(7,fav_dim, 1, 7)
+    fav_7.config(text="favori 7")
+    fav_7.grid(row=2, column=2, padx=fav_dim, pady=fav_dim)
+    
+    fav_8 = Favori(8, fav_dim, 1, 8)
+    fav_8.config(text='favori 8')
+    fav_8.grid(row=2, column = 3, padx=fav_dim, pady=fav_dim)
+    
+    fav_9 = Favori(9,fav_dim, 1, 9)
+    fav_9.config(text="favori 9")
+    fav_9.grid(row=2, column=4, padx=fav_dim, pady=fav_dim)
+    
+    fav_10 = Favori(10, fav_dim, 1, 10)
+    fav_10.config(text='favori 10')
+    fav_10.grid(row=2, column = 5, padx=fav_dim, pady=fav_dim)
+    
+    Dico_rang_fav ={1: fav_1,
+                    2: fav_2,
+                    3:fav_3,
+                    4:fav_4,
+                    5:fav_5,
+                    6:fav_6,
+                    7:fav_7,
+                    8:fav_8,
+                    9:fav_9,
+                    10:fav_10}
+
+
+
 def Start_Over():
     Vague_actuelle = 1
     Init_suspects(choices_container_frame, Liste_vague1, photo_width, photo_height)
@@ -339,57 +394,7 @@ best_choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
 
 
 fav_dim = int(left_width*0.021)
-
-fav_1 = Favori(1,fav_dim, 1, 1)
-fav_1.config(text="favori 1")
-fav_1.grid(row=1, column=1, padx=fav_dim, pady=fav_dim)
-
-fav_2 = Favori(2, fav_dim, 1, 2)
-fav_2.config(text='favori 2')
-fav_2.grid(row=1, column = 2, padx=fav_dim, pady=fav_dim)
-
-fav_3 = Favori(3,fav_dim, 1, 3)
-fav_3.config(text="favori 3")
-fav_3.grid(row=1, column=3, padx=fav_dim, pady=fav_dim)
-
-fav_4 = Favori(4, fav_dim, 1, 4)
-fav_4.config(text='favori 4')
-fav_4.grid(row=1, column = 4, padx=fav_dim, pady=fav_dim)
-
-fav_5 = Favori(5,fav_dim, 1, 5)
-fav_5.config(text="favori 5")
-fav_5.grid(row=1, column=5, padx=fav_dim, pady=fav_dim)
-
-fav_6 = Favori(6, fav_dim, 1, 6)
-fav_6.config(text='favori 6')
-fav_6.grid(row=2, column = 1, padx=fav_dim, pady=fav_dim)
-
-fav_7 = Favori(7,fav_dim, 1, 7)
-fav_7.config(text="favori 7")
-fav_7.grid(row=2, column=2, padx=fav_dim, pady=fav_dim)
-
-fav_8 = Favori(8, fav_dim, 1, 8)
-fav_8.config(text='favori 8')
-fav_8.grid(row=2, column = 3, padx=fav_dim, pady=fav_dim)
-
-fav_9 = Favori(9,fav_dim, 1, 9)
-fav_9.config(text="favori 9")
-fav_9.grid(row=2, column=4, padx=fav_dim, pady=fav_dim)
-
-fav_10 = Favori(10, fav_dim, 1, 10)
-fav_10.config(text='favori 10')
-fav_10.grid(row=2, column = 5, padx=fav_dim, pady=fav_dim)
-
-Dico_rang_fav ={1: fav_1,
-                2: fav_2,
-                3:fav_3,
-                4:fav_4,
-                5:fav_5,
-                6:fav_6,
-                7:fav_7,
-                8:fav_8,
-                9:fav_9,
-                10:fav_10}
+Init_favori(fav_dim)
 
 Dico_rank = {}
 
