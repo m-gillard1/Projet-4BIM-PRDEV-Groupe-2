@@ -36,18 +36,17 @@ class Favori(tk.Button):
         return
     
     def Update_Fav (Dico_note):
-        print('ici1')
         sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
         lim = 1
         for i in sorted_id_by_note : 
             if lim < 10 :
                 if (i[1]>6):
                     path = i[0]
-                    print(path)
+                    #print(path)
                     photo = Image.open(path)
                     photo_resized = photo.resize((Dico_rang_fav[lim].large, Dico_rang_fav[lim].large,))
                     Dico_rang_fav[lim].photo_image = ImageTk.PhotoImage(photo_resized)
-                    print(Dico_rang_fav[lim])
+                    #print(Dico_rang_fav[lim])
                     Dico_rang_fav[lim].config(height=Dico_rang_fav[lim].large,width=Dico_rang_fav[lim].large, image=Dico_rang_fav[lim].photo_image)
                     lim+=1
                     
@@ -166,7 +165,7 @@ class Suspect(tk.Button):
         global suspect_actuel
         rank = suspect_actuel.ranking()
         if (rank<10 and self.note>6):
-            print('favori')
+            #print('favori')
             Favori.Make_favorite(Dico_rang_fav[rank], suspect_actuel.id, suspect_actuel.note, suspect_actuel.photo_image)
         return
 
@@ -337,9 +336,9 @@ best_choices_container_frame.pack(fill="both", expand=True)
 best_choices_container_frame.pack_propagate(False) 
 best_choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
 # Create a grid of frames
-favorites = [[tk.Frame(best_choices_container_frame, bg="lightgreen") for _ in range(5)] for _ in range(2)]
+
+
 fav_dim = int(left_width*0.021)
-print(fav_dim)
 
 fav_1 = Favori(1,fav_dim, 1, 1)
 fav_1.config(text="favori 1")
