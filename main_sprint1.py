@@ -99,7 +99,24 @@ def algo_genetique_sans_note (encoded_image_list, taux_cross_over) :
 
     return new_image_encoded
 
+#########################################
+### Algorithme génétique (cross over) ###
+#########################################
 
+def algo_genetique_avec_note (image_note_list, taux_cross_over) :
+
+    image_after_algo_list=Algo_gen.cross_over_avec_note(image_note_list,taux_cross_over)
+
+    new_image_encoded=[]
+    count_3=0
+
+    ## création de la liste avec uniquement les numpy a décoder pour la prochaine vague
+    for image_numpy in image_after_algo_list :
+        image_reshape=image_numpy.reshape(1,256,32,32) # remettre sous forme matricielle
+        new_image_encoded.append(image_reshape)
+        count_3+=1
+
+    return new_image_encoded
 
 #########################################################################
 ### Décoder les nparray obtenus en image + sauvegarde dans un dossier ###
