@@ -146,27 +146,27 @@ def sauv_img (new_image_encoded, path_result_vague) :
 ### Fonction pour ajouter des nouveaux visages de la base de donnes ###
 #######################################################################
 
-def add_Suspect_from_DB(nb_new_img_from_db):
+def add_Suspect_from_DB():
 
     """
     prend en entree le nombre d'image a generer
     renvoie une liste chemin menant des images choisies nb_aleatoirement dans la db
     """
 
-    List_new_path=[]
-    for i in range(nb_new_img_from_db) :
-        nb_aleatoire = int(uniform(24000, 24030))
+    # List_new_path=[]
+    # for i in range(nb_new_img_from_db) :
+    nb_aleatoire = int(uniform(24000, 24030))
         # rajouter un if pour eviter ceu ayant deja ete propose
-        path=("data/"+ str(nb_aleatoire) +'_superposee.png')
+    path=("data/"+ str(nb_aleatoire) +'_superposee.png')
         #print(path)
         ## Verification ouverture du fichier
         #im=Image.open(path)
         #im.show()
-        List_new_path.append(path)
+        # List_new_path.append(path)
 
 
     # chercher une image dans la DB
-    return List_new_path # un path vers une new image de la DB
+    return  path #List_new_path # un path vers une new image de la DB
 
 
 ######################
@@ -217,13 +217,27 @@ def IHM_loop (numero_vague,note) :
     for img in image_note_list :
         if (img[0][0] >= 7) :
             img_fav.append(img)
+    print("fav")
     print(img_fav)
 
     new_image_encoded=algo_genetique_avec_note(img_fav, taux_cross_over)
     list_path_img=[]
     list_path_img=sauv_img(new_image_encoded,path_result_vague)
 
-    return list_path_img
+
+    nb_new_img_from_db=12-len(list_path_img) # nombre de nouvelles images à ajouter de la base de données
+    print(nb_new_img_from_db)
+    list_path_complete=list_path_img
+    print('avant')
+    print(list_path_complete)
+    # completer liste path en consequence
+    for i in range(nb_new_img_from_db) :
+        list_path_complete.append(add_Suspect_from_DB())
+
+    print('apres')
+    print(list_path_complete)
+
+    return list_path_complete
 
 
 

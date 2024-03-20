@@ -185,10 +185,6 @@ def Refresh_event(event):
     # recupérer les favoris plus besoin du dico note
 
     Liste_path = Genere_Suspect(Dico_note, Vague_actuelle)
-    nb_new_img_from_db=12-len(Liste_path) # nombre de nouvelles images à ajouter de la base de données
-    # completer liste path en consequence
-    for i in range(nb_new_img_from_db) :
-        Liste_path.append(Add_Suspect_from_DB(nb_new_img_from_db))
     Vague_actuelle+=1
     #genere 12 nouvelles images de suspects  "\vague_2\image_1", "\vague2|image2... n"
     suspect_principal.configure(image=Image_Instruction)
