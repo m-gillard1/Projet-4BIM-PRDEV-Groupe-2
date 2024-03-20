@@ -220,10 +220,6 @@ def Genere_Suspect(Dico, Vague_actuelle ):
     print(Liste_Path_nouvelle_vague)
     return (Liste_Path_nouvelle_vague)
 
-def Add_Suspect_from_DB(nb_new_img_from_db):
-    # chercher une image dans la DB
-    return # un path vers une new image de la DB
-
 def Init_suspects(choices_container_frame,Liste_img,photo_width,photo_height):
 
     suspect_1 = Suspect(choices_container_frame,Liste_img[0],5,photo_width,photo_height)

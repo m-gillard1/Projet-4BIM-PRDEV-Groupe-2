@@ -142,6 +142,16 @@ def sauv_img (new_image_encoded, path_result_vague) :
 
     return List_path
 
+
+#######################################################################
+### Fonction pour ajouter des nouveaux visages de la base de donnes ###
+#######################################################################
+
+def add_Suspect_from_DB(nb_new_img_from_db):
+    # chercher une image dans la DB
+    return # un path vers une new image de la DB
+
+
 ######################
 ### PRINCIPAL LOOP ###
 ######################
