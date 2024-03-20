@@ -112,7 +112,8 @@ def algo_genetique_avec_note (image_note_list, taux_cross_over) :
 
     ## création de la liste avec uniquement les numpy a décoder pour la prochaine vague
     for image_numpy in image_after_algo_list :
-        image_reshape=image_numpy.reshape(1,256,32,32) # remettre sous forme matricielle
+        new_image=image_numpy[1]
+        image_reshape=new_image.reshape(1,256,32,32) # remettre sous forme matricielle
         new_image_encoded.append(image_reshape)
         count_3+=1
 
@@ -183,11 +184,12 @@ def IHM_loop (numero_vague,note) :
     image_note_list=data_structure_note_image(encoded_image_list,note)
 
     # boucle pour extraire les favoris
+    print("image note list")
     print(image_note_list)
     img_fav=[]
     for img in image_note_list :
         if (img[0][0] >= 7) :
-            img_fav.append(img[1])
+            img_fav.append(img)
     print(img_fav)
 
     new_image_encoded=algo_genetique_avec_note(img_fav, taux_cross_over)
@@ -203,4 +205,6 @@ if __name__=='__main__':
     #main_loop(8)
 
     note_list=creation_list_note(12)
+    print("note")
+    print(note_list)
     print(IHM_loop(1,note_list))

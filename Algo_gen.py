@@ -74,7 +74,7 @@ def cross_over_avec_note(best_image_list, Tc):
 
     print(new_P)
     print(len(new_P))
-    for i in range(0, len(new_P[0])):
+    for i in range(0, len(new_P)):
         if random() < Tc:
             #print('cross over !! ',i)
             indc = randint(0, len(new_P) - 1) #choisi l'image avec laquelle il va échanger entre 0 et 10
