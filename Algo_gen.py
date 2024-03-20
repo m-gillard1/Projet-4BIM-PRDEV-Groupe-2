@@ -70,6 +70,9 @@ def cross_over(best_image_list, Tc):
     """
     new_P = np.copy(best_image_list) ## image_list ou sorted_image_list ?
 
+    print(new_P)
+    print(len(new_P))
+
     for i in range(0, len(new_P)):
         if random() < Tc:
             #print('cross over !! ',i)
