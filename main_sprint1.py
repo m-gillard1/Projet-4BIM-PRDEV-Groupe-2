@@ -178,7 +178,7 @@ def IHM_loop (numero_vague,note) :
     path_im_vague=("image_vague_"+str(numero_vague)+"/")
     path_result_vague =("image_vague_"+str(numero_vague+1)+"/")
 
-    taux_cross_over=0.8
+    taux_cross_over=1
 
     encoded_image_list=encoded_image(path_im_vague)
     image_note_list=data_structure_note_image(encoded_image_list,note)
