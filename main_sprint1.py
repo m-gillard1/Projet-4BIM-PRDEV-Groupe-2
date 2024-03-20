@@ -20,9 +20,9 @@ from PIL import Image
 ######################
 # Martin Théo
 
-#############################################################
-### Récupérer les images utilisées par l'IHM et leur note ###
-#############################################################
+############################
+### Récupérer les notes ###
+###########################
 
 #inutile
 def creation_list_note(nb_image_par_vague) :
@@ -142,14 +142,31 @@ def sauv_img (new_image_encoded, path_result_vague) :
 
     return List_path
 
-
 #######################################################################
 ### Fonction pour ajouter des nouveaux visages de la base de donnes ###
 #######################################################################
 
 def add_Suspect_from_DB(nb_new_img_from_db):
+
+    """
+    prend en entree le nombre d'image a generer
+    renvoie une liste chemin menant des images choisies nb_aleatoirement dans la db
+    """
+
+    List_new_path=[]
+    for i in range(nb_new_img_from_db) :
+        nb_aleatoire = int(uniform(24000, 24030))
+        # rajouter un if pour eviter ceu ayant deja ete propose
+        path=("data/"+ str(nb_aleatoire) +'_superposee.png')
+        #print(path)
+        ## Verification ouverture du fichier
+        #im=Image.open(path)
+        #im.show()
+        List_new_path.append(path)
+
+
     # chercher une image dans la DB
-    return # un path vers une new image de la DB
+    return List_new_path # un path vers une new image de la DB
 
 
 ######################
@@ -218,3 +235,7 @@ if __name__=='__main__':
     print("note")
     print(note_list)
     print(IHM_loop(1,note_list))
+
+
+    print ('test new fct')
+    print(add_Suspect_from_DB(2))
