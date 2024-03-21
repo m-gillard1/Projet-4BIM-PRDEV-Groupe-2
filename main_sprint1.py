@@ -169,6 +169,24 @@ def add_Suspect_from_DB():
     return  path #List_new_path # un path vers une new image de la DB
 
 
+
+#######################################################################
+### calculer distances entre 2 images en numpy  ###
+#######################################################################
+
+def distance_img(img1, img2):
+
+    """
+    prends 2 img sous forme vetorielles
+    et renvoie leur ditance euclidienne
+
+    """
+    from scipy.spatial import distance
+    dist=distance.euclidean(img1, img2)
+
+    return  dist
+
+
 ######################
 ### PRINCIPAL LOOP ###
 ######################
@@ -249,7 +267,3 @@ if __name__=='__main__':
     print("note")
     print(note_list)
     print(IHM_loop(1,note_list))
-
-
-    print ('test new fct')
-    print(add_Suspect_from_DB(2))
