@@ -95,8 +95,11 @@ class Suspect(tk.Button):
         global suspect_actuel
         suspect_actuel = self
         note_label.config(text = 'Note: ' + str(self.note))
+           
         image_suspect = suspect_actuel.cget('image')
-        suspect_principal.configure(image=image_suspect)
+        print(image_suspect)
+        print(type(image_suspect))
+        suspect_principal.config(image=image_suspect)
     
     def increment_note(self):
         
@@ -111,8 +114,7 @@ class Suspect(tk.Button):
         Dico_note[suspect_actuel.id]= suspect_actuel.note
         suspect_actuel.Ajout_Favori()
         Favori.Update_Fav(Dico_note=Dico_note)
-
-            
+         
     def decrement_note(self):
         global suspect_actuel
         if suspect_actuel.note >0:
@@ -143,7 +145,7 @@ class Suspect(tk.Button):
         elif suspect_actuel.note >= 7:
             border_color = "green yellow"
         elif suspect_actuel.note > 3:
-            border_color = self.original_border_color
+            border_color = "white"
         elif suspect_actuel.note > 1:
             border_color = "orange"
         else:
@@ -151,8 +153,7 @@ class Suspect(tk.Button):
         
         # Définit la couleur de la bordure du bouton
         suspect_actuel.config(highlightbackground=border_color)
-   
-    
+     
     def ranking(self):
         rank=1
         rating=suspect_actuel.note
@@ -249,7 +250,6 @@ def Init_suspects(choices_container_frame,Liste_img,photo_width,photo_height):
     suspect_12 = Suspect(choices_container_frame, Liste_img[11],5,photo_width,photo_height)
     suspect_12.grid(row=2, column=3, padx=photo_width//50, pady=photo_height//50)
 
-
 def Init_favori(fav_dim):
     fav_1 = Favori(1,fav_dim, 1, 1)
     fav_1.config(text="favori 1")
@@ -303,19 +303,12 @@ def Init_favori(fav_dim):
                 10:fav_10}
     return Dico_rang_fav
     
-    
-
-
-
 def Start_Over():
     Vague_actuelle = 1
     Init_suspects(choices_container_frame, Liste_vague1, photo_width, photo_height)
     global Dico_rang_fav
     Dico_rang_fav = Init_favori(fav_dim)
     note_label.config(text = "Pas d'image sélectionnée")
-
-
-
 
 # Ceate the main window
 root = tk.Tk()
@@ -342,14 +335,14 @@ right_frame.pack_propagate(False)
 choices_frame = tk.Frame(right_frame,width=right_width, height = choices_height, bg = "gray70")
 choices_frame.pack(side=tk.TOP, fill=tk.X)
 choices_frame.pack_propagate(False) 
+
+
 ### intérieur de la partie supérieur de la partie de droite, contient les suspects ###
 choices_container_frame =  tk.Frame(choices_frame,width=right_width*0.9, height = choices_height*0.9, bg = "white")
 choices_container_frame.pack(fill="both", expand=True)
 choices_container_frame.pack_propagate(False) 
 choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
 choices_container_frame.update()
-choices_height = (choices_container_frame.winfo_height()//1)
-choices_width = choices_container_frame.winfo_width()
 
 
 ##### Creation et ajout des boutons dans choices_container (en haut à droite) #####
@@ -439,12 +432,12 @@ view_main_image_frame = tk.Frame(main_image_frame,width=(left_width-top_left_wid
 view_main_image_frame.pack_propagate(False) 
 view_main_image_frame.pack(side=tk.LEFT,fill=tk.Y)
 
-main_image_width = (left_width-top_left_width)
-main_image_height = (520*main_image_width) / 360
 ### Label contenant l'image/texte en haut à gauche lors du lancement du logiciel, nécessaire car définissant taille des frames
 Image_Instruction = PhotoImage(file = "instruction.png")
-suspect_principal = tk.Label(view_main_image_frame , image=Image_Instruction, width=main_image_width, height=main_image_height,bg="lightgray")
+suspect_principal = tk.Label(view_main_image_frame , width = top_left_width, height = left_height, image = Image_Instruction)
+suspect_principal.place(relx = 0.5,rely = 0.5, anchor="center")
 suspect_principal.pack(fill="both",expand=True)
+
 note_label.config(text = "Pas d'image sélectionnée")
   
 
