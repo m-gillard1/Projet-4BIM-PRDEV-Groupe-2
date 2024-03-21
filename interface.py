@@ -290,24 +290,28 @@ def Init_favori(fav_dim):
     fav_10 = Favori(10, fav_dim, 1, 10)
     fav_10.config(text='favori 10')
     fav_10.grid(row=2, column = 5, padx=fav_dim, pady=fav_dim)
-    
+
     Dico_rang_fav ={1: fav_1,
-                    2: fav_2,
-                    3:fav_3,
-                    4:fav_4,
-                    5:fav_5,
-                    6:fav_6,
-                    7:fav_7,
-                    8:fav_8,
-                    9:fav_9,
-                    10:fav_10}
+                2: fav_2,
+                3:fav_3,
+                4:fav_4,
+                5:fav_5,
+                6:fav_6,
+                7:fav_7,
+                8:fav_8,
+                9:fav_9,
+                10:fav_10}
+    return Dico_rang_fav
+    
+    
 
 
 
 def Start_Over():
     Vague_actuelle = 1
     Init_suspects(choices_container_frame, Liste_vague1, photo_width, photo_height)
-    Init_favori(fav_dim)
+    global Dico_rang_fav
+    Dico_rang_fav = Init_favori(fav_dim)
     note_label.config(text = "Pas d'image sélectionnée")
 
 
@@ -346,10 +350,7 @@ choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
 choices_container_frame.update()
 choices_height = (choices_container_frame.winfo_height()//1)
 choices_width = choices_container_frame.winfo_width()
-### partie inférieur de la partie de droite, contient les boutons d'options ###
-Menu_Option_Frame = tk.Frame(right_frame,width=right_width, height = (screen_height-choices_height), bg = "gray10")
-Menu_Option_Frame.pack_propagate(False) 
-Menu_Option_Frame.pack(side=tk.TOP, fill='both')
+
 
 ##### Creation et ajout des boutons dans choices_container (en haut à droite) #####
 photo_width = int(right_width*0.18)
@@ -359,28 +360,34 @@ Liste_vague1= ["image_vague_1/1.png", "image_vague_1/2.png", "image_vague_1/3.pn
 Init_suspects(choices_container_frame,Liste_vague1,photo_width,photo_height)
 
 
+### partie inférieur de la partie de droite, contient les boutons d'options ###
+Menu_Option_Frame_haut = tk.Frame(right_frame, bg = "black")
+Menu_Option_Frame_haut.pack(side=tk.TOP, fill="both",expand=True)
+Menu_Option_Frame_haut.pack_propagate(False) 
+
 ##### Création et ajout des boutons dans le frame menu option #####
-Menu_Option_Frame.update()
-height_menu = Menu_Option_Frame.winfo_height()
-width_menu = Menu_Option_Frame.winfo_width()
 
-pad_horizontal = width_menu // 15
-pad_vertical = height_menu // 22
+Menu_Option_Frame_bas= tk.Frame(right_frame, bg = "black")
+Menu_Option_Frame_bas.pack(side=tk.BOTTOM, fill="both",expand=True)
+Menu_Option_Frame_bas.pack_propagate(False) 
 
-Bouton_restart = tk.Button(Menu_Option_Frame,text='Start Over',height=height_menu//47, width=width_menu//20,background='red', command=lambda: Restart_event)
-Bouton_restart.grid(row=1, column=2, padx=pad_horizontal, pady=pad_vertical, sticky='nswe')
+pad_horizontal = 10
+pad_vertical = 10
+
+Bouton_restart = tk.Button(Menu_Option_Frame_haut,text='Start Over',background='red', command=lambda: Restart_event)
+Bouton_restart.pack(side = tk.RIGHT, fill = "both", expand = True,padx=pad_horizontal, pady=pad_vertical)
 Bouton_restart.bind("<Button-1>", Restart_event)
 
-Bouton_refresh = tk.Button(Menu_Option_Frame,text='Refresh',height=height_menu//47, width=width_menu//20, background='lightblue')
-Bouton_refresh.grid(row=2, column=1, padx=pad_horizontal, pady=pad_vertical, sticky='nswe')
+Bouton_refresh = tk.Button(Menu_Option_Frame_bas,text='Refresh', background='lightblue')
+Bouton_refresh.pack(side=tk.LEFT, fill = "both", expand = True, padx=pad_horizontal, pady=pad_vertical)
 Bouton_refresh.bind("<Button-1>", Refresh_event)
 
-Bouton_garbage= tk.Button(Menu_Option_Frame,text='Garbage Bin',height=height_menu//47, width=width_menu//20, background='lightgreen')
-Bouton_garbage.grid(row=1, column=1, padx=pad_horizontal, pady=pad_vertical, sticky='nswe')
+Bouton_garbage= tk.Button(Menu_Option_Frame_haut,text='Garbage Bin', background='lightgreen')
+Bouton_garbage.pack(side=tk.LEFT, fill = "both", expand = True, padx=pad_horizontal, pady=pad_vertical)
 Bouton_garbage.bind("<Button-1>" , Suspect.garbage )
 
-Bouton_FIN= tk.Button(Menu_Option_Frame,text='Finish', height=height_menu//47, width=width_menu//20, background='yellow')
-Bouton_FIN.grid(row=2, column=2, padx=pad_horizontal, pady=pad_vertical, sticky='nswe')
+Bouton_FIN= tk.Button(Menu_Option_Frame_bas,text='Finish', background='yellow')
+Bouton_FIN.pack(side=tk.RIGHT, fill = "both", expand = True, padx=pad_horizontal, pady=pad_vertical)
 
 ######### --Modif for the left side-- #########
 ####### --Bottom side: selection des meilleures images-- ########
@@ -394,7 +401,7 @@ best_choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
 # Create a grid of frames
 
 fav_dim = int(left_width*0.021)
-Init_favori(fav_dim)
+Dico_rang_fav= Init_favori(fav_dim)
 
 Dico_rank = {}
 
