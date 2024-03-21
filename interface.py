@@ -13,18 +13,18 @@ Dico_note ={}
 
 
 class Favori(tk.Button):
-    def __init__(self,position, wide, column, row, **kwargs):
-        h = int (wide*0.5)
-        self.wd = wide
-        self.ht = h
-        self.large=h*15
+    def __init__(self,position, size, column, row, **kwargs):
+        
+        self.wd = size
+        self.ht = size
+        self.large=size*15
         self.photo_image= None
         self.note=None
         self.id=None
         self.col = column
         self.row=row
         
-        super().__init__(best_choices_container_frame,width=wide, height=h, **kwargs)
+        super().__init__(best_choices_container_frame,width=size, height=size, **kwargs)
 
     def Make_favorite (self,id, note, image ):
         self.note=note
@@ -96,10 +96,9 @@ class Suspect(tk.Button):
         suspect_actuel = self
         note_label.config(text = 'Note: ' + str(self.note))
            
-        image_suspect = suspect_actuel.cget('image')
-        print(image_suspect)
-        print(type(image_suspect))
-        suspect_principal.config(image=image_suspect)
+        resized_image = Image.open(self.id).resize((512, 512))
+        resized_photo_image = ImageTk.PhotoImage(resized_image)
+        suspect_principal.configure(image=resized_photo_image)
     
     def increment_note(self):
         
@@ -387,6 +386,7 @@ Bouton_FIN.pack(side=tk.RIGHT, fill = "both", expand = True, padx=pad_horizontal
 best_choices_frame = tk.Frame(left_frame,width=left_width,height=left_height,bg="gray75")
 best_choices_frame.pack(side=tk.BOTTOM,fill = tk.X)
 best_choices_frame.pack_propagate(False) 
+
 best_choices_container_frame =  tk.Frame(best_choices_frame,width=left_width*0.95, height = left_height*0.95, bg = "white")
 best_choices_container_frame.pack(fill="both", expand=True)
 best_choices_container_frame.pack_propagate(False) 
