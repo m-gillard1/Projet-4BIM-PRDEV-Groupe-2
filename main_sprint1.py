@@ -153,26 +153,27 @@ def add_Suspect_from_DB():
     renvoie une liste chemin menant des images choisies nb_aleatoirement dans la db
     """
 
-    # List_new_path=[]
-    # for i in range(nb_new_img_from_db) :
-    nb_aleatoire = int(uniform(24000, 24030))
-        # rajouter un if pour eviter ceu ayant deja ete propose
-    path=("data/"+ str(nb_aleatoire) +'_superposee.png')
-        #print(path)
-        ## Verification ouverture du fichier
-        #im=Image.open(path)
-        #im.show()
-        # List_new_path.append(path)
+    ## extraire les numeros des images ayant deja ete utilisées
+
+    ## aleatoire
+    numero = int(uniform(24000, 24030))
+
+    ## avec distances
+    # parcourir toutes les images de la DB pour calculer leur distance avec toutes les images du la vague actuelle 3000 x 12
+
+    path=("data/"+ str(numero) +'_superposee.png')
 
 
     # chercher une image dans la DB
     return  path #List_new_path # un path vers une new image de la DB
 
+## faire une autre fonction qui encoded toutes les images du test
+# supprime une image des qu'elle a ete utilisée
 
 
-#######################################################################
+###################################################
 ### calculer distances entre 2 images en numpy  ###
-#######################################################################
+###################################################
 
 def distance_img(img1, img2):
 
