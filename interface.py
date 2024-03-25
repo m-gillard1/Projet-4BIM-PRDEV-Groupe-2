@@ -23,6 +23,29 @@ Dico_note ={}
 
 class Favori(tk.Button):
     def __init__(self,position, size, column, row, **kwargs):
+    """
+    Permet de spécifier les dimensions de l'encadré contenant une image favorite sur l'interface.
+
+    Parameters:
+    position (tuple): Un tuple contenant les coordonnées (x, y) de la position de l'objet.
+    size (int): La taille de l'objet, en pixels.
+    column (int): La colonne dans laquelle l'objet doit être placé.
+    row (int): La ligne dans laquelle l'objet doit être placé.
+    **kwargs (dict): Tout argument supplémentaire.
+
+    Attributes:
+    wd (int): La largeur de l'objet, en pixels.
+    ht (int): La hauteur de l'objet, en pixels.
+    large (int): La taille de l'objet agrandie, en pixels.
+    photo_image (tkinter.PhotoImage): L'image associée à l'objet.
+    note (str): Une note associée à l'objet.
+    id (int): L'identifiant unique de l'objet.
+    col (int): La colonne dans laquelle l'objet est placé.
+    row (int): La ligne dans laquelle l'objet est placé.
+
+    Returns:
+    None
+    """
 
         self.wd = size
         self.ht = size
