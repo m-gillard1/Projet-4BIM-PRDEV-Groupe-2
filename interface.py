@@ -22,7 +22,7 @@ Dico_note ={}
 
 
 class Favori(tk.Button):
-    def __init__(self,position, wide, pad,column, row, **kwargs):
+    def __init__(self,position, wide,column, row, **kwargs):
         """
         Permet de spécifier les dimensions de l'encadré contenant une image favorite sur l'interface.
 
@@ -46,7 +46,7 @@ class Favori(tk.Button):
         Returns:
         None
         """
-        self.pad = pad
+        
         self.wd = wide
         self.ht = int(wide * 0.5)
         self.large=wide*15
@@ -56,7 +56,7 @@ class Favori(tk.Button):
         self.col = column
         self.row=row
         
-        super().__init__(best_choices_container_frame,width=self.wd, height = self.ht, padx = self.pad, pady = self.pad,**kwargs)
+        super().__init__(best_choices_container_frame,width=self.wd, height = self.ht,**kwargs)
 
     def Make_favorite (self,id, note, image ):
         self.note=note
@@ -128,9 +128,14 @@ class Suspect(tk.Button):
         suspect_actuel = self
         note_label.config(text = 'Note: ' + str(self.note))
         global suspect_principal
-        resized_image = Image.open(self.id).resize((512, 512))
-        resized_photo_image = ImageTk.PhotoImage(resized_image)
-        suspect_principal.configure(height =left_height,width = top_left_width, image=resized_photo_image)
+        image_suspect = suspect_actuel.cget('image')
+        print(type(image_suspect))
+        print(image_suspect)
+        #suspect_principal.config(image=image_suspect)yimage3
+        new_image = Image.open(self.id)
+        resized_image = new_image.resize((512, 512))
+        self.resized_photo_image = ImageTk.PhotoImage(resized_image)
+        suspect_principal.configure(image=self.resized_photo_image)
     
     def increment_note(self):
 
@@ -282,43 +287,43 @@ def Init_suspects(choices_container_frame,Liste_img,photo_width,photo_height):
     suspect_12.grid(row=2, column=3, padx=photo_width//50, pady=photo_height//50)
 
 def Init_favori(fav_dim,pad):
-    fav_1 = Favori(1,fav_dim, pad,1, 1)
+    fav_1 = Favori(1,fav_dim,1, 1)
     fav_1.config(text="favori 1")
     fav_1.grid(row=1, column=1, padx = pad, pady = pad)
 
-    fav_2 = Favori(2, fav_dim,pad, 1, 2)
+    fav_2 = Favori(2, fav_dim, 1, 2)
     fav_2.config(text='favori 2')
     fav_2.grid(row=1, column = 2  ,padx = pad, pady = pad)
     
-    fav_3 = Favori(3,fav_dim,pad, 1, 3)
+    fav_3 = Favori(3,fav_dim, 1, 3)
     fav_3.config(text="favori 3")
     fav_3.grid(row=1, column=3 ,padx = pad, pady = pad)
     
-    fav_4 = Favori(4, fav_dim,pad, 1, 4)
+    fav_4 = Favori(4, fav_dim, 1, 4)
     fav_4.config(text='favori 4')
     fav_4.grid(row=1, column = 4 ,padx = pad, pady = pad)
     
-    fav_5 = Favori(5,fav_dim, pad,1, 5)
+    fav_5 = Favori(5,fav_dim, 1, 5)
     fav_5.config(text="favori 5")
     fav_5.grid(row=1, column=5,padx = pad, pady = pad)
     
-    fav_6 = Favori(6, fav_dim, pad,1, 6)
+    fav_6 = Favori(6, fav_dim,1, 6)
     fav_6.config(text='favori 6')
     fav_6.grid(row=2, column = 1,padx = pad, pady = pad)
     
-    fav_7 = Favori(7,fav_dim, pad,1, 7)
+    fav_7 = Favori(7,fav_dim, 1, 7)
     fav_7.config(text="favori 7")
     fav_7.grid(row=2, column=2,padx = pad, pady = pad)    
 
-    fav_8 = Favori(8, fav_dim, pad,1, 8)
+    fav_8 = Favori(8, fav_dim,1, 8)
     fav_8.config(text='favori 8')
     fav_8.grid(row=2, column = 3,padx = pad, pady = pad)
     
-    fav_9 = Favori(9,fav_dim, pad,1, 9)
+    fav_9 = Favori(9,fav_dim, 1, 9)
     fav_9.config(text="favori 9")
     fav_9.grid(row=2, column=4,padx = pad, pady = pad)
     
-    fav_10 = Favori(10, fav_dim, pad,1, 10)
+    fav_10 = Favori(10, fav_dim, 1, 10)
     fav_10.config(text='favori 10')
     fav_10.grid(row=2, column = 5,padx = pad, pady = pad)
 
