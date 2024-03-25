@@ -203,10 +203,23 @@ def distance_img(img1, img2):
 
 
 ###################################################
+### encoder toutes les images de la db test ###
+###################################################
+
+def encoded_test_db():
+
+    """
+    retourne la list de toutes les images du jeu de test encodée
+    """
+    list_DB=encoded_image("data")
+    return list_DB
+
+
+###################################################
 ### trouve l'image la plus proche en distance d'une autre image  ###
 ###################################################
 
-def img_proche (img1):
+def img_proche (img1, list_DB):
 
     """
     prends 1 img sous forme vetorielle
@@ -215,7 +228,6 @@ def img_proche (img1):
     """
     low_dist=1000000
     count=24000
-    list_DB=encoded_image(data)
     for img in list_DB :
         dist=distance_img(img,img1)
         if dist<=low_dist :
@@ -224,7 +236,29 @@ def img_proche (img1):
         count=+1
 
     return count
-    
+
+###################################################
+### trouve l'image la plus loin en distance d'une autre image  ###
+###################################################
+
+def img_loin (img1, list_DB):
+
+    """
+    prends 1 img sous forme vetorielle
+    et renvoie l'image la plus loin dans le jeu de test
+
+    """
+    high_dist=0
+    count=24000
+    for img in list_DB :
+        dist=distance_img(img,img1)
+        if dist>=high_dist :
+            high_dist=dist
+            nb_image=count
+        count=+1
+
+    return count
+
 
 ######################
 ### PRINCIPAL LOOP ###
