@@ -7,14 +7,14 @@ from PIL import Image,ImageTk
 ########## __FONCTIONS__ ##########
 
 def toggle_fullscreen(event=None):
-     """
-    Bascule l'application en mode plein écran.
+    """
+        Bascule l'application en mode plein écran.
 
-    Parameters:
-    event: tkinter.Event: L'événement qui a déclenché l'appel de cette fonction ( par défaut, None).
+        Parameters:
+        event: tkinter.Event: L'événement qui a déclenché l'appel de cette fonction ( par défaut, None).
 
-    Returns:
-    None
+        Returns:
+        None
     """
     root.attributes('-fullscreen', not root.attributes('-fullscreen'))
 
@@ -22,41 +22,41 @@ Dico_note ={}
 
 
 class Favori(tk.Button):
-    def __init__(self,position, size, column, row, **kwargs):
-    """
-    Permet de spécifier les dimensions de l'encadré contenant une image favorite sur l'interface.
+    def __init__(self,position, wide,column, row, **kwargs):
+        """
+        Permet de spécifier les dimensions de l'encadré contenant une image favorite sur l'interface.
 
-    Parameters:
-    position (tuple): Un tuple contenant les coordonnées (x, y) de la position de l'objet.
-    size (int): La taille de l'objet, en pixels.
-    column (int): La colonne dans laquelle l'objet doit être placé.
-    row (int): La ligne dans laquelle l'objet doit être placé.
-    **kwargs (dict): Tout argument supplémentaire.
+        Parameters:
+        position (tuple): Un tuple contenant les coordonnées (x, y) de la position de l'objet.
+        size (int): La taille de l'objet, en pixels.
+        column (int): La colonne dans laquelle l'objet doit être placé.
+        row (int): La ligne dans laquelle l'objet doit être placé.
+        **kwargs (dict): Tout argument supplémentaire.
 
-    Attributes:
-    wd (int): La largeur de l'objet, en pixels.
-    ht (int): La hauteur de l'objet, en pixels.
-    large (int): La taille de l'objet agrandie, en pixels.
-    photo_image (tkinter.PhotoImage): L'image associée à l'objet.
-    note (str): Une note associée à l'objet.
-    id (int): L'identifiant unique de l'objet.
-    col (int): La colonne dans laquelle l'objet est placé.
-    row (int): La ligne dans laquelle l'objet est placé.
+        Attributes:
+        wd (int): La largeur de l'objet, en pixels.
+        ht (int): La hauteur de l'objet, en pixels.
+        large (int): La taille de l'objet agrandie, en pixels.
+        photo_image (tkinter.PhotoImage): L'image associée à l'objet.
+        note (str): Une note associée à l'objet.
+        id (int): L'identifiant unique de l'objet.
+        col (int): La colonne dans laquelle l'objet est placé.
+        row (int): La ligne dans laquelle l'objet est placé.
 
-    Returns:
-    None
-    """
-
-        self.wd = size
-        self.ht = size
-        self.large=size*15
+        Returns:
+        None
+        """
+        
+        self.wd = wide
+        self.ht = int(wide * 0.5)
+        self.large=wide*9
         self.photo_image= None
         self.note=None
         self.id=None
         self.col = column
         self.row=row
-
-        super().__init__(best_choices_container_frame,width=size, height=size, **kwargs)
+        
+        super().__init__(best_choices_container_frame,width=self.wd, height = self.ht,**kwargs)
 
     def Make_favorite (self,id, note, image ):
     """
@@ -158,11 +158,12 @@ class Suspect(tk.Button):
         global suspect_actuel
         suspect_actuel = self
         note_label.config(text = 'Note: ' + str(self.note))
-
-        resized_image = Image.open(self.id).resize((512, 512))
-        resized_photo_image = ImageTk.PhotoImage(resized_image)
-        suspect_principal.configure(image=resized_photo_image)
-
+        global suspect_principal
+        new_image = Image.open(self.id)
+        resized_image = new_image.resize((512, 512))
+        self.resized_photo_image = ImageTk.PhotoImage(resized_image)
+        suspect_principal.configure(image=self.resized_photo_image)
+    
     def increment_note(self):
 
         global suspect_actuel
@@ -269,7 +270,7 @@ def Genere_Suspect(Dico, Vague_actuelle ):
         # va chercher les images de la vague correspondante
         # génère les nouvelles images
         # renvoie la liste des path svers les nouvelles images
-    Liste_Path_nouvelle_vague=main_sprint1.IHM_loop(Vague_actuelle, note_list)
+    #Liste_Path_nouvelle_vague=main_sprint1.IHM_loop(Vague_actuelle, note_list)
 
     print(Liste_Path_nouvelle_vague)
     return (Liste_Path_nouvelle_vague)
@@ -312,46 +313,46 @@ def Init_suspects(choices_container_frame,Liste_img,photo_width,photo_height):
     suspect_12 = Suspect(choices_container_frame, Liste_img[11],5,photo_width,photo_height)
     suspect_12.grid(row=2, column=3, padx=photo_width//50, pady=photo_height//50)
 
-def Init_favori(fav_dim):
-    fav_1 = Favori(1,fav_dim, 1, 1)
+def Init_favori(fav_dim,pad):
+    fav_1 = Favori(1,fav_dim,1, 1)
     fav_1.config(text="favori 1")
-    fav_1.grid(row=1, column=1, padx=fav_dim, pady=fav_dim)
+    fav_1.grid(row=0, column=0, padx = pad, pady = pad)
 
     fav_2 = Favori(2, fav_dim, 1, 2)
     fav_2.config(text='favori 2')
-    fav_2.grid(row=1, column = 2, padx=fav_dim, pady=fav_dim)
-
+    fav_2.grid(row=0, column = 1  ,padx = pad, pady = pad)
+    
     fav_3 = Favori(3,fav_dim, 1, 3)
     fav_3.config(text="favori 3")
-    fav_3.grid(row=1, column=3, padx=fav_dim, pady=fav_dim)
-
+    fav_3.grid(row=0, column=2 ,padx = pad, pady = pad)
+    
     fav_4 = Favori(4, fav_dim, 1, 4)
     fav_4.config(text='favori 4')
-    fav_4.grid(row=1, column = 4, padx=fav_dim, pady=fav_dim)
-
+    fav_4.grid(row=0, column = 3 ,padx = pad, pady = pad)
+    
     fav_5 = Favori(5,fav_dim, 1, 5)
     fav_5.config(text="favori 5")
-    fav_5.grid(row=1, column=5, padx=fav_dim, pady=fav_dim)
-
-    fav_6 = Favori(6, fav_dim, 1, 6)
+    fav_5.grid(row=0, column=4,padx = pad, pady = pad)
+    
+    fav_6 = Favori(6, fav_dim,1, 6)
     fav_6.config(text='favori 6')
-    fav_6.grid(row=2, column = 1, padx=fav_dim, pady=fav_dim)
-
+    fav_6.grid(row=1, column = 0,padx = pad, pady = pad)
+    
     fav_7 = Favori(7,fav_dim, 1, 7)
     fav_7.config(text="favori 7")
-    fav_7.grid(row=2, column=2, padx=fav_dim, pady=fav_dim)
+    fav_7.grid(row=1, column=1,padx = pad, pady = pad)    
 
-    fav_8 = Favori(8, fav_dim, 1, 8)
+    fav_8 = Favori(8, fav_dim,1, 8)
     fav_8.config(text='favori 8')
-    fav_8.grid(row=2, column = 3, padx=fav_dim, pady=fav_dim)
-
+    fav_8.grid(row=1, column = 2,padx = pad, pady = pad)
+    
     fav_9 = Favori(9,fav_dim, 1, 9)
     fav_9.config(text="favori 9")
-    fav_9.grid(row=2, column=4, padx=fav_dim, pady=fav_dim)
-
+    fav_9.grid(row=1, column=3,padx = pad, pady = pad)
+    
     fav_10 = Favori(10, fav_dim, 1, 10)
     fav_10.config(text='favori 10')
-    fav_10.grid(row=2, column = 5, padx=fav_dim, pady=fav_dim)
+    fav_10.grid(row=1, column = 4,padx = pad, pady = pad)
 
     Dico_rang_fav ={1: fav_1,
                 2: fav_2,
@@ -368,9 +369,9 @@ def Init_favori(fav_dim):
 def Start_Over():
     Vague_actuelle = 1
     Init_suspects(choices_container_frame, Liste_vague1, photo_width, photo_height)
+    note_label.config(text = "Pas d'image sélectionnée")
     global Dico_rang_fav
     Dico_rang_fav = Init_favori(fav_dim)
-    note_label.config(text = "Pas d'image sélectionnée")
 
 # Ceate the main window
 root = tk.Tk()
@@ -416,33 +417,37 @@ Init_suspects(choices_container_frame,Liste_vague1,photo_width,photo_height)
 
 
 ### partie inférieur de la partie de droite, contient les boutons d'options ###
-Menu_Option_Frame_haut = tk.Frame(right_frame, bg = "black")
-Menu_Option_Frame_haut.pack(side=tk.TOP, fill="both",expand=True)
-Menu_Option_Frame_haut.pack_propagate(False)
+Menu_Option_Frame= tk.Frame(right_frame, bg = "black")
+Menu_Option_Frame.pack(fill="both",expand=True)
+Menu_Option_Frame.pack_propagate(False)
 
 ##### Création et ajout des boutons dans le frame menu option #####
-
+"""
 Menu_Option_Frame_bas= tk.Frame(right_frame, bg = "black")
 Menu_Option_Frame_bas.pack(side=tk.BOTTOM, fill="both",expand=True)
 Menu_Option_Frame_bas.pack_propagate(False)
-
+"""
 pad_horizontal = 10
 pad_vertical = 10
+Menu_Option_Frame.grid_rowconfigure(0, weight=1)
+Menu_Option_Frame.grid_rowconfigure(1, weight=1)
+Menu_Option_Frame.grid_columnconfigure(0, weight=1)
+Menu_Option_Frame.grid_columnconfigure(1, weight=1)
 
-Bouton_restart = tk.Button(Menu_Option_Frame_haut,text='Start Over',background='red', command=lambda: Restart_event)
-Bouton_restart.pack(side = tk.RIGHT, fill = "both", expand = True,padx=pad_horizontal, pady=pad_vertical)
+Bouton_restart = tk.Button(Menu_Option_Frame,text='Start Over',background='red', command=lambda: Restart_event)
+Bouton_restart.grid(column=1, row=0, sticky="nswe",padx=pad_horizontal, pady=pad_vertical)
 Bouton_restart.bind("<Button-1>", Restart_event)
 
-Bouton_refresh = tk.Button(Menu_Option_Frame_bas,text='Refresh', background='lightblue')
-Bouton_refresh.pack(side=tk.LEFT, fill = "both", expand = True, padx=pad_horizontal, pady=pad_vertical)
+Bouton_refresh = tk.Button(Menu_Option_Frame,text='Refresh', background='lightblue')
+Bouton_refresh.grid(column=0, row=1, sticky="nswe",padx=pad_horizontal, pady=pad_vertical)
 Bouton_refresh.bind("<Button-1>", Refresh_event)
 
-Bouton_garbage= tk.Button(Menu_Option_Frame_haut,text='Garbage Bin', background='lightgreen')
-Bouton_garbage.pack(side=tk.LEFT, fill = "both", expand = True, padx=pad_horizontal, pady=pad_vertical)
+Bouton_garbage= tk.Button(Menu_Option_Frame,text='Garbage Bin', background='lightgreen')
+Bouton_garbage.grid(column=0, row=0, sticky="nswe",padx=pad_horizontal, pady=pad_vertical)
 Bouton_garbage.bind("<Button-1>" , Suspect.garbage )
 
-Bouton_FIN= tk.Button(Menu_Option_Frame_bas,text='Finish', background='yellow')
-Bouton_FIN.pack(side=tk.RIGHT, fill = "both", expand = True, padx=pad_horizontal, pady=pad_vertical)
+Bouton_FIN= tk.Button(Menu_Option_Frame,text='Finish', background='yellow')
+Bouton_FIN.grid(column=1, row=1, sticky="nswe",padx=pad_horizontal, pady=pad_vertical)
 
 ######### --Modif for the left side-- #########
 ####### --Bottom side: selection des meilleures images-- ########
@@ -452,12 +457,22 @@ best_choices_frame.pack_propagate(False)
 
 best_choices_container_frame =  tk.Frame(best_choices_frame,width=left_width*0.95, height = left_height*0.95, bg = "white")
 best_choices_container_frame.pack(fill="both", expand=True)
-best_choices_container_frame.pack_propagate(False)
-best_choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
-# Create a grid of frames
 
-fav_dim = int(left_width*0.021)
-Dico_rang_fav= Init_favori(fav_dim)
+best_choices_container_frame.grid_rowconfigure(0, weight=1)
+best_choices_container_frame.grid_rowconfigure(1, weight=1)
+best_choices_container_frame.grid_columnconfigure(0, weight=1)
+best_choices_container_frame.grid_columnconfigure(1, weight=1)
+best_choices_container_frame.grid_columnconfigure(2, weight=1)
+best_choices_container_frame.grid_columnconfigure(3, weight=1)
+best_choices_container_frame.grid_columnconfigure(4, weight=1)
+
+
+
+# Create a grid of frames
+fav_pad_x = 10
+fav_dim = int(((left_width *0.95)) / 40)
+#fav_pad_y = left_height-
+Dico_rang_fav= Init_favori(fav_dim,fav_pad_x)
 
 Dico_rank = {}
 
@@ -480,7 +495,7 @@ button_up = tk.Button(modif_main_image_frame, image=Image_up,bg="lightgray")
 button_up.pack(side=tk.TOP, fill="both",expand=True)
 button_up.bind("<Button-1>",Suspect.increment_note)
 
-note_label = tk.Label(modif_main_image_frame,text="Note: " + str(5))
+note_label = tk.Label(modif_main_image_frame,text="Pas d'image sélectionnée")
 note_label.pack(side=tk.TOP,fill="both",expand=True)
 
 photo_down_raw = Image.open("down.png")
@@ -501,7 +516,7 @@ suspect_principal = tk.Label(view_main_image_frame , width = top_left_width, hei
 suspect_principal.place(relx = 0.5,rely = 0.5, anchor="center")
 suspect_principal.pack(fill="both",expand=True)
 
-note_label.config(text = "Pas d'image sélectionnée")
+
 
 
 
