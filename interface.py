@@ -342,9 +342,9 @@ def Init_favori(fav_dim,pad):
 def Start_Over():
     Vague_actuelle = 1
     Init_suspects(choices_container_frame, Liste_vague1, photo_width, photo_height)
+    note_label.config(text = "Pas d'image sélectionnée")
     global Dico_rang_fav
     Dico_rang_fav = Init_favori(fav_dim)
-    note_label.config(text = "Pas d'image sélectionnée")
 
 # Ceate the main window
 root = tk.Tk()
