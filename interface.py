@@ -115,6 +115,16 @@ class Favori(tk.Button):
                 le_fav.config(text=text_to_print, image='', padx=11, pady=11,height=le_fav.ht, width=le_fav.wd)
 
     def get_first_non_fav(dico_sorted):
+    """
+    Trouve la position du premier élément non favori dans un dictionnaire trié par note.
+
+    Parameters:
+    dico_sorted (list): Liste de tuples (ID, note) triés par note.
+
+    Returns:
+    int: La position du premier élément non favori.
+    """
+
         pos = 0
         for i in dico_sorted :
             if i[1]>6:
