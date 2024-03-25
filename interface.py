@@ -64,7 +64,7 @@ class Favori(tk.Button):
         photo = Image.open(self.id)
         photo_resized = photo.resize((self.large, self.large))
         self.photo_image = ImageTk.PhotoImage(photo_resized)
-        self.config(height=self.large, width=self.large,padx = self.pad,pady = self.pad,image=self.photo_image)
+        self.config(height=self.large, width=self.large,image=self.photo_image)
         return
 
     def Update_Fav (Dico_note):
@@ -390,33 +390,37 @@ Init_suspects(choices_container_frame,Liste_vague1,photo_width,photo_height)
 
 
 ### partie inférieur de la partie de droite, contient les boutons d'options ###
-Menu_Option_Frame_haut = tk.Frame(right_frame, bg = "black")
-Menu_Option_Frame_haut.pack(side=tk.TOP, fill="both",expand=True)
-Menu_Option_Frame_haut.pack_propagate(False)
+Menu_Option_Frame= tk.Frame(right_frame, bg = "black")
+Menu_Option_Frame.pack(fill="both",expand=True)
+Menu_Option_Frame.pack_propagate(False)
 
 ##### Création et ajout des boutons dans le frame menu option #####
-
+"""
 Menu_Option_Frame_bas= tk.Frame(right_frame, bg = "black")
 Menu_Option_Frame_bas.pack(side=tk.BOTTOM, fill="both",expand=True)
 Menu_Option_Frame_bas.pack_propagate(False)
-
+"""
 pad_horizontal = 10
 pad_vertical = 10
+Menu_Option_Frame.grid_rowconfigure(0, weight=1)
+Menu_Option_Frame.grid_rowconfigure(1, weight=1)
+Menu_Option_Frame.grid_columnconfigure(0, weight=1)
+Menu_Option_Frame.grid_columnconfigure(1, weight=1)
 
-Bouton_restart = tk.Button(Menu_Option_Frame_haut,text='Start Over',background='red', command=lambda: Restart_event)
-Bouton_restart.pack(side = tk.RIGHT, fill = "both", expand = True,padx=pad_horizontal, pady=pad_vertical)
+Bouton_restart = tk.Button(Menu_Option_Frame,text='Start Over',background='red', command=lambda: Restart_event)
+Bouton_restart.grid(column=1, row=0, sticky="nswe",padx=pad_horizontal, pady=pad_vertical)
 Bouton_restart.bind("<Button-1>", Restart_event)
 
-Bouton_refresh = tk.Button(Menu_Option_Frame_bas,text='Refresh', background='lightblue')
-Bouton_refresh.pack(side=tk.LEFT, fill = "both", expand = True, padx=pad_horizontal, pady=pad_vertical)
+Bouton_refresh = tk.Button(Menu_Option_Frame,text='Refresh', background='lightblue')
+Bouton_refresh.grid(column=0, row=1, sticky="nswe",padx=pad_horizontal, pady=pad_vertical)
 Bouton_refresh.bind("<Button-1>", Refresh_event)
 
-Bouton_garbage= tk.Button(Menu_Option_Frame_haut,text='Garbage Bin', background='lightgreen')
-Bouton_garbage.pack(side=tk.LEFT, fill = "both", expand = True, padx=pad_horizontal, pady=pad_vertical)
+Bouton_garbage= tk.Button(Menu_Option_Frame,text='Garbage Bin', background='lightgreen')
+Bouton_garbage.grid(column=0, row=0, sticky="nswe",padx=pad_horizontal, pady=pad_vertical)
 Bouton_garbage.bind("<Button-1>" , Suspect.garbage )
 
-Bouton_FIN= tk.Button(Menu_Option_Frame_bas,text='Finish', background='yellow')
-Bouton_FIN.pack(side=tk.RIGHT, fill = "both", expand = True, padx=pad_horizontal, pady=pad_vertical)
+Bouton_FIN= tk.Button(Menu_Option_Frame,text='Finish', background='yellow')
+Bouton_FIN.grid(column=1, row=1, sticky="nswe",padx=pad_horizontal, pady=pad_vertical)
 
 ######### --Modif for the left side-- #########
 ####### --Bottom side: selection des meilleures images-- ########
@@ -454,7 +458,7 @@ button_up = tk.Button(modif_main_image_frame, image=Image_up,bg="lightgray")
 button_up.pack(side=tk.TOP, fill="both",expand=True)
 button_up.bind("<Button-1>",Suspect.increment_note)
 
-note_label = tk.Label(modif_main_image_frame,text="Note: " + str(5))
+note_label = tk.Label(modif_main_image_frame,text="Pas d'image sélectionnée")
 note_label.pack(side=tk.TOP,fill="both",expand=True)
 
 photo_down_raw = Image.open("down.png")
@@ -475,7 +479,7 @@ suspect_principal = tk.Label(view_main_image_frame , width = top_left_width, hei
 suspect_principal.place(relx = 0.5,rely = 0.5, anchor="center")
 suspect_principal.pack(fill="both",expand=True)
 
-note_label.config(text = "Pas d'image sélectionnée")
+
 
 
 
