@@ -49,7 +49,7 @@ class Favori(tk.Button):
         
         self.wd = wide
         self.ht = int(wide * 0.5)
-        self.large=wide*15
+        self.large=wide*9
         self.photo_image= None
         self.note=None
         self.id=None
@@ -128,10 +128,6 @@ class Suspect(tk.Button):
         suspect_actuel = self
         note_label.config(text = 'Note: ' + str(self.note))
         global suspect_principal
-        image_suspect = suspect_actuel.cget('image')
-        print(type(image_suspect))
-        print(image_suspect)
-        #suspect_principal.config(image=image_suspect)yimage3
         new_image = Image.open(self.id)
         resized_image = new_image.resize((512, 512))
         self.resized_photo_image = ImageTk.PhotoImage(resized_image)
@@ -443,7 +439,7 @@ best_choices_container_frame.grid_columnconfigure(4, weight=1)
 
 # Create a grid of frames
 fav_pad_x = 10
-fav_dim = int(((left_width *0.95)) / 50)
+fav_dim = int(((left_width *0.95)) / 40)
 #fav_pad_y = left_height-
 Dico_rang_fav= Init_favori(fav_dim,fav_pad_x)
 
