@@ -237,6 +237,7 @@ def img_proche (img1, list_DB):
 
     return count
 
+
 ###################################################
 ### trouve l'image la plus loin en distance d'une autre image  ###
 ###################################################
