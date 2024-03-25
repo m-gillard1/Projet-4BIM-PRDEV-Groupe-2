@@ -59,6 +59,17 @@ class Favori(tk.Button):
         super().__init__(best_choices_container_frame,width=size, height=size, **kwargs)
 
     def Make_favorite (self,id, note, image ):
+    """
+    Définit une image favorite pour l'objet courant. Elle charge l'image grace à son identifiant `id`, la redimensionne à la taille souhaitée, et l'associe à l'objet.
+
+    Parameters:
+    id (str): Identifiant l'image favorite.
+    note (str): Une note associée à l'image favorite.
+    image (PIL.Image.Image): L'image favorite.
+
+    Returns:
+    None
+    """
         self.note=note
         self.id=id
         photo = Image.open(self.id)
@@ -68,6 +79,16 @@ class Favori(tk.Button):
         return
 
     def Update_Fav (Dico_note):
+    """
+    Met à jour les images favorites en fonction des notes fournies dans le dictionnaire.
+
+    Parameters:
+    Dico_note (dict): Dictionnaire contenant les notes associées aux ID des images.
+
+    Returns:
+    None
+    """
+
         sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
         lim = 1
         for i in sorted_id_by_note :
