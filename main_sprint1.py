@@ -211,7 +211,7 @@ def encoded_test_db():
     """
     retourne la list de toutes les images du jeu de test encodée
     """
-    list_DB=encoded_image("data")
+    list_DB=encoded_image("data/")
     return list_DB
 
 
@@ -300,8 +300,6 @@ def IHM_loop (numero_vague,note) :
     taux_cross_over=1
 
     encoded_image_list=encoded_image(path_im_vague)
-    print('tailllleee')
-    print(len(encoded_image_list[0].flatten()))
     image_note_list=data_structure_note_image(encoded_image_list,note)
 
     # boucle pour extraire les favoris
@@ -343,3 +341,7 @@ if __name__=='__main__':
     print("note")
     print(note_list)
     print(IHM_loop(1,note_list))
+
+
+    ### test des distances
+    the_list=encoded_test_db()
