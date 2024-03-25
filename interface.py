@@ -7,25 +7,56 @@ from PIL import Image,ImageTk
 ########## __FONCTIONS__ ##########
 
 def toggle_fullscreen(event=None):
+    """
+        Bascule l'application en mode plein écran.
+
+        Parameters:
+        event: tkinter.Event: L'événement qui a déclenché l'appel de cette fonction ( par défaut, None).
+
+        Returns:
+        None
+    """
     root.attributes('-fullscreen', not root.attributes('-fullscreen'))
 
 Dico_note ={}
 
 
 class Favori(tk.Button):
-    def __init__(self,master, wide,pad, column, row, **kwargs):
-        h = int(wide * (left_height/left_width) )
+    def __init__(self,position, wide, pad,column, row, **kwargs):
+        """
+        Permet de spécifier les dimensions de l'encadré contenant une image favorite sur l'interface.
+
+        Parameters:
+        position (tuple): Un tuple contenant les coordonnées (x, y) de la position de l'objet.
+        size (int): La taille de l'objet, en pixels.
+        column (int): La colonne dans laquelle l'objet doit être placé.
+        row (int): La ligne dans laquelle l'objet doit être placé.
+        **kwargs (dict): Tout argument supplémentaire.
+
+        Attributes:
+        wd (int): La largeur de l'objet, en pixels.
+        ht (int): La hauteur de l'objet, en pixels.
+        large (int): La taille de l'objet agrandie, en pixels.
+        photo_image (tkinter.PhotoImage): L'image associée à l'objet.
+        note (str): Une note associée à l'objet.
+        id (int): L'identifiant unique de l'objet.
+        col (int): La colonne dans laquelle l'objet est placé.
+        row (int): La ligne dans laquelle l'objet est placé.
+
+        Returns:
+        None
+        """
         self.pad = pad
         self.wd = wide
-        self.ht = h
-        self.large=h*15
+        self.ht = int(wide * 0.5)
+        self.large=wide*15
         self.photo_image= None
         self.note=None
         self.id=None
         self.col = column
         self.row=row
         
-        super().__init__(best_choices_container_frame,width=wide, height = h, padx = self.pad, pady = self.pad,**kwargs)
+        super().__init__(best_choices_container_frame,width=self.wd, height = self.ht, padx = self.pad, pady = self.pad,**kwargs)
 
     def Make_favorite (self,id, note, image ):
         self.note=note
@@ -35,11 +66,11 @@ class Favori(tk.Button):
         self.photo_image = ImageTk.PhotoImage(photo_resized)
         self.config(height=self.large, width=self.large,padx = self.pad,pady = self.pad,image=self.photo_image)
         return
-    
+
     def Update_Fav (Dico_note):
         sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
         lim = 1
-        for i in sorted_id_by_note : 
+        for i in sorted_id_by_note :
             if lim < 10 :
                 if (i[1]>6):
                     path = i[0]
@@ -50,7 +81,7 @@ class Favori(tk.Button):
                     #print(Dico_rang_fav[lim])
                     Dico_rang_fav[lim].config(height=Dico_rang_fav[lim].large,width=Dico_rang_fav[lim].large, image=Dico_rang_fav[lim].photo_image)
                     lim+=1
-                    
+
         for j in range (10):
             le_fav = Dico_rang_fav[j+1]
             la_note = sorted_id_by_note[j][1]
@@ -60,19 +91,19 @@ class Favori(tk.Button):
                 le_fav.note=None
                 name = str(le_fav.winfo_name())
                 text_to_print=name[1:]
-                le_fav.config(text=text_to_print, image='', padx=11, pady=11,height=le_fav.ht, width=le_fav.wd)      
-       
+                le_fav.config(text=text_to_print, image='', padx=11, pady=11,height=le_fav.ht, width=le_fav.wd)
+
     def get_first_non_fav(dico_sorted):
-        pos = 0 
-        for i in dico_sorted : 
+        pos = 0
+        for i in dico_sorted :
             if i[1]>6:
                 pos+=1
         return pos
-            
+
     def Clear_fav (self):
         self.config(text= str(self.winfo_name()), image='', height=self.large, width=self.large)
 
-        
+
 
 class Suspect(tk.Button):
     def __init__(self, master, image_path, note, width, height, **kwargs):
@@ -89,7 +120,7 @@ class Suspect(tk.Button):
         self.config(image=self.photo_image, command=self.selected_suspect_event)
 
 
-    
+
     #fonction appelée par les boutons suspects en haut à droite #
     #remplace l'image du suspect selctionné en haut gauche pour le noter ensuite#
     def selected_suspect_event(self):
@@ -102,11 +133,11 @@ class Suspect(tk.Button):
         suspect_principal.configure(height =left_height,width = top_left_width, image=resized_photo_image)
     
     def increment_note(self):
-        
+
         global suspect_actuel
         if suspect_actuel.note <10:
             suspect_actuel.note += 1
-            
+
             suspect_actuel.update_color()
         global Dico_note
         global note_label
@@ -114,18 +145,18 @@ class Suspect(tk.Button):
         Dico_note[suspect_actuel.id]= suspect_actuel.note
         suspect_actuel.Ajout_Favori()
         Favori.Update_Fav(Dico_note=Dico_note)
-         
+
     def decrement_note(self):
         global suspect_actuel
         if suspect_actuel.note >0:
-            suspect_actuel.note = suspect_actuel.note - 1 
-            suspect_actuel.update_color() 
+            suspect_actuel.note = suspect_actuel.note - 1
+            suspect_actuel.update_color()
         global note_label
         global Dico_note
         note_label.config(text="Note: "+str(suspect_actuel.note))
         Dico_note[suspect_actuel.id]= suspect_actuel.note
         Favori.Update_Fav(Dico_note=Dico_note)
-    
+
     def garbage(self):
         global suspect_actuel
         suspect_actuel.note = 0  # Réinitialise la note à 0
@@ -134,12 +165,12 @@ class Suspect(tk.Button):
         note_label.config(text="Note: "+str(suspect_actuel.note))
         global Dico_note
         Dico_note[suspect_actuel.id]= suspect_actuel.note
-        
+
         Favori.Update_Fav(Dico_note=Dico_note)
 
     def update_color(self):
         global suspect_actuel
-        
+
         if suspect_actuel.note >= 9 :
             border_color = "dark green"
         elif suspect_actuel.note >= 7:
@@ -150,10 +181,10 @@ class Suspect(tk.Button):
             border_color = "orange"
         else:
             border_color = "red"
-        
+
         # Définit la couleur de la bordure du bouton
         suspect_actuel.config(highlightbackground=border_color)
-     
+
     def ranking(self):
         rank=1
         rating=suspect_actuel.note
@@ -161,7 +192,7 @@ class Suspect(tk.Button):
             if (rating<notes):
                 rank+=1
         return rank
-    
+
     def Ajout_Favori(self):
         global suspect_actuel
         rank = suspect_actuel.ranking()
@@ -172,7 +203,7 @@ class Suspect(tk.Button):
 
 
 #fonction appelée par le bouton restart
-# réinitialise à l'état d'origine (affichage, contenu des dossiers, numérotation vague, notations) 
+# réinitialise à l'état d'origine (affichage, contenu des dossiers, numérotation vague, notations)
 def Restart_event(event):
     suspect_principal.configure(image=Image_Instruction)
     Start_Over()
@@ -202,13 +233,13 @@ def Genere_Suspect(Dico, Vague_actuelle ):
         print(f"{img} a {note} points.")
         note_list.append(note)
 
-    # Génération des nouvelles images :   
+    # Génération des nouvelles images :
         # prend en entree le numero de la vague et les notes
         # va chercher les images de la vague correspondante
         # génère les nouvelles images
         # renvoie la liste des path svers les nouvelles images
-    Liste_Path_nouvelle_vague=main_sprint1.IHM_loop(Vague_actuelle, note_list)
-    
+    #Liste_Path_nouvelle_vague=main_sprint1.IHM_loop(Vague_actuelle, note_list)
+
     print(Liste_Path_nouvelle_vague)
     return (Liste_Path_nouvelle_vague)
 
@@ -302,7 +333,7 @@ def Init_favori(fav_dim,pad):
                 9:fav_9,
                 10:fav_10}
     return Dico_rang_fav
-    
+
 def Start_Over():
     Vague_actuelle = 1
     Init_suspects(choices_container_frame, Liste_vague1, photo_width, photo_height)
@@ -321,26 +352,26 @@ left_width = screen_width * 3 // 7
 right_width = screen_width * 4 // 7
 choices_height = screen_height * 2 // 3
 left_height = screen_height * 3 // 8
-top_left_width = left_width * 1 // 4 
+top_left_width = left_width * 1 // 4
 #jauge_width = top_left_width * 2 // 15
 # Create frames for left and right sections
 left_frame = tk.Frame(root, width=left_width, height=screen_height, bg="gray80")
 right_frame = tk.Frame(root, width=right_width, height=screen_height, bg="black")
 left_frame.pack(side=tk.LEFT, fill=tk.Y)
-left_frame.pack_propagate(False) 
+left_frame.pack_propagate(False)
 right_frame.pack(side=tk.RIGHT, fill=tk.Y)
-right_frame.pack_propagate(False) 
+right_frame.pack_propagate(False)
 ######### --Modif for the right side-- #########
 ### choices frame = partie supérieur de la partie de droite ###
 choices_frame = tk.Frame(right_frame,width=right_width, height = choices_height, bg = "gray70")
 choices_frame.pack(side=tk.TOP, fill=tk.X)
-choices_frame.pack_propagate(False) 
+choices_frame.pack_propagate(False)
 
 
 ### intérieur de la partie supérieur de la partie de droite, contient les suspects ###
 choices_container_frame =  tk.Frame(choices_frame,width=right_width*0.9, height = choices_height*0.9, bg = "white")
 choices_container_frame.pack(fill="both", expand=True)
-choices_container_frame.pack_propagate(False) 
+choices_container_frame.pack_propagate(False)
 choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
 choices_container_frame.update()
 
@@ -356,13 +387,13 @@ Init_suspects(choices_container_frame,Liste_vague1,photo_width,photo_height)
 ### partie inférieur de la partie de droite, contient les boutons d'options ###
 Menu_Option_Frame_haut = tk.Frame(right_frame, bg = "black")
 Menu_Option_Frame_haut.pack(side=tk.TOP, fill="both",expand=True)
-Menu_Option_Frame_haut.pack_propagate(False) 
+Menu_Option_Frame_haut.pack_propagate(False)
 
 ##### Création et ajout des boutons dans le frame menu option #####
 
 Menu_Option_Frame_bas= tk.Frame(right_frame, bg = "black")
 Menu_Option_Frame_bas.pack(side=tk.BOTTOM, fill="both",expand=True)
-Menu_Option_Frame_bas.pack_propagate(False) 
+Menu_Option_Frame_bas.pack_propagate(False)
 
 pad_horizontal = 10
 pad_vertical = 10
@@ -386,11 +417,10 @@ Bouton_FIN.pack(side=tk.RIGHT, fill = "both", expand = True, padx=pad_horizontal
 ####### --Bottom side: selection des meilleures images-- ########
 best_choices_frame = tk.Frame(left_frame,width=left_width,height=left_height,bg="gray75")
 best_choices_frame.pack(side=tk.BOTTOM,fill = tk.X)
-best_choices_frame.pack_propagate(False) 
+best_choices_frame.pack_propagate(False)
 
 best_choices_container_frame =  tk.Frame(best_choices_frame,width=left_width*0.95, height = left_height*0.95, bg = "white")
 best_choices_container_frame.pack(fill="both", expand=True)
-
 # Create a grid of frames
 
 fav_pad_x = 10
@@ -404,10 +434,10 @@ Dico_rank = {}
 suspect_actuel = None
 main_image_frame = tk.Frame(left_frame,width=left_width,height=(screen_height-left_height),bg="gray85")
 main_image_frame.pack(side=tk.TOP,fill=tk.X)
-main_image_frame.pack_propagate(False) 
+main_image_frame.pack_propagate(False)
 modif_main_image_frame = tk.Frame(main_image_frame,width=top_left_width,height=(screen_height-left_height),bg="lightgray")
 modif_main_image_frame.pack(side=tk.RIGHT,fill=tk.Y)
-modif_main_image_frame.pack_propagate(False) 
+modif_main_image_frame.pack_propagate(False)
 
 modif_main_image_frame.update()
 photo_updown_size = modif_main_image_frame.winfo_width()
@@ -431,7 +461,7 @@ button_down.bind("<Button-1>",Suspect.decrement_note)
 
 
 view_main_image_frame = tk.Frame(main_image_frame,width=(left_width-top_left_width),height=(screen_height-left_height),bg="lightgray")
-view_main_image_frame.pack_propagate(False) 
+view_main_image_frame.pack_propagate(False)
 view_main_image_frame.pack(side=tk.LEFT,fill=tk.Y)
 
 ### Label contenant l'image/texte en haut à gauche lors du lancement du logiciel, nécessaire car définissant taille des frames
@@ -441,7 +471,7 @@ suspect_principal.place(relx = 0.5,rely = 0.5, anchor="center")
 suspect_principal.pack(fill="both",expand=True)
 
 note_label.config(text = "Pas d'image sélectionnée")
-  
+
 
 
 ###############################################################################
