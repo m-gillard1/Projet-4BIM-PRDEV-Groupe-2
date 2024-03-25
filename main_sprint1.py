@@ -39,6 +39,10 @@ def creation_list_note(nb_image_par_vague) :
 ##########################
 
 def encoded_image (path_im_vague) :
+    """
+    entree : lien vers le dossier contenant les images de la vagues
+    sortie : list de vecteur correspondnat aux images encodées
+    """
     encoded_image_list=[]
     count_1=0
 
@@ -61,6 +65,11 @@ def encoded_image (path_im_vague) :
 
 ### on utilise directement ceux labelisés comme favoris plus besoin de note
 def data_structure_note_image(encoded_image_list, note) :
+    """
+    entree : list de vecteur des images encodee et list des notes dans l'ordre corresponant à la liste de taille_vecteur_image
+    sortie : list contenant pour chaque image une list avec 2 vecteurs : le 1er element du 1er vecteur contient la note puis le
+        reste du vecteur contient des Nan (afin d'avoir un vecteur de la meme taille que l'image encodée) et le 2e vecteur correspond à l'image encodée
+    """
 
     count_2=0
     image_note_list=[]
@@ -149,8 +158,7 @@ def sauv_img (new_image_encoded, path_result_vague) :
 def add_Suspect_from_DB():
 
     """
-    prend en entree le nombre d'image a generer
-    renvoie une liste chemin menant des images choisies nb_aleatoirement dans la db
+    renvoie un chemin vers une images en choisissant un nb_aleatoirement dans la db
     """
 
     ## extraire les numeros des images ayant deja ete utilisées
@@ -182,10 +190,24 @@ def distance_img(img1, img2):
     et renvoie leur ditance euclidienne
 
     """
-    from scipy.spatial import distance
-    dist=distance.euclidean(img1, img2)
+
+    # from scipy.spatial import distance
+    # calculate Euclidian distance between vectors
+    # dist=distance.euclidean(img1, img2)
+
+    from scipy.spatial.distance import cityblock
+    #calculate Manhattan distance between vectors
+    dist=cityblock(img1, img2)
 
     return  dist
+
+
+
+
+
+
+
+
 
 
 ######################
@@ -227,6 +249,8 @@ def IHM_loop (numero_vague,note) :
     taux_cross_over=1
 
     encoded_image_list=encoded_image(path_im_vague)
+    print('tailllleee')
+    print(len(encoded_image_list[0].flatten()))
     image_note_list=data_structure_note_image(encoded_image_list,note)
 
     # boucle pour extraire les favoris
