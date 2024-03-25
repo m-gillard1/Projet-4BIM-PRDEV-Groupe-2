@@ -289,43 +289,43 @@ def Init_suspects(choices_container_frame,Liste_img,photo_width,photo_height):
 def Init_favori(fav_dim,pad):
     fav_1 = Favori(1,fav_dim,1, 1)
     fav_1.config(text="favori 1")
-    fav_1.grid(row=1, column=1, padx = pad, pady = pad)
+    fav_1.grid(row=0, column=0, padx = pad, pady = pad)
 
     fav_2 = Favori(2, fav_dim, 1, 2)
     fav_2.config(text='favori 2')
-    fav_2.grid(row=1, column = 2  ,padx = pad, pady = pad)
+    fav_2.grid(row=0, column = 1  ,padx = pad, pady = pad)
     
     fav_3 = Favori(3,fav_dim, 1, 3)
     fav_3.config(text="favori 3")
-    fav_3.grid(row=1, column=3 ,padx = pad, pady = pad)
+    fav_3.grid(row=0, column=2 ,padx = pad, pady = pad)
     
     fav_4 = Favori(4, fav_dim, 1, 4)
     fav_4.config(text='favori 4')
-    fav_4.grid(row=1, column = 4 ,padx = pad, pady = pad)
+    fav_4.grid(row=0, column = 3 ,padx = pad, pady = pad)
     
     fav_5 = Favori(5,fav_dim, 1, 5)
     fav_5.config(text="favori 5")
-    fav_5.grid(row=1, column=5,padx = pad, pady = pad)
+    fav_5.grid(row=0, column=4,padx = pad, pady = pad)
     
     fav_6 = Favori(6, fav_dim,1, 6)
     fav_6.config(text='favori 6')
-    fav_6.grid(row=2, column = 1,padx = pad, pady = pad)
+    fav_6.grid(row=1, column = 0,padx = pad, pady = pad)
     
     fav_7 = Favori(7,fav_dim, 1, 7)
     fav_7.config(text="favori 7")
-    fav_7.grid(row=2, column=2,padx = pad, pady = pad)    
+    fav_7.grid(row=1, column=1,padx = pad, pady = pad)    
 
     fav_8 = Favori(8, fav_dim,1, 8)
     fav_8.config(text='favori 8')
-    fav_8.grid(row=2, column = 3,padx = pad, pady = pad)
+    fav_8.grid(row=1, column = 2,padx = pad, pady = pad)
     
     fav_9 = Favori(9,fav_dim, 1, 9)
     fav_9.config(text="favori 9")
-    fav_9.grid(row=2, column=4,padx = pad, pady = pad)
+    fav_9.grid(row=1, column=3,padx = pad, pady = pad)
     
     fav_10 = Favori(10, fav_dim, 1, 10)
     fav_10.config(text='favori 10')
-    fav_10.grid(row=2, column = 5,padx = pad, pady = pad)
+    fav_10.grid(row=1, column = 4,padx = pad, pady = pad)
 
     Dico_rang_fav ={1: fav_1,
                 2: fav_2,
@@ -430,8 +430,18 @@ best_choices_frame.pack_propagate(False)
 
 best_choices_container_frame =  tk.Frame(best_choices_frame,width=left_width*0.95, height = left_height*0.95, bg = "white")
 best_choices_container_frame.pack(fill="both", expand=True)
-# Create a grid of frames
 
+best_choices_container_frame.grid_rowconfigure(0, weight=1)
+best_choices_container_frame.grid_rowconfigure(1, weight=1)
+best_choices_container_frame.grid_columnconfigure(0, weight=1)
+best_choices_container_frame.grid_columnconfigure(1, weight=1)
+best_choices_container_frame.grid_columnconfigure(2, weight=1)
+best_choices_container_frame.grid_columnconfigure(3, weight=1)
+best_choices_container_frame.grid_columnconfigure(4, weight=1)
+
+
+
+# Create a grid of frames
 fav_pad_x = 10
 fav_dim = int(((left_width *0.95)) / 50)
 #fav_pad_y = left_height-
