@@ -147,6 +147,20 @@ class Favori(tk.Button):
 
 class Suspect(tk.Button):
     def __init__(self, master, image_path, note, width, height, **kwargs):
+    """
+    Initialise un élément avec une image d’un suspect, une note et des dimensions spécifiées.
+
+    Parameters:
+    master: Le frame dans lequel on crée le suspect.
+    image_path (str): Le chemin de l'image d’un suspect.
+    note (int): La note associée à l'image du suspect.
+    width (int): Largeur de l'image du suspect.
+    height (int): Hauteur de l'image du suspect.
+    **kwargs: Arguments supplémentaires.
+
+    Returns:
+    None
+    """
         super().__init__(master, **kwargs)
         self.note = note
         self.original_border_color = self.cget('highlightbackground')
