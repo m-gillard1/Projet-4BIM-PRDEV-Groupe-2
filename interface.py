@@ -46,7 +46,7 @@ class Favori(tk.Button):
         Returns:
         None
         """
-        
+
         self.wd = wide
         self.ht = int(wide * 0.5)
         self.large=wide*9
@@ -55,7 +55,7 @@ class Favori(tk.Button):
         self.id=None
         self.col = column
         self.row=row
-        
+
         super().__init__(best_choices_container_frame,width=self.wd, height = self.ht,**kwargs)
 
     def Make_favorite (self,id, note, image ):
@@ -132,6 +132,15 @@ class Favori(tk.Button):
         return pos
 
     def Clear_fav (self):
+    """
+    Efface les informations de l'élément favori en réinitialisant son affichage.
+
+    Parameters:
+    self (object): L'instance de l'élément favori.
+
+    Returns:
+    None
+    """
         self.config(text= str(self.winfo_name()), image='', height=self.large, width=self.large)
 
 
@@ -163,7 +172,7 @@ class Suspect(tk.Button):
         resized_image = new_image.resize((512, 512))
         self.resized_photo_image = ImageTk.PhotoImage(resized_image)
         suspect_principal.configure(image=self.resized_photo_image)
-    
+
     def increment_note(self):
 
         global suspect_actuel
@@ -321,35 +330,35 @@ def Init_favori(fav_dim,pad):
     fav_2 = Favori(2, fav_dim, 1, 2)
     fav_2.config(text='favori 2')
     fav_2.grid(row=0, column = 1  ,padx = pad, pady = pad)
-    
+
     fav_3 = Favori(3,fav_dim, 1, 3)
     fav_3.config(text="favori 3")
     fav_3.grid(row=0, column=2 ,padx = pad, pady = pad)
-    
+
     fav_4 = Favori(4, fav_dim, 1, 4)
     fav_4.config(text='favori 4')
     fav_4.grid(row=0, column = 3 ,padx = pad, pady = pad)
-    
+
     fav_5 = Favori(5,fav_dim, 1, 5)
     fav_5.config(text="favori 5")
     fav_5.grid(row=0, column=4,padx = pad, pady = pad)
-    
+
     fav_6 = Favori(6, fav_dim,1, 6)
     fav_6.config(text='favori 6')
     fav_6.grid(row=1, column = 0,padx = pad, pady = pad)
-    
+
     fav_7 = Favori(7,fav_dim, 1, 7)
     fav_7.config(text="favori 7")
-    fav_7.grid(row=1, column=1,padx = pad, pady = pad)    
+    fav_7.grid(row=1, column=1,padx = pad, pady = pad)
 
     fav_8 = Favori(8, fav_dim,1, 8)
     fav_8.config(text='favori 8')
     fav_8.grid(row=1, column = 2,padx = pad, pady = pad)
-    
+
     fav_9 = Favori(9,fav_dim, 1, 9)
     fav_9.config(text="favori 9")
     fav_9.grid(row=1, column=3,padx = pad, pady = pad)
-    
+
     fav_10 = Favori(10, fav_dim, 1, 10)
     fav_10.config(text='favori 10')
     fav_10.grid(row=1, column = 4,padx = pad, pady = pad)
