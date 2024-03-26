@@ -378,6 +378,18 @@ def Genere_Suspect(Dico, Vague_actuelle ):
     return (Liste_Path_nouvelle_vague)
 
 def Init_suspects(choices_container_frame,Liste_img,photo_width,photo_height):
+    """
+    Initialise les suspects avec leurs images et positions dans l’encadré dédié.
+
+    Parameters:
+    choices_container_frame: L’encadré contenant les choix des suspects.
+    Liste_img (list): Liste des chemins des images des suspects.
+    photo_width (int): Largeur des images des suspects.
+    photo_height (int): Hauteur des images des suspects.
+
+    Returns:
+    None
+    """
 
     suspect_1 = Suspect(choices_container_frame,Liste_img[0],5,photo_width,photo_height)
     suspect_1.grid(row=0, column=0, padx=photo_width//50, pady=photo_height//50)
