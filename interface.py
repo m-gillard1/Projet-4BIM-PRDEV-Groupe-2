@@ -491,6 +491,13 @@ def Init_favori(fav_dim,pad):
     return Dico_rang_fav
 
 def Start_Over():
+    """
+    Réinitialise l'application en remettant la vague actuelle à 1, réinitialisant les suspects et les favoris, et affichant un message par défaut.
+
+    Returns:
+    None
+    """
+
     Vague_actuelle = 1
     Init_suspects(choices_container_frame, Liste_vague1, photo_width, photo_height)
     note_label.config(text = "Pas d'image sélectionnée")
