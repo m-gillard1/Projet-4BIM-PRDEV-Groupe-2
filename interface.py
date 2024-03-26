@@ -428,6 +428,16 @@ def Init_suspects(choices_container_frame,Liste_img,photo_width,photo_height):
     suspect_12.grid(row=2, column=3, padx=photo_width//50, pady=photo_height//50)
 
 def Init_favori(fav_dim,pad):
+    """
+    Initialise les éléments favoris avec leurs dimensions et positions dans la grille.
+
+    Parameters:
+    fav_dim: La dimension des éléments favoris.
+
+    Returns:
+    dict: Dictionnaire contenant les éléments favoris indexés par leur rang.
+    """
+
     fav_1 = Favori(1,fav_dim,1, 1)
     fav_1.config(text="favori 1")
     fav_1.grid(row=0, column=0, padx = pad, pady = pad)
