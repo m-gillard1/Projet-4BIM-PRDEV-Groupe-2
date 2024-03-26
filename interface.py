@@ -277,6 +277,12 @@ class Suspect(tk.Button):
         suspect_actuel.config(highlightbackground=border_color)
 
     def ranking(self):
+    """
+    Calcule le classement du suspect actuel en fonction de sa note parmi tous les suspects.
+
+    Returns:
+    int: Le classement du suspect actuel.
+    """
         rank=1
         rating=suspect_actuel.note
         for notes in Dico_note.values():
