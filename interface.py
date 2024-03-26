@@ -178,6 +178,15 @@ class Suspect(tk.Button):
     #fonction appelée par les boutons suspects en haut à droite #
     #remplace l'image du suspect selctionné en haut gauche pour le noter ensuite#
     def selected_suspect_event(self):
+    """
+    Fonction appelée par les boutons suspects en haut à droite pour sélectionner un suspect.
+
+    Parameters:
+    self: Le suspect actuel.
+
+    Returns:
+    None
+    """
         global suspect_actuel
         suspect_actuel = self
         note_label.config(text = 'Note: ' + str(self.note))
