@@ -217,6 +217,13 @@ class Suspect(tk.Button):
         Favori.Update_Fav(Dico_note=Dico_note)
 
     def decrement_note(self):
+    """
+    Décrémente la note du suspect actuel s'il est supérieur à 0, met à jour la couleur et les informations.
+
+    Returns:
+    None
+    """
+
         global suspect_actuel
         if suspect_actuel.note >0:
             suspect_actuel.note = suspect_actuel.note - 1
