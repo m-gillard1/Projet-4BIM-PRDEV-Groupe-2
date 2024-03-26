@@ -347,8 +347,19 @@ def Refresh_event(event):
 
 #fonction Gene_Suspect :
 #genere 12 nouvelles images de suspects dans un dossier nommée vague_n\: Par exemple pour n=2, on veut en sortie 12 images au format .png telles que:  "\vague_2\image_1.png", "\vague_2\image_2.png, ... , "\vague_2\image_11.png "
-# return une liste contenant les paths des 12 image
+# return une liste contenant les paths des 12 images
 def Genere_Suspect(Dico, Vague_actuelle ):
+    """
+    Génère 12 nouvelles images de suspects pour une vague donnée.
+
+    Parameters:
+    Dico (dict): Dictionnaire contenant les chemins des images et les notes associées.
+    Vague_actuelle (int): Le numéro de la vague pour laquelle on génère nouveaux suspects.
+
+    Returns:
+    list: Liste contenant les chemins des 12 nouvelles images générées.
+    """
+
     print(Vague_actuelle)
     # Parcourir le dictionnaire et afficher chaque clé et valeur
     note_list=[]
