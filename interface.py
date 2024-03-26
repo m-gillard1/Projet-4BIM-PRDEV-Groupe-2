@@ -235,6 +235,13 @@ class Suspect(tk.Button):
         Favori.Update_Fav(Dico_note=Dico_note)
 
     def garbage(self):
+    """
+    Réinitialise la note du suspect actuel à 0, met à jour la couleur et les informations.
+
+    Returns:
+    None
+    """
+
         global suspect_actuel
         suspect_actuel.note = 0  # Réinitialise la note à 0
         suspect_actuel.update_color()
