@@ -291,6 +291,12 @@ class Suspect(tk.Button):
         return rank
 
     def Ajout_Favori(self):
+    """
+    Ajoute le suspect actuel aux favoris si sa note appartient à ]6;10[.
+
+    Returns:
+    None
+    """
         global suspect_actuel
         rank = suspect_actuel.ranking()
         if (rank<10 and self.note>6):
