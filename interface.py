@@ -308,6 +308,16 @@ class Suspect(tk.Button):
 #fonction appelée par le bouton restart
 # réinitialise à l'état d'origine (affichage, contenu des dossiers, numérotation vague, notations)
 def Restart_event(event):
+    """
+    Réinitialise l'application à son état d'origine.
+
+    Parameters:
+    event: L'événement déclencheur du redémarrage.
+
+    Returns:
+    None
+    """
+
     suspect_principal.configure(image=Image_Instruction)
     Start_Over()
     Vague_actuelle=1
