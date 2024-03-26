@@ -253,6 +253,13 @@ class Suspect(tk.Button):
         Favori.Update_Fav(Dico_note=Dico_note)
 
     def update_color(self):
+    """
+    Met à jour la couleur de la bordure du bouton qui encadre l’image d’un suspect en fonction de la note qu’on lui attribue.
+
+    Returns:
+    None
+    """
+
         global suspect_actuel
 
         if suspect_actuel.note >= 9 :
