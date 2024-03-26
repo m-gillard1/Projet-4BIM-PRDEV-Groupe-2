@@ -323,6 +323,16 @@ def Restart_event(event):
     Vague_actuelle=1
 
 def Refresh_event(event):
+    """
+    Met à jour l'affichage en générant de nouveaux suspects pour la vague actuelle.
+
+    Parameters:
+    event: L'événement déclencheur.
+
+    Returns:
+    None
+    """
+
     global Vague_actuelle
     print('REFRESH REFRESH')
     Liste_path = Genere_Suspect(Dico_note, Vague_actuelle)
