@@ -197,6 +197,12 @@ class Suspect(tk.Button):
         suspect_principal.configure(image=self.resized_photo_image)
 
     def increment_note(self):
+    """
+    Incrémente la note du suspect actuel s'il est inférieur à 10, met à jour la couleur et les informations.
+
+    Returns:
+    None
+    """
 
         global suspect_actuel
         if suspect_actuel.note <10:
