@@ -22,7 +22,7 @@ Dico_note ={}
 
 
 class Favori(tk.Button):
-    def __init__(self,position, wide,column, row, **kwargs):
+    def __init__(self,position, wide,column, row,r,c, **kwargs):
         """
         Permet de spécifier les dimensions de l'encadré contenant une image favorite sur l'interface.
 
@@ -46,7 +46,7 @@ class Favori(tk.Button):
         Returns:
         None
         """
-
+        h = int (wide*0.5)
         self.wd = wide
         self.ht = int(wide * 0.5)
         self.large=wide*9
@@ -55,21 +55,23 @@ class Favori(tk.Button):
         self.id=None
         self.col = column
         self.row=row
+        self.c = c
+        self.r= r
 
-        super().__init__(best_choices_container_frame,width=self.wd, height = self.ht,**kwargs)
+        super().__init__(best_choices_container_frame,width=self.wd, height = self.ht, **kwargs)
 
     def Make_favorite (self,id, note, image ):
-    """
-    Définit une image favorite pour l'objet courant. Elle charge l'image grace à son identifiant `id`, la redimensionne à la taille souhaitée, et l'associe à l'objet.
+        """
+        Définit une image favorite pour l'objet courant. Elle charge l'image grace à son identifiant `id`, la redimensionne à la taille souhaitée, et l'associe à l'objet.
 
-    Parameters:
-    id (str): Identifiant l'image favorite.
-    note (str): Une note associée à l'image favorite.
-    image (PIL.Image.Image): L'image favorite.
+        Parameters:
+        id (str): Identifiant l'image favorite.
+        note (str): Une note associée à l'image favorite.
+        image (PIL.Image.Image): L'image favorite.
 
-    Returns:
-    None
-    """
+        Returns:
+        None
+        """
         self.note=note
         self.id=id
         photo = Image.open(self.id)
@@ -79,15 +81,15 @@ class Favori(tk.Button):
         return
 
     def Update_Fav (Dico_note):
-    """
-    Met à jour les images favorites en fonction des notes fournies dans le dictionnaire.
+        """
+        Met à jour les images favorites en fonction des notes fournies dans le dictionnaire.
 
-    Parameters:
-    Dico_note (dict): Dictionnaire contenant les notes associées aux ID des images.
+        Parameters:
+        Dico_note (dict): Dictionnaire contenant les notes associées aux ID des images.
 
-    Returns:
-    None
-    """
+        Returns:
+        None
+        """
 
         sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
         lim = 1
@@ -115,15 +117,15 @@ class Favori(tk.Button):
                 le_fav.config(text=text_to_print, image='', padx=11, pady=11,height=le_fav.ht, width=le_fav.wd)
 
     def get_first_non_fav(dico_sorted):
-    """
-    Trouve la position du premier élément non favori dans un dictionnaire trié par note.
+        """
+        Trouve la position du premier élément non favori dans un dictionnaire trié par note.
 
-    Parameters:
-    dico_sorted (list): Liste de tuples (ID, note) triés par note.
+        Parameters:
+        dico_sorted (list): Liste de tuples (ID, note) triés par note.
 
-    Returns:
-    int: La position du premier élément non favori.
-    """
+        Returns:
+        int: La position du premier élément non favori.
+        """
 
         pos = 0
         for i in dico_sorted :
@@ -132,36 +134,38 @@ class Favori(tk.Button):
         return pos
 
     def Clear_fav (self):
-    """
-    Efface les informations de l'élément favori en réinitialisant son affichage.
+        """
+        Efface les informations de l'élément favori en réinitialisant son affichage.
 
-    Parameters:
-    self (object): L'instance de l'élément favori.
+        Parameters:
+        self (object): L'instance de l'élément favori.
 
-    Returns:
-    None
-    """
+        Returns:
+        None
+        """
         self.config(text= str(self.winfo_name()), image='', height=self.large, width=self.large)
 
 
 
 class Suspect(tk.Button):
-    def __init__(self, master, image_path, note, width, height, **kwargs):
-    """
-    Initialise un élément avec une image d’un suspect, une note et des dimensions spécifiées.
+    def __init__(self, master, image_path, note, width, height, row, col, **kwargs):
+        """
+        Initialise un élément avec une image d’un suspect, une note et des dimensions spécifiées.
 
-    Parameters:
-    master: Le frame dans lequel on crée le suspect.
-    image_path (str): Le chemin de l'image d’un suspect.
-    note (int): La note associée à l'image du suspect.
-    width (int): Largeur de l'image du suspect.
-    height (int): Hauteur de l'image du suspect.
-    **kwargs: Arguments supplémentaires.
+        Parameters:
+        master: Le frame dans lequel on crée le suspect.
+        image_path (str): Le chemin de l'image d’un suspect.
+        note (int): La note associée à l'image du suspect.
+        width (int): Largeur de l'image du suspect.
+        height (int): Hauteur de l'image du suspect.
+        **kwargs: Arguments supplémentaires.
 
-    Returns:
-    None
-    """
+        Returns:
+        None
+        """
         super().__init__(master, **kwargs)
+        self.col = col
+        self.row= row
         self.note = note
         self.original_border_color = self.cget('highlightbackground')
         self.config(highlightthickness=10)
@@ -178,15 +182,15 @@ class Suspect(tk.Button):
     #fonction appelée par les boutons suspects en haut à droite #
     #remplace l'image du suspect selctionné en haut gauche pour le noter ensuite#
     def selected_suspect_event(self):
-    """
-    Fonction appelée par les boutons suspects en haut à droite pour sélectionner un suspect.
+        """
+        Fonction appelée par les boutons suspects en haut à droite pour sélectionner un suspect.
 
-    Parameters:
-    self: Le suspect actuel.
+        Parameters:
+        self: Le suspect actuel.
 
-    Returns:
-    None
-    """
+        Returns:
+        None
+        """
         global suspect_actuel
         suspect_actuel = self
         note_label.config(text = 'Note: ' + str(self.note))
@@ -197,12 +201,12 @@ class Suspect(tk.Button):
         suspect_principal.configure(image=self.resized_photo_image)
 
     def increment_note(self):
-    """
-    Incrémente la note du suspect actuel s'il est inférieur à 10, met à jour la couleur et les informations.
+        """
+        Incrémente la note du suspect actuel s'il est inférieur à 10, met à jour la couleur et les informations.
 
-    Returns:
-    None
-    """
+        Returns:
+        None
+        """
 
         global suspect_actuel
         if suspect_actuel.note <10:
@@ -217,12 +221,12 @@ class Suspect(tk.Button):
         Favori.Update_Fav(Dico_note=Dico_note)
 
     def decrement_note(self):
-    """
-    Décrémente la note du suspect actuel s'il est supérieur à 0, met à jour la couleur et les informations.
+        """
+        Décrémente la note du suspect actuel s'il est supérieur à 0, met à jour la couleur et les informations.
 
-    Returns:
-    None
-    """
+        Returns:
+        None
+        """
 
         global suspect_actuel
         if suspect_actuel.note >0:
@@ -235,12 +239,12 @@ class Suspect(tk.Button):
         Favori.Update_Fav(Dico_note=Dico_note)
 
     def garbage(self):
-    """
-    Réinitialise la note du suspect actuel à 0, met à jour la couleur et les informations.
+        """
+        Réinitialise la note du suspect actuel à 0, met à jour la couleur et les informations.
 
-    Returns:
-    None
-    """
+        Returns:
+        None
+        """
 
         global suspect_actuel
         suspect_actuel.note = 0  # Réinitialise la note à 0
@@ -253,12 +257,12 @@ class Suspect(tk.Button):
         Favori.Update_Fav(Dico_note=Dico_note)
 
     def update_color(self):
-    """
-    Met à jour la couleur de la bordure du bouton qui encadre l’image d’un suspect en fonction de la note qu’on lui attribue.
+        """
+        Met à jour la couleur de la bordure du bouton qui encadre l’image d’un suspect en fonction de la note qu’on lui attribue.
 
-    Returns:
-    None
-    """
+        Returns:
+        None
+        """
 
         global suspect_actuel
 
@@ -277,12 +281,12 @@ class Suspect(tk.Button):
         suspect_actuel.config(highlightbackground=border_color)
 
     def ranking(self):
-    """
-    Calcule le classement du suspect actuel en fonction de sa note parmi tous les suspects.
+        """
+        Calcule le classement du suspect actuel en fonction de sa note parmi tous les suspects.
 
-    Returns:
-    int: Le classement du suspect actuel.
-    """
+        Returns:
+        int: Le classement du suspect actuel.
+        """
         rank=1
         rating=suspect_actuel.note
         for notes in Dico_note.values():
@@ -291,12 +295,12 @@ class Suspect(tk.Button):
         return rank
 
     def Ajout_Favori(self):
-    """
-    Ajoute le suspect actuel aux favoris si sa note appartient à ]6;10[.
+        """
+        Ajoute le suspect actuel aux favoris si sa note appartient à ]6;10[.
 
-    Returns:
-    None
-    """
+        Returns:
+        None
+        """
         global suspect_actuel
         rank = suspect_actuel.ranking()
         if (rank<10 and self.note>6):
@@ -304,7 +308,72 @@ class Suspect(tk.Button):
             Favori.Make_favorite(Dico_rang_fav[rank], suspect_actuel.id, suspect_actuel.note, suspect_actuel.photo_image)
         return
 
+### GESTION DU DND ###
+def make_draggable_fav(widget):
+    widget.bind("<Button-1>", on_fav_drag_start)
+    widget.bind("<B1-Motion>", on_fav_drag_motion)
+    widget.bind("<ButtonRelease-1>", on_fav_drag_release)
 
+def on_fav_drag_start(event):
+    widget = event.widget
+    container = widget.nametowidget(widget.winfo_parent())
+    widget._drag_start_x = event.x
+    widget._drag_start_y = event.y
+
+def on_fav_drag_motion(event):
+    widget = event.widget
+    container = widget.nametowidget(widget.winfo_parent())
+    x = widget.winfo_x() - widget._drag_start_x + event.x
+    y = widget.winfo_y() - widget._drag_start_y + event.y
+    widget.place(x=x, y=y)
+
+
+def on_fav_drag_release(event):
+    widget = event.widget
+    container = widget.nametowidget(widget.winfo_parent())
+    x = round((widget.winfo_x() - widget._drag_start_x + event.x) ) 
+    y = round((widget.winfo_y() - widget._drag_start_y + event.y) ) 
+    widget.grid(row=widget.r, column=widget.c, padx=widget.wd, pady=widget.wd)
+
+
+
+def make_draggable_suspect(widget):
+    widget.bind("<Button-1>", on_suspect_drag_start)
+    widget.bind("<B1-Motion>", on_suspect_drag_motion)
+    widget.bind("<ButtonRelease-1>", on_suspect_drag_release)
+
+def on_suspect_drag_start(event):
+    widget = event.widget
+    container = widget.nametowidget(widget.winfo_parent())
+    widget._drag_start_x = event.x
+    widget._drag_start_y = event.y
+    Suspect.selected_suspect_event(widget)
+def on_suspect_drag_motion(event):
+    widget = event.widget
+    container = widget.nametowidget(widget.winfo_parent())
+    x = widget.winfo_x() - widget._drag_start_x + event.x
+    y = widget.winfo_y() - widget._drag_start_y + event.y
+    widget.place(x=x, y=y)
+def on_suspect_drag_release(event):
+    widget = event.widget
+    container = widget.nametowidget(widget.winfo_parent())
+    x = round((widget.winfo_x() - widget._drag_start_x + event.x) ) 
+    y = round((widget.winfo_y() - widget._drag_start_y + event.y) ) 
+    widget.grid(row=widget.row, column=widget.col, padx=photo_width//50, pady=photo_height//50)
+    if (x < -100 and x > -900 and y > 350 and y < 800):
+        print("'FAV!!!S")
+        widget.note=7
+        global suspect_actuel
+        global Dico_note
+        global note_label
+        note_label.config(text="Note: "+str(suspect_actuel.note))
+        Dico_note[suspect_actuel.id]= suspect_actuel.note
+        suspect_actuel.Ajout_Favori()
+        Favori.Update_Fav(Dico_note=Dico_note)
+    ### mettre un suspect à la poubelle
+    if (x < -20 and x > -900 and y > 350 and y < 800):
+        print()
+    print("x , y " + str(x)+"    "+str(y)) 
 #fonction appelée par le bouton restart
 # réinitialise à l'état d'origine (affichage, contenu des dossiers, numérotation vague, notations)
 def Restart_event(event):
@@ -391,41 +460,52 @@ def Init_suspects(choices_container_frame,Liste_img,photo_width,photo_height):
     None
     """
 
-    suspect_1 = Suspect(choices_container_frame,Liste_img[0],5,photo_width,photo_height)
+    suspect_1 = Suspect(choices_container_frame,Liste_img[0],5,photo_width,photo_height,0,0)
     suspect_1.grid(row=0, column=0, padx=photo_width//50, pady=photo_height//50)
+    make_draggable_suspect(suspect_1)
 
-    suspect_2 = Suspect(choices_container_frame, Liste_img[1],5,photo_width,photo_height)
+    suspect_2 = Suspect(choices_container_frame, Liste_img[1],5,photo_width,photo_height,0,1)
     suspect_2.grid(row=0, column=1, padx=photo_width//50, pady=photo_height//50)
+    make_draggable_suspect(suspect_2)
 
-    suspect_3 = Suspect(choices_container_frame, Liste_img[2],5,photo_width,photo_height)
+    suspect_3 = Suspect(choices_container_frame, Liste_img[2],5,photo_width,photo_height,0,2)
     suspect_3.grid(row=0, column=2, padx=photo_width//50, pady=photo_height//50)
+    make_draggable_suspect(suspect_3)
 
-    suspect_4 = Suspect(choices_container_frame, Liste_img[3],5,photo_width,photo_height)
+    suspect_4 = Suspect(choices_container_frame, Liste_img[3],5,photo_width,photo_height,0,3)
     suspect_4.grid(row=0, column=3, padx=photo_width//50, pady=photo_height//50)
+    make_draggable_suspect(suspect_4)
 
-    suspect_5 = Suspect(choices_container_frame, Liste_img[4],5,photo_width,photo_height)
+    suspect_5 = Suspect(choices_container_frame, Liste_img[4],5,photo_width,photo_height,1,0)
     suspect_5.grid(row=1, column=0, padx=photo_width//50, pady=photo_height//50)
-
-    suspect_6 = Suspect(choices_container_frame, Liste_img[5],5,photo_width,photo_height)
+    make_draggable_suspect(suspect_5)
+    suspect_6 = Suspect(choices_container_frame, Liste_img[5],5,photo_width,photo_height,1,1)
     suspect_6.grid(row=1, column=1, padx=photo_width//50, pady=photo_height//50)
+    make_draggable_suspect(suspect_6)
 
-    suspect_7 = Suspect(choices_container_frame, Liste_img[6],5,photo_width,photo_height)
+    suspect_7 = Suspect(choices_container_frame, Liste_img[6],5,photo_width,photo_height,1,2)
     suspect_7.grid(row=1, column=2, padx=photo_width//50, pady=photo_height//50)
+    make_draggable_suspect(suspect_7)
 
-    suspect_8 = Suspect(choices_container_frame, Liste_img[7],5,photo_width,photo_height)
+    suspect_8 = Suspect(choices_container_frame, Liste_img[7],5,photo_width,photo_height,1,3)
     suspect_8.grid(row=1, column=3, padx=photo_width//50, pady=photo_height//50)
+    make_draggable_suspect(suspect_8)
 
-    suspect_9 = Suspect(choices_container_frame, Liste_img[8],5,photo_width,photo_height)
+    suspect_9 = Suspect(choices_container_frame, Liste_img[8],5,photo_width,photo_height,2,0)
     suspect_9.grid(row=2, column=0, padx=photo_width//50, pady=photo_height//50)
+    make_draggable_suspect(suspect_9)
 
-    suspect_10 = Suspect(choices_container_frame, Liste_img[9],5,photo_width,photo_height)
+    suspect_10 = Suspect(choices_container_frame, Liste_img[9],5,photo_width,photo_height,2,1)
     suspect_10.grid(row=2, column=1, padx=photo_width//50, pady=photo_height//50)
+    make_draggable_suspect(suspect_10)
 
-    suspect_11 = Suspect(choices_container_frame, Liste_img[10],5,photo_width,photo_height)
+    suspect_11 = Suspect(choices_container_frame, Liste_img[10],5,photo_width,photo_height,2,2)
     suspect_11.grid(row=2, column=2, padx=photo_width//50, pady=photo_height//50)
+    make_draggable_suspect(suspect_11)
 
-    suspect_12 = Suspect(choices_container_frame, Liste_img[11],5,photo_width,photo_height)
+    suspect_12 = Suspect(choices_container_frame, Liste_img[11],5,photo_width,photo_height,2,3)
     suspect_12.grid(row=2, column=3, padx=photo_width//50, pady=photo_height//50)
+    make_draggable_suspect(suspect_12)
 
 def Init_favori(fav_dim,pad):
     """
@@ -438,45 +518,55 @@ def Init_favori(fav_dim,pad):
     dict: Dictionnaire contenant les éléments favoris indexés par leur rang.
     """
 
-    fav_1 = Favori(1,fav_dim,1, 1)
+    fav_1 = Favori(1,fav_dim, 1, 1,1,1)
     fav_1.config(text="favori 1")
-    fav_1.grid(row=0, column=0, padx = pad, pady = pad)
+    fav_1.grid(row=1, column=1, padx=pad, pady=pad)
+    make_draggable_fav(fav_1)
 
-    fav_2 = Favori(2, fav_dim, 1, 2)
+    fav_2 = Favori(2, fav_dim, 1, 2,1,2)
     fav_2.config(text='favori 2')
-    fav_2.grid(row=0, column = 1  ,padx = pad, pady = pad)
+    fav_2.grid(row=1, column = 2, padx=pad, pady=pad)
+    make_draggable_fav(fav_2)
 
-    fav_3 = Favori(3,fav_dim, 1, 3)
+    fav_3 = Favori(3,fav_dim, 1, 3, 1, 3)
     fav_3.config(text="favori 3")
-    fav_3.grid(row=0, column=2 ,padx = pad, pady = pad)
+    fav_3.grid(row=1, column=3, padx=pad, pady=pad)
+    make_draggable_fav(fav_3)
 
-    fav_4 = Favori(4, fav_dim, 1, 4)
+    fav_4 = Favori(4, fav_dim, 1, 4,1,4)
     fav_4.config(text='favori 4')
-    fav_4.grid(row=0, column = 3 ,padx = pad, pady = pad)
+    fav_4.grid(row=1, column = 4, padx=pad, pady=pad)
+    make_draggable_fav(fav_4)
 
-    fav_5 = Favori(5,fav_dim, 1, 5)
+    fav_5 = Favori(5,fav_dim, 1, 5,1,5)
     fav_5.config(text="favori 5")
-    fav_5.grid(row=0, column=4,padx = pad, pady = pad)
+    fav_5.grid(row=1, column=5, padx=pad, pady=pad)
+    make_draggable_fav(fav_5)
 
-    fav_6 = Favori(6, fav_dim,1, 6)
+    fav_6 = Favori(6, fav_dim, 1, 6, 2 ,1)
     fav_6.config(text='favori 6')
-    fav_6.grid(row=1, column = 0,padx = pad, pady = pad)
+    fav_6.grid(row=2, column = 1, padx=pad, pady=pad)
+    make_draggable_fav(fav_6)
 
-    fav_7 = Favori(7,fav_dim, 1, 7)
+    fav_7 = Favori(7,fav_dim, 1, 7, 2, 2)
     fav_7.config(text="favori 7")
-    fav_7.grid(row=1, column=1,padx = pad, pady = pad)
+    fav_7.grid(row=2, column=2, padx=pad, pady=pad)
+    make_draggable_fav(fav_7)
 
-    fav_8 = Favori(8, fav_dim,1, 8)
+    fav_8 = Favori(8, fav_dim, 1, 8, 2, 3)
     fav_8.config(text='favori 8')
-    fav_8.grid(row=1, column = 2,padx = pad, pady = pad)
+    fav_8.grid(row=2, column = 3, padx=pad, pady=pad)
+    make_draggable_fav(fav_8)
 
-    fav_9 = Favori(9,fav_dim, 1, 9)
+    fav_9 = Favori(9,fav_dim, 1, 9, 2, 4)
     fav_9.config(text="favori 9")
-    fav_9.grid(row=1, column=3,padx = pad, pady = pad)
+    fav_9.grid(row=2, column=4, padx=pad, pady=pad)
+    make_draggable_fav(fav_9)
 
-    fav_10 = Favori(10, fav_dim, 1, 10)
+    fav_10 = Favori(10, fav_dim, 1, 10, 2,5)
     fav_10.config(text='favori 10')
-    fav_10.grid(row=1, column = 4,padx = pad, pady = pad)
+    fav_10.grid(row=2, column = 5, padx=pad, pady=pad)
+    make_draggable_fav(fav_10)
 
     Dico_rang_fav ={1: fav_1,
                 2: fav_2,
