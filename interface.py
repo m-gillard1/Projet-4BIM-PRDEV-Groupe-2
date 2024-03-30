@@ -102,6 +102,7 @@ class Favori(tk.Button):
                     photo_resized = photo.resize((Dico_rang_fav[lim].large, Dico_rang_fav[lim].large,))
                     Dico_rang_fav[lim].photo_image = ImageTk.PhotoImage(photo_resized)
                     #print(Dico_rang_fav[lim])
+                    Dico_rang_fav[lim].id=path
                     Dico_rang_fav[lim].config(height=Dico_rang_fav[lim].large,width=Dico_rang_fav[lim].large, image=Dico_rang_fav[lim].photo_image)
                     lim+=1
 
@@ -112,6 +113,7 @@ class Favori(tk.Button):
             w = le_fav.large
             if (la_note<7):
                 le_fav.note=None
+                le_fav.id=None
                 name = str(le_fav.winfo_name())
                 text_to_print=name[1:]
                 le_fav.config(text=text_to_print, image='', padx=11, pady=11,height=le_fav.ht, width=le_fav.wd)
@@ -145,6 +147,10 @@ class Favori(tk.Button):
         """
         self.config(text= str(self.winfo_name()), image='', height=self.large, width=self.large)
 
+    def update_color(self):
+        return
+    def Ajout_Favori(self):
+        return
 
 
 class Suspect(tk.Button):
@@ -191,14 +197,19 @@ class Suspect(tk.Button):
         Returns:
         None
         """
-        global suspect_actuel
-        suspect_actuel = self
-        note_label.config(text = 'Note: ' + str(self.note))
-        global suspect_principal
-        new_image = Image.open(self.id)
-        resized_image = new_image.resize((512, 512))
-        self.resized_photo_image = ImageTk.PhotoImage(resized_image)
-        suspect_principal.configure(image=self.resized_photo_image)
+        print('letype est   ' + str(type(self)))
+        if (type(self)==Suspect):
+            print('type true')
+            global suspect_actuel
+            suspect_actuel = self
+            note_label.config(text = 'Note: ' + str(self.note))
+            global suspect_principal
+            new_image = Image.open(self.id)
+            resized_image = new_image.resize((512, 512))
+            self.resized_photo_image = ImageTk.PhotoImage(resized_image)
+            suspect_principal.configure(image=self.resized_photo_image)
+        if (type(self)==Favori):
+            print('fav_seleted')
 
     def increment_note(self):
         """
@@ -319,6 +330,7 @@ def on_fav_drag_start(event):
     container = widget.nametowidget(widget.winfo_parent())
     widget._drag_start_x = event.x
     widget._drag_start_y = event.y
+    Suspect.selected_suspect_event(widget)
 
 def on_fav_drag_motion(event):
     widget = event.widget
@@ -399,7 +411,7 @@ def Refresh_event(event):
     event: L'événement déclencheur.
 
     Returns:
-    None
+    Non
     """
 
     global Vague_actuelle
@@ -592,7 +604,24 @@ def Start_Over():
     Init_suspects(choices_container_frame, Liste_vague1, photo_width, photo_height)
     note_label.config(text = "Pas d'image sélectionnée")
     global Dico_rang_fav
-    Dico_rang_fav = Init_favori(fav_dim)
+    for le_fav in (Dico_rang_fav.values()):
+        le_fav.note=None
+        le_fav.id=None
+        name = str(le_fav.winfo_name())
+        text_to_print=name[1:]
+        le_fav.config(text=text_to_print, image='', padx=11, pady=11,height=le_fav.ht, width=le_fav.wd)
+    fav_pad_x = 10
+    fav_dim = int(((left_width *0.95)) / 40)
+    #fav_pad_y = left_height-
+    Dico_rang_fav= Init_favori(fav_dim,fav_pad_x)
+    #for le_fav in (Dico_rang_fav.items()):
+    #    le_fav.note=None
+    #    le_fav.id=None
+    #    name = str(le_fav.winfo_name())
+    #    text_to_print=name[1:]
+    #    le_fav.config(text=text_to_print, image='', padx=11, pady=11,height=le_fav.ht, width=le_fav.wd)
+
+        
 
 # Ceate the main window
 root = tk.Tk()
