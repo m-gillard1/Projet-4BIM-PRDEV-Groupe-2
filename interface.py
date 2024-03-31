@@ -700,7 +700,7 @@ def Start_Over():
         le_fav.id=None
         name = str(le_fav.winfo_name())
         text_to_print=name[1:]
-        le_fav.config(text=text_to_print, image='', padx=11, pady=11,height=le_fav.ht, width=le_fav.wd)
+        le_fav.config(text=text_to_print, image='',height=le_fav.ht, width=le_fav.wd)
     fav_pad_x = 10
     fav_dim = int(((left_width *0.95)) / 40)
     #fav_pad_y = left_height-
