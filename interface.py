@@ -118,7 +118,7 @@ class Favori(tk.Button):
                 le_fav.note=None
                 le_fav.id=None
                 name = str(le_fav.winfo_name())
-                text_to_print=name[1:]
+                text_to_print='favori ' +  str (j+1)
                 le_fav.config(text=text_to_print, image='',height=le_fav.ht, width=le_fav.wd)
 
     def get_first_non_fav(dico_sorted):
