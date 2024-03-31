@@ -96,7 +96,7 @@ class Favori(tk.Button):
         sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
         lim = 1
         for i in sorted_id_by_note :
-            if lim < 10 :
+            if lim < 11 :
                 if (i[1]>6):
                     path = i[0]
                     #print(path)
