@@ -59,7 +59,8 @@ class Favori(tk.Button):
         self.position= position
     
 
-        super().__init__(best_choices_container_frame,width=self.wd, height = self.ht, **kwargs)
+        super().__init__(best_choices_container_frame,width=self.wd, height = self.ht,compound='bottom', anchor='n', **kwargs)
+        #compound='bottom', anchor='n',
 
     def Make_favorite (self,id, note, image ):
         """
@@ -105,7 +106,7 @@ class Favori(tk.Button):
                     #print(Dico_rang_fav[lim])
                     Dico_rang_fav[lim].id=path
                     Dico_rang_fav[lim].note=i[1]
-                    Dico_rang_fav[lim].config(height=Dico_rang_fav[lim].large,width=Dico_rang_fav[lim].large, image=Dico_rang_fav[lim].photo_image)
+                    Dico_rang_fav[lim].config(height=Dico_rang_fav[lim].large,width=Dico_rang_fav[lim].large, image=Dico_rang_fav[lim].photo_image, text=Dico_rang_fav[lim].note )
                     lim+=1
 
         for j in range (10):
