@@ -57,6 +57,8 @@ class Favori(tk.Button):
         self.row=row
         self.c = c
         self.r= r
+        self.position= position
+    
 
         super().__init__(best_choices_container_frame,width=self.wd, height = self.ht, **kwargs)
 
@@ -103,6 +105,7 @@ class Favori(tk.Button):
                     Dico_rang_fav[lim].photo_image = ImageTk.PhotoImage(photo_resized)
                     #print(Dico_rang_fav[lim])
                     Dico_rang_fav[lim].id=path
+                    Dico_rang_fav[lim].note=i[1]
                     Dico_rang_fav[lim].config(height=Dico_rang_fav[lim].large,width=Dico_rang_fav[lim].large, image=Dico_rang_fav[lim].photo_image)
                     lim+=1
 
@@ -151,6 +154,32 @@ class Favori(tk.Button):
         return
     def Ajout_Favori(self):
         return
+    
+    def selected_suspect_event(self):
+        """
+        Fonction appelée par les boutons suspects en haut à droite pour sélectionner un suspect.
+
+        Parameters:
+        self: Le suspect actuel.
+
+        Returns:
+        None
+        """
+        if (type(self)==Favori):
+            
+            global suspect_actuel
+            suspect_actuel = self
+            note_label.config(text = 'Note: ' + str(self.note))
+            global suspect_principal
+            new_image = Image.open(self.id)
+            resized_image = new_image.resize((512, 512))
+            self.resized_photo_image = ImageTk.PhotoImage(resized_image)
+            suspect_principal.configure(image=self.resized_photo_image)
+
+    
+
+
+
 
 
 class Suspect(tk.Button):
@@ -197,9 +226,7 @@ class Suspect(tk.Button):
         Returns:
         None
         """
-        print('letype est   ' + str(type(self)))
         if (type(self)==Suspect):
-            print('type true')
             global suspect_actuel
             suspect_actuel = self
             note_label.config(text = 'Note: ' + str(self.note))
@@ -208,8 +235,7 @@ class Suspect(tk.Button):
             resized_image = new_image.resize((512, 512))
             self.resized_photo_image = ImageTk.PhotoImage(resized_image)
             suspect_principal.configure(image=self.resized_photo_image)
-        if (type(self)==Favori):
-            print('fav_seleted')
+       
 
     def increment_note(self):
         """
@@ -228,6 +254,7 @@ class Suspect(tk.Button):
         global note_label
         note_label.config(text="Note: "+str(suspect_actuel.note))
         Dico_note[suspect_actuel.id]= suspect_actuel.note
+        print(Dico_note.items())
         suspect_actuel.Ajout_Favori()
         Favori.Update_Fav(Dico_note=Dico_note)
 
@@ -330,7 +357,11 @@ def on_fav_drag_start(event):
     container = widget.nametowidget(widget.winfo_parent())
     widget._drag_start_x = event.x
     widget._drag_start_y = event.y
-    Suspect.selected_suspect_event(widget)
+    print(str(widget.winfo_name())+ str ('      ') + str(widget.winfo_geometry()))
+    if(widget.note is not None):
+        Favori.selected_suspect_event(widget)
+        global Dico_note
+        Favori.Update_Fav(Dico_note)
 
 def on_fav_drag_motion(event):
     widget = event.widget
@@ -342,11 +373,72 @@ def on_fav_drag_motion(event):
 
 def on_fav_drag_release(event):
     widget = event.widget
-    container = widget.nametowidget(widget.winfo_parent())
-    x = round((widget.winfo_x() - widget._drag_start_x + event.x) ) 
-    y = round((widget.winfo_y() - widget._drag_start_y + event.y) ) 
     widget.grid(row=widget.r, column=widget.c, padx=widget.wd, pady=widget.wd)
+    global Dico_note
+    print (Dico_note)
+    print('le x est : '+ str (widget.winfo_x()+event.x) + '  le y est : ' + str (widget.winfo_y()+event.y))
+    if (widget.note is not None and widget.note >= 7):
+        if (widget.winfo_x()+event.x > 10 and widget.winfo_x()+event.x < 120 and (widget.winfo_y()+event.y)>15 and (widget.winfo_y()+event.y)<155):
+            sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
+            Dico_note[widget.id] = sorted_id_by_note[0][1]
+            Favori.Update_Fav(Dico_note)
+            
 
+        if (widget.winfo_x()+event.x > 145 and widget.winfo_x()+event.x < 245 and (widget.winfo_y()+event.y)>15 and (widget.winfo_y()+event.y)<155):
+            sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
+            Dico_note[widget.id] = sorted_id_by_note[1][1]
+            Favori.Update_Fav(Dico_note)
+            
+
+        if (widget.winfo_x()+event.x > 275 and widget.winfo_x()+event.x < 370 and (widget.winfo_y()+event.y)>15 and (widget.winfo_y()+event.y)<155):
+            sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
+            Dico_note[widget.id] = sorted_id_by_note[2][1]
+            Favori.Update_Fav(Dico_note)
+            
+        
+        if (widget.winfo_x()+event.x > 400 and widget.winfo_x()+event.x < 495 and (widget.winfo_y()+event.y)>15 and (widget.winfo_y()+event.y)<155):
+            sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
+            Dico_note[widget.id] = sorted_id_by_note[3][1]
+            Favori.Update_Fav(Dico_note)
+            
+        
+        if (widget.winfo_x()+event.x > 520 and widget.winfo_x()+event.x < 620 and (widget.winfo_y()+event.y)>15 and (widget.winfo_y()+event.y)<155):
+            sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
+            Dico_note[widget.id] = sorted_id_by_note[4][1]
+            Favori.Update_Fav(Dico_note)
+            
+        
+        if (widget.winfo_x()+event.x > 10 and widget.winfo_x()+event.x < 120 and (widget.winfo_y()+event.y)>175 and (widget.winfo_y()+event.y)<314):
+            sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
+            Dico_note[widget.id] = sorted_id_by_note[5][1]
+            Favori.Update_Fav(Dico_note)
+            
+        
+        if (widget.winfo_x()+event.x > 145 and widget.winfo_x()+event.x < 245 and (widget.winfo_y()+event.y)>175 and (widget.winfo_y()+event.y)<314):
+            sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
+            Dico_note[widget.id] = sorted_id_by_note[6][1]
+            Favori.Update_Fav(Dico_note)
+            
+        
+        if (widget.winfo_x()+event.x > 275 and widget.winfo_x()+event.x < 370 and (widget.winfo_y()+event.y)>175 and (widget.winfo_y()+event.y)<314):
+            sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
+            Dico_note[widget.id] = sorted_id_by_note[7][1]
+            Favori.Update_Fav(Dico_note)
+            
+        
+        if (widget.winfo_x()+event.x > 400 and widget.winfo_x()+event.x < 495 and (widget.winfo_y()+event.y)>175 and (widget.winfo_y()+event.y)<314):
+            sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
+            Dico_note[widget.id] = sorted_id_by_note[8][1]
+            Favori.Update_Fav(Dico_note)
+            
+    
+        if (widget.winfo_x()+event.x > 520 and widget.winfo_x()+event.x < 620 and (widget.winfo_y()+event.y)>175 and (widget.winfo_y()+event.y)<314):
+            sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
+            Dico_note[widget.id] = sorted_id_by_note[9][1]
+            Favori.Update_Fav(Dico_note)
+            
+    
+        print(Dico_note)
 
 
 def make_draggable_suspect(widget):
@@ -373,7 +465,6 @@ def on_suspect_drag_release(event):
     y = round((widget.winfo_y() - widget._drag_start_y + event.y) ) 
     widget.grid(row=widget.row, column=widget.col, padx=photo_width//50, pady=photo_height//50)
     if (x < -100 and x > -900 and y > 350 and y < 800):
-        print("'FAV!!!S")
         widget.note=7
         global suspect_actuel
         global Dico_note
