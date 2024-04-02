@@ -244,7 +244,7 @@ def img_proche (img1, list_DB):
         count+=1
         #print('count: '+str(count))
 
-    return count
+    return nb_image
 
 
 ###################################################
@@ -267,7 +267,7 @@ def img_loin (img1, list_DB):
             nb_image=count
         count+=1
 
-    return count
+    return nb_image
 
 
 ######################
@@ -358,6 +358,6 @@ if __name__=='__main__':
     print(len(the_list))
     print(the_list[0])
     print('proche')
-    print(img_proche(the_list[0], the_list))
+    print(img_proche(the_list[2], the_list))
     print('loin ')
-    print(img_loin(the_list[0], the_list))
+    print(img_loin(the_list[2], the_list))
