@@ -2,6 +2,14 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 
+class Reshape(nn.Module):
+    def __init__(self, *shape):
+        super(Reshape, self).__init__()
+        self.shape = shape
+
+    def forward(self, x):
+        return x.view(*self.shape)
+
 class VAE(nn.Module):
     def __init__(self, latent_dim):
         super(VAE, self).__init__()
