@@ -69,4 +69,5 @@ class VAE(nn.Module):
             x_recon = self.decoder(z.view(-1, self.latent_dim))
             return x_recon, mean, log_var
 
-
+def my_loader_function(path):
+        return Image.open(open(path, 'r+b'))
