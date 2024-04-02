@@ -1,6 +1,8 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
+import torchvision.transforms as transforms
+import torchvision.datasets as datasets
 
 class Reshape(nn.Module):
     def __init__(self, *shape):
@@ -73,3 +75,6 @@ def my_loader_function(path):
         return Image.open(open(path, 'r+b'))
 
 def train_vae():
+    transform = transforms.Compose([
+        transforms.ToTensor(),
+    ])
