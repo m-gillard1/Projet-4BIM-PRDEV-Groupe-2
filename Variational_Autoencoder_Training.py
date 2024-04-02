@@ -114,3 +114,6 @@ def train_vae(dataset_path, batch_size=64, latent_dim=200, learning_rate=0.001, 
         if epoch % 10 == 0:
         # Save the trained VAE model
             torch.save(vae.state_dict(), 'C:/Users/thiba/Documents/INSA_2023-2024/S2/Software_dev/VAE_Models/vae_model'+str(epoch)+'.pth')
+
+if __name__ == "__main__":
+    train_vae(dataset_path="C:/Users/thiba/Documents/INSA_2023-2024/S2/Software_dev/ImagesClassées/train_data_0_23999/")
