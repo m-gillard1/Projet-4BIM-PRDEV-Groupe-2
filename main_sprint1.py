@@ -48,7 +48,9 @@ def encoded_image (path_im_vague) :
 
     for image in os.listdir(path_im_vague) :
         encoded_image=Autoencoder_to_use.NumpyEncoding(path_im_vague+image)
-        encoded_image_list.append(encoded_image)
+        ## flatten here or in data_structure_note_image
+        flatten_numpy_image=np.array(encoded_image.flatten())
+        encoded_image_list.append(flatten_numpy_image)
         count_1+=1
 
     return encoded_image_list
@@ -75,15 +77,20 @@ def data_structure_note_image(encoded_image_list, note) :
     image_note_list=[]
 
     for numpy in encoded_image_list:
-            flatten_numpy_image=np.array(numpy.flatten())
-            taille_vecteur_image =flatten_numpy_image.size
+            # si flatten here
+            #flatten_numpy_image=np.array(numpy.flatten())
+            #taille_vecteur_image =flatten_numpy_image.size
+            # sinon
+            taille_vecteur_image=numpy.size
+
+
             note_numpy = np.zeros(taille_vecteur_image)
             print(note_numpy)
             print(count_2)
             print(note)
             note_numpy[0] = note[count_2]
             note_numpy [1:taille_vecteur_image] = None
-            element=np.array([note_numpy,flatten_numpy_image])
+            element=np.array([note_numpy, numpy]) ##flatten_numpy_image])
             image_note_list.append(element)
             count_2+=1
 
@@ -230,10 +237,12 @@ def img_proche (img1, list_DB):
     count=24000
     for img in list_DB :
         dist=distance_img(img,img1)
+        #print('distance :'+str(dist))
         if dist<=low_dist :
             low_dist=dist
             nb_image=count
-        count=+1
+        count+=1
+        #print('count: '+str(count))
 
     return count
 
@@ -256,7 +265,7 @@ def img_loin (img1, list_DB):
         if dist>=high_dist :
             high_dist=dist
             nb_image=count
-        count=+1
+        count+=1
 
     return count
 
@@ -344,4 +353,11 @@ if __name__=='__main__':
 
 
     ### test des distances
+    print('encoded....')
     the_list=encoded_test_db()
+    print(len(the_list))
+    print(the_list[0])
+    print('proche')
+    print(img_proche(the_list[0], the_list))
+    print('loin ')
+    print(img_loin(the_list[0], the_list))
