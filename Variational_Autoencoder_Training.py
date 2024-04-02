@@ -71,3 +71,5 @@ class VAE(nn.Module):
 
 def my_loader_function(path):
         return Image.open(open(path, 'r+b'))
+
+def train_vae():
