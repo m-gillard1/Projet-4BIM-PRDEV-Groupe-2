@@ -82,3 +82,6 @@ def train_vae(dataset_path, batch_size=64):
     # Load dataset
     train_dataset= datasets.ImageFolder(root=dataset_path, transform=transforms.ToTensor(), loader=my_loader_function)
     train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=True)
+
+    # Define VAE model
+    vae = VAE(latent_dim)
