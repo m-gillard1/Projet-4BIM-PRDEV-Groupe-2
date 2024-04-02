@@ -74,7 +74,7 @@ class VAE(nn.Module):
 def my_loader_function(path):
         return Image.open(open(path, 'r+b'))
 
-def train_vae(dataset_path, batch_size=64):
+def train_vae(dataset_path, batch_size=64, latent_dim=200, learning_rate=0.001):
     transform = transforms.Compose([
         transforms.ToTensor(),
     ])
