@@ -78,3 +78,7 @@ def train_vae():
     transform = transforms.Compose([
         transforms.ToTensor(),
     ])
+    
+    # Load dataset
+    train_dataset= datasets.ImageFolder(root=dataset_path, transform=transforms.ToTensor(), loader=my_loader_function)
+    train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=True)
