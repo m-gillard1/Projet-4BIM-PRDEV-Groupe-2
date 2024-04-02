@@ -92,3 +92,6 @@ def train_vae(dataset_path, batch_size=64):
         KLD = -0.5 * torch.sum(1 + log_var - mu.pow(2) - log_var.exp()) # KL divergence
         #print(BCE.item(), KLD.item())
         return BCE + 0.001*KLD
+
+    # Optimizer
+    optimizer = optim.Adam(vae.parameters(), lr=learning_rate)
