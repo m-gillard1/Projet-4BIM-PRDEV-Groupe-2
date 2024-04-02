@@ -22,3 +22,8 @@ class VAE(nn.Module):
         # Mean and log variance layers
         self.fc_mean = nn.Linear(128 * 32 * 32, latent_dim)
         self.fc_log_var = nn.Linear(128 * 32 * 32 , latent_dim)
+
+        self.decoder = nn.Sequential(
+            nn.Linear(latent_dim, 128 * 32 * 32 ),
+            nn.ReLU()
+        )
