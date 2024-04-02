@@ -3,6 +3,8 @@ import torch.nn as nn
 import torch.optim as optim
 import torchvision.transforms as transforms
 import torchvision.datasets as datasets
+from torch.autograd import Variable
+from PIL import Image
 
 class Reshape(nn.Module):
     def __init__(self, *shape):
@@ -74,7 +76,7 @@ class VAE(nn.Module):
 def my_loader_function(path):
         return Image.open(open(path, 'r+b'))
 
-def train_vae(dataset_path, batch_size=64, latent_dim=200, learning_rate=0.001):
+def train_vae(dataset_path, batch_size=64, latent_dim=200, learning_rate=0.001, num_epochs=100):
     transform = transforms.Compose([
         transforms.ToTensor(),
     ])
@@ -95,3 +97,20 @@ def train_vae(dataset_path, batch_size=64, latent_dim=200, learning_rate=0.001):
 
     # Optimizer
     optimizer = optim.Adam(vae.parameters(), lr=learning_rate)
+
+    # Training loop
+    for epoch in range(num_epochs):
+        for i, (images, _) in enumerate(train_loader):
+            images = Variable(images)
+            recon_images, mu, log_var = vae(images)
+            loss = vae_loss(recon_images, images, mu, log_var)
+
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+
+            if (i+1) % 2 == 0:
+                print('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}'.format(epoch+1, num_epochs, i+1, len(train_loader), loss.item()))
+        if epoch % 10 == 0:
+        # Save the trained VAE model
+            torch.save(vae.state_dict(), 'C:/Users/thiba/Documents/INSA_2023-2024/S2/Software_dev/VAE_Models/vae_model'+str(epoch)+'.pth')
