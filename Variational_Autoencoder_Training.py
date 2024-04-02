@@ -85,3 +85,10 @@ def train_vae(dataset_path, batch_size=64):
 
     # Define VAE model
     vae = VAE(latent_dim)
+
+    # Loss function
+    def vae_loss(recon_x, x, mu, log_var):
+        BCE = nn.BCELoss(reduction='sum')(recon_x, x) # Reconstruction loss
+        KLD = -0.5 * torch.sum(1 + log_var - mu.pow(2) - log_var.exp()) # KL divergence
+        #print(BCE.item(), KLD.item())
+        return BCE + 0.001*KLD
