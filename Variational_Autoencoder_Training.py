@@ -43,3 +43,10 @@ class VAE(nn.Module):
             nn.ConvTranspose2d(16, 1, kernel_size=3, stride=2, padding=1, output_padding=1),
             nn.Sigmoid()
         )
+
+        def encode(self, x):
+            x = self.encoder(x)
+            x = x.view(x.size(0), -1)
+            mean = self.fc_mean(x)
+            log_var = self.fc_log_var(x)
+        return mean, log_var
