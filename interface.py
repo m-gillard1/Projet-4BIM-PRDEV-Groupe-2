@@ -254,8 +254,6 @@ class Suspect(tk.Button):
         global note_label
         note_label.config(text="Note: "+str(suspect_actuel.note))
         Dico_note[suspect_actuel.id]= suspect_actuel.note
-        print(Dico_note.items())
-        suspect_actuel.Ajout_Favori()
         Favori.Update_Fav(Dico_note=Dico_note)
 
     def decrement_note(self):
@@ -274,6 +272,7 @@ class Suspect(tk.Button):
         global Dico_note
         note_label.config(text="Note: "+str(suspect_actuel.note))
         Dico_note[suspect_actuel.id]= suspect_actuel.note
+        
         Favori.Update_Fav(Dico_note=Dico_note)
 
     def garbage(self):
@@ -380,62 +379,72 @@ def on_fav_drag_release(event):
     if (widget.note is not None and widget.note >= 7):
         if (widget.winfo_x()+event.x > 10 and widget.winfo_x()+event.x < 120 and (widget.winfo_y()+event.y)>15 and (widget.winfo_y()+event.y)<155):
             sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
-            Dico_note[widget.id] = sorted_id_by_note[0][1]
-            Favori.Update_Fav(Dico_note)
+            if (sorted_id_by_note[0][1]>=7):
+                Dico_note[widget.id] = sorted_id_by_note[0][1]
+                Favori.Update_Fav(Dico_note)
             
 
         if (widget.winfo_x()+event.x > 145 and widget.winfo_x()+event.x < 245 and (widget.winfo_y()+event.y)>15 and (widget.winfo_y()+event.y)<155):
             sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
-            Dico_note[widget.id] = sorted_id_by_note[1][1]
-            Favori.Update_Fav(Dico_note)
+            if (sorted_id_by_note[1][1]>=7):
+                Dico_note[widget.id] = sorted_id_by_note[1][1]
+                Favori.Update_Fav(Dico_note)
             
 
         if (widget.winfo_x()+event.x > 275 and widget.winfo_x()+event.x < 370 and (widget.winfo_y()+event.y)>15 and (widget.winfo_y()+event.y)<155):
             sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
-            Dico_note[widget.id] = sorted_id_by_note[2][1]
-            Favori.Update_Fav(Dico_note)
+            if (sorted_id_by_note[2][1]>=7):
+                Dico_note[widget.id] = sorted_id_by_note[2][1]
+                Favori.Update_Fav(Dico_note)
             
         
         if (widget.winfo_x()+event.x > 400 and widget.winfo_x()+event.x < 495 and (widget.winfo_y()+event.y)>15 and (widget.winfo_y()+event.y)<155):
             sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
-            Dico_note[widget.id] = sorted_id_by_note[3][1]
-            Favori.Update_Fav(Dico_note)
+            if (sorted_id_by_note[3][1]>=7):
+                Dico_note[widget.id] = sorted_id_by_note[3][1]
+                Favori.Update_Fav(Dico_note)
             
         
         if (widget.winfo_x()+event.x > 520 and widget.winfo_x()+event.x < 620 and (widget.winfo_y()+event.y)>15 and (widget.winfo_y()+event.y)<155):
             sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
-            Dico_note[widget.id] = sorted_id_by_note[4][1]
-            Favori.Update_Fav(Dico_note)
+            if (sorted_id_by_note[4][1]>=7):
+                Dico_note[widget.id] = sorted_id_by_note[4][1]
+                Favori.Update_Fav(Dico_note)
             
         
         if (widget.winfo_x()+event.x > 10 and widget.winfo_x()+event.x < 120 and (widget.winfo_y()+event.y)>175 and (widget.winfo_y()+event.y)<314):
             sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
-            Dico_note[widget.id] = sorted_id_by_note[5][1]
-            Favori.Update_Fav(Dico_note)
+            if (sorted_id_by_note[5][1]>=7):
+                Dico_note[widget.id] = sorted_id_by_note[5][1]
+                Favori.Update_Fav(Dico_note)
             
         
         if (widget.winfo_x()+event.x > 145 and widget.winfo_x()+event.x < 245 and (widget.winfo_y()+event.y)>175 and (widget.winfo_y()+event.y)<314):
             sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
-            Dico_note[widget.id] = sorted_id_by_note[6][1]
-            Favori.Update_Fav(Dico_note)
+            if (sorted_id_by_note[6][1]>=7):
+                Dico_note[widget.id] = sorted_id_by_note[6][1]
+                Favori.Update_Fav(Dico_note)
             
         
         if (widget.winfo_x()+event.x > 275 and widget.winfo_x()+event.x < 370 and (widget.winfo_y()+event.y)>175 and (widget.winfo_y()+event.y)<314):
             sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
-            Dico_note[widget.id] = sorted_id_by_note[7][1]
-            Favori.Update_Fav(Dico_note)
+            if (sorted_id_by_note[7][1]>=7):
+                Dico_note[widget.id] = sorted_id_by_note[7][1]
+                Favori.Update_Fav(Dico_note)
             
         
         if (widget.winfo_x()+event.x > 400 and widget.winfo_x()+event.x < 495 and (widget.winfo_y()+event.y)>175 and (widget.winfo_y()+event.y)<314):
             sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
-            Dico_note[widget.id] = sorted_id_by_note[8][1]
-            Favori.Update_Fav(Dico_note)
+            if (sorted_id_by_note[8][1]>=7):
+                Dico_note[widget.id] = sorted_id_by_note[8][1]
+                Favori.Update_Fav(Dico_note)
             
     
         if (widget.winfo_x()+event.x > 520 and widget.winfo_x()+event.x < 620 and (widget.winfo_y()+event.y)>175 and (widget.winfo_y()+event.y)<314):
             sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
-            Dico_note[widget.id] = sorted_id_by_note[9][1]
-            Favori.Update_Fav(Dico_note)
+            if (sorted_id_by_note[9][1]>=7):
+                Dico_note[widget.id] = sorted_id_by_note[9][1]
+                Favori.Update_Fav(Dico_note)
             
     
         print(Dico_note)
@@ -787,6 +796,7 @@ Bouton_refresh.bind("<Button-1>", Refresh_event)
 Bouton_garbage= tk.Button(Menu_Option_Frame,text='Garbage Bin', background='lightgreen')
 Bouton_garbage.grid(column=0, row=0, sticky="nswe",padx=pad_horizontal, pady=pad_vertical)
 Bouton_garbage.bind("<Button-1>" , Suspect.garbage )
+print('bgb geoometrie '+ str(Bouton_garbage.winfo_geometry()))
 
 Bouton_FIN= tk.Button(Menu_Option_Frame,text='Finish', background='yellow')
 Bouton_FIN.grid(column=1, row=1, sticky="nswe",padx=pad_horizontal, pady=pad_vertical)
