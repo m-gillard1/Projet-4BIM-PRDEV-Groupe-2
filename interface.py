@@ -19,6 +19,7 @@ def toggle_fullscreen(event=None):
     root.attributes('-fullscreen', not root.attributes('-fullscreen'))
 
 Dico_note ={}
+Sus_Being_Dragged = None
 
 
 class Favori(tk.Button):
@@ -353,9 +354,10 @@ def make_draggable_fav(widget):
 
 def on_fav_drag_start(event):
     widget = event.widget
+    widget.lift()
     container = widget.nametowidget(widget.winfo_parent())
-    widget._drag_start_x = event.x
-    widget._drag_start_y = event.y
+    widget.drag_start_x = event.x
+    widget.drag_start_y = event.y
     print(str(widget.winfo_name())+ str ('      ') + str(widget.winfo_geometry()))
     if(widget.note is not None):
         Favori.selected_suspect_event(widget)
@@ -365,8 +367,8 @@ def on_fav_drag_start(event):
 def on_fav_drag_motion(event):
     widget = event.widget
     container = widget.nametowidget(widget.winfo_parent())
-    x = widget.winfo_x() - widget._drag_start_x + event.x
-    y = widget.winfo_y() - widget._drag_start_y + event.y
+    x = widget.winfo_x() - widget.drag_start_x + event.x
+    y = widget.winfo_y() - widget.drag_start_y + event.y
     widget.place(x=x, y=y)
 
 
@@ -456,22 +458,36 @@ def make_draggable_suspect(widget):
     widget.bind("<ButtonRelease-1>", on_suspect_drag_release)
 
 def on_suspect_drag_start(event):
+    global Sus_Being_Dragged
     widget = event.widget
+    widget.lift()
+    Sus_Being_Dragged=widget
     container = widget.nametowidget(widget.winfo_parent())
-    widget._drag_start_x = event.x
-    widget._drag_start_y = event.y
+    widget.drag_start_x = event.x
+    widget.drag_start_y = event.y
+    Sus_Being_Dragged.drag_start_x = event.x
+    Sus_Being_Dragged.drag_start_y = event.y
     Suspect.selected_suspect_event(widget)
+    print(vars(widget))
+    print(event,"vghhvghvhvhgvvvhvhg")
+    
 def on_suspect_drag_motion(event):
-    widget = event.widget
+    print(event,"v111111111111111hg")
+    global Sus_Being_Dragged
+    widget = Sus_Being_Dragged
     container = widget.nametowidget(widget.winfo_parent())
-    x = widget.winfo_x() - widget._drag_start_x + event.x
-    y = widget.winfo_y() - widget._drag_start_y + event.y
-    widget.place(x=x, y=y)
+    print(vars(widget))
+    print(type(widget))
+    print(widget.drag_start_x)
+    x = Sus_Being_Dragged.winfo_x() - Sus_Being_Dragged.drag_start_x + event.x
+    y = Sus_Being_Dragged.winfo_y() - Sus_Being_Dragged.drag_start_y + event.y
+    Sus_Being_Dragged.place(x=x, y=y)
 def on_suspect_drag_release(event):
-    widget = event.widget
+    global Sus_Being_Dragged
+    widget = Sus_Being_Dragged
     container = widget.nametowidget(widget.winfo_parent())
-    x = round((widget.winfo_x() - widget._drag_start_x + event.x) ) 
-    y = round((widget.winfo_y() - widget._drag_start_y + event.y) ) 
+    x = round((widget.winfo_x() - widget.drag_start_x + event.x) ) 
+    y = round((widget.winfo_y() - widget.drag_start_y + event.y) ) 
     widget.grid(row=widget.row, column=widget.col, padx=photo_width//50, pady=photo_height//50)
     if (x < -100 and x > -900 and y > 350 and y < 800):
         widget.note=7
@@ -486,6 +502,7 @@ def on_suspect_drag_release(event):
     if (x < -20 and x > -900 and y > 350 and y < 800):
         print()
     print("x , y " + str(x)+"    "+str(y)) 
+    Sus_Being_Dragged = None
 #fonction appelée par le bouton restart
 # réinitialise à l'état d'origine (affichage, contenu des dossiers, numérotation vague, notations)
 def Restart_event(event):
@@ -494,7 +511,7 @@ def Restart_event(event):
 
     Parameters:
     event: L'événement déclencheur du redémarrage.
-
+()
     Returns:
     None
     """
@@ -520,7 +537,7 @@ def Refresh_event(event):
     Vague_actuelle+=1
     #genere 12 nouvelles images de suspects  "\vague_2\image_1", "\vague2|image2... n"
     suspect_principal.configure(image=Image_Instruction)
-    Init_suspects(choices_container_frame,Liste_path,photo_width,photo_height)
+    Init_suspects(choices_frame,Liste_path,photo_width,photo_height)
     return
 
 #Dico note est un dictionnaire qui contient en clé les path des images (string) et en value les notes associées aux images (int). Exemple de contenu :
@@ -702,7 +719,7 @@ def Start_Over():
     """
 
     Vague_actuelle = 1
-    Init_suspects(choices_container_frame, Liste_vague1, photo_width, photo_height)
+    Init_suspects(choices_frame, Liste_vague1, photo_width, photo_height)
     note_label.config(text = "Pas d'image sélectionnée")
     global Dico_rang_fav
     for le_fav in (Dico_rang_fav.values()):
@@ -750,13 +767,14 @@ choices_frame = tk.Frame(right_frame,width=right_width, height = choices_height,
 choices_frame.pack(side=tk.TOP, fill=tk.X)
 choices_frame.pack_propagate(False)
 
+choices_frame.grid_rowconfigure(0, weight=1)
+choices_frame.grid_rowconfigure(1, weight=1)
+choices_frame.grid_rowconfigure(2, weight=1)
+choices_frame.grid_columnconfigure(0, weight=1)
+choices_frame.grid_columnconfigure(1, weight=1)
+choices_frame.grid_columnconfigure(2, weight=1)
+choices_frame.grid_columnconfigure(3, weight=1)
 
-### intérieur de la partie supérieur de la partie de droite, contient les suspects ###
-choices_container_frame =  tk.Frame(choices_frame,width=right_width*0.9, height = choices_height*0.9, bg = "white")
-choices_container_frame.pack(fill="both", expand=True)
-choices_container_frame.pack_propagate(False)
-choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
-choices_container_frame.update()
 
 
 ##### Creation et ajout des boutons dans choices_container (en haut à droite) #####
@@ -764,7 +782,7 @@ photo_width = int(right_width*0.18)
 photo_height = int(right_width*0.18)
 Vague_actuelle = 1
 Liste_vague1= ["image_vague_1/1.png", "image_vague_1/2.png", "image_vague_1/3.png","image_vague_1/4.png","image_vague_1/5.png","image_vague_1/6.png","image_vague_1/7.png","image_vague_1/8.png","image_vague_1/9.png","image_vague_1/10.png", "image_vague_1/11.png","image_vague_1/12.png"]
-Init_suspects(choices_container_frame,Liste_vague1,photo_width,photo_height)
+Init_suspects(choices_frame,Liste_vague1,photo_width,photo_height)
 
 
 ### partie inférieur de la partie de droite, contient les boutons d'options ###
