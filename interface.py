@@ -739,8 +739,9 @@ def Start_Over():
     #    text_to_print=name[1:]
     #    le_fav.config(text=text_to_print, image='', padx=11, pady=11,height=le_fav.ht, width=le_fav.wd)
 
-def switch_frames(fram1):
+def switch_frames(fram1,fram2):
     fram1.pack_forget()
+    fram2.place(relx=0.5, rely=0.5, anchor="center") 
 
 # Ceate the main window
 root = tk.Tk()
@@ -765,6 +766,11 @@ frame_depart.pack(expand=True,fill='both')
 
 frame_interface = tk.Frame(root, width=screen_width, height=screen_height, bg="gray80")
 frame_interface.pack(expand=True,fill='both')
+
+frame_fin = tk.Frame(root, width=screen_width, height=screen_height, bg="gray80")
+frame_fin.pack(expand=True,fill='both')
+frame_fin.pack_forget()
+
 
 left_frame = tk.Frame(frame_interface, width=left_width, height=screen_height, bg="gray80")
 right_frame = tk.Frame(frame_interface, width=right_width, height=screen_height, bg="black")
@@ -827,7 +833,7 @@ Bouton_garbage.grid(column=0, row=0, sticky="nswe",padx=pad_horizontal, pady=pad
 Bouton_garbage.bind("<Button-1>" , Suspect.garbage )
 print('bgb geoometrie '+ str(Bouton_garbage.winfo_geometry()))
 
-Bouton_FIN= tk.Button(Menu_Option_Frame,text='Finish', background='yellow')
+Bouton_FIN= tk.Button(Menu_Option_Frame,text='Finish', background='yellow',command=lambda: switch_frames(frame_interface,frame_fin))
 Bouton_FIN.grid(column=1, row=1, sticky="nswe",padx=pad_horizontal, pady=pad_vertical)
 
 ######### --Modif for the left side-- #########
@@ -898,8 +904,11 @@ suspect_principal.place(relx = 0.5,rely = 0.5, anchor="center")
 suspect_principal.pack(fill="both",expand=True)
 
 
-button = tk.Button(frame_depart, text="Switch Frames", command=lambda: switch_frames(frame_depart))
+button = tk.Button(frame_depart, text="Switch Frames", command=lambda: switch_frames(frame_depart,frame_interface))
 button.place(relx=0.5, rely=0.9, anchor="center")
+
+
+
 
 
 ###############################################################################
