@@ -60,7 +60,7 @@ class Favori(tk.Button):
         self.position= position
     
 
-        super().__init__(best_choices_container_frame,width=self.wd, height = self.ht,compound='bottom', anchor='n', **kwargs)
+        super().__init__(best_choices_container_frame,width=self.wd, height = self.ht,compound='bottom', anchor='center', pady = 20,**kwargs)
         #compound='bottom', anchor='n',
 
     def Make_favorite (self,id, note, image ):
@@ -107,7 +107,7 @@ class Favori(tk.Button):
                     #print(Dico_rang_fav[lim])
                     Dico_rang_fav[lim].id=path
                     Dico_rang_fav[lim].note=i[1]
-                    Dico_rang_fav[lim].config(height=Dico_rang_fav[lim].large,width=Dico_rang_fav[lim].large, image=Dico_rang_fav[lim].photo_image, text=Dico_rang_fav[lim].note )
+                    Dico_rang_fav[lim].config(height=Dico_rang_fav[lim].large,width=Dico_rang_fav[lim].large, image=Dico_rang_fav[lim].photo_image, text=Dico_rang_fav[lim].note , pady = 20)
                     lim+=1
 
         for j in range (10):
@@ -739,7 +739,8 @@ def Start_Over():
     #    text_to_print=name[1:]
     #    le_fav.config(text=text_to_print, image='', padx=11, pady=11,height=le_fav.ht, width=le_fav.wd)
 
-        
+def switch_frames(fram1):
+    fram1.pack_forget()
 
 # Ceate the main window
 root = tk.Tk()
@@ -755,8 +756,18 @@ left_height = screen_height * 3 // 8
 top_left_width = left_width * 1 // 4
 #jauge_width = top_left_width * 2 // 15
 # Create frames for left and right sections
-left_frame = tk.Frame(root, width=left_width, height=screen_height, bg="gray80")
-right_frame = tk.Frame(root, width=right_width, height=screen_height, bg="black")
+
+
+frame_depart = tk.Frame(root, width=screen_width, height=screen_height, bg="gray80")
+frame_depart.pack(expand=True,fill='both')
+
+
+
+frame_interface = tk.Frame(root, width=screen_width, height=screen_height, bg="gray80")
+frame_interface.pack(expand=True,fill='both')
+
+left_frame = tk.Frame(frame_interface, width=left_width, height=screen_height, bg="gray80")
+right_frame = tk.Frame(frame_interface, width=right_width, height=screen_height, bg="black")
 left_frame.pack(side=tk.LEFT, fill=tk.Y)
 left_frame.pack_propagate(False)
 right_frame.pack(side=tk.RIGHT, fill=tk.Y)
@@ -887,7 +898,8 @@ suspect_principal.place(relx = 0.5,rely = 0.5, anchor="center")
 suspect_principal.pack(fill="both",expand=True)
 
 
-
+button = tk.Button(frame_depart, text="Switch Frames", command=lambda: switch_frames(frame_depart))
+button.place(relx=0.5, rely=0.9, anchor="center")
 
 
 ###############################################################################
