@@ -303,7 +303,9 @@ class Suspect(tk.Button):
         note_label.config(text="Note: "+str(suspect_actuel.note))
         global Dico_note
         Dico_note[suspect_actuel.id]= suspect_actuel.note
-
+        note_label.config(text="Pas d'image selectionnée")
+        suspect_actuel = None
+        suspect_principal.configure(image=Image_Instruction)
         Favori.Update_Fav(Dico_note=Dico_note)
 
     def update_color(self):
