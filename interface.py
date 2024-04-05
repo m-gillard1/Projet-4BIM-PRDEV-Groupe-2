@@ -60,7 +60,7 @@ class Favori(tk.Button):
         self.position= position
     
 
-        super().__init__(best_choices_container_frame,width=self.wd, height = self.ht,compound='bottom', anchor='center', pady = 20,**kwargs)
+        super().__init__(best_choices_container_frame,width=self.wd, height = self.ht,compound='top', anchor='center', pady = 20,**kwargs)
         #compound='bottom', anchor='n',
 
     def Make_favorite (self,id, note, image ):
@@ -762,10 +762,18 @@ top_left_width = left_width * 1 // 4
 # Create frames for left and right sections
 
 
-frame_depart = tk.Frame(root, width=screen_width, height=screen_height, bg="gray80")
-frame_depart.pack(expand=True,fill='both')
+frame_depart = tk.Frame(root, width=screen_width, height=screen_height, bg="midnight blue")
+frame_depart.pack(fill = 'both',expand=True,anchor='center')
+frame_depart.pack_propagate(False)
 
+titre_depart = tk.Label(frame_depart,text = 'FACE RECOGNITION SOFTWARE',fg = 'white', font = ('Dyuthi',50),bg = 'midnight blue')
+titre_depart.pack(anchor="center", pady=(150, 0) )
 
+button = tk.Button(frame_depart, width = 20, height = 5, text="Start Working", font = ('Dyuthi',30), bg = 'gold',command=lambda: switch_frames(frame_depart,frame_interface))
+button.place(relx=0.5, rely=0.5, anchor="center")
+
+legend_depart = tk.Label(frame_depart,text = 'Made by Martin Gillard, Thibald Chalas, Aurore Le Houssel, Selma Kadiri, Théo Ducasse',fg = 'white', font = ('Dyuthi',15),bg = 'midnight blue')
+legend_depart.pack(anchor="center", pady=(0, 150) )
 
 frame_interface = tk.Frame(root, width=screen_width, height=screen_height, bg="gray80")
 frame_interface.pack(expand=True,fill='both')
@@ -905,9 +913,6 @@ suspect_principal = tk.Label(view_main_image_frame , width = top_left_width, hei
 suspect_principal.place(relx = 0.5,rely = 0.5, anchor="center")
 suspect_principal.pack(fill="both",expand=True)
 
-
-button = tk.Button(frame_depart, text="Switch Frames", command=lambda: switch_frames(frame_depart,frame_interface))
-button.place(relx=0.5, rely=0.9, anchor="center")
 
 
 
