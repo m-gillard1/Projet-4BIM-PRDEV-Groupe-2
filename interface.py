@@ -771,10 +771,10 @@ frame_depart = tk.Frame(root, width=screen_width, height=screen_height, bg="midn
 frame_depart.pack(fill = 'both',expand=True,anchor='center')
 frame_depart.pack_propagate(False)
 
-titre_depart = tk.Label(frame_depart,text = 'FACE RECOGNITION SOFTWARE',fg = 'white', font = ('Dyuthi',50),bg = 'midnight blue')
+titre_depart = tk.Label(frame_depart,text = 'FACE RECOGNITION SOFTWARE',fg = 'white', font = ('Ubuntu',50),bg = 'midnight blue')
 titre_depart.pack(anchor="center", pady=(150, 0) )
 
-button = tk.Button(frame_depart, width = 20, height = 5, text="Start Working", font = ('Dyuthi',30), bg = 'gold',command=lambda: switch_frames(frame_depart,frame_interface))
+button = tk.Button(frame_depart, width = 20, height = 5, text="Start Working", font = ('Ubuntu',30), bg = 'gold',command=lambda: switch_frames(frame_depart,frame_interface))
 button.place(relx=0.5, rely=0.5, anchor="center")
 
 legend_depart = tk.Label(frame_depart,text = 'Made by Martin Gillard, Thibald Chalas, Aurore Le Houssel, Selma Kadiri, Théo Ducasse',fg = 'white', font = ('Dyuthi',15),bg = 'midnight blue')
@@ -782,10 +782,6 @@ legend_depart.pack(anchor="center", pady=(0, 150) )
 
 frame_interface = tk.Frame(root, width=screen_width, height=screen_height, bg="gray80")
 frame_interface.pack(expand=True,fill='both')
-
-frame_fin = tk.Frame(root, width=screen_width, height=screen_height, bg="gray80")
-frame_fin.pack(expand=True,fill='both')
-frame_fin.pack_forget()
 
 
 left_frame = tk.Frame(frame_interface, width=left_width, height=screen_height, bg="gray80")
@@ -917,6 +913,30 @@ Image_Instruction = PhotoImage(file = "instruction.png")
 suspect_principal = tk.Label(view_main_image_frame , width = top_left_width, height = left_height, image = Image_Instruction)
 suspect_principal.place(relx = 0.5,rely = 0.5, anchor="center")
 suspect_principal.pack(fill="both",expand=True)
+
+
+frame_fin = tk.Frame(root, width=screen_width, height=screen_height, bg="midnight blue")
+frame_fin.pack(expand=True,fill='both')
+frame_fin.pack_forget()
+frame_fin.pack_propagate(False)
+
+titre_fin = tk.Label(frame_fin,text = 'RESULTS OF THE PROCESS: ',fg = 'white', font = ('Ubuntu',50),bg = 'midnight blue')
+titre_fin.pack(anchor="center", pady=(150, 0) )
+
+legend_fin = tk.Label(frame_fin,text = 'These are the best matches you have selected. \n Thank you for your help, these faces will be extremely usefull in order to find the person we are looking for. ',fg = 'white', font = ('Dyuthi',15),bg = 'midnight blue')
+legend_fin.pack(anchor="center", pady=(0, 150) )
+
+frame_favori_fin = tk.Frame(frame_fin, width = screen_width* 1//2, height = screen_height* 1//2)
+frame_favori_fin.place(anchor = 'center',relx = 0.5,rely = 0.6)
+frame_favori_fin.pack_propagate(False)
+
+frame_favori_fin.grid_rowconfigure(0, weight=1)
+frame_favori_fin.grid_rowconfigure(1, weight=1)
+frame_favori_fin.grid_columnconfigure(0, weight=1)
+frame_favori_fin.grid_columnconfigure(1, weight=1)
+frame_favori_fin.grid_columnconfigure(2, weight=1)
+frame_favori_fin.grid_columnconfigure(3, weight=1)
+frame_favori_fin.grid_columnconfigure(4, weight=1)
 
 
 
