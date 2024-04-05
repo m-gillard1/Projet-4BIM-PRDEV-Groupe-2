@@ -20,6 +20,7 @@ def toggle_fullscreen(event=None):
 
 Dico_note ={}
 Sus_Being_Dragged = None
+Dico_suspect= {}
 
 
 class Favori(tk.Button):
@@ -592,6 +593,7 @@ def Init_suspects(choices_container_frame,Liste_img,photo_width,photo_height):
     Returns:
     None
     """
+    global Dico_suspect
 
     suspect_1 = Suspect(choices_container_frame,Liste_img[0],5,photo_width,photo_height,0,0)
     suspect_1.grid(row=0, column=0, padx=photo_width//50, pady=photo_height//50)
@@ -639,6 +641,7 @@ def Init_suspects(choices_container_frame,Liste_img,photo_width,photo_height):
     suspect_12 = Suspect(choices_container_frame, Liste_img[11],5,photo_width,photo_height,2,3)
     suspect_12.grid(row=2, column=3, padx=photo_width//50, pady=photo_height//50)
     make_draggable_suspect(suspect_12)
+    Dico_suspect ={suspect_1:1, suspect_2:2, suspect_3:3, suspect_4:4, suspect_5:5, suspect_6:6, suspect_7:7, suspect_8:8, suspect_9:9, suspect_10:10, suspect_11:11, suspect_12:12}
 
 def Init_favori(fav_dim,pad):
     """
@@ -713,6 +716,7 @@ def Init_favori(fav_dim,pad):
                 10:fav_10}
     return Dico_rang_fav
 
+
 def Start_Over():
     """
     Réinitialise l'application en remettant la vague actuelle à 1, réinitialisant les suspects et les favoris, et affichant un message par défaut.
@@ -720,20 +724,19 @@ def Start_Over():
     Returns:
     None
     """
-
+    global Dico_rang_fav
     Vague_actuelle = 1
+    global Dico_suspect
+    for sus in Dico_suspect.keys():
+        sus.destroy()
     Init_suspects(choices_frame, Liste_vague1, photo_width, photo_height)
     note_label.config(text = "Pas d'image sélectionnée")
-    global Dico_rang_fav
-    for le_fav in (Dico_rang_fav.values()):
-        le_fav.note=None
-        le_fav.id=None
-        name = str(le_fav.winfo_name())
-        text_to_print=name[1:]
-        le_fav.config(text=text_to_print, image='',height=le_fav.ht, width=le_fav.wd)
+    
     fav_pad_x = 10
     fav_dim = int(((left_width *0.95)) / 40)
     #fav_pad_y = left_height-
+    for fav in Dico_rang_fav.values():
+        fav.destroy()
     Dico_rang_fav= Init_favori(fav_dim,fav_pad_x)
     #for le_fav in (Dico_rang_fav.items()):
     #    le_fav.note=None
