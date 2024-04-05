@@ -176,6 +176,8 @@ class Favori(tk.Button):
             resized_image = new_image.resize((512, 512))
             self.resized_photo_image = ImageTk.PhotoImage(resized_image)
             suspect_principal.configure(image=self.resized_photo_image)
+        
+
 
     
 
@@ -236,6 +238,7 @@ class Suspect(tk.Button):
             resized_image = new_image.resize((512, 512))
             self.resized_photo_image = ImageTk.PhotoImage(resized_image)
             suspect_principal.configure(image=self.resized_photo_image)
+
        
 
     def increment_note(self):
@@ -271,10 +274,18 @@ class Suspect(tk.Button):
             suspect_actuel.update_color()
         global note_label
         global Dico_note
-        note_label.config(text="Note: "+str(suspect_actuel.note))
         Dico_note[suspect_actuel.id]= suspect_actuel.note
+        note_label.config(text="Note: "+str(suspect_actuel.note))
         
+        print("ICI" +  str(suspect_actuel.note))
+        if (suspect_actuel.note==6):
+            print("here")
+            note_label.config(text="Pas d'image selectionnée")
+            suspect_actuel = None
+            suspect_principal.configure(image=Image_Instruction)
         Favori.Update_Fav(Dico_note=Dico_note)
+        
+        
 
     def garbage(self):
         """
@@ -358,7 +369,6 @@ def on_fav_drag_start(event):
     container = widget.nametowidget(widget.winfo_parent())
     widget.drag_start_x = event.x
     widget.drag_start_y = event.y
-    print(str(widget.winfo_name())+ str ('      ') + str(widget.winfo_geometry()))
     if(widget.note is not None):
         Favori.selected_suspect_event(widget)
         global Dico_note
@@ -376,8 +386,7 @@ def on_fav_drag_release(event):
     widget = event.widget
     widget.grid(row=widget.r, column=widget.c, padx=widget.wd, pady=widget.wd)
     global Dico_note
-    print (Dico_note)
-    print('le x est : '+ str (widget.winfo_x()+event.x) + '  le y est : ' + str (widget.winfo_y()+event.y))
+    
     if (widget.note is not None and widget.note >= 7):
         if (widget.winfo_x()+event.x > 10 and widget.winfo_x()+event.x < 120 and (widget.winfo_y()+event.y)>15 and (widget.winfo_y()+event.y)<155):
             sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
@@ -449,7 +458,7 @@ def on_fav_drag_release(event):
                 Favori.Update_Fav(Dico_note)
             
     
-        print(Dico_note)
+
 
 
 def make_draggable_suspect(widget):
@@ -468,17 +477,14 @@ def on_suspect_drag_start(event):
     Sus_Being_Dragged.drag_start_x = event.x
     Sus_Being_Dragged.drag_start_y = event.y
     Suspect.selected_suspect_event(widget)
-    print(vars(widget))
-    print(event,"vghhvghvhvhgvvvhvhg")
+
     
 def on_suspect_drag_motion(event):
-    print(event,"v111111111111111hg")
+
     global Sus_Being_Dragged
     widget = Sus_Being_Dragged
     container = widget.nametowidget(widget.winfo_parent())
-    print(vars(widget))
-    print(type(widget))
-    print(widget.drag_start_x)
+
     x = Sus_Being_Dragged.winfo_x() - Sus_Being_Dragged.drag_start_x + event.x
     y = Sus_Being_Dragged.winfo_y() - Sus_Being_Dragged.drag_start_y + event.y
     Sus_Being_Dragged.place(x=x, y=y)
@@ -501,7 +507,6 @@ def on_suspect_drag_release(event):
     ### mettre un suspect à la poubelle
     if (x < -20 and x > -900 and y > 350 and y < 800):
         print()
-    print("x , y " + str(x)+"    "+str(y)) 
     Sus_Being_Dragged = None
 #fonction appelée par le bouton restart
 # réinitialise à l'état d'origine (affichage, contenu des dossiers, numérotation vague, notations)
@@ -532,7 +537,6 @@ def Refresh_event(event):
     """
 
     global Vague_actuelle
-    print('REFRESH REFRESH')
     Liste_path = Genere_Suspect(Dico_note, Vague_actuelle)
     Vague_actuelle+=1
     #genere 12 nouvelles images de suspects  "\vague_2\image_1", "\vague2|image2... n"
@@ -558,7 +562,6 @@ def Genere_Suspect(Dico, Vague_actuelle ):
     list: Liste contenant les chemins des 12 nouvelles images générées.
     """
 
-    print(Vague_actuelle)
     # Parcourir le dictionnaire et afficher chaque clé et valeur
     note_list=[]
     for img, note in Dico.items():
@@ -831,7 +834,6 @@ Bouton_refresh.bind("<Button-1>", Refresh_event)
 Bouton_garbage= tk.Button(Menu_Option_Frame,text='Garbage Bin', background='lightgreen')
 Bouton_garbage.grid(column=0, row=0, sticky="nswe",padx=pad_horizontal, pady=pad_vertical)
 Bouton_garbage.bind("<Button-1>" , Suspect.garbage )
-print('bgb geoometrie '+ str(Bouton_garbage.winfo_geometry()))
 
 Bouton_FIN= tk.Button(Menu_Option_Frame,text='Finish', background='yellow',command=lambda: switch_frames(frame_interface,frame_fin))
 Bouton_FIN.grid(column=1, row=1, sticky="nswe",padx=pad_horizontal, pady=pad_vertical)
