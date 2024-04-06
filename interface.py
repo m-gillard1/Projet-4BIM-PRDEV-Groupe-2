@@ -387,7 +387,7 @@ def on_fav_drag_motion(event):
 
 def on_fav_drag_release(event):
     widget = event.widget
-    widget.grid(row=widget.r, column=widget.c, padx=widget.wd, pady=widget.wd)
+    widget.grid(row=widget.r, column=widget.c)
     global Dico_note
     
     if (widget.note is not None and widget.note >= 7):
@@ -470,34 +470,26 @@ def make_draggable_suspect(widget):
     widget.bind("<ButtonRelease-1>", on_suspect_drag_release)
 
 def on_suspect_drag_start(event):
-    global Sus_Being_Dragged
+    
     widget = event.widget
     widget.lift()
-    Sus_Being_Dragged=widget
-    container = widget.nametowidget(widget.winfo_parent())
     widget.drag_start_x = event.x
     widget.drag_start_y = event.y
-    Sus_Being_Dragged.drag_start_x = event.x
-    Sus_Being_Dragged.drag_start_y = event.y
     Suspect.selected_suspect_event(widget)
 
     
 def on_suspect_drag_motion(event):
-
-    global Sus_Being_Dragged
-    widget = Sus_Being_Dragged
-    container = widget.nametowidget(widget.winfo_parent())
-
-    x = Sus_Being_Dragged.winfo_x() - Sus_Being_Dragged.drag_start_x + event.x
-    y = Sus_Being_Dragged.winfo_y() - Sus_Being_Dragged.drag_start_y + event.y
-    Sus_Being_Dragged.place(x=x, y=y)
+    widget = event.widget
+    x = widget.winfo_x() - widget.drag_start_x + event.x
+    y = widget.winfo_y() - widget.drag_start_y + event.y
+    widget.place(x=x, y=y)
+    
 def on_suspect_drag_release(event):
-    global Sus_Being_Dragged
-    widget = Sus_Being_Dragged
-    container = widget.nametowidget(widget.winfo_parent())
+    widget = event.widget
     x = round((widget.winfo_x() - widget.drag_start_x + event.x) ) 
     y = round((widget.winfo_y() - widget.drag_start_y + event.y) ) 
-    widget.grid(row=widget.row, column=widget.col, padx=photo_width//50, pady=photo_height//50)
+    widget.grid(row=widget.row, column=widget.col)
+    
     if (x < -100 and x > -900 and y > 350 and y < 800):
         widget.note=7
         global suspect_actuel
@@ -507,10 +499,12 @@ def on_suspect_drag_release(event):
         Dico_note[suspect_actuel.id]= suspect_actuel.note
         suspect_actuel.Ajout_Favori()
         Favori.Update_Fav(Dico_note=Dico_note)
+    
+   
+
     ### mettre un suspect à la poubelle
-    if (x < -20 and x > -900 and y > 350 and y < 800):
-        print()
-    Sus_Being_Dragged = None
+    #if (x < -20 and x > -900 and y > 350 and y < 800):
+    #    print()
 #fonction appelée par le bouton restart
 # réinitialise à l'état d'origine (affichage, contenu des dossiers, numérotation vague, notations)
 def Restart_event(event):
