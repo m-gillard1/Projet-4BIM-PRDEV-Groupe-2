@@ -65,13 +65,64 @@ DOCTYPE html>
                   <p>Contenu de la page sur la documentation de l'interface.</p>
                   <h2 class="h2">Fonctions</h2>
                   <ul>
-                    <li class="functions"> <strong style="font-size: 1.2em;">toggle_fullscreen(event=None)</strong>
+                  <li class="functions"> <strong style="font-size: 1.2em;">toggle_fullscreen(event=None)</strong>
                       <p>Bascule l'application en mode plein écran.</p>
                       <ul>
                         <li class="li">Paramètres<p> event: tkinter.Event: L'événement qui a déclenché l'appel de cette fonction ( par défaut, None).</p></li>
                         <li class="li">Retourne<p>None</p></li>
                       </ul>
                     </li>
+
+                    <h2 class="h2">class "Favori"</h2>
+
+                    <li class="functions"> <strong style="font-size: 1.2em;">__init__(self,position, wide,column, row,r,c, **kwargs</strong>
+                        <p>  Permet de spécifier les dimensions de l'encadré contenant une image favorite sur l'interface.</p>
+                        <ul>
+                           <li class="li2">Paramètres</li>
+                            <ol>
+                              <li>event: tkinter.Event: L'événement qui a déclenché l'appel de cette fonction (par défaut, None).</li>
+                              <li>size (int): La taille de l'objet, en pixels.</li>
+                              <li>column (int): La colonne dans laquelle l'objet doit être placé.</li>
+                              <li>row (int): La ligne dans laquelle l'objet doit être placé.</li>
+                              <li> **kwargs (dict): Tout argument supplémentaire.</li>
+                            </ol>
+
+                            <li class="li2">Attributs</li>
+                            <ol>
+                              <li>wd (int): La largeur de l'objet, en pixels.</li>
+                              <li> ht (int): La hauteur de l'objet, en pixels.</li>
+                              <li>large (int): La taille de l'objet agrandie, en pixels.</li>
+                              <li>photo_image (tkinter.PhotoImage): L'image associée à l'objet.</li>
+                              <li> note (str): Une note associée à l'objet.</li>
+                              <li> id (int): L'identifiant unique de l'objet.</li>
+                              <li> col (int): La colonne dans laquelle l'objet est placé.</li>
+                              <li> row (int): La ligne dans laquelle l'objet est placé.</li>
+                            </ol>
+
+                            <li class="li">Retourne<p>None</p></li>
+                          </ul>
+
+                      </li>
+
+
+
+                      <li class="functions"> <strong style="font-size: 1.2em;">Make_favorite (self,id, note, image )</strong>
+                          <p> Définit une image favorite. Elle charge l'image grace à son identifiant `id`, la redimensionne à la taille souhaitée, et l'associe à l'objet.</p>
+                          <ul>
+                             <li class="li2">Paramètres</li>
+                              <ol>
+                                <li>id (str): Identifiant l'image favorite.</li>
+                                <li>note (str): Une note associée à l'image favorite.</li>
+                                <li>image (PIL.Image.Image): L'image favorite.</li>
+                              </ol>
+                              <li class="li">Retourne<p>None</p></li>
+                             </ul>
+
+                         </li>
+
+
+
+
 
                   </ul>
 
