@@ -369,7 +369,6 @@ def make_draggable_fav(widget):
 def on_fav_drag_start(event):
     widget = event.widget
     widget.lift()
-    container = widget.nametowidget(widget.winfo_parent())
     widget.drag_start_x = event.x
     widget.drag_start_y = event.y
     if(widget.note is not None):
@@ -379,7 +378,6 @@ def on_fav_drag_start(event):
 
 def on_fav_drag_motion(event):
     widget = event.widget
-    container = widget.nametowidget(widget.winfo_parent())
     x = widget.winfo_x() - widget.drag_start_x + event.x
     y = widget.winfo_y() - widget.drag_start_y + event.y
     widget.place(x=x, y=y)
@@ -743,7 +741,7 @@ def Start_Over():
 
 def switch_frames(fram1,fram2):
     fram1.pack_forget()
-    fram2.place(relx=0.5, rely=0.5, anchor="center") 
+    fram2.place(x=0, y=0, relwidth=1, relheight=1)
 
 # Ceate the main window
 root = tk.Tk()
@@ -849,6 +847,8 @@ best_choices_frame.pack_propagate(False)
 
 best_choices_container_frame =  tk.Frame(best_choices_frame,width=left_width*0.95, height = left_height*0.95, bg = "white")
 best_choices_container_frame.pack(fill="both", expand=True)
+best_choices_container_frame.pack_propagate(False)
+
 
 best_choices_container_frame.grid_rowconfigure(0, weight=1)
 best_choices_container_frame.grid_rowconfigure(1, weight=1)
@@ -931,8 +931,6 @@ frame_favori_fin.grid_columnconfigure(1, weight=1)
 frame_favori_fin.grid_columnconfigure(2, weight=1)
 frame_favori_fin.grid_columnconfigure(3, weight=1)
 frame_favori_fin.grid_columnconfigure(4, weight=1)
-
-
 
 
 
