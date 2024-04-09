@@ -15,10 +15,6 @@ import os
 from PIL import Image
 #import interface.py
 
-######################
-### Exécuter l'IHM ###
-######################
-# Martin Théo
 
 ############################
 ### Récupérer les notes ###
@@ -55,12 +51,6 @@ def encoded_image (path_im_vague) :
 
     return encoded_image_list
 
-###############################################
-### Récupérer les favoris en sortie de l'IHM ###
-###############################################
-
-# Aurore, Martin, Théo
-
 ###########################################################################################################
 ### Créer structure de données pour l'algorithme génétique [[[float note],[np.array image encodée]],[]] ###
 ###########################################################################################################
@@ -72,6 +62,8 @@ def data_structure_note_image(encoded_image_list, note) :
     sortie : list contenant pour chaque image une list avec 2 vecteurs : le 1er element du 1er vecteur contient la note puis le
         reste du vecteur contient des Nan (afin d'avoir un vecteur de la meme taille que l'image encodée) et le 2e vecteur correspond à l'image encodée
     """
+
+###############################################
 
     count_2=0
     image_note_list=[]
