@@ -206,8 +206,7 @@ class Suspect(tk.Button):
         self.col = col
         self.row= row
         self.note = note
-        self.original_border_color = self.cget('highlightbackground')
-        self.config(highlightthickness=10)
+        self.config(highlightthickness=10, highlightbackground="white")
         self.id = image_path
         global Dico_note
         Dico_note[self.id]= self.note
@@ -288,7 +287,7 @@ class Suspect(tk.Button):
         
         
 
-    def garbage(self):
+    def fav(self):
         """
         Réinitialise la note du suspect actuel à 0, met à jour la couleur et les informations.
 
@@ -297,7 +296,7 @@ class Suspect(tk.Button):
         """
 
         global suspect_actuel
-        suspect_actuel.note = 0  # Réinitialise la note à 0
+        suspect_actuel.note = 7  # Réinitialise la note à 0
         suspect_actuel.update_color()
         global note_label
         note_label.config(text="Note: "+str(suspect_actuel.note))
@@ -460,7 +459,7 @@ def on_fav_drag_release(event):
             
     
 
-
+"""
 
 def make_draggable_suspect(widget):
     widget.bind("<Button-1>", on_suspect_drag_start)
@@ -505,13 +504,16 @@ def on_suspect_drag_release(event):
     #    print()
 #fonction appelée par le bouton restart
 # réinitialise à l'état d'origine (affichage, contenu des dossiers, numérotation vague, notations)
+"""
+
 def Restart_event(event):
+
     """
     Réinitialise l'application à son état d'origine.
 
     Parameters:
     event: L'événement déclencheur du redémarrage.
-()
+
     Returns:
     None
     """
@@ -519,6 +521,7 @@ def Restart_event(event):
     suspect_principal.configure(image=Image_Instruction)
     Start_Over()
     Vague_actuelle=1
+
 
 def Refresh_event(event):
     """
@@ -591,50 +594,50 @@ def Init_suspects(choices_container_frame,Liste_img,photo_width,photo_height):
 
     suspect_1 = Suspect(choices_container_frame,Liste_img[0],5,photo_width,photo_height,0,0)
     suspect_1.grid(row=0, column=0, padx=photo_width//50, pady=photo_height//50)
-    make_draggable_suspect(suspect_1)
+    #make_draggable_suspect(suspect_1)
 
     suspect_2 = Suspect(choices_container_frame, Liste_img[1],5,photo_width,photo_height,0,1)
     suspect_2.grid(row=0, column=1, padx=photo_width//50, pady=photo_height//50)
-    make_draggable_suspect(suspect_2)
+    #make_draggable_suspect(suspect_2)
 
     suspect_3 = Suspect(choices_container_frame, Liste_img[2],5,photo_width,photo_height,0,2)
     suspect_3.grid(row=0, column=2, padx=photo_width//50, pady=photo_height//50)
-    make_draggable_suspect(suspect_3)
+    #make_draggable_suspect(suspect_3)
 
     suspect_4 = Suspect(choices_container_frame, Liste_img[3],5,photo_width,photo_height,0,3)
     suspect_4.grid(row=0, column=3, padx=photo_width//50, pady=photo_height//50)
-    make_draggable_suspect(suspect_4)
+    #make_draggable_suspect(suspect_4)
 
     suspect_5 = Suspect(choices_container_frame, Liste_img[4],5,photo_width,photo_height,1,0)
     suspect_5.grid(row=1, column=0, padx=photo_width//50, pady=photo_height//50)
-    make_draggable_suspect(suspect_5)
+    #make_draggable_suspect(suspect_5)
     suspect_6 = Suspect(choices_container_frame, Liste_img[5],5,photo_width,photo_height,1,1)
     suspect_6.grid(row=1, column=1, padx=photo_width//50, pady=photo_height//50)
-    make_draggable_suspect(suspect_6)
+    #make_draggable_suspect(suspect_6)
 
     suspect_7 = Suspect(choices_container_frame, Liste_img[6],5,photo_width,photo_height,1,2)
     suspect_7.grid(row=1, column=2, padx=photo_width//50, pady=photo_height//50)
-    make_draggable_suspect(suspect_7)
+    #make_draggable_suspect(suspect_7)
 
     suspect_8 = Suspect(choices_container_frame, Liste_img[7],5,photo_width,photo_height,1,3)
     suspect_8.grid(row=1, column=3, padx=photo_width//50, pady=photo_height//50)
-    make_draggable_suspect(suspect_8)
+    #make_draggable_suspect(suspect_8)
 
     suspect_9 = Suspect(choices_container_frame, Liste_img[8],5,photo_width,photo_height,2,0)
     suspect_9.grid(row=2, column=0, padx=photo_width//50, pady=photo_height//50)
-    make_draggable_suspect(suspect_9)
+    #make_draggable_suspect(suspect_9)
 
     suspect_10 = Suspect(choices_container_frame, Liste_img[9],5,photo_width,photo_height,2,1)
     suspect_10.grid(row=2, column=1, padx=photo_width//50, pady=photo_height//50)
-    make_draggable_suspect(suspect_10)
+    #make_draggable_suspect(suspect_10)
 
     suspect_11 = Suspect(choices_container_frame, Liste_img[10],5,photo_width,photo_height,2,2)
     suspect_11.grid(row=2, column=2, padx=photo_width//50, pady=photo_height//50)
-    make_draggable_suspect(suspect_11)
+    #make_draggable_suspect(suspect_11)
 
     suspect_12 = Suspect(choices_container_frame, Liste_img[11],5,photo_width,photo_height,2,3)
     suspect_12.grid(row=2, column=3, padx=photo_width//50, pady=photo_height//50)
-    make_draggable_suspect(suspect_12)
+    #make_draggable_suspect(suspect_12)
     Dico_suspect ={suspect_1:1, suspect_2:2, suspect_3:3, suspect_4:4, suspect_5:5, suspect_6:6, suspect_7:7, suspect_8:8, suspect_9:9, suspect_10:10, suspect_11:11, suspect_12:12}
 
 def Init_favori(fav_dim,pad):
@@ -832,9 +835,9 @@ Bouton_refresh = tk.Button(Menu_Option_Frame,text='Refresh', background='lightbl
 Bouton_refresh.grid(column=0, row=1, sticky="nswe",padx=pad_horizontal, pady=pad_vertical)
 Bouton_refresh.bind("<Button-1>", Refresh_event)
 
-Bouton_garbage= tk.Button(Menu_Option_Frame,text='Garbage Bin', background='lightgreen')
-Bouton_garbage.grid(column=0, row=0, sticky="nswe",padx=pad_horizontal, pady=pad_vertical)
-Bouton_garbage.bind("<Button-1>" , Suspect.garbage )
+Bouton_fav= tk.Button(Menu_Option_Frame,text='Mettre en Favori', background='lightgreen')
+Bouton_fav.grid(column=0, row=0, sticky="nswe",padx=pad_horizontal, pady=pad_vertical)
+Bouton_fav.bind("<Button-1>" , Suspect.fav )
 
 Bouton_FIN= tk.Button(Menu_Option_Frame,text='Finish', background='yellow',command=lambda: switch_frames(frame_interface,frame_fin))
 Bouton_FIN.grid(column=1, row=1, sticky="nswe",padx=pad_horizontal, pady=pad_vertical)
