@@ -238,8 +238,20 @@ def img_proche (img1, list_DB):
     for img in list_DB :
         dist=distance_img(img,img1)
         #print('distance :'+str(dist))
-        if dist<=low_dist :
+
+        # #verifier si les vecteurs sont différents
+        # vect_diff=False
+        # bool_vect= (img!=img1)
+        # print(bool_vect)
+        # for bool in bool_vect :
+        #     if bool==False :
+        #         vect_identiq=True
+        #         print(vect_identiq)
+
+
+        if dist<=low_dist : #and vect_diff  :
             low_dist=dist
+            print(low_dist)
             nb_image=count
         count+=1
         #print('count: '+str(count))
@@ -361,3 +373,5 @@ if __name__=='__main__':
     print(img_proche(the_list[2], the_list))
     print('loin ')
     print(img_loin(the_list[2], the_list))
+
+    print(the_list[0]!=the_list[2])
