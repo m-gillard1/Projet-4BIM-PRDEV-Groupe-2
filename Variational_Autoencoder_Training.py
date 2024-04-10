@@ -6,13 +6,6 @@ import torchvision.datasets as datasets
 from torch.autograd import Variable
 from PIL import Image
 
-class Reshape(nn.Module):
-    def __init__(self, *shape):
-        super(Reshape, self).__init__()
-        self.shape = shape
-
-    def forward(self, x):
-        return x.view(*self.shape)
 
 class VAE(nn.Module):
     def __init__(self, latent_dim):
