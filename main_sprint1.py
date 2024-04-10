@@ -226,21 +226,12 @@ def sauv_img (new_image_encoded, path_result_vague) :
 
 def add_Suspect_from_DB():
     """
-    Encode toutes les images de la vague en vecteur grace à l'autoencodeur
-
-    Paramètres :
-    ----------
-    path_im_vague : str
-        lien vers le dossier contenant les images de la vagues
+    renvoie un chemin vers une images en choisissant un nb_aleatoirement dans la db
 
     Retourne :
     ---------
-    encoded_image_list : list
-        list de vecteur correspondant aux images encodées
-    """
-
-    """
-    renvoie un chemin vers une images en choisissant un nb_aleatoirement dans la db
+    path : str
+        chemin vers une image de la DB
     """
 
     ## extraire les numeros des images ayant deja ete utilisées
