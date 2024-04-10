@@ -73,10 +73,13 @@ def train_vae(dataset_path, batch_size=32, learning_rate=0.0001, num_epochs=100)
     # Define VAE model
     vae = VAE()
 
+    """
+    This part was only used to train the autoencoder as it can cause some error on computer and is not actually used during the application we put it in comment
     #define the running device
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print("Training on:", device)
     vae.to(device)
+    """
     
     # Loss function
     def vae_loss(recon_x, x, mu, log_var, epoch):
@@ -98,7 +101,7 @@ def train_vae(dataset_path, batch_size=32, learning_rate=0.0001, num_epochs=100)
     for epoch in range(num_epochs):
         for i, (images, _) in enumerate(train_loader):
             images = Variable(images)
-            images = images.to(device)
+            #images = images.to(device)
             recon_images, mu, log_var = vae(images)
             loss = vae_loss(recon_images, images, mu, log_var)
 
