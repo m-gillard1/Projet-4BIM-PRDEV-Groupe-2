@@ -50,9 +50,19 @@ def creation_list_note(nb_image_par_vague) :
 
 def encoded_image (path_im_vague) :
     """
-    entree : lien vers le dossier contenant les images de la vagues
-    sortie : list de vecteur correspondnat aux images encodées
+    Encode toutes les images de la vague en vecteur grace à l'autoencodeur
+
+    Paramètres :
+    ----------
+    path_im_vague : str
+        lien vers le dossier contenant les images de la vagues
+
+    Retourne :
+    ---------
+    encoded_image_list : list
+        list de vecteur correspondant aux images encodées
     """
+
     encoded_image_list=[]
     count_1=0
 
