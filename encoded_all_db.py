@@ -3,6 +3,7 @@ import Autoencoder_to_use
 import numpy as np
 import os
 from PIL import Image
+import pickle
 
 
 ##########################
@@ -39,34 +40,24 @@ def encoded_test_db():
     list_DB=encoded_image("data/")
     return list_DB
 
-###################################################
-### ficheir avec les vecteurs de toute la DB ###
-###################################################
-def encoded_in_file(list_DB_, encoded_data_):
-    with open(encoded_data_, 'w') as fichier:
-        for vecteur in list_DB_:
-            ligne = ' '.join(str(element) for element in vecteur)
-            print(ligne)
-            fichier.write(ligne + '\n')
-            #fichier.write(vecteur+ '\n')
-
-# # Exemple de vecteurs
-# vecteurs = [
-#     [1, 2, 3],
-#     [4, 5, 6],
-#     [7, 8, 9]
-# ]
-#
-# # Nom du fichier de sortie
-# nom_fichier = "vecteurs.txt"
-#
-# # Appel de la fonction pour sauvegarder les vecteurs dans le fichier
-# sauvegarder_vecteurs_dans_fichier(list_DB,"encoded_data.txt")
-#
 
 
 ##### MAIN ##########
 print('encoding...')
 list_DB=encoded_test_db()
 print('writing....')
-encoded_in_file(list_DB,"encoded_data.txt")
+
+# Sauvegarde de la liste
+with open('liste.pkl', 'wb') as f:
+    pickle.dump(list_DB, f)
+
+
+## Verification
+print("openning")
+
+# Chargement de la liste
+with open('liste.pkl', 'rb') as f:
+    ma_liste_chargee = pickle.load(f)
+
+print(list_DB[0])
+print(ma_liste_chargee[0])
