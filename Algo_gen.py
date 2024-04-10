@@ -125,7 +125,7 @@ def cross_over_sans_note(best_image_list, Tc):
 
 def one_loop_avec_note(image_list, Tc):
     """
-    Trie la population, choisit le smeilleurs images sur lesquelles vont etre faites de cross over.
+    Trie la population, choisit les meilleurs images sur lesquelles vont etre faites de cross over.
 
     Paramètres :
     ----------
