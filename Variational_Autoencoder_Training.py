@@ -8,9 +8,8 @@ from PIL import Image
 
 
 class VAE(nn.Module):
-    def __init__(self, latent_dim):
+    def __init__(self):
         super(VAE, self).__init__()
-        self.latent_dim = latent_dim
 
         # Encoder layers
         self.encoder = nn.Sequential(
@@ -65,7 +64,7 @@ class VAE(nn.Module):
 def my_loader_function(path):
         return Image.open(open(path, 'r+b'))
 
-def train_vae(dataset_path, batch_size=64, latent_dim=200, learning_rate=0.001, num_epochs=100):
+def train_vae(dataset_path, batch_size=64, learning_rate=0.001, num_epochs=100):
     transform = transforms.Compose([
         transforms.ToTensor(),
     ])
@@ -75,7 +74,7 @@ def train_vae(dataset_path, batch_size=64, latent_dim=200, learning_rate=0.001, 
     train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=True)
 
     # Define VAE model
-    vae = VAE(latent_dim)
+    vae = VAE()
 
     # Loss function
     def vae_loss(recon_x, x, mu, log_var):
