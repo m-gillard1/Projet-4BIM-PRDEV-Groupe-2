@@ -179,7 +179,6 @@ class Favori(tk.Button):
             suspect_principal.configure(image=self.resized_photo_image)
 
 
-
 class Suspect(tk.Button):
     def __init__(self, master, image_path, note, width, height, row, col, **kwargs):
         """
@@ -280,7 +279,7 @@ class Suspect(tk.Button):
 
     def fav(self):
         """
-        Réinitialise la note du suspect actuel à 0, met à jour la couleur et les informations.
+        Change la note du suspect actuel à 7, met à jour la couleur et les informations.
 
         Returns:
         None
@@ -867,8 +866,9 @@ modif_main_image_frame = tk.Frame(main_image_frame,width=top_left_width,height=(
 modif_main_image_frame.pack(side=tk.RIGHT,fill=tk.Y)
 modif_main_image_frame.pack_propagate(False)
 
-modif_main_image_frame.update()
-photo_updown_size = modif_main_image_frame.winfo_width()
+
+photo_updown_size = top_left_width
+print(photo_updown_size)
 
 photo_up_raw = Image.open("up.png")
 photo_up_resized = photo_up_raw.resize((photo_updown_size, photo_updown_size))
@@ -880,12 +880,23 @@ button_up.bind("<Button-1>",Suspect.increment_note)
 note_label = tk.Label(modif_main_image_frame,text="Pas d'image sélectionnée")
 note_label.pack(side=tk.TOP,fill="both",expand=True)
 
-photo_down_raw = Image.open("down.png")
-photo_down_resized = photo_down_raw.resize((photo_updown_size, photo_updown_size))
-Image_down = ImageTk.PhotoImage(photo_down_resized)
+try:
+    photo_down_raw = Image.open("down.png")
+    print("Original image size:", photo_down_raw.size)  # Print the original image size
+    # Resize the image
+    photo_down_resized = photo_down_raw.resize((photo_updown_size, photo_updown_size))
+    print("Resized image size:", photo_down_resized.size)  # Print the resized image size
+    # Convert the resized image to a format compatible with Tkinter
+    Image_down = ImageTk.PhotoImage(photo_down_resized)
+    print("Image_down object:", Image_down)  # Print the Image_down object reference
+except Exception as e:
+    print("Error loading/downsizing image:", e)
 button_down = tk.Button(modif_main_image_frame, image=Image_down,bg="lightgray")
-button_down.pack(side=tk.BOTTOM, fill="both",expand=True)
+button_down.pack(side=tk.TOP, fill="both",expand=True)
 button_down.bind("<Button-1>",Suspect.decrement_note)
+
+
+
 
 
 view_main_image_frame = tk.Frame(main_image_frame,width=(left_width-top_left_width),height=(screen_height-left_height),bg="lightgray")
