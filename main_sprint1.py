@@ -81,13 +81,27 @@ def encoded_image (path_im_vague) :
 
 ### on utilise directement ceux labelisés comme favoris plus besoin de note
 def data_structure_note_image(encoded_image_list, note) :
+
     """
-    entree : list de vecteur des images encodee et list des notes dans l'ordre corresponant à la liste de taille_vecteur_image
-    sortie : list contenant pour chaque image une list avec 2 vecteurs : le 1er element du 1er vecteur contient la note puis le
-        reste du vecteur contient des Nan (afin d'avoir un vecteur de la meme taille que l'image encodée) et le 2e vecteur correspond à l'image encodée
+    Creation de la structure de données qui va etre utilisée pour l'algorithme genetique soit : une list contenant pour
+    chaque image 2 vecteurs de meme taille (taille du vecteur de l'image encodée) un avec la note comme premier élément
+    puis Nan et le 2eme vecteur contenant l'image encodée
+
+    Paramètres :
+    ----------
+    encoded_image_liste : list de vecteur
+        list de vecteur des images encodee
+
+    note : list de int
+        list de int contenant les notes dans l'ordre corresponant à encoded_image_list
+
+    Retourne :
+    ---------
+    image_note_list : list
+        list contenant pour chaque image une list avec 2 vecteurs : le 1er element du 1er vecteur contient la note puis le
+        reste de ce vecteur contient des Nan (afin d'avoir un vecteur de la meme taille que le vecteur de l'image encodée) et le 2e vecteur correspond à l'image encodée
     """
 
-###############################################
 
     count_2=0
     image_note_list=[]
