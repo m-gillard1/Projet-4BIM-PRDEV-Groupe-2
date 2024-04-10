@@ -712,6 +712,8 @@ def Start_Over():
     Returns:
     None
     """
+    global Dico_note
+    Dico_note={}
     global Dico_rang_fav
     Vague_actuelle = 1
     global Dico_suspect
