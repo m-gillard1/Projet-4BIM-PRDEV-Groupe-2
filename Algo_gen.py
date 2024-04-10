@@ -26,7 +26,7 @@ def pop_sort(image_list):
 
 
 
-    # Trier la liste de listes selon le deuxième élément de chaque sous-liste
+    # Trier la liste de listes selon la note de chaque image
     sorted_image_list = sorted(image_list, key=lambda x: x[0][0], reverse=True)
 
     return sorted_image_list
@@ -55,12 +55,12 @@ def lowest_cost_pop(sorted_image_list):
 
 def cross_over_avec_note(best_image_list, Tc):
     """
-    Fait des croisements entre vecteurs d'image.
+    Fait des croisements entre vecteurs d'image afin d'obtenir un nouveau vecteur qui sera transformé en image.
 
     Paramètres :
     ----------
-    image_list: list
-        list de vecteurs comprenant la note de l'image et le vecteur issue de celle-ci
+    best_image_list: list
+        list de vecteurs comprenant la note de l'image et le vecteur issue de celle-ci pour les meilleures images
 
     Tc: float
         Taux de croisement.
@@ -68,17 +68,17 @@ def cross_over_avec_note(best_image_list, Tc):
     Retourne :
     ---------
     new_P : list
-        Liste contenant les vecteurs d'images ayant ou non subis des croisement. // avec ou sans note meme problème qu'avant
+        Liste contenant les vecteurs d'images (sans note) ayant ou non subis des croisement
     """
-    new_P = np.copy(best_image_list) ## image_list ou sorted_image_list ?
+    new_P = np.copy(best_image_list)
 
     print(new_P)
     print(len(new_P))
     for i in range(0, len(new_P)):
         if random() < Tc:
             #print('cross over !! ',i)
-            indc = randint(0, len(new_P) - 1) #choisi l'image avec laquelle il va échanger entre 0 et 10
-            posc = randint(0, len(new_P[i][1]) - 1) # choisi a quelle position du vecteur on coupe entre 0 et 20
+            indc = randint(0, len(new_P) - 1) # choisi l'image avec laquelle il va échanger
+            posc = randint(0, len(new_P[i][1]) - 1) # choisi a quelle position du vecteur on coupe
             #print(indc)
             #print(posc)
             #print(len(new_P[i][1]))
@@ -95,8 +95,8 @@ def cross_over_sans_note(best_image_list, Tc):
 
     Paramètres :
     ----------
-    image_list: list
-        list de vecteurs comprenant la note de l'image et le vecteur issue de celle-ci
+    best_image_list: list
+        list de vecteurs comprenant le vecteur issue de l'image pour les meilleures images
 
     Tc: float
         Taux de croisement.
@@ -104,7 +104,7 @@ def cross_over_sans_note(best_image_list, Tc):
     Retourne :
     ---------
     new_P : list
-        Liste contenant les vecteurs d'images ayant ou non subis des croisement. // avec ou sans note meme problème qu'avant
+        Liste contenant les vecteurs d'images (sans note) ayant ou non subis des croisement
     """
     new_P = np.copy(best_image_list) ## image_list ou sorted_image_list ?
 
@@ -125,7 +125,7 @@ def cross_over_sans_note(best_image_list, Tc):
 
 def one_loop_avec_note(image_list, Tc):
     """
-    Calcule la moyenne des couts, le cout minimum et definit la population finale de vecteurs.
+    Trie la population, choisit le smeilleurs images sur lesquelles vont etre faites de cross over.
 
     Paramètres :
     ----------
@@ -140,7 +140,7 @@ def one_loop_avec_note(image_list, Tc):
 
     Retourne :
     ---------
-    list: Liste contenant la population dinale de vecteurs.
+    list: Liste contenant les nouvelles images modifiées par le croos over
     """
     #nombre_image=len(image_list)
     #taille_vect_image=len(image_list[0][1])
@@ -168,11 +168,11 @@ if __name__=='__main__':
     print('test lowest cost - ok ')
     print(lowest_cost_pop(pop_sort(image_note_list)))
 
-    # Test de la fonction cross_over(best_image_list, Tc)
+    # Test de la fonction cross_over_avec_note(best_image_list, Tc)
     print('test cross over avec note :')
     print(cross_over_avec_note(image_note_list,0.1))
 
     image_list = [ [7, 2], [9, 5], [6, 1], [8, 3] ]
-    # Test de la fonction cross_over(best_image_list, Tc)
+    # Test de la fonction cross_over_sans_note(best_image_list, Tc)
     print('test cross over sans note:')
     print(cross_over_sans_note(image_list,0.6))
