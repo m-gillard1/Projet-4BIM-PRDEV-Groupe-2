@@ -2,7 +2,7 @@ import torch
 from torchvision import transforms
 from PIL import Image
 import numpy as np
-import variational_Autoencoder_3 as auto
+import Variational_Autoencoder_Training as auto
 
 # Instantiate the autoencoder model
 autoencoder = auto.VAE()
