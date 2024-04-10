@@ -27,7 +27,7 @@ class VAE(nn.Module):
         decode(self, z): Decodes the latent space representation to reconstruct input images.
         forward(self, x): Performs the forward pass through the VAE model.
     """
-    
+
     def __init__(self):
         super(VAE, self).__init__()
 
@@ -46,7 +46,7 @@ class VAE(nn.Module):
         # Mean and log variance layers
         self.fc_mean = nn.Conv2d(256 , 256, kernel_size=3, padding='same') #Linear(8 * 8 * 256 , latent_dim)
         self.fc_log_var = nn.Conv2d(256 , 256, kernel_size=3, padding='same') #Linear(256 * 8 * 8 , latent_dim)
-        
+
         self.decoder = nn.Sequential(
             nn.ConvTranspose2d(256, 128, kernel_size=3, stride=2, padding=1, output_padding=1),
             nn.ReLU(),
@@ -77,11 +77,11 @@ class VAE(nn.Module):
         def reparameterize(self, mean, log_var):
             """
             Reparameterizes the latent space.
-    
+
             Args:
                 mean (torch.Tensor): Mean of the latent space.
                 log_var (torch.Tensor): Log variance of the latent space.
-    
+
             Returns:
                 torch.Tensor: Reparameterized latent space.
             """
@@ -92,10 +92,10 @@ class VAE(nn.Module):
         def decode(self, z):
             """
             Decodes the latent space representation to reconstruct input images.
-    
+
             Args:
                 z (torch.Tensor): Latent space representation.
-    
+
             Returns:
                 torch.Tensor: Reconstructed images.
             """
@@ -105,10 +105,10 @@ class VAE(nn.Module):
         def forward(self, x):
             """
             Performs the forward pass through the VAE model.
-    
+
             Args:
                 x (torch.Tensor): Input images.
-    
+
             Returns:
                 torch.Tensor: Reconstructed images.
                 torch.Tensor: Mean of the latent space.
@@ -131,7 +131,7 @@ def my_loader_function(path):
     Returns:
         PIL.Image.Image: The opened image object.
     """
-        return Image.open(open(path, 'r+b'))
+    return Image.open(open(path, 'r+b'))
 
 def train_vae(dataset_path, batch_size=32, learning_rate=0.0001, num_epochs=100):
     """
@@ -158,7 +158,7 @@ def train_vae(dataset_path, batch_size=32, learning_rate=0.0001, num_epochs=100)
     print("Training on:", device)
     vae.to(device)
     """
-    
+
     # Loss function
     def vae_loss(recon_x, x, mu, log_var, epoch):
         if epoch > 2:
@@ -170,7 +170,7 @@ def train_vae(dataset_path, batch_size=32, learning_rate=0.0001, num_epochs=100)
             MSE = nn.MSELoss()(recon_x, x)
             print(MSE.item())
             loss = MSE
-        return loss 
+        return loss
 
     # Optimizer
     optimizer = optim.Adam(vae.parameters(), lr=learning_rate)
