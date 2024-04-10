@@ -289,19 +289,7 @@ def distance_img(img1, img2):
 ###################################################
 
 def encoded_test_db():
-    """
-    Encode toutes les images de la vague en vecteur grace à l'autoencodeur
 
-    Paramètres :
-    ----------
-    path_im_vague : str
-        lien vers le dossier contenant les images de la vagues
-
-    Retourne :
-    ---------
-    encoded_image_list : list
-        list de vecteur correspondant aux images encodées
-    """
 
     """
     retourne la list de toutes les images du jeu de test encodée
@@ -315,19 +303,6 @@ def encoded_test_db():
 ###################################################
 
 def img_proche (img1, list_DB):
-    """
-    Encode toutes les images de la vague en vecteur grace à l'autoencodeur
-
-    Paramètres :
-    ----------
-    path_im_vague : str
-        lien vers le dossier contenant les images de la vagues
-
-    Retourne :
-    ---------
-    encoded_image_list : list
-        list de vecteur correspondant aux images encodées
-    """
 
     """
     prends 1 img sous forme vetorielle
