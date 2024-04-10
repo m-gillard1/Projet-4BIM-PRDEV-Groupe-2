@@ -14,8 +14,16 @@ autoencoder.load_state_dict(torch.load("./vae_model10lrBBatchB.pth"))
 autoencoder.eval()
 
 def NumpyEncoding(path_to_imToEncode):
+    """
+    Encodes an input image into a NumPy array using a pre-trained autoencoder model.
 
-    # Define transformations to be applied to new data samples
+    Args:
+        path_to_imToEncode (str): The path to the image file to be encoded.
+
+    Returns:
+        numpy.ndarray: The encoded image represented as a NumPy array.
+
+    """
     transform = transforms.ToTensor() # Convert PIL Image to tensor
     image=auto.my_loader_function(path_to_imToEncode)
     image_tensor=transform(image).unsqueeze(0) #add batch dimension
@@ -24,8 +32,16 @@ def NumpyEncoding(path_to_imToEncode):
     return encoded_image_np
 
 def NumpyDecoding(npToDecode):
+    """
+    Decodes an encoded image represented as a NumPy array into a PIL image using a pre-trained autoencoder model.
 
-    #define the tranform
+    Args:
+        npToDecode (numpy.ndarray): The encoded image represented as a NumPy array.
+
+    Returns:
+        PIL.Image.Image: The decoded image as a PIL image.
+
+    """
     transform2 = transforms.ToPILImage()
     encoded_image=torch.from_numpy(npToDecode.astype(np.float32))
     decoded_image=autoencoder.decoder(encoded_image)
