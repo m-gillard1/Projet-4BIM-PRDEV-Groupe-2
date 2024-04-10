@@ -22,3 +22,13 @@ def NumpyEncoding(path_to_imToEncode):
     mean, logvar=autoencoder.encode(image_tensor)
     encoded_image_np=mean.detach().numpy()
     return encoded_image_np
+
+def NumpyDecoding(npToDecode):
+
+    #define the tranform
+    transform2 = transforms.ToPILImage()
+    encoded_image=torch.from_numpy(npToDecode.astype(np.float32))
+    decoded_image=autoencoder.decoder(encoded_image)
+    decoded_image_pil=transform2(decoded_image.squeeze(0))
+
+    return decoded_image_pil
