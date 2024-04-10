@@ -7,7 +7,7 @@
 #######################################################################
 
 import Algo_gen
-import Autoencoder_to_use
+import VAE_model_to_use
 
 from random import *
 import numpy as np
