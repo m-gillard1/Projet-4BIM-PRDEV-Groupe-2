@@ -41,7 +41,6 @@ class VAE(nn.Module):
 
         def encode(self, x):
             x = self.encoder(x)
-            x = x.view(x.size(0), -1)
             mean = self.fc_mean(x)
             log_var = self.fc_log_var(x)
             return mean, log_var
@@ -57,11 +56,10 @@ class VAE(nn.Module):
 
         def forward(self, x):
             x = self.encoder(x)
-            x = x.view(x.size(0), -1)  # Flatten the features
             mean = self.fc_mean(x)
             log_var = self.fc_log_var(x)
             z = self.reparameterize(mean, log_var)
-            x_recon = self.decoder(z.view(-1, self.latent_dim))
+            x_recon = self.decoder(z)
             return x_recon, mean, log_var
 
 def my_loader_function(path):
