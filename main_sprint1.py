@@ -150,6 +150,22 @@ def algo_genetique_sans_note (encoded_image_list, taux_cross_over) :
 #########################################
 
 def algo_genetique_avec_note (image_note_list, taux_cross_over) :
+    """
+    Encode toutes les images de la vague en vecteur grace à l'autoencodeur
+
+    Paramètres :
+    ----------
+    image_note_list : list
+        list contenat la note et l'image encodee obtenue par data_structure_note_image
+
+    taux_cross_over : int
+        probabilite que le cross over se fasse
+
+    Retourne :
+    ---------
+    new_image_encoded : list
+        list de vecteur correspondant aux nouvelles images encodées apres cross over 
+    """
 
     image_after_algo_list=Algo_gen.cross_over_avec_note(image_note_list,taux_cross_over)
 
@@ -169,6 +185,19 @@ def algo_genetique_avec_note (image_note_list, taux_cross_over) :
 ### Décoder les nparray obtenus en image + sauvegarde dans un dossier ###
 #########################################################################
 def sauv_img (new_image_encoded, path_result_vague) :
+    """
+    Encode toutes les images de la vague en vecteur grace à l'autoencodeur
+
+    Paramètres :
+    ----------
+    path_im_vague : str
+        lien vers le dossier contenant les images de la vagues
+
+    Retourne :
+    ---------
+    encoded_image_list : list
+        list de vecteur correspondant aux images encodées
+    """
 
     # verfier si le dossier existe sinon le creer
     if not os.path.exists(path_result_vague):
@@ -193,6 +222,19 @@ def sauv_img (new_image_encoded, path_result_vague) :
 #######################################################################
 
 def add_Suspect_from_DB():
+    """
+    Encode toutes les images de la vague en vecteur grace à l'autoencodeur
+
+    Paramètres :
+    ----------
+    path_im_vague : str
+        lien vers le dossier contenant les images de la vagues
+
+    Retourne :
+    ---------
+    encoded_image_list : list
+        list de vecteur correspondant aux images encodées
+    """
 
     """
     renvoie un chemin vers une images en choisissant un nb_aleatoirement dans la db
@@ -221,6 +263,19 @@ def add_Suspect_from_DB():
 ###################################################
 
 def distance_img(img1, img2):
+    """
+    Encode toutes les images de la vague en vecteur grace à l'autoencodeur
+
+    Paramètres :
+    ----------
+    path_im_vague : str
+        lien vers le dossier contenant les images de la vagues
+
+    Retourne :
+    ---------
+    encoded_image_list : list
+        list de vecteur correspondant aux images encodées
+    """
 
     """
     prends 2 img sous forme vetorielles
@@ -244,6 +299,19 @@ def distance_img(img1, img2):
 ###################################################
 
 def encoded_test_db():
+    """
+    Encode toutes les images de la vague en vecteur grace à l'autoencodeur
+
+    Paramètres :
+    ----------
+    path_im_vague : str
+        lien vers le dossier contenant les images de la vagues
+
+    Retourne :
+    ---------
+    encoded_image_list : list
+        list de vecteur correspondant aux images encodées
+    """
 
     """
     retourne la list de toutes les images du jeu de test encodée
@@ -257,6 +325,19 @@ def encoded_test_db():
 ###################################################
 
 def img_proche (img1, list_DB):
+    """
+    Encode toutes les images de la vague en vecteur grace à l'autoencodeur
+
+    Paramètres :
+    ----------
+    path_im_vague : str
+        lien vers le dossier contenant les images de la vagues
+
+    Retourne :
+    ---------
+    encoded_image_list : list
+        list de vecteur correspondant aux images encodées
+    """
 
     """
     prends 1 img sous forme vetorielle
