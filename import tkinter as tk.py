@@ -48,6 +48,7 @@ class Favori(tk.Button):
         Returns:
         None
         """
+        
         self.wd = wide
         self.ht = int (self.wd*0.43)
         self.large=wide*7
@@ -56,22 +57,21 @@ class Favori(tk.Button):
         self.id=None
         self.col = column
         self.row=row
-<<<<<<< HEAD
-
-        super().__init__(best_choices_container_frame,width=wide, height=h, **kwargs)
-=======
         self.c = c
         self.r= r
         self.position= position
-
-
         super().__init__(best_choices_container_frame,width=self.wd, height = self.ht,compound='top', anchor='center', pady = 20,**kwargs)
-        #compound='bottom', anchor='n',
->>>>>>> IHM_suite
+        
+        self.bind("<Button-1>", self.on_fav_drag_start)
+       # self.bind("<B1-Motion>", self.on_fav_drag_motion)
+       # self.bind("<ButtonRelease-1>", self.on_fav_drag_release)
+    
 
+       
+      
     def Make_favorite (self,id, note, image ):
         """
-        Définit une image favorite. Elle charge l'image grace à son identifiant `id`, la redimensionne à la taille souhaitée, et l'associe à l'objet.
+        Définit une image favorite pour l'objet courant. Elle charge l'image grace à son identifiant `id`, la redimensionne à la taille souhaitée, et l'associe à l'objet.
 
         Parameters:
         id (str): Identifiant l'image favorite.
@@ -103,11 +103,7 @@ class Favori(tk.Button):
         sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
         lim = 1
         for i in sorted_id_by_note :
-<<<<<<< HEAD
-            if lim < 10 :
-=======
             if lim < 11 :
->>>>>>> IHM_suite
                 if (i[1]>6):
                     path = i[0]
                     #print(path)
@@ -129,12 +125,6 @@ class Favori(tk.Button):
                 le_fav.note=None
                 le_fav.id=None
                 name = str(le_fav.winfo_name())
-<<<<<<< HEAD
-                text_to_print=name[1:]
-                le_fav.config(text=text_to_print, image='', padx=11, pady=11,height=le_fav.ht, width=le_fav.wd)
-
-    def get_first_non_fav(dico_sorted):
-=======
                 text_to_print='favori ' +  str (j+1)
                 le_fav.config(text=text_to_print, image='',height=le_fav.ht, width=le_fav.wd)
 
@@ -149,7 +139,6 @@ class Favori(tk.Button):
         int: La position du premier élément non favori.
         """
 
->>>>>>> IHM_suite
         pos = 0
         for i in dico_sorted :
             if i[1]>6:
@@ -168,13 +157,11 @@ class Favori(tk.Button):
         """
         self.config(text= str(self.winfo_name()), image='', height=self.large, width=self.large)
 
-<<<<<<< HEAD
-=======
     def update_color(self):
         return
     def Ajout_Favori(self):
         return
-
+    
     def selected_suspect_event(self):
         """
         Fonction appelée par les boutons suspects en haut à droite pour sélectionner un suspect.
@@ -186,7 +173,7 @@ class Favori(tk.Button):
         None
         """
         if (type(self)==Favori):
-
+            
             global suspect_actuel
             suspect_actuel = self
             note_label.config(text = 'Note: ' + str(self.note))
@@ -196,7 +183,97 @@ class Favori(tk.Button):
             self.resized_photo_image = ImageTk.PhotoImage(resized_image)
             suspect_principal.configure(image=self.resized_photo_image)
 
->>>>>>> IHM_suite
+
+    def on_fav_drag_start(self,event):
+        self.lift()
+        self.drag_start_x = event.x
+        self.drag_start_y = event.y
+        if(self.note is not None):
+            self.selected_suspect_event
+            global Dico_note
+            self.Update_Fav(Dico_note)
+
+    def on_fav_drag_motion(self,event):
+        x = self.winfo_x() - self.drag_start_x + event.x
+        y = self.winfo_y() - self.drag_start_y + event.y
+        self.place(x=x, y=y)
+
+
+    def on_fav_drag_release(self,event):
+        self.grid(row=self.r, column=self.c)
+        global Dico_note
+
+        if (self.note is not None and self.note >= 7):
+            if (self.winfo_x()+event.x > 10 and self.winfo_x()+event.x < 120 and (self.winfo_y()+event.y)>15 and (self.winfo_y()+event.y)<155):
+                sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
+                if (sorted_id_by_note[0][1]>=7):
+                    Dico_note[self.id] = sorted_id_by_note[0][1]
+                    self.Update_Fav(Dico_note)
+
+
+            if (self.winfo_x()+event.x > 145 and self.winfo_x()+event.x < 245 and (self.winfo_y()+event.y)>15 and (self.winfo_y()+event.y)<155):
+                sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
+                if (sorted_id_by_note[1][1]>=7):
+                    Dico_note[self.id] = sorted_id_by_note[1][1]
+                    self.Update_Fav(Dico_note)
+
+
+            if (self.winfo_x()+event.x > 275 and self.winfo_x()+event.x < 370 and (self.winfo_y()+event.y)>15 and (self.winfo_y()+event.y)<155):
+                sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
+                if (sorted_id_by_note[2][1]>=7):
+                    Dico_note[self.id] = sorted_id_by_note[2][1]
+                    self.Update_Fav(Dico_note)
+
+
+            if (self.winfo_x()+event.x > 400 and self.winfo_x()+event.x < 495 and (self.winfo_y()+event.y)>15 and (self.winfo_y()+event.y)<155):
+                sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
+                if (sorted_id_by_note[3][1]>=7):
+                    Dico_note[self.id] = sorted_id_by_note[3][1]
+                    self.Update_Fav(Dico_note)
+
+
+            if (self.winfo_x()+event.x > 520 and self.winfo_x()+event.x < 620 and (self.winfo_y()+event.y)>15 and (self.winfo_y()+event.y)<155):
+                sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
+                if (sorted_id_by_note[4][1]>=7):
+                    Dico_note[self.id] = sorted_id_by_note[4][1]
+                    self.Update_Fav(Dico_note)
+
+
+            if (self.winfo_x()+event.x > 10 and self.winfo_x()+event.x < 120 and (self.winfo_y()+event.y)>175 and (self.winfo_y()+event.y)<314):
+                sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
+                if (sorted_id_by_note[5][1]>=7):
+                    Dico_note[self.id] = sorted_id_by_note[5][1]
+                    self.Update_Fav(Dico_note)
+
+
+            if (self.winfo_x()+event.x > 145 and self.winfo_x()+event.x < 245 and (self.winfo_y()+event.y)>175 and (self.winfo_y()+event.y)<314):
+                sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
+                if (sorted_id_by_note[6][1]>=7):
+                    Dico_note[self.id] = sorted_id_by_note[6][1]
+                    self.Update_Fav(Dico_note)
+
+
+            if (self.winfo_x()+event.x > 275 and self.winfo_x()+event.x < 370 and (self.winfo_y()+event.y)>175 and (self.winfo_y()+event.y)<314):
+                sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
+                if (sorted_id_by_note[7][1]>=7):
+                    Dico_note[self.id] = sorted_id_by_note[7][1]
+                    self.Update_Fav(Dico_note)
+
+
+            if (self.winfo_x()+event.x > 400 and self.winfo_x()+event.x < 495 and (self.winfo_y()+event.y)>175 and (self.winfo_y()+event.y)<314):
+                sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
+                if (sorted_id_by_note[8][1]>=7):
+                    Dico_note[self.id] = sorted_id_by_note[8][1]
+                    self.Update_Fav(Dico_note)
+
+
+            if (self.winfo_x()+event.x > 520 and self.winfo_x()+event.x < 620 and (self.winfo_y()+event.y)>175 and (self.winfo_y()+event.y)<314):
+                sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
+                if (sorted_id_by_note[9][1]>=7):
+                    Dico_note[self.id] = sorted_id_by_note[9][1]
+                    self.Update_Fav(Dico_note)
+
+
 
 
 class Suspect(tk.Button):
@@ -219,7 +296,8 @@ class Suspect(tk.Button):
         self.col = col
         self.row= row
         self.note = note
-        self.config(highlightthickness=10, highlightbackground="white")
+        self.original_border_color = self.cget('highlightbackground')
+        self.config(highlightthickness=10)
         self.id = image_path
         global Dico_note
         Dico_note[self.id]= self.note
@@ -227,23 +305,20 @@ class Suspect(tk.Button):
         photo_resized = photo.resize((width, height))
         self.photo_image = ImageTk.PhotoImage(photo_resized)
         self.config(image=self.photo_image, command=self.selected_suspect_event)
+        self.bind("<Button-1>", self.on_suspect_drag_start)
+        self.bind("<B1-Motion>", self.on_suspect_drag_motion)
+        self.bind("<ButtonRelease-1>", self.on_suspect_drag_release)
 
 
 
     #fonction appelée par les boutons suspects en haut à droite #
     #remplace l'image du suspect selctionné en haut gauche pour le noter ensuite#
     def selected_suspect_event(self):
-<<<<<<< HEAD
-        global suspect_actuel
-        suspect_actuel = self
-        note_label.config(text = 'Note: ' + str(self.note))
-        image_suspect = suspect_actuel.cget('image')
-        suspect_principal.configure(image=image_suspect)
-
-    def increment_note(self):
-=======
         """
         Fonction appelée par les boutons suspects en haut à droite pour sélectionner un suspect.
+
+        Parameters:
+        self: Le suspect actuel.
 
         Returns:
         None
@@ -258,7 +333,7 @@ class Suspect(tk.Button):
             self.resized_photo_image = ImageTk.PhotoImage(resized_image)
             suspect_principal.configure(image=self.resized_photo_image)
 
-
+       
 
     def increment_note(self):
         """
@@ -267,7 +342,6 @@ class Suspect(tk.Button):
         Returns:
         None
         """
->>>>>>> IHM_suite
 
         global suspect_actuel
         if suspect_actuel.note <10:
@@ -296,7 +370,7 @@ class Suspect(tk.Button):
         global Dico_note
         Dico_note[suspect_actuel.id]= suspect_actuel.note
         note_label.config(text="Note: "+str(suspect_actuel.note))
-
+        
         print("ICI" +  str(suspect_actuel.note))
         if (suspect_actuel.note==6):
             print("here")
@@ -304,10 +378,10 @@ class Suspect(tk.Button):
             suspect_actuel = None
             suspect_principal.configure(image=Image_Instruction)
         Favori.Update_Fav(Dico_note=Dico_note)
+        
+        
 
-
-
-    def fav(self):
+    def garbage(self):
         """
         Réinitialise la note du suspect actuel à 0, met à jour la couleur et les informations.
 
@@ -316,7 +390,7 @@ class Suspect(tk.Button):
         """
 
         global suspect_actuel
-        suspect_actuel.note = 7  # Réinitialise la note à 0
+        suspect_actuel.note = 0  # Réinitialise la note à 0
         suspect_actuel.update_color()
         global note_label
         note_label.config(text="Note: "+str(suspect_actuel.note))
@@ -378,204 +452,35 @@ class Suspect(tk.Button):
             #print('favori')
             Favori.Make_favorite(Dico_rang_fav[rank], suspect_actuel.id, suspect_actuel.note, suspect_actuel.photo_image)
         return
+    
 
-### GESTION DU DND ###
-def make_draggable_fav(widget):
-    widget.bind("<Button-1>", on_fav_drag_start)
-    widget.bind("<B1-Motion>", on_fav_drag_motion)
-    widget.bind("<ButtonRelease-1>", on_fav_drag_release)
-
-def on_fav_drag_start(event):
-    widget = event.widget
-    widget.lift()
-    widget.drag_start_x = event.x
-    widget.drag_start_y = event.y
-    if(widget.note is not None):
-        Favori.selected_suspect_event(widget)
-        global Dico_note
-        Favori.Update_Fav(Dico_note)
-
-def on_fav_drag_motion(event):
-    widget = event.widget
-    x = widget.winfo_x() - widget.drag_start_x + event.x
-    y = widget.winfo_y() - widget.drag_start_y + event.y
-    widget.place(x=x, y=y)
+    def on_suspect_drag_start(self,event):
+        self.lift()
+        self.drag_start_x = event.x
+        self.drag_start_y = event.y
+        self.selected_suspect_event
 
 
-def on_fav_drag_release(event):
-    widget = event.widget
-    widget.grid(row=widget.r, column=widget.c)
-    global Dico_note
+    def on_suspect_drag_motion(self,event):
 
-    if (widget.note is not None and widget.note >= 7):
-        if (widget.winfo_x()+event.x > 10 and widget.winfo_x()+event.x < 120 and (widget.winfo_y()+event.y)>15 and (widget.winfo_y()+event.y)<155):
-            sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
-            if (sorted_id_by_note[0][1]>=7):
-                Dico_note[widget.id] = sorted_id_by_note[0][1]
-                Favori.Update_Fav(Dico_note)
+        x = self.winfo_x() - self.drag_start_x + event.x
+        y = self.winfo_y() - self.drag_start_y + event.y
+        self.place(x=x, y=y)
 
+    def on_suspect_drag_release(self,event):
+        x = round((self.winfo_x() - self.drag_start_x + event.x) ) 
+        y = round((self.winfo_y() - self.drag_start_y + event.y) ) 
+        self.grid(row=self.row, column=self.col)
 
-        if (widget.winfo_x()+event.x > 145 and widget.winfo_x()+event.x < 245 and (widget.winfo_y()+event.y)>15 and (widget.winfo_y()+event.y)<155):
-            sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
-            if (sorted_id_by_note[1][1]>=7):
-                Dico_note[widget.id] = sorted_id_by_note[1][1]
-                Favori.Update_Fav(Dico_note)
-
-
-        if (widget.winfo_x()+event.x > 275 and widget.winfo_x()+event.x < 370 and (widget.winfo_y()+event.y)>15 and (widget.winfo_y()+event.y)<155):
-            sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
-            if (sorted_id_by_note[2][1]>=7):
-                Dico_note[widget.id] = sorted_id_by_note[2][1]
-                Favori.Update_Fav(Dico_note)
-
-
-        if (widget.winfo_x()+event.x > 400 and widget.winfo_x()+event.x < 495 and (widget.winfo_y()+event.y)>15 and (widget.winfo_y()+event.y)<155):
-            sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
-            if (sorted_id_by_note[3][1]>=7):
-                Dico_note[widget.id] = sorted_id_by_note[3][1]
-                Favori.Update_Fav(Dico_note)
-
-
-        if (widget.winfo_x()+event.x > 520 and widget.winfo_x()+event.x < 620 and (widget.winfo_y()+event.y)>15 and (widget.winfo_y()+event.y)<155):
-            sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
-            if (sorted_id_by_note[4][1]>=7):
-                Dico_note[widget.id] = sorted_id_by_note[4][1]
-                Favori.Update_Fav(Dico_note)
-
-
-        if (widget.winfo_x()+event.x > 10 and widget.winfo_x()+event.x < 120 and (widget.winfo_y()+event.y)>175 and (widget.winfo_y()+event.y)<314):
-            sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
-            if (sorted_id_by_note[5][1]>=7):
-                Dico_note[widget.id] = sorted_id_by_note[5][1]
-                Favori.Update_Fav(Dico_note)
-
-
-        if (widget.winfo_x()+event.x > 145 and widget.winfo_x()+event.x < 245 and (widget.winfo_y()+event.y)>175 and (widget.winfo_y()+event.y)<314):
-            sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
-            if (sorted_id_by_note[6][1]>=7):
-                Dico_note[widget.id] = sorted_id_by_note[6][1]
-                Favori.Update_Fav(Dico_note)
-
-
-        if (widget.winfo_x()+event.x > 275 and widget.winfo_x()+event.x < 370 and (widget.winfo_y()+event.y)>175 and (widget.winfo_y()+event.y)<314):
-            sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
-            if (sorted_id_by_note[7][1]>=7):
-                Dico_note[widget.id] = sorted_id_by_note[7][1]
-                Favori.Update_Fav(Dico_note)
-
-
-        if (widget.winfo_x()+event.x > 400 and widget.winfo_x()+event.x < 495 and (widget.winfo_y()+event.y)>175 and (widget.winfo_y()+event.y)<314):
-            sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
-            if (sorted_id_by_note[8][1]>=7):
-                Dico_note[widget.id] = sorted_id_by_note[8][1]
-                Favori.Update_Fav(Dico_note)
-
-
-        if (widget.winfo_x()+event.x > 520 and widget.winfo_x()+event.x < 620 and (widget.winfo_y()+event.y)>175 and (widget.winfo_y()+event.y)<314):
-            sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
-            if (sorted_id_by_note[9][1]>=7):
-                Dico_note[widget.id] = sorted_id_by_note[9][1]
-                Favori.Update_Fav(Dico_note)
-
-
-
-"""
-
-def make_draggable_suspect(widget):
-    widget.bind("<Button-1>", on_suspect_drag_start)
-    widget.bind("<B1-Motion>", on_suspect_drag_motion)
-    widget.bind("<ButtonRelease-1>", on_suspect_drag_release)
-
-def on_suspect_drag_start(event):
-
-    widget = event.widget
-    widget.lift()
-    widget.drag_start_x = event.x
-    widget.drag_start_y = event.y
-    Suspect.selected_suspect_event(widget)
-
-
-def on_suspect_drag_motion(event):
-    widget = event.widget
-    x = widget.winfo_x() - widget.drag_start_x + event.x
-    y = widget.winfo_y() - widget.drag_start_y + event.y
-    widget.place(x=x, y=y)
-
-def on_suspect_drag_release(event):
-    widget = event.widget
-    x = round((widget.winfo_x() - widget.drag_start_x + event.x) )
-    y = round((widget.winfo_y() - widget.drag_start_y + event.y) )
-    widget.grid(row=widget.row, column=widget.col)
-
-    if (x < -100 and x > -900 and y > 350 and y < 800):
-        widget.note=7
-        global suspect_actuel
-        global Dico_note
-        global note_label
-        note_label.config(text="Note: "+str(suspect_actuel.note))
-        Dico_note[suspect_actuel.id]= suspect_actuel.note
-        suspect_actuel.Ajout_Favori()
-        Favori.Update_Fav(Dico_note=Dico_note)
-
-<<<<<<< HEAD
-
-    def decrement_note(self):
-        global suspect_actuel
-        if suspect_actuel.note >0:
-            suspect_actuel.note = suspect_actuel.note - 1
-            suspect_actuel.update_color()
-        global note_label
-        global Dico_note
-        note_label.config(text="Note: "+str(suspect_actuel.note))
-        Dico_note[suspect_actuel.id]= suspect_actuel.note
-        Favori.Update_Fav(Dico_note=Dico_note)
-
-    def garbage(self):
-        global suspect_actuel
-        suspect_actuel.note = 0  # Réinitialise la note à 0
-        suspect_actuel.update_color()
-        global note_label
-        note_label.config(text="Note: "+str(suspect_actuel.note))
-        global Dico_note
-        Dico_note[suspect_actuel.id]= suspect_actuel.note
-
-        Favori.Update_Fav(Dico_note=Dico_note)
-
-    def update_color(self):
-        global suspect_actuel
-
-        if suspect_actuel.note >= 9 :
-            border_color = "dark green"
-        elif suspect_actuel.note >= 7:
-            border_color = "green yellow"
-        elif suspect_actuel.note > 3:
-            border_color = self.original_border_color
-        elif suspect_actuel.note > 1:
-            border_color = "orange"
-        else:
-            border_color = "red"
-
-        # Définit la couleur de la bordure du bouton
-        suspect_actuel.config(highlightbackground=border_color)
-
-
-    def ranking(self):
-        rank=1
-        rating=suspect_actuel.note
-        for notes in Dico_note.values():
-            if (rating<notes):
-                rank+=1
-        return rank
-
-    def Ajout_Favori(self):
-        global suspect_actuel
-        rank = suspect_actuel.ranking()
-        if (rank<10 and self.note>6):
-            print('favori')
-            Favori.Make_favorite(Dico_rang_fav[rank], suspect_actuel.id, suspect_actuel.note, suspect_actuel.photo_image)
-        return
-=======
->>>>>>> IHM_suite
+        if (x < -100 and x > -900 and y > 350 and y < 800):
+            self.note=7
+            global suspect_actuel
+            global Dico_note
+            global note_label
+            note_label.config(text="Note: "+str(suspect_actuel.note))
+            Dico_note[suspect_actuel.id]= suspect_actuel.note
+            suspect_actuel.Ajout_Favori()
+            Favori.Update_Fav(Dico_note=Dico_note)
 
 
     ### mettre un suspect à la poubelle
@@ -583,19 +488,13 @@ def on_suspect_drag_release(event):
     #    print()
 #fonction appelée par le bouton restart
 # réinitialise à l'état d'origine (affichage, contenu des dossiers, numérotation vague, notations)
-<<<<<<< HEAD
-=======
-"""
-
->>>>>>> IHM_suite
 def Restart_event(event):
-
     """
     Réinitialise l'application à son état d'origine.
 
     Parameters:
     event: L'événement déclencheur du redémarrage.
-    
+()
     Returns:
     None
     """
@@ -603,7 +502,6 @@ def Restart_event(event):
     suspect_principal.configure(image=Image_Instruction)
     Start_Over()
     Vague_actuelle=1
-
 
 def Refresh_event(event):
     """
@@ -613,17 +511,10 @@ def Refresh_event(event):
     event: L'événement déclencheur.
 
     Returns:
-    None
+    Non
     """
 
     global Vague_actuelle
-<<<<<<< HEAD
-    print('REFRESH REFRESH')
-
-    # recupérer les favoris plus besoin du dico note
-
-=======
->>>>>>> IHM_suite
     Liste_path = Genere_Suspect(Dico_note, Vague_actuelle)
     Vague_actuelle+=1
     #genere 12 nouvelles images de suspects  "\vague_2\image_1", "\vague2|image2... n"
@@ -650,7 +541,6 @@ def Genere_Suspect(Dico, Vague_actuelle ):
     """
 
     # Parcourir le dictionnaire et afficher chaque clé et valeur
-    # constituer la liste de note associée à chaque image
     note_list=[]
     for img, note in Dico.items():
         print(f"{img} a {note} points.")
@@ -661,11 +551,7 @@ def Genere_Suspect(Dico, Vague_actuelle ):
         # va chercher les images de la vague correspondante
         # génère les nouvelles images
         # renvoie la liste des path svers les nouvelles images
-<<<<<<< HEAD
-    Liste_Path_nouvelle_vague=main_sprint1.IHM_loop(Vague_actuelle,note_list)
-=======
     #Liste_Path_nouvelle_vague=main_sprint1.IHM_loop(Vague_actuelle, note_list)
->>>>>>> IHM_suite
 
     print(Liste_Path_nouvelle_vague)
     return (Liste_Path_nouvelle_vague)
@@ -688,50 +574,49 @@ def Init_suspects(choices_container_frame,Liste_img,photo_width,photo_height):
 
     suspect_1 = Suspect(choices_container_frame,Liste_img[0],5,photo_width,photo_height,0,0)
     suspect_1.grid(row=0, column=0, padx=photo_width//50, pady=photo_height//50)
-    #make_draggable_suspect(suspect_1)
+   
 
     suspect_2 = Suspect(choices_container_frame, Liste_img[1],5,photo_width,photo_height,0,1)
     suspect_2.grid(row=0, column=1, padx=photo_width//50, pady=photo_height//50)
-    #make_draggable_suspect(suspect_2)
+    
 
     suspect_3 = Suspect(choices_container_frame, Liste_img[2],5,photo_width,photo_height,0,2)
     suspect_3.grid(row=0, column=2, padx=photo_width//50, pady=photo_height//50)
-    #make_draggable_suspect(suspect_3)
 
     suspect_4 = Suspect(choices_container_frame, Liste_img[3],5,photo_width,photo_height,0,3)
     suspect_4.grid(row=0, column=3, padx=photo_width//50, pady=photo_height//50)
-    #make_draggable_suspect(suspect_4)
+
 
     suspect_5 = Suspect(choices_container_frame, Liste_img[4],5,photo_width,photo_height,1,0)
     suspect_5.grid(row=1, column=0, padx=photo_width//50, pady=photo_height//50)
-    #make_draggable_suspect(suspect_5)
+
+
     suspect_6 = Suspect(choices_container_frame, Liste_img[5],5,photo_width,photo_height,1,1)
     suspect_6.grid(row=1, column=1, padx=photo_width//50, pady=photo_height//50)
-    #make_draggable_suspect(suspect_6)
+
 
     suspect_7 = Suspect(choices_container_frame, Liste_img[6],5,photo_width,photo_height,1,2)
     suspect_7.grid(row=1, column=2, padx=photo_width//50, pady=photo_height//50)
-    #make_draggable_suspect(suspect_7)
 
     suspect_8 = Suspect(choices_container_frame, Liste_img[7],5,photo_width,photo_height,1,3)
     suspect_8.grid(row=1, column=3, padx=photo_width//50, pady=photo_height//50)
-    #make_draggable_suspect(suspect_8)
+
 
     suspect_9 = Suspect(choices_container_frame, Liste_img[8],5,photo_width,photo_height,2,0)
     suspect_9.grid(row=2, column=0, padx=photo_width//50, pady=photo_height//50)
-    #make_draggable_suspect(suspect_9)
+
 
     suspect_10 = Suspect(choices_container_frame, Liste_img[9],5,photo_width,photo_height,2,1)
     suspect_10.grid(row=2, column=1, padx=photo_width//50, pady=photo_height//50)
-    #make_draggable_suspect(suspect_10)
+
 
     suspect_11 = Suspect(choices_container_frame, Liste_img[10],5,photo_width,photo_height,2,2)
     suspect_11.grid(row=2, column=2, padx=photo_width//50, pady=photo_height//50)
-    #make_draggable_suspect(suspect_11)
+
 
     suspect_12 = Suspect(choices_container_frame, Liste_img[11],5,photo_width,photo_height,2,3)
     suspect_12.grid(row=2, column=3, padx=photo_width//50, pady=photo_height//50)
-    #make_draggable_suspect(suspect_12)
+
     Dico_suspect ={suspect_1:1, suspect_2:2, suspect_3:3, suspect_4:4, suspect_5:5, suspect_6:6, suspect_7:7, suspect_8:8, suspect_9:9, suspect_10:10, suspect_11:11, suspect_12:12}
 
 def Init_favori(fav_dim,pad):
@@ -748,152 +633,54 @@ def Init_favori(fav_dim,pad):
     fav_1 = Favori(1,fav_dim, 1, 1,0,0)
     fav_1.config(text="favori 1")
     fav_1.grid(row=0, column=0, padx=pad, pady=pad)
-    make_draggable_fav(fav_1)
+ 
 
-<<<<<<< HEAD
-# Ceate the main window
-root = tk.Tk()
-root.title("Face Determination Software")
-# Define the width and height of the screen
-screen_width = root.winfo_screenwidth()
-screen_height = root.winfo_screenheight()
-# Calculate the width and height
-left_width = screen_width * 3 // 7
-right_width = screen_width * 4 // 7
-choices_height = screen_height * 2 // 3
-left_height = screen_height * 3 // 8
-top_left_width = left_width * 1 // 4
-#jauge_width = top_left_width * 2 // 15
-# Create frames for left and right sections
-left_frame = tk.Frame(root, width=left_width, height=screen_height, bg="gray80")
-right_frame = tk.Frame(root, width=right_width, height=screen_height, bg="black")
-left_frame.pack(side=tk.LEFT, fill=tk.Y)
-left_frame.pack_propagate(False)
-right_frame.pack(side=tk.RIGHT, fill=tk.Y)
-right_frame.pack_propagate(False)
-######### --Modif for the right side-- #########
-### choices frame = partie supérieur de la partie de droite ###
-choices_frame = tk.Frame(right_frame,width=right_width, height = choices_height, bg = "gray70")
-choices_frame.pack(side=tk.TOP, fill=tk.X)
-choices_frame.pack_propagate(False)
-### intérieur de la partie supérieur de la partie de droite, contient les suspects ###
-choices_container_frame =  tk.Frame(choices_frame,width=right_width*0.9, height = choices_height*0.9, bg = "white")
-choices_container_frame.pack(fill="both", expand=True)
-choices_container_frame.pack_propagate(False)
-choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
-choices_container_frame.update()
-choices_height = (choices_container_frame.winfo_height()//1)
-choices_width = choices_container_frame.winfo_width()
-### partie inférieur de la partie de droite, contient les boutons d'options ###
-Menu_Option_Frame = tk.Frame(right_frame,width=right_width, height = (screen_height-choices_height), bg = "gray10")
-Menu_Option_Frame.pack_propagate(False)
-Menu_Option_Frame.pack(side=tk.TOP, fill='both')
-=======
     fav_2 = Favori(2, fav_dim, 1, 2,0,1)
     fav_2.config(text='favori 2')
     fav_2.grid(row=0, column = 1, padx=pad, pady=pad)
-    make_draggable_fav(fav_2)
->>>>>>> IHM_suite
+
 
     fav_3 = Favori(3,fav_dim, 1, 3, 0, 2)
     fav_3.config(text="favori 3")
     fav_3.grid(row=0, column=2, padx=pad, pady=pad)
-    make_draggable_fav(fav_3)
+
 
     fav_4 = Favori(4, fav_dim, 1, 4,0,3)
     fav_4.config(text='favori 4')
     fav_4.grid(row=0, column = 3, padx=pad, pady=pad)
-    make_draggable_fav(fav_4)
+
 
     fav_5 = Favori(5,fav_dim, 1, 5,0,4)
     fav_5.config(text="favori 5")
     fav_5.grid(row=0, column=4, padx=pad, pady=pad)
-    make_draggable_fav(fav_5)
+ 
 
     fav_6 = Favori(6, fav_dim, 1, 6, 1 ,0)
     fav_6.config(text='favori 6')
     fav_6.grid(row=1, column = 0, padx=pad, pady=pad)
-    make_draggable_fav(fav_6)
+
 
     fav_7 = Favori(7,fav_dim, 1, 7, 1, 1)
     fav_7.config(text="favori 7")
     fav_7.grid(row=1, column=1, padx=pad, pady=pad)
-    make_draggable_fav(fav_7)
+
 
     fav_8 = Favori(8, fav_dim, 1, 8, 1, 2)
     fav_8.config(text='favori 8')
     fav_8.grid(row=1, column = 2, padx=pad, pady=pad)
-    make_draggable_fav(fav_8)
+
 
     fav_9 = Favori(9,fav_dim, 1, 9, 1, 3)
     fav_9.config(text="favori 9")
     fav_9.grid(row=1, column=3, padx=pad, pady=pad)
-    make_draggable_fav(fav_9)
+
 
     fav_10 = Favori(10, fav_dim, 1, 10, 1,4)
     fav_10.config(text='favori 10')
     fav_10.grid(row=1, column = 4, padx=pad, pady=pad)
-    make_draggable_fav(fav_10)
 
-<<<<<<< HEAD
-######### --Modif for the left side-- #########
-####### --Bottom side: selection des meilleures images-- ########
-best_choices_frame = tk.Frame(left_frame,width=left_width,height=left_height,bg="gray75")
-best_choices_frame.pack(side=tk.BOTTOM,fill = tk.X)
-best_choices_frame.pack_propagate(False)
-best_choices_container_frame =  tk.Frame(best_choices_frame,width=left_width*0.95, height = left_height*0.95, bg = "white")
-best_choices_container_frame.pack(fill="both", expand=True)
-best_choices_container_frame.pack_propagate(False)
-best_choices_container_frame.place(relx=0.5,rely=0.5,anchor="center")
-# Create a grid of frames
-favorites = [[tk.Frame(best_choices_container_frame, bg="lightgreen") for _ in range(5)] for _ in range(2)]
-fav_dim = int(left_width*0.021)
-print(fav_dim)
 
-fav_1 = Favori(1,fav_dim, 1, 1)
-fav_1.config(text="favori 1")
-fav_1.grid(row=1, column=1, padx=fav_dim, pady=fav_dim)
-
-fav_2 = Favori(2, fav_dim, 1, 2)
-fav_2.config(text='favori 2')
-fav_2.grid(row=1, column = 2, padx=fav_dim, pady=fav_dim)
-
-fav_3 = Favori(3,fav_dim, 1, 3)
-fav_3.config(text="favori 3")
-fav_3.grid(row=1, column=3, padx=fav_dim, pady=fav_dim)
-
-fav_4 = Favori(4, fav_dim, 1, 4)
-fav_4.config(text='favori 4')
-fav_4.grid(row=1, column = 4, padx=fav_dim, pady=fav_dim)
-
-fav_5 = Favori(5,fav_dim, 1, 5)
-fav_5.config(text="favori 5")
-fav_5.grid(row=1, column=5, padx=fav_dim, pady=fav_dim)
-
-fav_6 = Favori(6, fav_dim, 1, 6)
-fav_6.config(text='favori 6')
-fav_6.grid(row=2, column = 1, padx=fav_dim, pady=fav_dim)
-
-fav_7 = Favori(7,fav_dim, 1, 7)
-fav_7.config(text="favori 7")
-fav_7.grid(row=2, column=2, padx=fav_dim, pady=fav_dim)
-
-fav_8 = Favori(8, fav_dim, 1, 8)
-fav_8.config(text='favori 8')
-fav_8.grid(row=2, column = 3, padx=fav_dim, pady=fav_dim)
-
-fav_9 = Favori(9,fav_dim, 1, 9)
-fav_9.config(text="favori 9")
-fav_9.grid(row=2, column=4, padx=fav_dim, pady=fav_dim)
-
-fav_10 = Favori(10, fav_dim, 1, 10)
-fav_10.config(text='favori 10')
-fav_10.grid(row=2, column = 5, padx=fav_dim, pady=fav_dim)
-
-Dico_rang_fav ={1: fav_1,
-=======
     Dico_rang_fav ={1: fav_1,
->>>>>>> IHM_suite
                 2: fav_2,
                 3:fav_3,
                 4:fav_4,
@@ -920,7 +707,7 @@ def Start_Over():
         sus.destroy()
     Init_suspects(choices_frame, Liste_vague1, photo_width, photo_height)
     note_label.config(text = "Pas d'image sélectionnée")
-
+    
     fav_pad_x = 10
     fav_dim = int(((left_width *0.95)) / 40)
     #fav_pad_y = left_height-
@@ -936,7 +723,7 @@ def Start_Over():
 
 def switch_frames(fram1,fram2):
     fram1.pack_forget()
-    fram2.place(x=0, y=0, relwidth=1, relheight=1)
+    fram2.place(relx=0.5, rely=0.5, anchor="center") 
 
 # Ceate the main window
 root = tk.Tk()
@@ -946,7 +733,7 @@ screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
 # Calculate the width and height
 left_width = screen_width * 3 // 7
-right_width = screen_width -left_width
+right_width = screen_width * 4 // 7
 choices_height = screen_height * 2 // 3
 left_height = screen_height * 3 // 8
 top_left_width = left_width * 1 // 4
@@ -1007,7 +794,11 @@ Menu_Option_Frame.pack(fill="both",expand=True)
 Menu_Option_Frame.pack_propagate(False)
 
 ##### Création et ajout des boutons dans le frame menu option #####
-
+"""
+Menu_Option_Frame_bas= tk.Frame(right_frame, bg = "black")
+Menu_Option_Frame_bas.pack(side=tk.BOTTOM, fill="both",expand=True)
+Menu_Option_Frame_bas.pack_propagate(False)
+"""
 pad_horizontal = 10
 pad_vertical = 10
 Menu_Option_Frame.grid_rowconfigure(0, weight=1)
@@ -1015,7 +806,7 @@ Menu_Option_Frame.grid_rowconfigure(1, weight=1)
 Menu_Option_Frame.grid_columnconfigure(0, weight=1)
 Menu_Option_Frame.grid_columnconfigure(1, weight=1)
 
-Bouton_restart = tk.Button(Menu_Option_Frame,text='     Start Over     ',background='red', command=lambda: Restart_event)
+Bouton_restart = tk.Button(Menu_Option_Frame,text='Start Over',background='red', command=lambda: Restart_event)
 Bouton_restart.grid(column=1, row=0, sticky="nswe",padx=pad_horizontal, pady=pad_vertical)
 Bouton_restart.bind("<Button-1>", Restart_event)
 
@@ -1023,9 +814,9 @@ Bouton_refresh = tk.Button(Menu_Option_Frame,text='Refresh', background='lightbl
 Bouton_refresh.grid(column=0, row=1, sticky="nswe",padx=pad_horizontal, pady=pad_vertical)
 Bouton_refresh.bind("<Button-1>", Refresh_event)
 
-Bouton_fav= tk.Button(Menu_Option_Frame,text='Mettre en Favori', background='lightgreen')
-Bouton_fav.grid(column=0, row=0, sticky="nswe",padx=pad_horizontal, pady=pad_vertical)
-Bouton_fav.bind("<Button-1>" , Suspect.fav )
+Bouton_garbage= tk.Button(Menu_Option_Frame,text='Garbage Bin', background='lightgreen')
+Bouton_garbage.grid(column=0, row=0, sticky="nswe",padx=pad_horizontal, pady=pad_vertical)
+Bouton_garbage.bind("<Button-1>" , Suspect.garbage )
 
 Bouton_FIN= tk.Button(Menu_Option_Frame,text='Finish', background='yellow',command=lambda: switch_frames(frame_interface,frame_fin))
 Bouton_FIN.grid(column=1, row=1, sticky="nswe",padx=pad_horizontal, pady=pad_vertical)
@@ -1038,8 +829,6 @@ best_choices_frame.pack_propagate(False)
 
 best_choices_container_frame =  tk.Frame(best_choices_frame,width=left_width*0.95, height = left_height*0.95, bg = "white")
 best_choices_container_frame.pack(fill="both", expand=True)
-best_choices_container_frame.pack_propagate(False)
-
 
 best_choices_container_frame.grid_rowconfigure(0, weight=1)
 best_choices_container_frame.grid_rowconfigure(1, weight=1)
@@ -1088,21 +877,7 @@ button_down = tk.Button(modif_main_image_frame, image=Image_down,bg="lightgray")
 button_down.pack(side=tk.BOTTOM, fill="both",expand=True)
 button_down.bind("<Button-1>",Suspect.decrement_note)
 
-<<<<<<< HEAD
-"""
-jauge_frame = tk.Frame(modif_main_image_frame,width=jauge_width,height=(screen_height-left_height),bg="lightgray")
-jauge_frame.pack(side=tk.LEFT,fill=tk.Y)
-jauge_frame.pack_propagate(False)
-jauge = jauge(jauge_frame,(screen_height-left_height))
-buttons_modif_main_frame = tk.Frame(modif_main_image_frame,width=(top_left_width-jauge_width),height=(screen_height-left_height),bg="lightgray")
-buttons_modif_main_frame.pack(side=tk.RIGHT,fill=tk.Y)
-buttons_modif_main_frame.pack_propagate(False)
-button1 = tk.Button(buttons_modif_main_frame, text="Save Mark")
-button1.pack(side=tk.TOP, fill=tk.X, padx=10, pady=5)
-"""
-=======
 
->>>>>>> IHM_suite
 view_main_image_frame = tk.Frame(main_image_frame,width=(left_width-top_left_width),height=(screen_height-left_height),bg="lightgray")
 view_main_image_frame.pack_propagate(False)
 view_main_image_frame.pack(side=tk.LEFT,fill=tk.Y)
@@ -1113,8 +888,6 @@ suspect_principal = tk.Label(view_main_image_frame , width = top_left_width, hei
 suspect_principal.place(relx = 0.5,rely = 0.5, anchor="center")
 suspect_principal.pack(fill="both",expand=True)
 
-<<<<<<< HEAD
-=======
 
 frame_fin = tk.Frame(root, width=screen_width, height=screen_height, bg="midnight blue")
 frame_fin.pack(expand=True,fill='both')
@@ -1140,7 +913,8 @@ frame_favori_fin.grid_columnconfigure(3, weight=1)
 frame_favori_fin.grid_columnconfigure(4, weight=1)
 
 
->>>>>>> IHM_suite
+
+
 
 
 ###############################################################################
