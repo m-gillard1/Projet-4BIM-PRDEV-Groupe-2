@@ -22,6 +22,20 @@ from PIL import Image
 
 #inutile
 def creation_list_note(nb_image_par_vague) :
+    """
+    Creer une  liste de note aléatoire pour tester nos fonctions sans le lien avec l'IHM
+
+    Paramètres :
+    ----------
+    nb_image_par_vague : int
+        donne le nombre d'image dans une vague et donc le nombre de note à générer
+
+    Retourne :
+    ---------
+    note : list
+        list de int contennat les note aléatoire
+    """
+
     # liste de note aléatoire en attendant lien fonctionnel avec l'IHM
     note = np.zeros(nb_image_par_vague)
     count_0=0
