@@ -868,7 +868,7 @@ modif_main_image_frame.pack_propagate(False)
 
 
 photo_updown_size = top_left_width
-print(photo_updown_size)
+
 
 photo_up_raw = Image.open("up.png")
 photo_up_resized = photo_up_raw.resize((photo_updown_size, photo_updown_size))
