@@ -74,11 +74,17 @@ def train_vae(dataset_path, batch_size=64, learning_rate=0.001, num_epochs=100):
     vae = VAE()
 
     # Loss function
-    def vae_loss(recon_x, x, mu, log_var):
-        BCE = nn.BCELoss(reduction='sum')(recon_x, x) # Reconstruction loss
-        KLD = -0.5 * torch.sum(1 + log_var - mu.pow(2) - log_var.exp()) # KL divergence
-        #print(BCE.item(), KLD.item())
-        return BCE + 0.001*KLD
+    def vae_loss(recon_x, x, mu, log_var, epoch):
+        if epoch > 2:
+            MSE = nn.MSELoss()(recon_x, x)
+            KLD = -0.5 * torch.sum(1 + log_var - mu.pow(2) - log_var.exp()) # KL divergence
+            print(MSE.item(), KLD.item())
+            loss =  MSE + 1e-7 * KLD
+        else:
+            MSE = nn.MSELoss()(recon_x, x)
+            print(MSE.item())
+            loss = MSE
+        return loss 
 
     # Optimizer
     optimizer = optim.Adam(vae.parameters(), lr=learning_rate)
