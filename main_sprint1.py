@@ -151,7 +151,7 @@ def algo_genetique_sans_note (encoded_image_list, taux_cross_over) :
 
 def algo_genetique_avec_note (image_note_list, taux_cross_over) :
     """
-    Encode toutes les images de la vague en vecteur grace à l'autoencodeur
+    Creer de nouveau vecteur d'image avec le cross over
 
     Paramètres :
     ----------
@@ -164,7 +164,7 @@ def algo_genetique_avec_note (image_note_list, taux_cross_over) :
     Retourne :
     ---------
     new_image_encoded : list
-        list de vecteur correspondant aux nouvelles images encodées apres cross over 
+        list de vecteur correspondant aux nouvelles images encodées apres cross over
     """
 
     image_after_algo_list=Algo_gen.cross_over_avec_note(image_note_list,taux_cross_over)
