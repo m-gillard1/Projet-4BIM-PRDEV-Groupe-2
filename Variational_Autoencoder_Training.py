@@ -32,9 +32,9 @@ class VAE(nn.Module):
         )
 
         # Mean and log variance layers
-        self.fc_mean = nn.Linear(128 * 32 * 32, latent_dim)
-        self.fc_log_var = nn.Linear(128 * 32 * 32 , latent_dim)
-
+        self.fc_mean = nn.Conv2d(256 , 256, kernel_size=3, padding='same') #Linear(8 * 8 * 256 , latent_dim)
+        self.fc_log_var = nn.Conv2d(256 , 256, kernel_size=3, padding='same') #Linear(256 * 8 * 8 , latent_dim)
+        
         self.decoder = nn.Sequential(
             nn.ConvTranspose2d(256, 128, kernel_size=3, stride=2, padding=1, output_padding=1),
             nn.ReLU(),
