@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import PhotoImage
 from PIL import Image,ImageTk
+import os
 
 #import main_sprint1
 
@@ -735,6 +736,22 @@ def Start_Over():
 def switch_frames(fram1,fram2):
     fram1.pack_forget()
     fram2.place(x=0, y=0, relwidth=1, relheight=1)
+    if not os.path.exists("resultats"):
+        os.makedirs("resultats")
+    for i in range (2):
+        for j in range (5):
+            fav = Dico_rang_fav[i*5 + j + 1]
+            print(fav)
+            if (fav.photo_image is not None):
+                temp = tk.Label(frame_favori_fin, image = fav.photo_image)
+                temp.grid(column = j, row=i)
+                img = ImageTk.getimage( fav.photo_image )
+                le_path = "resultats/" + str (i*5 + j + 1)+str(".png")
+                print('le path est le suivant : '  + str (le_path))
+                img.save(le_path)
+
+    
+    
 
 # Ceate the main window
 root = tk.Tk()
@@ -925,13 +942,7 @@ frame_favori_fin = tk.Frame(frame_fin, width = screen_width* 1//2, height = scre
 frame_favori_fin.place(anchor = 'center',relx = 0.5,rely = 0.6)
 frame_favori_fin.pack_propagate(False)
 
-frame_favori_fin.grid_rowconfigure(0, weight=1)
-frame_favori_fin.grid_rowconfigure(1, weight=1)
-frame_favori_fin.grid_columnconfigure(0, weight=1)
-frame_favori_fin.grid_columnconfigure(1, weight=1)
-frame_favori_fin.grid_columnconfigure(2, weight=1)
-frame_favori_fin.grid_columnconfigure(3, weight=1)
-frame_favori_fin.grid_columnconfigure(4, weight=1)
+
 
 
 
