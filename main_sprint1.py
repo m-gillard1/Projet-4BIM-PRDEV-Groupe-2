@@ -186,17 +186,20 @@ def algo_genetique_avec_note (image_note_list, taux_cross_over) :
 #########################################################################
 def sauv_img (new_image_encoded, path_result_vague) :
     """
-    Encode toutes les images de la vague en vecteur grace à l'autoencodeur
+    décode les nouvelles images obtenues puis les sauvegarde dans un dossier et repertorie les liens
 
     Paramètres :
     ----------
-    path_im_vague : str
-        lien vers le dossier contenant les images de la vagues
+    new_image_encoded : list
+        list des vecteurs des nouvelles images encodées apres cross over
+
+    path_result_vague : str
+        lien vers le dossier contenant les nouvelles images crées
 
     Retourne :
     ---------
-    encoded_image_list : list
-        list de vecteur correspondant aux images encodées
+    list_path : list de str
+        list des chemin vers chacune des nouvelles images decodées
     """
 
     # verfier si le dossier existe sinon le creer
