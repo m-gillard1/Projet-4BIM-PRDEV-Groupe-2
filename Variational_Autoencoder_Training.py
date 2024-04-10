@@ -65,9 +65,6 @@ def my_loader_function(path):
         return Image.open(open(path, 'r+b'))
 
 def train_vae(dataset_path, batch_size=64, learning_rate=0.001, num_epochs=100):
-    transform = transforms.Compose([
-        transforms.ToTensor(),
-    ])
     
     # Load dataset
     train_dataset= datasets.ImageFolder(root=dataset_path, transform=transforms.ToTensor(), loader=my_loader_function)
