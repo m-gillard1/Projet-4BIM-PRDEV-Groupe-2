@@ -258,23 +258,19 @@ def add_Suspect_from_DB():
 
 def distance_img(img1, img2):
     """
-    Encode toutes les images de la vague en vecteur grace à l'autoencodeur
+    Calcule la distance Manhattan entre 2 vecteurs d'image encodées
 
     Paramètres :
     ----------
-    path_im_vague : str
-        lien vers le dossier contenant les images de la vagues
+    img1 : vector
+        vecteur d'une image encodée
+    img2: vector
+        vecteur d'une image encodée
 
     Retourne :
     ---------
-    encoded_image_list : list
-        list de vecteur correspondant aux images encodées
-    """
-
-    """
-    prends 2 img sous forme vetorielles
-    et renvoie leur ditance euclidienne
-
+    dist : float
+        distance Manhattan entre 2 images encodées
     """
 
     # from scipy.spatial import distance
