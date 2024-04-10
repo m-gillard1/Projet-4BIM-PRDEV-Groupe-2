@@ -8,7 +8,7 @@ import Variational_Autoencoder_Training as auto
 autoencoder = auto.VAE()
 
 # Load the trained weights
-autoencoder.load_state_dict(torch.load("./vae_model10lrBBatchB.pth"))
+autoencoder.load_state_dict(torch.load("./vae_model10lrBBatchB.pth"),map_location=torch.device('cpu'))
 
 # Set the model to evaluation mode
 autoencoder.eval()
