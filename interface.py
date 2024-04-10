@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import PhotoImage
 from PIL import Image,ImageTk
 
-#import main_sprint1
+import main_sprint1
 
 ########## __FONCTIONS__ ##########
 
@@ -503,7 +503,7 @@ def Restart_event(event):
 
     Parameters:
     event: L'événement déclencheur du redémarrage.
-    
+
     Returns:
     None
     """
@@ -561,7 +561,7 @@ def Genere_Suspect(Dico, Vague_actuelle ):
         # va chercher les images de la vague correspondante
         # génère les nouvelles images
         # renvoie la liste des path svers les nouvelles images
-    #Liste_Path_nouvelle_vague=main_sprint1.IHM_loop(Vague_actuelle, note_list)
+    Liste_Path_nouvelle_vague=main_sprint1.IHM_loop(Vague_actuelle, note_list)
 
     print(Liste_Path_nouvelle_vague)
     return (Liste_Path_nouvelle_vague)
