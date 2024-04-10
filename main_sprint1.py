@@ -28,13 +28,14 @@ def creation_list_note(nb_image_par_vague) :
     Paramètres :
     ----------
     nb_image_par_vague : int
-        donne le nombre d'image par vague et donc lenombre de note à générer
+        donne le nombre d'image dans une vague et donc le nombre de note à générer
 
     Retourne :
     ---------
     note : list
         Liste d'entier qui serviront de note
     """
+
     # liste de note aléatoire en attendant lien fonctionnel avec l'IHM
     note = np.zeros(nb_image_par_vague)
     count_0=0
@@ -49,9 +50,19 @@ def creation_list_note(nb_image_par_vague) :
 
 def encoded_image (path_im_vague) :
     """
-    entree : lien vers le dossier contenant les images de la vagues
-    sortie : list de vecteur correspondnat aux images encodées
+    Encode toutes les images de la vague en vecteur grace à l'autoencodeur
+
+    Paramètres :
+    ----------
+    path_im_vague : str
+        lien vers le dossier contenant les images de la vagues
+
+    Retourne :
+    ---------
+    encoded_image_list : list
+        list de vecteur correspondant aux images encodées
     """
+
     encoded_image_list=[]
     count_1=0
 
@@ -70,13 +81,28 @@ def encoded_image (path_im_vague) :
 
 ### on utilise directement ceux labelisés comme favoris plus besoin de note
 def data_structure_note_image(encoded_image_list, note) :
+
     """
-    entree : list de vecteur des images encodee et list des notes dans l'ordre corresponant à la liste de taille_vecteur_image
-    sortie : list contenant pour chaque image une list avec 2 vecteurs : le 1er element du 1er vecteur contient la note puis le
-        reste du vecteur contient des Nan (afin d'avoir un vecteur de la meme taille que l'image encodée) et le 2e vecteur correspond à l'image encodée
+    Creation de la structure de données qui va etre utilisée pour l'algorithme genetique soit : une list contenant pour
+    chaque image 2 vecteurs de meme taille (taille du vecteur de l'image encodée) un avec la note comme premier élément
+    puis Nan et le 2eme vecteur contenant l'image encodée
+
+    Paramètres :
+    ----------
+    encoded_image_liste : list de vecteur
+        list de vecteur des images encodee
+
+    note : list de int
+        list de int contenant les notes dans l'ordre corresponant à encoded_image_list
+
+    Retourne :
+    ---------
+    image_note_list : list
+        list contenant pour chaque image une list avec 2 vecteurs : le 1er element du 1er vecteur contient la note puis le
+        reste de ce vecteur contient des Nan (afin d'avoir un vecteur de la meme taille que le vecteur de l'image encodée) et le 2e vecteur correspond à l'image encodée
     """
 
-###############################################
+
 
     count_2=0
     image_note_list=[]
@@ -125,6 +151,22 @@ def algo_genetique_sans_note (encoded_image_list, taux_cross_over) :
 #########################################
 
 def algo_genetique_avec_note (image_note_list, taux_cross_over) :
+    """
+    Creer de nouveau vecteur d'image avec le cross over
+
+    Paramètres :
+    ----------
+    image_note_list : list
+        list contenat la note et l'image encodee obtenue par data_structure_note_image
+
+    taux_cross_over : int
+        probabilite que le cross over se fasse
+
+    Retourne :
+    ---------
+    new_image_encoded : list
+        list de vecteur correspondant aux nouvelles images encodées apres cross over
+    """
 
     image_after_algo_list=Algo_gen.cross_over_avec_note(image_note_list,taux_cross_over)
 
@@ -144,6 +186,22 @@ def algo_genetique_avec_note (image_note_list, taux_cross_over) :
 ### Décoder les nparray obtenus en image + sauvegarde dans un dossier ###
 #########################################################################
 def sauv_img (new_image_encoded, path_result_vague) :
+    """
+    décode les nouvelles images obtenues puis les sauvegarde dans un dossier et repertorie les liens
+
+    Paramètres :
+    ----------
+    new_image_encoded : list
+        list des vecteurs des nouvelles images encodées apres cross over
+
+    path_result_vague : str
+        lien vers le dossier contenant les nouvelles images crées
+
+    Retourne :
+    ---------
+    list_path : list de str
+        list des chemin vers chacune des nouvelles images decodées
+    """
 
     # verfier si le dossier existe sinon le creer
     if not os.path.exists(path_result_vague):
@@ -171,6 +229,11 @@ def add_Suspect_from_DB():
 
     """
     renvoie un chemin vers une images en choisissant un nb_aleatoirement dans la db
+
+    Retourne :
+    ---------
+    path : str
+        chemin vers une image de la DB
     """
 
     ## extraire les numeros des images ayant deja ete utilisées
@@ -198,9 +261,19 @@ def add_Suspect_from_DB():
 def distance_img(img1, img2):
 
     """
-    prends 2 img sous forme vetorielles
-    et renvoie leur ditance euclidienne
+    Calcule la distance Manhattan entre 2 vecteurs d'image encodées
 
+    Paramètres :
+    ----------
+    img1 : vector
+        vecteur d'une image encodée
+    img2: vector
+        vecteur d'une image encodée
+
+    Retourne :
+    ---------
+    dist : float
+        distance Manhattan entre 2 images encodées
     """
 
     # from scipy.spatial import distance
@@ -219,6 +292,7 @@ def distance_img(img1, img2):
 ###################################################
 
 def encoded_test_db():
+
 
     """
     retourne la list de toutes les images du jeu de test encodée
