@@ -100,9 +100,13 @@ def mutations(best_image_list, Tm) :
             img_muta = new_P[i][1]
 
             for i in range(len(img_muta)) :
-                if random() < 0.6 :
-                    img_muta[i]=img_muta[i]+1 # essayer d'autre type de mutation
-
+                aleat = random()
+                if aleat < 0.2 :
+                    img_muta[i]=img_muta[i]-3 # essayer d'autre type de mutation
+                if aleat > 0.8 :
+                    img_muta[i]=img_muta[i]+3 # essayer d'autre type de mutation
+                ## essayer de faire quelquechose selon les zones ??
+                
     return new_P
 
 
