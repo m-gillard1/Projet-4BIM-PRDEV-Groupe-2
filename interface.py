@@ -2,8 +2,9 @@ import tkinter as tk
 from tkinter import PhotoImage
 from PIL import Image,ImageTk
 import os
+import webbrowser
 
-import main_sprint1
+#import main_sprint1
 
 ########## __FONCTIONS__ ##########
 
@@ -562,7 +563,7 @@ def Genere_Suspect(Dico, Vague_actuelle ):
         # va chercher les images de la vague correspondante
         # génère les nouvelles images
         # renvoie la liste des path svers les nouvelles images
-    Liste_Path_nouvelle_vague=main_sprint1.IHM_loop(Vague_actuelle, note_list, fav_list)
+    #Liste_Path_nouvelle_vague=main_sprint1.IHM_loop(Vague_actuelle, note_list, fav_list)
 
     #print(Liste_Path_nouvelle_vague)
     return (Liste_Path_nouvelle_vague)
@@ -764,6 +765,11 @@ def switch_frames(fram1,fram2):
                 #print('le path est le suivant : '  + str (le_path))
                 img.save(le_path)
 
+def open_html():
+    path = "build/html/index.html"
+    webbrowser.open(path)
+
+
 
 
 
@@ -793,6 +799,11 @@ titre_depart.pack(anchor="center", pady=(300, 0) )
 
 button = tk.Button(frame_depart, width = 20, height = 5, text="Start Working", font = ('Ubuntu',35), bg = 'gold',command=lambda: switch_frames(frame_depart,frame_interface))
 button.place(relx=0.5, rely=0.6, anchor="center")
+
+button_help = tk.Button(frame_depart, width = 20, height = 20, image = "help.png", bg = 'white')
+button_help.place(anchor= 'ne')
+button_help.bind("<Button-1>", open_html())
+
 
 legend_depart = tk.Label(frame_depart,text = 'Made by Martin Gillard, Thibald Chalas, Aurore Le Houssel, Selma Kadiri, Théo Ducasse',fg = 'white', font = ('Dyuthi',15),bg = 'midnight blue')
 legend_depart.pack(anchor="center", pady=(0, 150) )
