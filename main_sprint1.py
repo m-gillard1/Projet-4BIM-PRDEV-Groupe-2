@@ -15,7 +15,6 @@ from random import *
 import numpy as np
 import os
 from PIL import Image
-import pickle
 
 
 #############
@@ -416,29 +415,6 @@ def IHM_loop (numero_vague,note,fav_list) :
     list_path_img=[]
     list_path_img=sauv_img(new_image_encoded,path_result_vague)
 
-    ###### utile si utilisation des distances
-    # ## extraire les images dont les note inf ou = à 2
-    # img_0=[]
-    # for img in image_note_list :
-    #     if (img[0][0] <= 2 ) :
-    #         img_0.append(img[1])
-    # print("list 0000")
-    # print(img_0)
-    #
-    # ## trouver une images "loin" des images = à 0
-    # if img_0!=[]:
-    #     # recuperationn de 1000 images encodées
-    #     with open('liste.pkl', 'rb') as f:
-    #         listDB = pickle.load(f)
-    #     for img in img_0 :
-    #         numero=img_loin(img[1],listDB)
-    #         path=("data/"+ str(numero) +'_superposee.png')
-    #         list_path_complete.append(path)
-    #         nb_new_img_from_db=nb_new_img_from_db-1
-    #         print("path")
-    #         print(path)
-    #         print("nb img a ajdd")
-    #         print(nb_new_img_from_db)
 
     return list_path_img
 
@@ -457,8 +433,6 @@ if __name__=='__main__':
     # the_list=encoded_test_db()
     # print(len(the_list))
     # print(the_list[0])
-    # print('proche')
-    # print(img_proche(the_list[2], the_list))
     # print('loin ')
     # print(img_loin(the_list[2], the_list))
     #
