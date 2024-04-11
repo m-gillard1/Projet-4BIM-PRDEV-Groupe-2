@@ -68,7 +68,7 @@ def cross_over_avec_note(best_image_list, Tc):
     Retourne :
     ---------
     new_P : list
-        Liste contenant les vecteurs d'images (sans note) ayant ou non subis des croisement
+        Liste contenant les vecteurs d'images + note ayant ou non subis des croisement
     """
     new_P = np.copy(best_image_list)
 
@@ -123,6 +123,38 @@ def cross_over_sans_note(best_image_list, Tc):
 
     return new_P
 
+
+
+def mutations(best_image_list, Tm) :
+    """
+    Fait des mutations sur les vecteurs d'image, rajoute +1 a certaines éléments du vecteur aléatoirement
+
+    Paramètres :
+    ----------
+    best_image_list: list
+        list de vecteurs comprenant le vecteur issue de l'image pour les meilleures images
+
+    Tm: float
+        Taux de mutations
+
+    Retourne :
+    ---------
+    new_P : list
+        Liste contenant les vecteurs d'images + note ayant ou non subis des croisement
+    """
+
+    new_P = np.copy(best_image_list) ## image_list ou sorted_image_list ?
+    for i in range(0, len(new_P)):
+        if random() < Tm:
+            img_muta = new_P[i][1]
+
+            for i in range(len(img_muta)) :
+                if random() < Tm :
+                    img_muta[i]=img_muta[i]+1
+
+    return new_P
+
+
 def one_loop_avec_note(image_list, Tc):
     """
     Trie la population, choisit les meilleurs images sur lesquelles vont etre faites de cross over.
@@ -171,6 +203,10 @@ if __name__=='__main__':
     # Test de la fonction cross_over_avec_note(best_image_list, Tc)
     print('test cross over avec note :')
     print(cross_over_avec_note(image_note_list,0.1))
+
+    # Test de la fonction mutations
+    print('test mutations:')
+    print(mutations(image_note_list,0.8))
 
     image_list = [ [7, 2], [9, 5], [6, 1], [8, 3] ]
     # Test de la fonction cross_over_sans_note(best_image_list, Tc)
