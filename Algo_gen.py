@@ -190,7 +190,7 @@ def one_loop_avec_note(image_list, Tc, Tm):
     # # Crée une nouvelle population en fusionnant les meilleurs vecteurs et les vecteurs mutés
     # popu_final = np.concatenate((popu_cross, best_popu), axis=0)
 
-    pop = popu_cross ## retourne seulement les images issues du cross over les autres osnt deja conservées dans les favoris
+    pop = popu_cross + popu_muta ## retourne seulement les images issues du cross over les autres osnt deja conservées dans les favoris
     return pop
 
 if __name__=='__main__':
