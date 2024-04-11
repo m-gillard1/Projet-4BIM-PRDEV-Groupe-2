@@ -34,9 +34,9 @@
             <ul class="current">
               <li class="toctree-l1"><a class="reference internal" href="autoencodeur.html">Documentation autoencodeur</a></li>
               <li class="toctree-l1"><a class="reference internal" href="algorithme_genetique.html">Documentation algorithme génétique</a></li>
+              <li class="toctree-l1"><a class="current reference internal" href="#">Documentation du main</a></li>
               <li class="toctree-l1"><a class="reference internal" href="interface.html">Documentation interface</a></li>
               <li class="toctree-l1"><a class="reference internal" href="mode_emploi.html">Mode d'emploi du logiciel</a></li>
-              <li class="toctree-l1"><a class="current reference internal" href="#">Main</a></li>
             </ul>
           </div>
         </div>
@@ -51,7 +51,7 @@
             <div role="navigation" aria-label="Page navigation">
               <ul class="wy-breadcrumbs">
                 <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-                <li class="breadcrumb-item active">Main</li>
+                <li class="breadcrumb-item active">Documentation du main</li>
                 <li class="wy-breadcrumbs-aside">
                   <a href="_sources/index.rst.txt" rel="nofollow"> Afficher la source de la page</a>
                 </li>
@@ -71,6 +71,7 @@
                       <li> Les images considérées comme favorites sont toutes celles qui ont une note supérieures ou égale à 4. On les récupère grace à leur chemin
                         et on les fait passer dans l'encodeur afin d'obtenir  des vecteurs. Nous utiliserons dans l'algorithme génétique ces images transformées en vecteurs
                         ainsi que leur note respective.</li>
+                      <p></p>
 
                       <h6 class="h6">Algorithme génétique</h6>
                       <li> On ordonne les images par ordre décroissant de notes.</li>
@@ -100,7 +101,7 @@
                         <li class="li">Paramètres></li>
                           <ol>
                             <li> nb_image_par_vague : int:  donne le nombre d'image dans une vague et donc le nombre de note à générer.</li>
-
+                          </ol>
                         <li class="li">Retourne<p>note : list:  Liste d'entiers qui serviront de notes.</p></li>
                       </ul>
                     </li>
@@ -112,7 +113,7 @@
                         <li class="li">Paramètres></li>
                           <ol>
                             <li>  path_im_vague : str : lien vers le dossier contenant les images de la vague en cours.</li>
-
+                          </ol>
                         <li class="li">Retourne<p> encoded_image_list : list: liste de vecteurs correspondant aux images encodées (pas de note).</p></li>
                       </ul>
                     </li>
@@ -127,7 +128,7 @@
                           <ol>
                             <li>   encoded_image_liste : list : liste de vecteurs des images encodées.</li>
                             <li>    note : list de int: list de int contenant les notes dans l'ordre correspondant à encoded_image_list. </li>
-
+                          </ol><
                         <li class="li">Retourne<p>  image_note_list : list: list contenant pour chaque image une list avec 2 vecteurs : le 1er element du 1er vecteur contient la note puis le
         reste de ce vecteur contient des Nan (afin d'avoir un vecteur de la meme taille que le vecteur de l'image encodée) et le 2e vecteur correspond à l'image encodée.</p></li>
                       </ul>
@@ -142,7 +143,7 @@
                             <li>  image_note_list : list: list contenat la note et l'image encodée obtenue par data_structure_note_image.</li>
                             <li>   taux_cross_over : int: probabilite que le cross over se fasse.</li>
                             <li>   taux_mutation: int: probabilite que les mutations se fassent.</li>
-
+                          </ol>
                         <li class="li">Retourne<p>  new_image_encoded : list:  liste de vecteurs correspondant aux nouvelles images encodées apres cross over (pas de note).</p></li>
                       </ul>
                     </li>
@@ -156,6 +157,7 @@
                           <ol>
                             <li>   new_image_encoded : list:  list des vecteurs des nouvelles images encodées apres cross over (pas de note).</li>
                             <li>   path_result_vague : str: lien vers le dossier contenant les nouvelles images crées</li>
+                          </ol>
                         <li class="li">Retourne<p>   list_path : list de str:  list des chemin vers chacune des nouvelles images d ela vague suivante.</p></li>
                       </ul>
                     </li>
@@ -169,7 +171,7 @@
 
                     <li class="functions"> <strong style="font-size: 1.2em;">IHM_loop (numero_vague,note)</strong>
                       <p>A partir du numero de vague et des notes données par l'utilisateur, cette boucle renverra des nouvelles images
-    à lui proposer afin de s'approcher au mieux de ces attentes. Ces 12 noooooouvelles images seront issus des favoris
+    à lui proposer afin de s'approcher au mieux de ces attentes. Ces 12 nouvelles images seront issus des favoris
     de la vague precedentes modifiées par l'algorithme genetique (cross over et mutation), de nouvelles images de la DB
     seront également inclus afin d'introduire de nouveaux profils.</p>
                       <ul>
@@ -178,6 +180,7 @@
                           <ol>
                             <li>   numero_vague : int:    numero de la vague pour savoir ou l'on se situe et quel dossier prendre en compte.</li>
                             <li>     note : liste de int: liste des notes qui seront attribuées par l'utilisateur.</li>
+                          </ol>
                         <li class="li">Retourne<p>  list_path_img : list de str:  list des chemins vers l'image que l'on proposera à l'utilisateur pour la vague suivante.</p></li>
                       </ul>
                     </li>
