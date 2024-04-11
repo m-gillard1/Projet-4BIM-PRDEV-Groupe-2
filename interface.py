@@ -103,7 +103,7 @@ class Favori(tk.Button):
         lim = 1
         for i in sorted_id_by_note :
             if lim < 11 :
-                if (i[1]>6):
+                if (i[1]>3):
                     path = i[0]
                     #print(path)
                     photo = Image.open(path)
@@ -120,7 +120,7 @@ class Favori(tk.Button):
             la_note = sorted_id_by_note[j][1]
             h = le_fav.large
             w = le_fav.large
-            if (la_note<7):
+            if (la_note<4):
                 le_fav.note=None
                 le_fav.id=None
                 name = str(le_fav.winfo_name())
@@ -140,7 +140,7 @@ class Favori(tk.Button):
 
         pos = 0
         for i in dico_sorted :
-            if i[1]>6:
+            if i[1]>3:
                 pos+=1
         return pos
 
@@ -286,7 +286,7 @@ class Suspect(tk.Button):
         note_label.config(text="Note: "+str(suspect_actuel.note))
 
         print("ICI" +  str(suspect_actuel.note))
-        if (suspect_actuel.note==6):
+        if (suspect_actuel.note==3):
             print("here")
             note_label.config(text="Pas d'image selectionnée")
             suspect_actuel = None
@@ -304,7 +304,7 @@ class Suspect(tk.Button):
         """
 
         global suspect_actuel
-        suspect_actuel.note = 7  # Réinitialise la note à 0
+        suspect_actuel.note = 4  # Réinitialise la note à 0
         suspect_actuel.update_color()
         global note_label
         note_label.config(text="Note: "+str(suspect_actuel.note))
@@ -362,7 +362,7 @@ class Suspect(tk.Button):
         """
         global suspect_actuel
         rank = suspect_actuel.ranking()
-        if (rank<10 and self.note>6):
+        if (rank<10 and self.note>3):
             #print('favori')
             Favori.Make_favorite(Dico_rang_fav[rank], suspect_actuel.id, suspect_actuel.note, suspect_actuel.photo_image)
         return
@@ -633,50 +633,50 @@ def Init_suspects(choices_container_frame,Liste_img,photo_width,photo_height):
     """
     global Dico_suspect
 
-    suspect_1 = Suspect(choices_container_frame,Liste_img[0],5,photo_width,photo_height,0,0)
+    suspect_1 = Suspect(choices_container_frame,Liste_img[0],3,photo_width,photo_height,0,0)
     suspect_1.grid(row=0, column=0, padx=photo_width//50, pady=photo_height//50)
     #make_draggable_suspect(suspect_1)
 
-    suspect_2 = Suspect(choices_container_frame, Liste_img[1],5,photo_width,photo_height,0,1)
+    suspect_2 = Suspect(choices_container_frame, Liste_img[1],3,photo_width,photo_height,0,1)
     suspect_2.grid(row=0, column=1, padx=photo_width//50, pady=photo_height//50)
     #make_draggable_suspect(suspect_2)
 
-    suspect_3 = Suspect(choices_container_frame, Liste_img[2],5,photo_width,photo_height,0,2)
+    suspect_3 = Suspect(choices_container_frame, Liste_img[2],3,photo_width,photo_height,0,2)
     suspect_3.grid(row=0, column=2, padx=photo_width//50, pady=photo_height//50)
     #make_draggable_suspect(suspect_3)
 
-    suspect_4 = Suspect(choices_container_frame, Liste_img[3],5,photo_width,photo_height,0,3)
+    suspect_4 = Suspect(choices_container_frame, Liste_img[3],3,photo_width,photo_height,0,3)
     suspect_4.grid(row=0, column=3, padx=photo_width//50, pady=photo_height//50)
     #make_draggable_suspect(suspect_4)
 
-    suspect_5 = Suspect(choices_container_frame, Liste_img[4],5,photo_width,photo_height,1,0)
+    suspect_5 = Suspect(choices_container_frame, Liste_img[4],3,photo_width,photo_height,1,0)
     suspect_5.grid(row=1, column=0, padx=photo_width//50, pady=photo_height//50)
     #make_draggable_suspect(suspect_5)
-    suspect_6 = Suspect(choices_container_frame, Liste_img[5],5,photo_width,photo_height,1,1)
+    suspect_6 = Suspect(choices_container_frame, Liste_img[5],3,photo_width,photo_height,1,1)
     suspect_6.grid(row=1, column=1, padx=photo_width//50, pady=photo_height//50)
     #make_draggable_suspect(suspect_6)
 
-    suspect_7 = Suspect(choices_container_frame, Liste_img[6],5,photo_width,photo_height,1,2)
+    suspect_7 = Suspect(choices_container_frame, Liste_img[6],3,photo_width,photo_height,1,2)
     suspect_7.grid(row=1, column=2, padx=photo_width//50, pady=photo_height//50)
     #make_draggable_suspect(suspect_7)
 
-    suspect_8 = Suspect(choices_container_frame, Liste_img[7],5,photo_width,photo_height,1,3)
+    suspect_8 = Suspect(choices_container_frame, Liste_img[7],3,photo_width,photo_height,1,3)
     suspect_8.grid(row=1, column=3, padx=photo_width//50, pady=photo_height//50)
     #make_draggable_suspect(suspect_8)
 
-    suspect_9 = Suspect(choices_container_frame, Liste_img[8],5,photo_width,photo_height,2,0)
+    suspect_9 = Suspect(choices_container_frame, Liste_img[8],3,photo_width,photo_height,2,0)
     suspect_9.grid(row=2, column=0, padx=photo_width//50, pady=photo_height//50)
     #make_draggable_suspect(suspect_9)
 
-    suspect_10 = Suspect(choices_container_frame, Liste_img[9],5,photo_width,photo_height,2,1)
+    suspect_10 = Suspect(choices_container_frame, Liste_img[9],3,photo_width,photo_height,2,1)
     suspect_10.grid(row=2, column=1, padx=photo_width//50, pady=photo_height//50)
     #make_draggable_suspect(suspect_10)
 
-    suspect_11 = Suspect(choices_container_frame, Liste_img[10],5,photo_width,photo_height,2,2)
+    suspect_11 = Suspect(choices_container_frame, Liste_img[10],3,photo_width,photo_height,2,2)
     suspect_11.grid(row=2, column=2, padx=photo_width//50, pady=photo_height//50)
     #make_draggable_suspect(suspect_11)
 
-    suspect_12 = Suspect(choices_container_frame, Liste_img[11],5,photo_width,photo_height,2,3)
+    suspect_12 = Suspect(choices_container_frame, Liste_img[11],3,photo_width,photo_height,2,3)
     suspect_12.grid(row=2, column=3, padx=photo_width//50, pady=photo_height//50)
     #make_draggable_suspect(suspect_12)
     Dico_suspect ={suspect_1:1, suspect_2:2, suspect_3:3, suspect_4:4, suspect_5:5, suspect_6:6, suspect_7:7, suspect_8:8, suspect_9:9, suspect_10:10, suspect_11:11, suspect_12:12}
