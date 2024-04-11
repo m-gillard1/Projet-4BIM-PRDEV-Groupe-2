@@ -72,6 +72,9 @@ def cross_over_avec_note(best_image_list, Tc):
     """
     new_P = np.copy(best_image_list)
 
+    if len(new_P)>6 :
+        new_P=new_P[:6] ## si plus de 6 favoris on ne prend que les 6 premiers soit les 6 meilleurs
+
     print(new_P)
     print(len(new_P))
     for i in range(0, len(new_P)):
@@ -106,7 +109,7 @@ def cross_over_sans_note(best_image_list, Tc):
     new_P : list
         Liste contenant les vecteurs d'images (sans note) ayant ou non subis des croisement
     """
-    new_P = np.copy(best_image_list) ## image_list ou sorted_image_list ?
+    new_P = np.copy(best_image_list)
 
     for i in range(0, len(new_P)):
         if random() < Tc:
@@ -143,7 +146,11 @@ def mutations(best_image_list, Tm) :
         Liste contenant les vecteurs d'images + note ayant ou non subis des croisement
     """
 
-    new_P = np.copy(best_image_list) ## image_list ou sorted_image_list ?
+    new_P = np.copy(best_image_list)
+
+    if len(new_P)>6 :
+        new_P=new_P[:6] ## si plus de 6 favoris on ne prend que les 6 premiers soit les 6 meilleurs
+
     for i in range(0, len(new_P)):
         if random() < Tm:
             img_muta = new_P[i][1]
@@ -183,19 +190,31 @@ def one_loop_avec_note(image_list, Tc, Tm):
 
     # Applique des croisements aux meilleurs vecteurs
     popu_cross = cross_over_avec_note(best_popu, Tc)
+    print("cross")
+    print(popu_cross)
 
     # Applique des mutations aux meilleurs vecteurs
     popu_muta = mutations(best_popu, Tm)
+    print("muta")
+    print(popu_muta)
 
     # # Crée une nouvelle population en fusionnant les meilleurs vecteurs et les vecteurs mutés
     # popu_final = np.concatenate((popu_cross, best_popu), axis=0)
 
-    pop = popu_cross + popu_muta ## retourne seulement les images issues du cross over les autres osnt deja conservées dans les favoris
+    pop = np.concatenate((popu_cross, popu_muta), axis=0) ## retourne seulement les images issues du cross over les autres osnt deja conservées dans les favoris
+    print("tot")
+    print(pop)
     return pop
+
+
+
+
+###### MAIN #######
+
 
 if __name__=='__main__':
     #Test de la fonction pop_sort(image_list)
-    image_note_list = [[[3, None],[7, 2]], [[1, None],[9, 5]], [[4, None], [6, 1]], [[2, None], [8, 3]]]
+    image_note_list = [[[3, None],[7, 2]], [[1, None],[9, 5]], [[4, None], [6, 1]], [[2, None], [8, 3]], [[2, None], [8, 3]], [[2, None], [8, 3]], [[2, None], [8, 3]], [[2, None], [8, 3]]]
     print('test pop_sort - ok ')
     print(pop_sort(image_note_list))
 
