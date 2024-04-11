@@ -240,93 +240,92 @@ def add_Suspect_from_DB():
     return  path
 
 
-###################################################
-### Calculer distances entre 2 images en numpy  ###
-###################################################
-
-def distance_img(img1, img2):
-
-    """
-    Calcule la distance Manhattan entre 2 vecteurs d'image encodées
-
-    Paramètres :
-    ----------
-    img1 : vector
-        vecteur d'une image encodée
-    img2: vector
-        vecteur d'une image encodée
-
-    Retourne :
-    ---------
-    dist : float
-        distance Manhattan entre 2 images encodées
-    """
-
-    # from scipy.spatial import distance
-    # calculate Euclidian distance between vectors
-    # dist=distance.euclidean(img1, img2)
-
-    from scipy.spatial.distance import cityblock
-    #calculate Manhattan distance between vectors
-    dist=cityblock(img1, img2)
-
-    return  dist
-
-
-###############################################
-### encoder toutes les images de la db test ###
-###############################################
-
-def encoded_test_db():
-
-
-    """
-    retourne la list de toutes les images du jeu de test encodée
-
-    Retourne :
-    ---------
-    dist : float
-        distance Manhattan entre 2 images encodées
-
-    """
-    list_DB=encoded_image("data/")
-    return list_DB
-
-
-
-
-##################################################################
-### trouve l'image la plus loin en distance d'une autre image  ###
-##################################################################
-
-def img_loin (img1, list_DB):
-
-    """
-    renvoie l'img a la plus grande distance de img1 dans la list_DB
-
-    Paramètres :
-    ----------
-    img1 : vector
-        vecteur d'une image encodée
-    list_DB : list of vectors
-        list des images encodées
-
-    Retourne :
-    ---------
-    nb_images : int
-        numero de l'image la plus loin
-    """
-
-    high_dist=0
-    count=25000
-    for img in list_DB :
-        dist=distance_img(img,img1)
-        if dist>=high_dist :
-            high_dist=dist
-            nb_image=count
-        count+=1
-
-    return nb_image
+# ###################################################
+# ### Calculer distances entre 2 images en numpy  ###
+# ###################################################
+#
+# def distance_img(img1, img2):
+#
+#     """
+#     Calcule la distance Manhattan entre 2 vecteurs d'image encodées
+#
+#     Paramètres :
+#     ----------
+#     img1 : vector
+#         vecteur d'une image encodée
+#     img2: vector
+#         vecteur d'une image encodée
+#
+#     Retourne :
+#     ---------
+#     dist : float
+#         distance Manhattan entre 2 images encodées
+#     """
+#
+#     # from scipy.spatial import distance
+#     # calculate Euclidian distance between vectors
+#     # dist=distance.euclidean(img1, img2)
+#
+#     from scipy.spatial.distance import cityblock
+#     #calculate Manhattan distance between vectors
+#     dist=cityblock(img1, img2)
+#
+#     return  dist
+#
+#
+# ###############################################
+# ### encoder toutes les images de la db test ###
+# ###############################################
+#
+# def encoded_test_db():
+#     """
+#     Retourne la list de toutes les images du dossier encodé
+#
+#     Cette fonction est longue à faire tourner, nous avons essayé de stocker cela directement
+#     dans un fichier à réutiliser ensuite mais ce fichier est trop volumneux pour git
+#
+#     Retourne :
+#     ---------
+#     list_DB : list of vectors
+#         list des images encodées
+#     """
+#
+#     list_DB=encoded_image("data/")
+#     return list_DB
+#
+#
+# ##################################################################
+# ### trouve l'image la plus loin en distance d'une autre image  ###
+# ##################################################################
+#
+# def img_loin (img1, list_DB):
+#
+#     """
+#     renvoie l'img a la plus grande distance de img1 dans la list_DB
+#
+#     Paramètres :
+#     ----------
+#     img1 : vector
+#         vecteur d'une image encodée
+#     list_DB : list of vectors
+#         list des images encodées
+#
+#     Retourne :
+#     ---------
+#     nb_images : int
+#         numero de l'image la plus loin
+#     """
+#
+#     high_dist=0
+#     count=25000
+#     for img in list_DB :
+#         dist=distance_img(img,img1)
+#         if dist>=high_dist :
+#             high_dist=dist
+#             nb_image=count
+#         count+=1
+#
+#     return nb_image
 
 
 ################
