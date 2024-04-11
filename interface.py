@@ -157,7 +157,7 @@ class Favori(tk.Button):
         self.config(text= str(self.winfo_name()), image='', height=self.large, width=self.large)
 
     def update_color(self):
-        """ 
+        """
         Surcharge de la méthode Suspect.update_color qui ne fait rien pour que l'on puisse call increment/decrement note sur un favori sans bug
         Parameters
         self : instance de favori
@@ -166,7 +166,7 @@ class Favori(tk.Button):
         """
         return
     def Ajout_Favori(self):
-        """ 
+        """
         Surcharge de la méthode Suspect.update_color qui ne fait rien pour que l'on puisse call increment/decrement note sur un favori sans bug
         Parameters
         self : instance de favori
@@ -369,7 +369,7 @@ class Suspect(tk.Button):
 
 ### GESTION DU DND ###
 def make_draggable_fav(widget):
-    """ 
+    """
     Attache les méthodes de gestion du DND aux favoris.
     Parameters:
     widget : instance de favori
@@ -381,7 +381,7 @@ def make_draggable_fav(widget):
     widget.bind("<ButtonRelease-1>", on_fav_drag_release)
 
 def on_fav_drag_start(event):
-    """ 
+    """
     Démarre la chaîne DND sur le favori. Met à jour le suspect actuel.
     Parameters:
     event : instance de event. Clique gauche sur une instance de Favori
@@ -398,7 +398,7 @@ def on_fav_drag_start(event):
         Favori.Update_Fav(Dico_note)
 
 def on_fav_drag_motion(event):
-    """ 
+    """
     Met à jour à chaque instant la position à laquelle afficher l'image du favori en cours de DND.
     Parameters:
     event : instance de event. Déplacement de la souris avec clique gauche maintenu.
@@ -412,7 +412,7 @@ def on_fav_drag_motion(event):
 
 
 def on_fav_drag_release(event):
-    """ 
+    """
     Met à jour l'environnment selon la zone de laché du favori. Peut déclencher un changement de note et de position selon la position de l'event.
     Parameters:
     event : instance de event. Relachement du bouton gauche de la souris.
@@ -496,7 +496,7 @@ def on_fav_drag_release(event):
 
 
 """
-ATTENTION: CODE FANTOME: 
+ATTENTION: CODE FANTOME:
 Méthodes de gestion du drag and drop sus les objets suspects. Remplacées temporairement par l'ajout d'un bouton 'mettre en favori'.
 
 def make_draggable_suspect(widget):
@@ -540,7 +540,7 @@ def on_suspect_drag_release(event):
     ### mettre un suspect à la poubelle
     #if (x < -20 and x > -900 and y > 350 and y < 800):
     #    print()
-""" 
+"""
 
 
 #fonction appelée par le bouton restart
@@ -603,16 +603,21 @@ def Genere_Suspect(Dico, Vague_actuelle ):
     # Parcourir le dictionnaire et afficher chaque clé et valeur
 
     note_list=[]
+    fav_list=[]
     for img, note in Dico.items():
         print(f"{img} a {note} points.")
         note_list.append(note)
+
+        if note >= 4 :
+            fav_list.append([img,note])
+    #print(fav_list)
 
     # Génération des nouvelles images :
         # prend en entree le numero de la vague et les notes
         # va chercher les images de la vague correspondante
         # génère les nouvelles images
         # renvoie la liste des path svers les nouvelles images
-    Liste_Path_nouvelle_vague=main_sprint1.IHM_loop(Vague_actuelle, note_list)
+    Liste_Path_nouvelle_vague=main_sprint1.IHM_loop(Vague_actuelle, note_list, fav_list)
 
     print(Liste_Path_nouvelle_vague)
     return (Liste_Path_nouvelle_vague)
@@ -788,7 +793,7 @@ def Start_Over():
     #    le_fav.config(text=text_to_print, image='', padx=11, pady=11,height=le_fav.ht, width=le_fav.wd)
 
 def switch_frames(fram1,fram2):
-    """ 
+    """
     Passe à la frame de resultats
     Parameters:
     fram1, fram2: respectivement la frame à masquer et la frame à afficher
@@ -815,8 +820,8 @@ def switch_frames(fram1,fram2):
                 print('le path est le suivant : '  + str (le_path))
                 img.save(le_path)
 
-    
-    
+
+
 
 # Ceate the main window
 root = tk.Tk()
