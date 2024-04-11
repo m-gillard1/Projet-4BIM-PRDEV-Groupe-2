@@ -1,6 +1,8 @@
-##################################
-####### MAIN pour sprint 1 #######
-##################################
+#####################################################################
+#####################################################################
+####### Script regroupant algo genetique + encodage decodage  #######
+#####################################################################
+#####################################################################
 
 #######################################################################
 ### Importer les fonctions de l'autoencodeur et de l'algo génétique ###
@@ -54,12 +56,12 @@ def encoded_image (path_im_vague) :
     Paramètres :
     ----------
     path_im_vague : str
-        lien vers le dossier contenant les images de la vagues
+        lien vers le dossier contenant les images de la vague en cours
 
     Retourne :
     ---------
     encoded_image_list : list
-        list de vecteur correspondant aux images encodées
+        list de vecteur correspondant aux images encodées (pas de note)
     """
 
     encoded_image_list=[]
@@ -100,8 +102,6 @@ def data_structure_note_image(encoded_image_list, note) :
         reste de ce vecteur contient des Nan (afin d'avoir un vecteur de la meme taille que le vecteur de l'image encodée) et le 2e vecteur correspond à l'image encodée
     """
 
-
-
     count_2=0
     image_note_list=[]
 
@@ -126,9 +126,9 @@ def data_structure_note_image(encoded_image_list, note) :
     return image_note_list
 
 
-#########################################
-### Algorithme génétique (cross over) ###
-#########################################
+#############################
+### Algorithme génétique  ###
+#############################
 
 def algo_genetique_avec_note (image_note_list, taux_cross_over, taux_mutation) :
     """
@@ -148,16 +148,16 @@ def algo_genetique_avec_note (image_note_list, taux_cross_over, taux_mutation) :
     Retourne :
     ---------
     new_image_encoded : list
-        list de vecteur correspondant aux nouvelles images encodées apres cross over
+        list de vecteur correspondant aux nouvelles images encodées apres cross over (pas de note)
     """
 
-    #image_after_algo_list=Algo_gen.cross_over_avec_note(image_note_list,taux_cross_over)
+    #image_after_algo_list=Algo_gen.cross_over_avec_note(image_note_list,taux_cross_over) ## si pas de mutation suffit d'appeler juste la focntion cross_over
     image_after_algo_list=Algo_gen.one_loop_avec_note(image_note_list,taux_cross_over, taux_mutation)
 
     new_image_encoded=[]
     count_3=0
 
-    ## création de la liste avec uniquement les numpy a décoder pour la prochaine vague
+    ## création de la liste avec uniquement les numpy (on enleve les notes) à décoder pour la prochaine vague
     for image_numpy in image_after_algo_list :
         new_image=image_numpy[1]
         image_reshape=new_image.reshape(1,256,32,32) # remettre sous forme matricielle
@@ -169,14 +169,16 @@ def algo_genetique_avec_note (image_note_list, taux_cross_over, taux_mutation) :
 #########################################################################
 ### Décoder les nparray obtenus en image + sauvegarde dans un dossier ###
 #########################################################################
+
 def sauv_img (new_image_encoded, path_result_vague) :
     """
-    décode les nouvelles images obtenues puis les sauvegarde dans un dossier et repertorie les liens
+    décode les nouvelles images obtenues puis les sauvegarde dans un dossier et repertorie les liens,
+    ajoute egalement dans ce dossier des nouvelles images issues de l DB
 
     Paramètres :
     ----------
     new_image_encoded : list
-        list des vecteurs des nouvelles images encodées apres cross over
+        list des vecteurs des nouvelles images encodées apres cross over (pas de note)
 
     path_result_vague : str
         lien vers le dossier contenant les nouvelles images crées
@@ -184,7 +186,7 @@ def sauv_img (new_image_encoded, path_result_vague) :
     Retourne :
     ---------
     list_path : list de str
-        list des chemin vers chacune des nouvelles images decodées
+        list des chemin vers chacune des nouvelles images d ela vague suivante
     """
 
     # verfier si le dossier existe sinon le creer
@@ -192,28 +194,27 @@ def sauv_img (new_image_encoded, path_result_vague) :
         # Créez le dossier
         os.makedirs(path_result_vague)
 
+    #initialisation
     count_4=0
     List_path=[]
 
-    # enregistrer les images du cross over et leur chemin
+    # enregistrer les images de l'algo genetique et leur chemin
     for numpy in new_image_encoded :
         count_4+=1
-        image_decoded=Autoencoder_to_use.NumpyDecoding(numpy)
-        image_decoded.save(path_result_vague+str(count_4)+'.png')
-        # pour IHM list des path :
-        List_path.append(path_result_vague+str(count_4)+'.png')
+        image_decoded=Autoencoder_to_use.NumpyDecoding(numpy) # decoder en image
+        image_decoded.save(path_result_vague+str(count_4)+'.png') # sauvegarder dans un dossier
+        List_path.append(path_result_vague+str(count_4)+'.png') # list de path a retourner pour l'IHM
 
-    ## calcul du nombre de nouvelles images à ajouter de la base de données et sauvegarde desnew img
-    nb_new_img_from_db=12-len(List_path)
+    # completer avec des images de la base de données aleatoirement
+    nb_new_img_from_db=12-len(List_path) # calcul du nombre de nouvelles images à ajouter de la base de données
     for i in range(nb_new_img_from_db) :
         count_4+=1
         print("compt")
         print(count_4)
-        new_img_path=add_Suspect_from_DB() ## récupère le path
-        new_img=Image.open(new_img_path) ## récupère l'img
-        #print(path_result_vague+str(count_4)+'.png')
-        new_img.save(path_result_vague+str(count_4)+'.png') ##############" porblem "
-        List_path.append(path_result_vague+str(count_4)+'.png')
+        new_img_path=add_Suspect_from_DB() # récupère le path d'un image de la DB
+        new_img=Image.open(new_img_path) # récupère au format img
+        new_img.save(path_result_vague+str(count_4)+'.png') # sauvegarde l'img dans le dossier de la vague suivante
+        List_path.append(path_result_vague+str(count_4)+'.png') # ajout à la liste de path pour l'IHM
 
     return List_path
 
@@ -231,27 +232,16 @@ def add_Suspect_from_DB():
     path : str
         chemin vers une image de la DB
     """
+    ## extraire les numeros des images ayant deja ete utilisées ?
 
-    ## extraire les numeros des images ayant deja ete utilisées
+    numero = int(uniform(25000, 25999)) # nombre aléatoire dans les images à disposition
+    path=("data/"+ str(numero) +'_superposee.png') # chemin de l'image
 
-    ## aleatoire
-    numero = int(uniform(25000, 25999))
-
-    ## avec distances
-    # parcourir toutes les images de la DB pour calculer leur distance avec toutes les images du la vague actuelle 3000 x 12
-
-    path=("data/"+ str(numero) +'_superposee.png')
-
-
-    # chercher une image dans la DB
-    return  path #List_new_path # un path vers une new image de la DB
-
-## faire une autre fonction qui encoded toutes les images du test
-# supprime une image des qu'elle a ete utilisée
+    return  path
 
 
 ###################################################
-### calculer distances entre 2 images en numpy  ###
+### Calculer distances entre 2 images en numpy  ###
 ###################################################
 
 def distance_img(img1, img2):
