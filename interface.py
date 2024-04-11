@@ -293,7 +293,7 @@ class Suspect(tk.Button):
 
     def fav(self):
         """
-        Change la note du suspect actuel à 4, met à jour la couleur et les informations.
+        Change la note du suspect actuel à 7, met à jour la couleur et les informations.
 
         Returns:
         None
@@ -637,7 +637,7 @@ def Init_suspects(choices_container_frame,Liste_img,photo_width,photo_height):
 def Init_favori(fav_dim,pad):
     """
     Initialise les éléments favoris avec leurs dimensions et positions dans la grille.
-    Les favoris sont les images en bas à gauche. Ce sont des suspects qui ont reçus une note supérieur à 7 et qui se placent parmi les 10 notes les plus élevées.
+    Les favoris sont les images en bas à gauche. Ce sont des suspects qui ont reçus une note supérieur à 4 et qui se placent parmi les 10 notes les plus élevées.
 
     Parameters:
     fav_dim: La dimension des éléments favoris.
@@ -772,7 +772,7 @@ def open_html():
     webbrowser.open(path)
     
 
-    time.sleep(5) 
+    time.sleep(3) 
     pyautogui.hotkey('alt','tab')
 
 
