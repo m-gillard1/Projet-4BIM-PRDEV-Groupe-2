@@ -151,7 +151,7 @@ def algo_genetique_sans_note (encoded_image_list, taux_cross_over) :
 ### Algorithme génétique (cross over) ###
 #########################################
 
-def algo_genetique_avec_note (image_note_list, taux_cross_over) :
+def algo_genetique_avec_note (image_note_list, taux_cross_over, taux_mutation) :
     """
     Creer de nouveau vecteur d'image avec le cross over
 
@@ -163,13 +163,17 @@ def algo_genetique_avec_note (image_note_list, taux_cross_over) :
     taux_cross_over : int
         probabilite que le cross over se fasse
 
+    taux_mutation: int
+        probabilite que les mutations se fassent
+
     Retourne :
     ---------
     new_image_encoded : list
         list de vecteur correspondant aux nouvelles images encodées apres cross over
     """
 
-    image_after_algo_list=Algo_gen.cross_over_avec_note(image_note_list,taux_cross_over)
+    #image_after_algo_list=Algo_gen.cross_over_avec_note(image_note_list,taux_cross_over)
+    image_after_algo_list=Algo_gen.one_loop_avec_note(image_note_list,taux_cross_over, taux_mutation)
 
     new_image_encoded=[]
     count_3=0
@@ -419,6 +423,7 @@ def IHM_loop (numero_vague,note) :
     path_result_vague =("image_vague_"+str(numero_vague+1)+"/")
 
     taux_cross_over=1 # on met un taux de cross over = à 1 pour obtenir forcement des images modifiées
+    taux_mutation=1 # on met un taux de cross over = à 1 pour obtenir forcement des images modifiées
 
     ## preparer nos images encoder + associer à la note
     encoded_image_list=encoded_image(path_im_vague)
@@ -437,7 +442,10 @@ def IHM_loop (numero_vague,note) :
     print(len(img_fav))
 
     ## sauvegarde des images issues du cross over
-    new_image_encoded=algo_genetique_avec_note(img_fav, taux_cross_over)
+    new_image_encoded=algo_genetique_avec_note(img_fav, taux_cross_over,taux_mutation) #### verif structure des donnees si les notes apparaisent encore ou pas
+    print('result algo gene')
+    #print(new_image_encoded)
+    print(len(new_image_encoded))
     list_path_img=[]
     list_path_img=sauv_img(new_image_encoded,path_result_vague)
 
@@ -495,14 +503,14 @@ if __name__=='__main__':
     print(IHM_loop(1,note_list))
 
 
-    ### test des distances
-    print('encoded....')
-    the_list=encoded_test_db()
-    print(len(the_list))
-    print(the_list[0])
-    print('proche')
-    print(img_proche(the_list[2], the_list))
-    print('loin ')
-    print(img_loin(the_list[2], the_list))
-
-    print(the_list[0]!=the_list[2])
+    # ### test des distances
+    # print('encoded....')
+    # the_list=encoded_test_db()
+    # print(len(the_list))
+    # print(the_list[0])
+    # print('proche')
+    # print(img_proche(the_list[2], the_list))
+    # print('loin ')
+    # print(img_loin(the_list[2], the_list))
+    #
+    # print(the_list[0]!=the_list[2])
