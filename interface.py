@@ -118,8 +118,6 @@ class Favori(tk.Button):
         for j in range (10):
             le_fav = Dico_rang_fav[j+1]
             la_note = sorted_id_by_note[j][1]
-            h = le_fav.large
-            w = le_fav.large
             if (la_note<4):
                 le_fav.note=None
                 le_fav.id=None
@@ -259,7 +257,6 @@ class Suspect(tk.Button):
         global suspect_actuel
         if suspect_actuel.note <10:
             suspect_actuel.note += 1
-
             suspect_actuel.update_color()
         global Dico_note
         global note_label
