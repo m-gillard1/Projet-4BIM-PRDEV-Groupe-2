@@ -28,7 +28,7 @@ Dico_suspect= {}
 
 
 class Favori(tk.Button):
-    def __init__(self,position, wide,column, row,r,c, **kwargs):
+    def __init__(self,position, wide,r,c, **kwargs):
         """
         Permet de spécifier les dimensions de l'encadré contenant une image favorite sur l'interface.
 
@@ -58,8 +58,6 @@ class Favori(tk.Button):
         self.photo_image= None
         self.note=None
         self.id=None
-        self.col = column
-        self.row=row
         self.c = c
         self.r= r
         self.position= position
@@ -299,7 +297,7 @@ class Suspect(tk.Button):
         """
 
         global suspect_actuel
-        suspect_actuel.note = 4  # Réinitialise la note à 0
+        suspect_actuel.note = 7  # Réinitialise la note à 0
         suspect_actuel.update_color()
         global note_label
         note_label.config(text="Note: "+str(suspect_actuel.note))
@@ -320,7 +318,7 @@ class Suspect(tk.Button):
 
         global suspect_actuel
 
-        if suspect_actuel.note >= 9 :
+        if suspect_actuel.note >= 8 :
             border_color = "dark green"
         elif suspect_actuel.note >= 4:
             border_color = "green yellow"
@@ -645,52 +643,52 @@ def Init_favori(fav_dim,pad):
     dict: Dictionnaire contenant les éléments favoris indexés par leur rang.
     """
 
-    fav_1 = Favori(1,fav_dim, 1, 1,0,0)
+    fav_1 = Favori(1,fav_dim, 0,0)
     fav_1.config(text="favori 1")
     fav_1.grid(row=0, column=0, padx=pad, pady=pad)
     make_draggable_fav(fav_1)
 
-    fav_2 = Favori(2, fav_dim, 1, 2,0,1)
+    fav_2 = Favori(2, fav_dim,0,1)
     fav_2.config(text='favori 2')
     fav_2.grid(row=0, column = 1, padx=pad, pady=pad)
     make_draggable_fav(fav_2)
 
-    fav_3 = Favori(3,fav_dim, 1, 3, 0, 2)
+    fav_3 = Favori(3,fav_dim,  0, 2)
     fav_3.config(text="favori 3")
     fav_3.grid(row=0, column=2, padx=pad, pady=pad)
     make_draggable_fav(fav_3)
 
-    fav_4 = Favori(4, fav_dim, 1, 4,0,3)
+    fav_4 = Favori(4, fav_dim,0,3)
     fav_4.config(text='favori 4')
     fav_4.grid(row=0, column = 3, padx=pad, pady=pad)
     make_draggable_fav(fav_4)
 
-    fav_5 = Favori(5,fav_dim, 1, 5,0,4)
+    fav_5 = Favori(5,fav_dim, 0,4)
     fav_5.config(text="favori 5")
     fav_5.grid(row=0, column=4, padx=pad, pady=pad)
     make_draggable_fav(fav_5)
 
-    fav_6 = Favori(6, fav_dim, 1, 6, 1 ,0)
+    fav_6 = Favori(6, fav_dim,1 ,0)
     fav_6.config(text='favori 6')
     fav_6.grid(row=1, column = 0, padx=pad, pady=pad)
     make_draggable_fav(fav_6)
 
-    fav_7 = Favori(7,fav_dim, 1, 7, 1, 1)
+    fav_7 = Favori(7,fav_dim,  1, 1)
     fav_7.config(text="favori 7")
     fav_7.grid(row=1, column=1, padx=pad, pady=pad)
     make_draggable_fav(fav_7)
 
-    fav_8 = Favori(8, fav_dim, 1, 8, 1, 2)
+    fav_8 = Favori(8, fav_dim, 1, 2)
     fav_8.config(text='favori 8')
     fav_8.grid(row=1, column = 2, padx=pad, pady=pad)
     make_draggable_fav(fav_8)
 
-    fav_9 = Favori(9,fav_dim, 1, 9, 1, 3)
+    fav_9 = Favori(9,fav_dim, 1, 3)
     fav_9.config(text="favori 9")
     fav_9.grid(row=1, column=3, padx=pad, pady=pad)
     make_draggable_fav(fav_9)
 
-    fav_10 = Favori(10, fav_dim, 1, 10, 1,4)
+    fav_10 = Favori(10, fav_dim,1,4)
     fav_10.config(text='favori 10')
     fav_10.grid(row=1, column = 4, padx=pad, pady=pad)
     make_draggable_fav(fav_10)
