@@ -1004,7 +1004,7 @@ frame_fin.pack_propagate(False)
 titre_fin = tk.Label(frame_fin,text = 'RESULTS OF THE PROCESS: ',fg = 'white', font = ('Ubuntu',50),bg = 'midnight blue')
 titre_fin.pack(anchor="center", pady=(150, 0) )
 
-legend_fin = tk.Label(frame_fin,text = 'These are the best matches you have selected. \n Thank you for your help, these faces will be extremely usefull in order to find the person we are looking for. \n Vos images seront sauvegardées dans un dossier Résultats ',fg = 'white', font = ('Dyuthi',15),bg = 'midnight blue')
+legend_fin = tk.Label(frame_fin,text = 'These are the best matches you have selected. \n Thank you for your help, these faces will be extremely usefull in order to find the person we are looking for. \n Your pictures will be saved in a folder : "Résultats" ',fg = 'white', font = ('Dyuthi',15),bg = 'midnight blue')
 legend_fin.pack(anchor="center", pady=(0, 150) )
 
 frame_favori_fin = tk.Frame(frame_fin, width = screen_width* 1//2, height = screen_height* 1//2)
