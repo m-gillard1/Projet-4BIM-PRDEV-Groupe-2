@@ -23,17 +23,17 @@ from PIL import Image
 
 def creation_list_note(nb_image_par_vague) :
     """
-    Créer une liste de note aléatoire pour permettre de tester nos fonctions sans l'IHM
+    Créer une liste de notes aléatoires pour permettre de tester nos fonctions sans l'IHM.
 
     Paramètres :
     ----------
     nb_image_par_vague : int
-        donne le nombre d'image dans une vague et donc le nombre de note à générer
+        Donne le nombre d'image dans une vague et donc le nombre de notes à générer.
 
     Retourne :
     ---------
     note : list
-        Liste d'entier qui serviront de note
+        Liste d'entiers qui serviront de notes.
     """
 
     # liste de note aléatoire pour tester sans l'IHM
@@ -50,7 +50,7 @@ def creation_list_note(nb_image_par_vague) :
 #
 # def encoded_image (path_im_vague) :
 #     """
-#     Encode toutes les images de la vague en vecteur grace à l'autoencodeur
+#     Encode toutes les images de la vague en vecteurs grace à l'autoencodeur
 #
 #     Paramètres :
 #     ----------
@@ -81,7 +81,7 @@ def creation_list_note(nb_image_par_vague) :
 
 def encoded_image (path_list) :
     """
-    Encode toutes les images de la vague en vecteur grace à l'autoencodeur
+    Encode toutes les images de la vague en vecteurs grace à l'autoencodeur
 
     Paramètres :
     ----------
@@ -90,7 +90,7 @@ def encoded_image (path_list) :
     Retourne :
     ---------
     encoded_image_list : list
-        list de vecteur correspondant aux images encodées (pas de note)
+        list de vecteurs correspondant aux images encodées (pas de note)
     """
 
     encoded_image_list=[]
@@ -112,22 +112,22 @@ def encoded_image (path_list) :
 def data_structure_note_image(encoded_image_list, note) :
 
     """
-    Creation de la structure de données qui va etre utilisée pour l'algorithme genetique soit : une list contenant pour
+    Création de la structure de données qui va etre utilisée pour l'algorithme genetique soit : une liste contenant pour
     chaque image 2 vecteurs de meme taille (taille du vecteur de l'image encodée) un avec la note comme premier élément
     puis Nan et le 2eme vecteur contenant l'image encodée
 
     Paramètres :
     ----------
     encoded_image_liste : list de vecteur
-        list de vecteur des images encodee
+        liste de vecteur des images encodee
 
     note : list de int
-        list de int contenant les notes dans l'ordre corresponant à encoded_image_list
+        liste de int contenant les notes dans l'ordre correspondant à encoded_image_list
 
     Retourne :
     ---------
     image_note_list : list
-        list contenant pour chaque image une list avec 2 vecteurs : le 1er element du 1er vecteur contient la note puis le
+        liste contenant pour chaque image une list avec 2 vecteurs : le 1er element du 1er vecteur contient la note puis le
         reste de ce vecteur contient des Nan (afin d'avoir un vecteur de la meme taille que le vecteur de l'image encodée) et le 2e vecteur correspond à l'image encodée
     """
 
@@ -161,12 +161,12 @@ def data_structure_note_image(encoded_image_list, note) :
 
 def algo_genetique_avec_note (image_note_list, taux_cross_over, taux_mutation) :
     """
-    Creer de nouveau vecteur d'image avec le cross over
+    Creer de nouveaux vecteurs d'image avec le cross over
 
     Paramètres :
     ----------
     image_note_list : list
-        list contenat la note et l'image encodee obtenue par data_structure_note_image
+        list contenat la note et l'image encodée obtenue par data_structure_note_image
 
     taux_cross_over : int
         probabilite que le cross over se fasse
@@ -177,7 +177,7 @@ def algo_genetique_avec_note (image_note_list, taux_cross_over, taux_mutation) :
     Retourne :
     ---------
     new_image_encoded : list
-        list de vecteur correspondant aux nouvelles images encodées apres cross over (pas de note)
+        list de vecteurs correspondant aux nouvelles images encodées apres cross over (pas de note)
     """
 
     #image_after_algo_list=Algo_gen.cross_over_avec_note(image_note_list,taux_cross_over) ## si pas de mutation suffit d'appeler juste la focntion cross_over
@@ -201,13 +201,13 @@ def algo_genetique_avec_note (image_note_list, taux_cross_over, taux_mutation) :
 
 def sauv_img (new_image_encoded, path_result_vague) :
     """
-    décode les nouvelles images obtenues puis les sauvegarde dans un dossier et repertorie les liens,
-    ajoute egalement dans ce dossier des nouvelles images issues de l DB
+    Décode les nouvelles images obtenues puis les sauvegarde dans un dossier et repertorie les liens,
+    ajoute egalement dans ce dossier des nouvelles images issues de la DB.
 
     Paramètres :
     ----------
     new_image_encoded : list
-        list des vecteurs des nouvelles images encodées apres cross over (pas de note)
+        list des vecteurs des nouvelles images encodées après cross over (pas de note)
 
     path_result_vague : str
         lien vers le dossier contenant les nouvelles images crées
@@ -215,7 +215,7 @@ def sauv_img (new_image_encoded, path_result_vague) :
     Retourne :
     ---------
     list_path : list de str
-        list des chemin vers chacune des nouvelles images d ela vague suivante
+        list des chemins vers chacune des nouvelles images de la vague suivante
     """
 
     # verfier si le dossier existe sinon le creer
@@ -254,7 +254,7 @@ def sauv_img (new_image_encoded, path_result_vague) :
 def add_Suspect_from_DB():
 
     """
-    renvoie un chemin vers une images en choisissant un nb_aleatoirement dans la db
+    Renvoie un chemin vers une image en choisissant un nb_aleatoirement dans la db
 
     Retourne :
     ---------
@@ -308,7 +308,7 @@ def add_Suspect_from_DB():
 #
 # def encoded_test_db():
 #     """
-#     Retourne la list de toutes les images du dossier encodé
+#     Retourne la liste de toutes les images du dossier encodé
 #
 #     Cette fonction est longue à faire tourner, nous avons essayé de stocker cela directement
 #     dans un fichier à réutiliser ensuite mais ce fichier est trop volumneux pour git
@@ -330,19 +330,19 @@ def add_Suspect_from_DB():
 # def img_loin (img1, list_DB):
 #
 #     """
-#     renvoie l'img a la plus grande distance de img1 dans la list_DB
+#     Renvoie l'image a la plus grande distance de img1 dans la list_DB
 #
 #     Paramètres :
 #     ----------
 #     img1 : vector
 #         vecteur d'une image encodée
 #     list_DB : list of vectors
-#         list des images encodées
+#         liste des images encodées
 #
 #     Retourne :
 #     ---------
 #     nb_images : int
-#         numero de l'image la plus loin
+#         numéro de l'image la plus loin
 #     """
 #
 #     high_dist=0
@@ -365,27 +365,27 @@ def IHM_loop (numero_vague,note,fav_list) :
 
     """
     A partir du numero de vague et des notes données par l'utilisateur, cette boucle renverra des nouvelles images
-    à lui proposer afin de s'approcher au mieux de ces attentes. Ces 12 noooooouvelles images seront issus des favoris
-    de la vague precedentes modifiées par l'algorithme genetique (cross over et mutation), de nouvelles images de la DB
-    seront également inclus afin d'introduire de nouveaux profils
+    à lui proposer afin de s'approcher au mieux de ces attentes. Ces 12 nouvelles images seront issues des favoris
+    de la vague précédentes modifiées par l'algorithme genetique (cross over et mutation), de nouvelles images de la DB
+    seront également inclus afin d'introduire de nouveaux profils.
 
     Paramètres :
     ----------
     numero_vague : int
-        numero de la vague pour savoir ou l'on se situe et quel dossier prendre en comte
+        numero de la vague pour savoir ou l'on se situe et quel dossier prendre en compte
     note : list de int
-        list des notes qui seront attribuéessss par l'utilisateur
+        liste des notes qui seront attribuées par l'utilisateur
 
     Retourne :
     ---------
     list_path_img : list de str
-        list des chemin vers l'image que l'on proposera à l'utilisateur pour la vague suivante
+        liste des chemins vers l'image que l'on proposera à l'utilisateur pour la vague suivante
     """
 
     nb_image_par_vague=12
     nb_new_img_from_db=0
 
-    ##note=note[len(note)-12:] # prendre en compte uniquement les notes de la dernièere vagues de 12 images
+    ##note=note[len(note)-12:] # prendre en compte uniquement les notes de la dernière vague de 12 images
     #print(note)
 
     ## chemin vers les dossiers avec les images
@@ -422,7 +422,7 @@ def IHM_loop (numero_vague,note,fav_list) :
 
 if __name__=='__main__':
 
-    note_list=creation_list_note(12) # creation de note pour test sans IHM
+    note_list=creation_list_note(12) # creation de notes pour test sans IHM
     print("note")
     print(note_list) # affichage des notes
     print(IHM_loop(1,note_list))
