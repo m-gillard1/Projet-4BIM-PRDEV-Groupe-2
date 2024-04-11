@@ -155,7 +155,7 @@ def mutations(best_image_list, Tm) :
     return new_P
 
 
-def one_loop_avec_note(image_list, Tc):
+def one_loop_avec_note(image_list, Tc, Tm):
     """
     Trie la population, choisit les meilleurs images sur lesquelles vont etre faites de cross over.
 
@@ -164,8 +164,8 @@ def one_loop_avec_note(image_list, Tc):
     image_list: list
         list de vecteur comprenant la note de l'image et le vecteur issue de celle-ci
 
-    (Tm: float
-        Taux de mutation.)
+    Tm: float
+        Taux de mutation
 
     Tc: float
         Taux de croisement.
@@ -181,8 +181,11 @@ def one_loop_avec_note(image_list, Tc):
     sorted_image_list = pop_sort(image_list)
     best_popu = lowest_cost_pop(sorted_image_list)
 
-    # Applique (des mutations et /ou) des croisements aux meilleurs vecteurs
+    # Applique des croisements aux meilleurs vecteurs
     popu_cross = cross_over_avec_note(best_popu, Tc)
+
+    # Applique des mutations aux meilleurs vecteurs
+    popu_muta = mutations(best_popu, Tm)
 
     # # Crée une nouvelle population en fusionnant les meilleurs vecteurs et les vecteurs mutés
     # popu_final = np.concatenate((popu_cross, best_popu), axis=0)
