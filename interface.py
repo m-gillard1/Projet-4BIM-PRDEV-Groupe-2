@@ -3,6 +3,8 @@ from tkinter import PhotoImage
 from PIL import Image,ImageTk
 import os
 import webbrowser
+import pyautogui
+import time
 
 #import main_sprint1
 
@@ -766,9 +768,12 @@ def switch_frames(fram1,fram2):
                 img.save(le_path)
 
 def open_html():
-    path = "build/html/index.html"
+    path = 'build/html/index.html'
     webbrowser.open(path)
+    
 
+    time.sleep(1) 
+    pyautogui.hotkey('alt','tab')
 
 
 
@@ -800,9 +805,14 @@ titre_depart.pack(anchor="center", pady=(300, 0) )
 button = tk.Button(frame_depart, width = 20, height = 5, text="Start Working", font = ('Ubuntu',35), bg = 'gold',command=lambda: switch_frames(frame_depart,frame_interface))
 button.place(relx=0.5, rely=0.6, anchor="center")
 
-button_help = tk.Button(frame_depart, width = 20, height = 20, image = "help.png", bg = 'white')
-button_help.place(anchor= 'ne')
-button_help.bind("<Button-1>", open_html())
+photo_help_raw = Image.open("help.png")
+photo_help_resized = photo_help_raw.resize((45,45))
+Image_help = ImageTk.PhotoImage(photo_help_resized)
+
+button_help = tk.Button(frame_depart,image=Image_help, bg = 'white',command= lambda: open_html())
+button_help.place(relx=0.0, rely=0.0)
+
+
 
 
 legend_depart = tk.Label(frame_depart,text = 'Made by Martin Gillard, Thibald Chalas, Aurore Le Houssel, Selma Kadiri, Théo Ducasse',fg = 'white', font = ('Dyuthi',15),bg = 'midnight blue')
@@ -841,6 +851,13 @@ photo_height = int(right_width*0.18)
 Vague_actuelle = 1
 Liste_vague1= ["image_vague_1/1.png", "image_vague_1/2.png", "image_vague_1/3.png","image_vague_1/4.png","image_vague_1/5.png","image_vague_1/6.png","image_vague_1/7.png","image_vague_1/8.png","image_vague_1/9.png","image_vague_1/10.png", "image_vague_1/11.png","image_vague_1/12.png"]
 Init_suspects(choices_frame,Liste_vague1,photo_width,photo_height)
+
+
+
+
+help = tk.Button(frame_interface,image=Image_help, bg = 'white',command= lambda: open_html())
+help.place(relx=0.0, rely=0.0)
+
 
 
 ### partie inférieur de la partie de droite, contient les boutons d'options ###
