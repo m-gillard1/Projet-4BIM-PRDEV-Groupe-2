@@ -285,9 +285,8 @@ class Suspect(tk.Button):
         Dico_note[suspect_actuel.id]= suspect_actuel.note
         note_label.config(text="Note: "+str(suspect_actuel.note))
 
-        print("ICI" +  str(suspect_actuel.note))
         if (suspect_actuel.note==3):
-            print("here")
+            
             note_label.config(text="Pas d'image selectionnée")
             suspect_actuel = None
             suspect_principal.configure(image=Image_Instruction)
@@ -297,7 +296,7 @@ class Suspect(tk.Button):
 
     def fav(self):
         """
-        Change la note du suspect actuel à 7, met à jour la couleur et les informations.
+        Change la note du suspect actuel à 4, met à jour la couleur et les informations.
 
         Returns:
         None
@@ -478,7 +477,7 @@ def on_suspect_drag_release(event):
     widget.grid(row=widget.row, column=widget.col)
 
     if (x < -100 and x > -900 and y > 350 and y < 800):
-        widget.note=7
+        widget.note=4
         global suspect_actuel
         global Dico_note
         global note_label
@@ -557,7 +556,7 @@ def Genere_Suspect(Dico, Vague_actuelle ):
     note_list=[]
     fav_list=[]
     for img, note in Dico.items():
-        print(f"{img} a {note} points.")
+        #print(f"{img} a {note} points.")
         note_list.append(note)
 
         if note >= 4 :
@@ -571,7 +570,7 @@ def Genere_Suspect(Dico, Vague_actuelle ):
         # renvoie la liste des path svers les nouvelles images
     #Liste_Path_nouvelle_vague=main_sprint1.IHM_loop(Vague_actuelle, note_list, fav_list)
 
-    print(Liste_Path_nouvelle_vague)
+    #print(Liste_Path_nouvelle_vague)
     return (Liste_Path_nouvelle_vague)
 
 
@@ -763,13 +762,12 @@ def switch_frames(fram1,fram2):
     for i in range (2):
         for j in range (5):
             fav = Dico_rang_fav[i*5 + j + 1]
-            print(fav)
             if (fav.photo_image is not None):
                 temp = tk.Label(frame_favori_fin, image = fav.photo_image)
                 temp.grid(column = j, row=i)
                 img = ImageTk.getimage( fav.photo_image )
                 le_path = "resultats/" + str (i*5 + j + 1)+str(".png")
-                print('le path est le suivant : '  + str (le_path))
+                #print('le path est le suivant : '  + str (le_path))
                 img.save(le_path)
 
 
