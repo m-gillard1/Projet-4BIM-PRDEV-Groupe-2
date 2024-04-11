@@ -72,7 +72,7 @@
                           <li class="li">Retourne<p>sorted_image_list: image_list ordonnées par ordre decroissant selon les notes (couts)</p></li>
                         </ul>
                       </li>
-                      
+
 
                       <li class="functions"><strong style="font-size: 1.2em;">cross_over_avec_note(best_image_list, Tc)</strong>
                          <p>  Fait des croisements entre vecteurs d'image. </p>
@@ -85,15 +85,17 @@
                          </ul>
                        </li>
 
-                       <li class="functions"><strong style="font-size: 1.2em;">one_loop_avec_note(image_list, Tc)</strong>
-                         <p>  Calcule la moyenne des couts, le cout minimum et definit la population finale de vecteurs. </p>
+                       <li class="functions"><strong style="font-size: 1.2em;">one_loop_avec_note(image_list, Tc, Tm)</strong>
+                         <p>  Trie la population, choisit les meilleurs images sur lesquelles vont etre faites de cross over. </p>
                          <ul>
-                           <li class="li">Paramètres<p>  - image_list: list de vecteurs comprenant la note de l'image et le vecteur issue de celle-ci.
-                                              -  Tc:  float : Taux de croisement.
+                           <li class="li">Paramètres<p> <ol><li> - image_list: list de vecteurs comprenant la note de l'image et le vecteur issue de celle-ci.</li>
+                                              <li>   Tm: float: Taux de mutation</li>
+                                              <li>   Tc: float:  Taux de croisement.</li>
+                                            </ol>
                                          </p>
 
                            </li>
-                           <li class="li">Retourne<p> pop : Liste contenant la population finale de vecteurs.</p></li>
+                           <li class="li">Retourne<p>  list: Liste contenant les nouvelles images modifiées par le cross over</p></li>
                          </ul>
                        </li>
 
