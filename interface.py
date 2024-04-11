@@ -3,7 +3,7 @@ from tkinter import PhotoImage
 from PIL import Image,ImageTk
 import os
 
-#import main_sprint1
+import main_sprint1
 
 ########## __FONCTIONS__ ##########
 
@@ -237,7 +237,6 @@ class Suspect(tk.Button):
         Returns:
         None
         """
-        self.update_color()
         if (type(self)==Suspect):
             global suspect_actuel
             suspect_actuel = self
@@ -613,7 +612,7 @@ def Genere_Suspect(Dico, Vague_actuelle ):
         # va chercher les images de la vague correspondante
         # génère les nouvelles images
         # renvoie la liste des path svers les nouvelles images
-   # Liste_Path_nouvelle_vague=main_sprint1.IHM_loop(Vague_actuelle, note_list)
+    Liste_Path_nouvelle_vague=main_sprint1.IHM_loop(Vague_actuelle, note_list)
 
     print(Liste_Path_nouvelle_vague)
     return (Liste_Path_nouvelle_vague)
@@ -800,6 +799,10 @@ def switch_frames(fram1,fram2):
     fram2.place(x=0, y=0, relwidth=1, relheight=1)
     if not os.path.exists("resultats"):
         os.makedirs("resultats")
+    else:
+        for filename in os.listdir("resultats"):
+            filepath=os.path.join("resultats/",filename )
+            os.remove(filepath)
     for i in range (2):
         for j in range (5):
             fav = Dico_rang_fav[i*5 + j + 1]
