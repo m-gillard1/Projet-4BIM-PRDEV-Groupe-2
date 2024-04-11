@@ -347,32 +347,7 @@ def img_loin (img1, list_DB):
     return nb_image
 
 
-######################
-### PRINCIPAL LOOP ###
-######################
-
-def main_loop (nb_vague) :
-
-    for vague in range(nb_vague) :
-
-        vague=vague+1
-        numero_vague=vague
-
-        nb_image_par_vague=12
-
-        path_im_vague=("image_vague_"+str(numero_vague)+"/")
-        path_result_vague =("image_vague_"+str(numero_vague+1)+"/")
-
-        taux_cross_over=0.3
-
-        note=creation_list_note(nb_image_par_vague)
-        encoded_image_list=encoded_image(path_im_vague)
-        #image_note_list=data_structure_note_image(encoded_image_list,note) # pas utile sans note
-        new_image_encoded=algo_genetique_sans_note(encoded_image_list, taux_cross_over)
-        sauv_img(new_image_encoded,path_result_vague)
-
-
-################s
+################
 ### IHM LOOP ###
 ################
 
