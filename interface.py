@@ -772,7 +772,7 @@ def open_html():
     webbrowser.open(path)
     
 
-    time.sleep(1) 
+    time.sleep(5) 
     pyautogui.hotkey('alt','tab')
 
 
