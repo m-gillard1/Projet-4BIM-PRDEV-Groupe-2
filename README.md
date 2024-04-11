@@ -25,7 +25,10 @@ La documentation a été réalisée grâce à l'outil "Sphinx". Pour y accéder,
 
 Le jeu de test contient initialement 3000 images mais afin d'alléger le dépot git nous en avons conservé 1000 dans le dossier "data". 
     
-  
+## Comment démarrer l'application ?
+
+Il faut run le fichier "interface.py". 
+
 
 
 
