@@ -13,6 +13,7 @@ from random import *
 import numpy as np
 import os
 from PIL import Image
+import pickle
 #import interface.py
 
 
@@ -211,12 +212,24 @@ def sauv_img (new_image_encoded, path_result_vague) :
     count_4=0
     List_path=[]
 
-    # enregistrer les images et leur chemin
+    # enregistrer les images du cross over et leur chemin
     for numpy in new_image_encoded :
         count_4+=1
         image_decoded=Autoencoder_to_use.NumpyDecoding(numpy)
         image_decoded.save(path_result_vague+str(count_4)+'.png')
         # pour IHM list des path :
+        List_path.append(path_result_vague+str(count_4)+'.png')
+
+    ## calcul du nombre de nouvelles images à ajouter de la base de données et sauvegarde desnew img
+    nb_new_img_from_db=12-len(List_path)
+    for i in range(nb_new_img_from_db) :
+        count_4+=1
+        print("compt")
+        print(count_4)
+        new_img_path=add_Suspect_from_DB() ## récupère le path
+        new_img=Image.open(new_img_path) ## récupère l'img
+        #print(path_result_vague+str(count_4)+'.png')
+        new_img.save(path_result_vague+str(count_4)+'.png') ##############" porblem "
         List_path.append(path_result_vague+str(count_4)+'.png')
 
     return List_path
@@ -239,7 +252,7 @@ def add_Suspect_from_DB():
     ## extraire les numeros des images ayant deja ete utilisées
 
     ## aleatoire
-    numero = int(uniform(24000, 24030))
+    numero = int(uniform(25000, 25999))
 
     ## avec distances
     # parcourir toutes les images de la DB pour calculer leur distance avec toutes les images du la vague actuelle 3000 x 12
@@ -313,7 +326,7 @@ def img_proche (img1, list_DB):
 
     """
     low_dist=1000000
-    count=24000
+    count=25000
     for img in list_DB :
         dist=distance_img(img,img1)
         #print('distance :'+str(dist))
@@ -350,7 +363,7 @@ def img_loin (img1, list_DB):
 
     """
     high_dist=0
-    count=24000
+    count=25000
     for img in list_DB :
         dist=distance_img(img,img1)
         if dist>=high_dist :
@@ -393,41 +406,80 @@ def main_loop (nb_vague) :
 def IHM_loop (numero_vague,note) :
 
     nb_image_par_vague=12
+    nb_new_img_from_db=0
 
+    # print("note")
+    # print(note)
+    # print(len(note)-12)
+    # note=note[len(note)-12:]
+    # print(note)
+
+    ## chemin vers les dossiers avec les images
     path_im_vague=("image_vague_"+str(numero_vague)+"/")
     path_result_vague =("image_vague_"+str(numero_vague+1)+"/")
 
-    taux_cross_over=1
+    taux_cross_over=1 # on met un taux de cross over = à 1 pour obtenir forcement des images modifiées
 
+    ## preparer nos images encoder + associer à la note
     encoded_image_list=encoded_image(path_im_vague)
     image_note_list=data_structure_note_image(encoded_image_list,note)
 
-    # boucle pour extraire les favoris
+    ## boucle pour extraire les favoris
     print("image note list")
     print(image_note_list)
+
     img_fav=[]
     for img in image_note_list :
         if (img[0][0] >= 7) :
             img_fav.append(img)
     print("fav")
     print(img_fav)
+    print(len(img_fav))
 
+    ## sauvegarde des images issues du cross over
     new_image_encoded=algo_genetique_avec_note(img_fav, taux_cross_over)
     list_path_img=[]
     list_path_img=sauv_img(new_image_encoded,path_result_vague)
 
+    ## calcul du nombre de nouvelles images à ajouter de la base de données
+    #nb_new_img_from_db=12-len(list_path_img)
 
-    nb_new_img_from_db=12-len(list_path_img) # nombre de nouvelles images à ajouter de la base de données
-    print(nb_new_img_from_db)
+    ##remplir le debut de la liste avec les img issues du cross over
     list_path_complete=list_path_img
-    print('avant')
-    print(list_path_complete)
-    # completer liste path en consequence
-    for i in range(nb_new_img_from_db) :
-        list_path_complete.append(add_Suspect_from_DB())
+    print("list_path_complete")
 
-    print('apres')
-    print(list_path_complete)
+    # ## extraire les images dont les note inf ou = à 2
+    # img_0=[]
+    # for img in image_note_list :
+    #     if (img[0][0] <= 2 ) :
+    #         img_0.append(img[1])
+    # print("list 0000")
+    # print(img_0)
+    #
+    #
+    #
+    # ## trouver une images "loin" des images = à 0
+    # if img_0!=[]:
+    #     # recuperationn de 1000 images encodées
+    #     with open('liste.pkl', 'rb') as f:
+    #         listDB = pickle.load(f)
+    #     for img in img_0 :
+    #         numero=img_loin(img[1],listDB)
+    #         path=("data/"+ str(numero) +'_superposee.png')
+    #         list_path_complete.append(path)
+    #         nb_new_img_from_db=nb_new_img_from_db-1
+    #         print("path")
+    #         print(path)
+    #         print("nb img a ajdd")
+    #         print(nb_new_img_from_db)
+
+
+    ## completer liste path avec des nouvelles images de la DB
+    # for i in range(nb_new_img_from_db) :
+    #     list_path_complete.append(add_Suspect_from_DB())
+    #
+    # print('apres')
+    #print(list_path_complete)
 
     return list_path_complete
 
