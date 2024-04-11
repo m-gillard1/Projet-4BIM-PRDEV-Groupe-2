@@ -408,11 +408,11 @@ def IHM_loop (numero_vague,note) :
     nb_image_par_vague=12
     nb_new_img_from_db=0
 
-    # print("note")
-    # print(note)
-    # print(len(note)-12)
-    # note=note[len(note)-12:]
-    # print(note)
+    print("note")
+    print(note)
+    print(len(note)-12)
+    note=note[len(note)-12:]
+    print(note)
 
     ## chemin vers les dossiers avec les images
     path_im_vague=("image_vague_"+str(numero_vague)+"/")
