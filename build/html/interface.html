@@ -76,15 +76,15 @@ DOCTYPE html>
 
                     <h2 class="h2">classe "Favori"</h2>
 
-                    <li class="functions"> <strong style="font-size: 1.2em;">__init__(self,position, wide,column, row,r,c, **kwargs)</strong>
+                    <li class="functions"> <strong style="font-size: 1.2em;">__init__(self,position, wide,column,r,c, **kwargs)</strong>
                         <p>  Permet de spécifier les dimensions de l'encadré contenant une image favorite sur l'interface.</p>
                         <ul>
                            <li class="li2">Paramètres</li>
                             <ol>
                               <li>event: tkinter.Event: L'événement qui a déclenché l'appel de cette fonction (par défaut, None).</li>
                               <li>size (int): La taille de l'objet, en pixels.</li>
-                              <li>column (int): La colonne dans laquelle l'objet doit être placé.</li>
-                              <li>row (int): La ligne dans laquelle l'objet doit être placé.</li>
+                              <li>c(int): La colonne dans laquelle l'objet doit être placé.</li>
+                              <li>r (int): La ligne dans laquelle l'objet doit être placé.</li>
                               <li> **kwargs (dict): Tout argument supplémentaire.</li>
                             </ol>
 
@@ -96,8 +96,8 @@ DOCTYPE html>
                               <li>photo_image (tkinter.PhotoImage): L'image associée à l'objet.</li>
                               <li> note (str): Une note associée à l'objet.</li>
                               <li> id (int): L'identifiant unique de l'objet.</li>
-                              <li> col (int): La colonne dans laquelle l'objet est placé.</li>
-                              <li> row (int): La ligne dans laquelle l'objet est placé.</li>
+                              <li> c (int): La colonne dans laquelle l'objet est placé.</li>
+                              <li> r (int): La ligne dans laquelle l'objet est placé.</li>
                             </ol>
 
                             <li class="li">Retourne<p>None</p></li>
@@ -107,18 +107,16 @@ DOCTYPE html>
 
 
 
-                      <li class="functions"> <strong style="font-size: 1.2em;">Make_favorite (self,id, note, image )</strong>
+                      <li class="functions"> <strong style="font-size: 1.2em;">Make_favorite (self,id, note)</strong>
                           <p> Définit une image favorite. Elle charge l'image grace à son identifiant `id`, la redimensionne à la taille souhaitée, et l'associe à l'objet.</p>
                           <ul>
                              <li class="li2">Paramètres</li>
                               <ol>
                                 <li>id (str): Identifiant l'image favorite.</li>
                                 <li>note (str): Une note associée à l'image favorite.</li>
-                                <li>image (PIL.Image.Image): L'image favorite.</li>
                               </ol>
                               <li class="li">Retourne<p>None</p></li>
                              </ul>
-
                          </li>
 
 
@@ -257,12 +255,11 @@ DOCTYPE html>
                                                      </li>
 
                                                   <li class="functions"> <strong style="font-size: 1.2em;">Ajout_Favori(self)</strong>
-                                                      <p>Ajoute le suspect actuel aux favoris si sa note appartient à ]6;10[.</p>
+                                                      <p>Ajoute le suspect actuel aux favoris si sa note appartient à [4;10].</p>
                                                       <ul>
                                                           <li class="li">Retourne<p>None</p></li>
                                                          </ul>
                                                      </li>
-
 
                                                      <li class="functions"> <strong style="font-size: 1.2em;">Restart_event(event)</strong>
                                                          <p> Réinitialise l'application à son état d'origine.</p>
@@ -294,7 +291,7 @@ DOCTYPE html>
                                                                   <li class="li2">Paramètres</li>
                                                                    <ol>
                                                                      <li> Dico (dict): Dictionnaire contenant les chemins des images et les notes associées.</li>
-                                                                      <li>  Vague_actuelle (int): Le numéro de la vague pour laquelle on génère nouveaux suspects.</li>
+                                                                     <li> Vague_actuelle (int): Le numéro de la vague pour laquelle on génère nouveaux suspects.</li>
                                                                    </ol>
                                                                    <li class="li">Retourne<p>list: Liste contenant les chemins des 12 nouvelles images générées.</p></li>
                                                                   </ul>
@@ -317,7 +314,7 @@ DOCTYPE html>
                                                                  </li>
 
                                                                  <li class="functions"> <strong style="font-size: 1.2em;">Init_favori(fav_dim,pad)</strong>
-                                                                     <p> Initialise les éléments favoris avec leurs dimensions et positions dans la grille.</p>
+                                                                     <p> Initialise les éléments favoris avec leurs dimensions et positions dans la grille. C'est ici que leur DND est initialisé aussi.</p>
                                                                      <ul>
                                                                         <li class="li2">Paramètres</li>
                                                                          <ol>
@@ -335,6 +332,17 @@ DOCTYPE html>
                                                                            </ul>
                                                                        </li>
 
+                                                                       <li class="functions"> <strong style="font-size: 1.2em;">switch_frames(fram1,fram2)</strong>
+                                                                        <p> Passe à la frame de resultats, affiche les favoris dans un tableau et les sauvegarde dans un dossier.</p>
+                                                                        <ul>
+                                                                           <li class="li2">Paramètres</li>
+                                                                            <ol>
+                                                                              <li> fram1: La frame à masquer.</li>
+                                                                              <li> fram2: La frame à afficher.</li>
+                                                                            </ol>
+                                                                            <li class="li">Retourne<p>None</p></li>
+                                                                           </ul>
+
 
                                                                          <h2 class="h2">Gestion du drag and drop</h2>
 
@@ -349,17 +357,16 @@ DOCTYPE html>
                                                                                 </ul>
                                                                           </li>
 
-
-                                                                          <li class="functions"> <strong style="font-size: 1.2em;">switch_frames(fram1,fram2)</strong>
-                                                                              <p> Passe à la frame de resultats.</p>
-                                                                              <ul>
-                                                                                 <li class="li2">Paramètres</li>
-                                                                                  <ol>
-                                                                                    <li> fram1: La frame à masquer.</li>
-                                                                                    <li> fram2: La frame à afficher.</li>
-                                                                                  </ol>
-                                                                                  <li class="li">Retourne<p>None</p></li>
-                                                                                 </ul>
+                                                                          <li class="functions"> <strong style="font-size: 1.2em;">open_html()</strong>
+                                                                            <p>  Ouvre une page dans le browser pour afficher les instructions</p>
+                                                                            <ul>
+                                                                               <li class="li2">Paramètres</li>
+                                                                                <ol>
+                                                                                  <li> None</li>
+                                                                                </ol>
+                                                                                <li class="li">Retourne<p>None</p></li>
+                                                                               </ul>
+                                                                         </li>
 
 
 
