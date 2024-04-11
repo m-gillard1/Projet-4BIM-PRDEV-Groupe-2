@@ -18,6 +18,12 @@ La documentation a été réalisée grâce à l'outil "Sphinx". Pour y accéder,
       - Documentation interface
       - Mode d'emploi du logiciel
       - Main
+   
+## Emplacement de la base de données 
+
+Le jeu de test contient initialement 3000 images mais afin d'alléger le dépot git nous en avons conservé 1000 dans le dossier "data". 
+    
+  
 
 
 
