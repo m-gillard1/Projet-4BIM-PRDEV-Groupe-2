@@ -356,8 +356,8 @@ def IHM_loop (numero_vague,note) :
     nb_image_par_vague=12
     nb_new_img_from_db=0
 
-    note=note[len(note)-12:] # prendre en compte uniquement les notes de la dernièere vagues de 12 images
-    #print(note)
+    ##note=note[len(note)-12:] # prendre en compte uniquement les notes de la dernièere vagues de 12 images
+    print(note)
 
     ## chemin vers les dossiers avec les images
     path_im_vague=("image_vague_"+str(numero_vague)+"/")
@@ -373,11 +373,11 @@ def IHM_loop (numero_vague,note) :
     ## boucle pour extraire les favoris
     img_fav=[]
     for img in image_note_list :
-        if (img[0][0] >= 7) :
+        if (img[0][0] >= 4) :
             img_fav.append(img)
-    # print("fav")
-    # print(img_fav)
-    # print(len(img_fav))
+    print("fav")
+    print(img_fav)
+    print(len(img_fav))
 
     ## sauvegarde des images issues de l'algorithme genetique et des nouvelles provenant de la DB
     new_image_encoded=algo_genetique_avec_note(img_fav, taux_cross_over,taux_mutation) #### verif structure des donnees si les notes apparaisent encore ou pas
