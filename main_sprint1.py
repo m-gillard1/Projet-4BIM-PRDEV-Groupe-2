@@ -273,68 +273,50 @@ def distance_img(img1, img2):
     return  dist
 
 
-###################################################
+###############################################
 ### encoder toutes les images de la db test ###
-###################################################
+###############################################
 
 def encoded_test_db():
 
 
     """
     retourne la list de toutes les images du jeu de test encodée
+
+    Retourne :
+    ---------
+    dist : float
+        distance Manhattan entre 2 images encodées
+
     """
     list_DB=encoded_image("data/")
     return list_DB
 
 
-###################################################
-### trouve l'image la plus proche en distance d'une autre image  ###
-###################################################
-
-def img_proche (img1, list_DB):
-
-    """
-    prends 1 img sous forme vetorielle
-    et renvoie l'image la plus proche dans le jeu de test
-
-    """
-    low_dist=1000000
-    count=25000
-    for img in list_DB :
-        dist=distance_img(img,img1)
-        #print('distance :'+str(dist))
-
-        # #verifier si les vecteurs sont différents
-        # vect_diff=False
-        # bool_vect= (img!=img1)
-        # print(bool_vect)
-        # for bool in bool_vect :
-        #     if bool==False :
-        #         vect_identiq=True
-        #         print(vect_identiq)
 
 
-        if dist<=low_dist : #and vect_diff  :
-            low_dist=dist
-            print(low_dist)
-            nb_image=count
-        count+=1
-        #print('count: '+str(count))
-
-    return nb_image
-
-
-###################################################
+##################################################################
 ### trouve l'image la plus loin en distance d'une autre image  ###
-###################################################
+##################################################################
 
 def img_loin (img1, list_DB):
 
     """
-    prends 1 img sous forme vetorielle
-    et renvoie l'image la plus loin dans le jeu de test
+    renvoie l'img a la plus grande distance de img1 dans la list_DB
 
+    Paramètres :
+    ----------
+    img1 : vector
+        vecteur d'une image encodée
+    list_DB : list of vectors
+        list des images encodées
+
+    Retourne :
+    ---------
+    nb_images : int
+        numero de l'image la plus loin
     """
+
     high_dist=0
     count=25000
     for img in list_DB :
@@ -353,52 +335,58 @@ def img_loin (img1, list_DB):
 
 def IHM_loop (numero_vague,note) :
 
+    """
+    A partir du numero de vague et des notes données par l'utilisateur, cette boucle renverra des nouvelles images
+    à lui proposer afin de s'approcher au mieux de ces attentes. Ces 12 noooooouvelles images seront issus des favoris
+    de la vague precedentes modifiées par l'algorithme genetique (cross over et mutation), de nouvelles images de la DB
+    seront également inclus afin d'introduire de nouveaux profils
+
+    Paramètres :
+    ----------
+    numero_vague : int
+        numero de la vague pour savoir ou l'on se situe et quel dossier prendre en comte
+    note : list de int
+        list des notes qui seront attribuéessss par l'utilisateur
+
+    Retourne :
+    ---------
+    list_path_img : list de str
+        list des chemin vers l'image que l'on proposera à l'utilisateur pour la vague suivante
+    """
+
     nb_image_par_vague=12
     nb_new_img_from_db=0
 
-    print("note")
-    print(note)
-    print(len(note)-12)
-    note=note[len(note)-12:]
-    print(note)
+    note=note[len(note)-12:] # prendre en compte uniquement les notes de la dernièere vagues de 12 images
+    #print(note)
 
     ## chemin vers les dossiers avec les images
     path_im_vague=("image_vague_"+str(numero_vague)+"/")
     path_result_vague =("image_vague_"+str(numero_vague+1)+"/")
 
     taux_cross_over=1 # on met un taux de cross over = à 1 pour obtenir forcement des images modifiées
-    taux_mutation=1 # on met un taux de cross over = à 1 pour obtenir forcement des images modifiées
+    taux_mutation=1 # on met un taux de mutation = à 1 pour obtenir forcement des images modifiées
 
-    ## preparer nos images encoder + associer à la note
+    ## preparer nos images encodee + associer à la note
     encoded_image_list=encoded_image(path_im_vague)
     image_note_list=data_structure_note_image(encoded_image_list,note)
 
     ## boucle pour extraire les favoris
-    print("image note list")
-    print(image_note_list)
-
     img_fav=[]
     for img in image_note_list :
         if (img[0][0] >= 7) :
             img_fav.append(img)
-    print("fav")
-    print(img_fav)
-    print(len(img_fav))
+    # print("fav")
+    # print(img_fav)
+    # print(len(img_fav))
 
-    ## sauvegarde des images issues du cross over
+    ## sauvegarde des images issues de l'algorithme genetique et des nouvelles provenant de la DB
     new_image_encoded=algo_genetique_avec_note(img_fav, taux_cross_over,taux_mutation) #### verif structure des donnees si les notes apparaisent encore ou pas
-    print('result algo gene')
+    #print('result algo gene')
     #print(new_image_encoded)
-    print(len(new_image_encoded))
+    #print(len(new_image_encoded))
     list_path_img=[]
     list_path_img=sauv_img(new_image_encoded,path_result_vague)
-
-    ## calcul du nombre de nouvelles images à ajouter de la base de données
-    #nb_new_img_from_db=12-len(list_path_img)
-
-    ##remplir le debut de la liste avec les img issues du cross over
-    list_path_complete=list_path_img
-    print("list_path_complete")
 
     # ## extraire les images dont les note inf ou = à 2
     # img_0=[]
@@ -407,8 +395,6 @@ def IHM_loop (numero_vague,note) :
     #         img_0.append(img[1])
     # print("list 0000")
     # print(img_0)
-    #
-    #
     #
     # ## trouver une images "loin" des images = à 0
     # if img_0!=[]:
@@ -425,25 +411,15 @@ def IHM_loop (numero_vague,note) :
     #         print("nb img a ajdd")
     #         print(nb_new_img_from_db)
 
-
-    ## completer liste path avec des nouvelles images de la DB
-    # for i in range(nb_new_img_from_db) :
-    #     list_path_complete.append(add_Suspect_from_DB())
-    #
-    # print('apres')
-    #print(list_path_complete)
-
-    return list_path_complete
+    return list_path_img
 
 
 
 if __name__=='__main__':
 
-    #main_loop(8)
-
-    note_list=creation_list_note(12)
+    note_list=creation_list_note(12) # creation de note pour test sans IHM
     print("note")
-    print(note_list)
+    print(note_list) # affichage des notes
     print(IHM_loop(1,note_list))
 
 
