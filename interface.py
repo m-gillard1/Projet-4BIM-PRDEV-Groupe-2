@@ -3,7 +3,7 @@ from tkinter import PhotoImage
 from PIL import Image,ImageTk
 import os
 
-import main_sprint1
+#import main_sprint1
 
 ########## __FONCTIONS__ ##########
 
@@ -422,76 +422,28 @@ def on_fav_drag_release(event):
     widget = event.widget
     widget.grid(row=widget.r, column=widget.c)
     global Dico_note
-
-    if (widget.note is not None and widget.note >= 7):
-        if (widget.winfo_x()+event.x > 10 and widget.winfo_x()+event.x < 120 and (widget.winfo_y()+event.y)>15 and (widget.winfo_y()+event.y)<155):
-            sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
-            if (sorted_id_by_note[0][1]>=7):
-                Dico_note[widget.id] = sorted_id_by_note[0][1]
-                Favori.Update_Fav(Dico_note)
-
-
-        if (widget.winfo_x()+event.x > 145 and widget.winfo_x()+event.x < 245 and (widget.winfo_y()+event.y)>15 and (widget.winfo_y()+event.y)<155):
-            sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
-            if (sorted_id_by_note[1][1]>=7):
-                Dico_note[widget.id] = sorted_id_by_note[1][1]
-                Favori.Update_Fav(Dico_note)
-
-
-        if (widget.winfo_x()+event.x > 275 and widget.winfo_x()+event.x < 370 and (widget.winfo_y()+event.y)>15 and (widget.winfo_y()+event.y)<155):
-            sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
-            if (sorted_id_by_note[2][1]>=7):
-                Dico_note[widget.id] = sorted_id_by_note[2][1]
-                Favori.Update_Fav(Dico_note)
+    global Dico_rang_fav
+    for fav in Dico_rang_fav.values():
+        if (widget.note is not None and widget.note >= 4):
+            string =fav.winfo_geometry()
+            part = string.split("+")
+            dim = part[0].split('x')
+            w=int(dim[0])
+            h=int(dim[1])
+            x=int(part[1])
+            y=int(part[2])
+            top_bound=y
+            bot_bound=y+h
+            left_bound=x
+            right_bound=x+w
+            if (widget.winfo_x()+event.x > left_bound and widget.winfo_x()+event.x < right_bound and (widget.winfo_y()+event.y)>top_bound and (widget.winfo_y()+event.y)<bot_bound):
+                sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
+                if (sorted_id_by_note[0][1]>=4):
+                    Dico_note[widget.id] = sorted_id_by_note[0][1]
+                    Favori.Update_Fav(Dico_note)
 
 
-        if (widget.winfo_x()+event.x > 400 and widget.winfo_x()+event.x < 495 and (widget.winfo_y()+event.y)>15 and (widget.winfo_y()+event.y)<155):
-            sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
-            if (sorted_id_by_note[3][1]>=7):
-                Dico_note[widget.id] = sorted_id_by_note[3][1]
-                Favori.Update_Fav(Dico_note)
-
-
-        if (widget.winfo_x()+event.x > 520 and widget.winfo_x()+event.x < 620 and (widget.winfo_y()+event.y)>15 and (widget.winfo_y()+event.y)<155):
-            sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
-            if (sorted_id_by_note[4][1]>=7):
-                Dico_note[widget.id] = sorted_id_by_note[4][1]
-                Favori.Update_Fav(Dico_note)
-
-
-        if (widget.winfo_x()+event.x > 10 and widget.winfo_x()+event.x < 120 and (widget.winfo_y()+event.y)>175 and (widget.winfo_y()+event.y)<314):
-            sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
-            if (sorted_id_by_note[5][1]>=7):
-                Dico_note[widget.id] = sorted_id_by_note[5][1]
-                Favori.Update_Fav(Dico_note)
-
-
-        if (widget.winfo_x()+event.x > 145 and widget.winfo_x()+event.x < 245 and (widget.winfo_y()+event.y)>175 and (widget.winfo_y()+event.y)<314):
-            sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
-            if (sorted_id_by_note[6][1]>=7):
-                Dico_note[widget.id] = sorted_id_by_note[6][1]
-                Favori.Update_Fav(Dico_note)
-
-
-        if (widget.winfo_x()+event.x > 275 and widget.winfo_x()+event.x < 370 and (widget.winfo_y()+event.y)>175 and (widget.winfo_y()+event.y)<314):
-            sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
-            if (sorted_id_by_note[7][1]>=7):
-                Dico_note[widget.id] = sorted_id_by_note[7][1]
-                Favori.Update_Fav(Dico_note)
-
-
-        if (widget.winfo_x()+event.x > 400 and widget.winfo_x()+event.x < 495 and (widget.winfo_y()+event.y)>175 and (widget.winfo_y()+event.y)<314):
-            sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
-            if (sorted_id_by_note[8][1]>=7):
-                Dico_note[widget.id] = sorted_id_by_note[8][1]
-                Favori.Update_Fav(Dico_note)
-
-
-        if (widget.winfo_x()+event.x > 520 and widget.winfo_x()+event.x < 620 and (widget.winfo_y()+event.y)>175 and (widget.winfo_y()+event.y)<314):
-            sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
-            if (sorted_id_by_note[9][1]>=7):
-                Dico_note[widget.id] = sorted_id_by_note[9][1]
-                Favori.Update_Fav(Dico_note)
+       
 
 
 
@@ -617,7 +569,7 @@ def Genere_Suspect(Dico, Vague_actuelle ):
         # va chercher les images de la vague correspondante
         # génère les nouvelles images
         # renvoie la liste des path svers les nouvelles images
-    Liste_Path_nouvelle_vague=main_sprint1.IHM_loop(Vague_actuelle, note_list, fav_list)
+    #Liste_Path_nouvelle_vague=main_sprint1.IHM_loop(Vague_actuelle, note_list, fav_list)
 
     print(Liste_Path_nouvelle_vague)
     return (Liste_Path_nouvelle_vague)
