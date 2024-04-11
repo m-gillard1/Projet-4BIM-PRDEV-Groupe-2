@@ -86,8 +86,8 @@ def encoded_image (path_list) :
 
     Paramètres :
     ----------
-    path_list !!!!!!!!!!
-
+    path_list : list de str
+        liste des chemins vers les images a encoder (ici les favoris)
     Retourne :
     ---------
     encoded_image_list : list
