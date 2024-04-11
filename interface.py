@@ -3,7 +3,7 @@ from tkinter import PhotoImage
 from PIL import Image,ImageTk
 import os
 
-import main_sprint1
+#import main_sprint1
 
 ########## __FONCTIONS__ ##########
 
@@ -237,6 +237,7 @@ class Suspect(tk.Button):
         Returns:
         None
         """
+        self.update_color()
         if (type(self)==Suspect):
             global suspect_actuel
             suspect_actuel = self
@@ -327,9 +328,9 @@ class Suspect(tk.Button):
 
         if suspect_actuel.note >= 9 :
             border_color = "dark green"
-        elif suspect_actuel.note >= 7:
+        elif suspect_actuel.note >= 4:
             border_color = "green yellow"
-        elif suspect_actuel.note > 3:
+        elif suspect_actuel.note >= 3:
             border_color = "white"
         elif suspect_actuel.note > 1:
             border_color = "orange"
@@ -612,7 +613,7 @@ def Genere_Suspect(Dico, Vague_actuelle ):
         # va chercher les images de la vague correspondante
         # génère les nouvelles images
         # renvoie la liste des path svers les nouvelles images
-    Liste_Path_nouvelle_vague=main_sprint1.IHM_loop(Vague_actuelle, note_list)
+   # Liste_Path_nouvelle_vague=main_sprint1.IHM_loop(Vague_actuelle, note_list)
 
     print(Liste_Path_nouvelle_vague)
     return (Liste_Path_nouvelle_vague)
