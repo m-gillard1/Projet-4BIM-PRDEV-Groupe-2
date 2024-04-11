@@ -64,6 +64,32 @@
                   <h1>Main<a class="headerlink" href="#main" title="Link to this heading"></a></h1>
                   <p>Les fonctions concernant le main se trouvent dans le fichier "main_sprint1.py".</p>
 
+                  <h2 class="h2">Fonctionnement générale</h2>
+                  <p>
+                    <ul>
+                      <h6 class="h6">Encodeur</h6>
+                      <li> Les images considérées comme favorites sont toutes celles qui ont une note supérieures ou égale à 4. On les récupère grace à leur chemin
+                        et on les fait passer dans l'encodeur afin d'obtenir  des vecteurs. Nous utiliserons dans l'algorithme génétique ces images transformées en vecteur
+                        ainsi que leur note respective.</li>
+
+                      <h6 class="h6">Algorithme génétique</h6>
+                      <li> On ordonne les images par ordre décroissant de notes.</li>
+                      <li> On effectue les actions suivantes sur les 4 images favorites les mieux notées. Si il y a moins de 4 images favorites au total,
+                      on effectue les actions suivantes sur l'ensemble des images dans les favoris (étant donné qu'il y en a moins de 4):
+                          <ul>
+                             <li> On réalise un cross-over qui correspond à un échange de portions de vecteurs entre 2 vecteurs et qui renvoit donc un vecteur issu de cette recombinaison. </li>
+                             <li> On réalise des mutations aléatoires qui correspondent à des additions ou à des soustractions réalisées sur chacun des éléments du vecteur.</li>
+                         </ul>
+                      </li>
+
+                      <h6 class="h6">Décodeur</h6>
+                      <ul>
+                         <li> On obtient ainsi entre 0 et 8 nouveaux vecteurs que l'on fera passer dans le décodeur pour obtenir les images correspondantes. </li>
+                         <li> On ajoutera un nombre d'images issues du fichier "data" correspondant aux images test, afin d'avoir 12 images au total afin d'introduire de la variabilité.</li>
+                     </ul>
+                    </ul>
+                </p>
+
                   <h2 class="h2">Fonctions</h2>
                   <ul>
 
