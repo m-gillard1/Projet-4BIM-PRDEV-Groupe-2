@@ -51,7 +51,7 @@ def cross_over_avec_note(best_image_list, Tc):
     new_P = np.copy(best_image_list)
 
     if len(new_P)>6 :
-        new_P=new_P[:6] ## si plus de 6 favoris on ne prend que les 6 premiers soit les 6 meilleurs
+        new_P=new_P[:4] ## si plus de 6 favoris on ne prend que les 6 premiers soit les 6 meilleurs
 
     print(new_P)
     print(len(new_P))
@@ -93,7 +93,7 @@ def mutations(best_image_list, Tm) :
     new_P = np.copy(best_image_list)
 
     if len(new_P)>6 :
-        new_P=new_P[:6] ## si plus de 6 favoris on ne prend que les 6 premiers soit les 6 meilleurs
+        new_P=new_P[:4] ## si plus de 6 favoris on ne prend que les 6 premiers soit les 6 meilleurs
 
     for i in range(0, len(new_P)):
         if random() < Tm:
@@ -106,7 +106,7 @@ def mutations(best_image_list, Tm) :
                 if aleat > 0.8 :
                     img_muta[i]=img_muta[i]+3 # essayer d'autre type de mutation
                 ## essayer de faire quelquechose selon les zones ??
-                
+
     return new_P
 
 
