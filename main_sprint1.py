@@ -45,18 +45,48 @@ def creation_list_note(nb_image_par_vague) :
         note[count_0] = int(uniform(0, 11)) # note aléatoire le lien sans l'IHM
     return note
 
+# ##########################
+# ### Encoder les images ###
+# ##########################
+#
+# def encoded_image (path_im_vague) :
+#     """
+#     Encode toutes les images de la vague en vecteur grace à l'autoencodeur
+#
+#     Paramètres :
+#     ----------
+#     path_im_vague : str
+#         lien vers le dossier contenant les images de la vague en cours
+#
+#     Retourne :
+#     ---------
+#     encoded_image_list : list
+#         list de vecteur correspondant aux images encodées (pas de note)
+#     """
+#
+#     encoded_image_list=[]
+#     count_1=0
+#
+#     for image in os.listdir(path_im_vague) :
+#         encoded_image=Autoencoder_to_use.NumpyEncoding(path_im_vague+image)
+#         ## flatten here or in data_structure_note_image
+#         flatten_numpy_image=np.array(encoded_image.flatten())
+#         encoded_image_list.append(flatten_numpy_image)
+#         count_1+=1
+#
+#     return encoded_image_list
+
 ##########################
 ### Encoder les images ###
 ##########################
 
-def encoded_image (path_im_vague) :
+def encoded_image (path_list) :
     """
     Encode toutes les images de la vague en vecteur grace à l'autoencodeur
 
     Paramètres :
     ----------
-    path_im_vague : str
-        lien vers le dossier contenant les images de la vague en cours
+    path_list !!!!!!!!!!
 
     Retourne :
     ---------
@@ -67,8 +97,8 @@ def encoded_image (path_im_vague) :
     encoded_image_list=[]
     count_1=0
 
-    for image in os.listdir(path_im_vague) :
-        encoded_image=Autoencoder_to_use.NumpyEncoding(path_im_vague+image)
+    for path in path_list :
+        encoded_image=Autoencoder_to_use.NumpyEncoding(path)
         ## flatten here or in data_structure_note_image
         flatten_numpy_image=np.array(encoded_image.flatten())
         encoded_image_list.append(flatten_numpy_image)
@@ -332,7 +362,7 @@ def add_Suspect_from_DB():
 ### IHM LOOP ###
 ################
 
-def IHM_loop (numero_vague,note) :
+def IHM_loop (numero_vague,note,fav_list) :
 
     """
     A partir du numero de vague et des notes données par l'utilisateur, cette boucle renverra des nouvelles images
@@ -357,7 +387,7 @@ def IHM_loop (numero_vague,note) :
     nb_new_img_from_db=0
 
     ##note=note[len(note)-12:] # prendre en compte uniquement les notes de la dernièere vagues de 12 images
-    print(note)
+    #print(note)
 
     ## chemin vers les dossiers avec les images
     path_im_vague=("image_vague_"+str(numero_vague)+"/")
@@ -366,27 +396,27 @@ def IHM_loop (numero_vague,note) :
     taux_cross_over=1 # on met un taux de cross over = à 1 pour obtenir forcement des images modifiées
     taux_mutation=1 # on met un taux de mutation = à 1 pour obtenir forcement des images modifiées
 
-    ## preparer nos images encodee + associer à la note
-    encoded_image_list=encoded_image(path_im_vague)
-    image_note_list=data_structure_note_image(encoded_image_list,note)
 
-    ## boucle pour extraire les favoris
-    img_fav=[]
-    for img in image_note_list :
-        if (img[0][0] >= 4) :
-            img_fav.append(img)
-    print("fav")
-    print(img_fav)
-    print(len(img_fav))
+    fav_path=[]
+    ## recupérer les favorites
+    for fav in fav_list :
+        fav_path.append(fav[0]) # recuperer les path des fav pour les encoder
+    #print("fav")
+    #print(fav_path)
+
+    ## preparer nos images à encodee + associer à la note
+    encoded_image_list=encoded_image(fav_path)
+    img_note_list=data_structure_note_image(encoded_image_list,note)
 
     ## sauvegarde des images issues de l'algorithme genetique et des nouvelles provenant de la DB
-    new_image_encoded=algo_genetique_avec_note(img_fav, taux_cross_over,taux_mutation) #### verif structure des donnees si les notes apparaisent encore ou pas
+    new_image_encoded=algo_genetique_avec_note(img_note_list, taux_cross_over,taux_mutation) #### verif structure des donnees si les notes apparaisent encore ou pas
     #print('result algo gene')
     #print(new_image_encoded)
     #print(len(new_image_encoded))
     list_path_img=[]
     list_path_img=sauv_img(new_image_encoded,path_result_vague)
 
+    ###### utile si utilisation des distances
     # ## extraire les images dont les note inf ou = à 2
     # img_0=[]
     # for img in image_note_list :
