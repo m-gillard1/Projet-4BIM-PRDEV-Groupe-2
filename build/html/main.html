@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="Français" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mode d'emploi du logiciel &mdash; Documentation SPhinx</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+    <script src="_static/jquery.js?v=5d32c60e"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="_static/documentation_options.js?v=bc5246f3"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="prev" title="Mode emploi logiciel" href="mode_emploi.html" />
+  </head>
+  <body class="wy-body-for-nav">
+    <div class="wy-grid-for-nav">
+      <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+        <div class="wy-side-scroll">
+          <div class="wy-side-nav-search">
+            <a href="index.html" class="icon icon-home">SPhinx</a>
+            <div role="search">
+              <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+                <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+            </div>
+          </div>
+          <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+            <ul class="current">
+              <li class="toctree-l1"><a class="reference internal" href="autoencodeur.html">Documentation autoencodeur</a></li>
+              <li class="toctree-l1"><a class="reference internal" href="algorithme_genetique.html">Documentation algorithme génétique</a></li>
+              <li class="toctree-l1"><a class="reference internal" href="interface.html">Documentation interface</a></li>
+              <li class="toctree-l1"><a class="reference internal" href="mode_emploi.html">Mode d'emploi du logiciel</a></li>
+              <li class="toctree-l1"><a class="current reference internal" href="#">Main</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+        <nav class="wy-nav-top" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">SPhinx</a>
+        </nav>
+        <div class="wy-nav-content">
+          <div class="rst-content">
+            <div role="navigation" aria-label="Page navigation">
+              <ul class="wy-breadcrumbs">
+                <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+                <li class="breadcrumb-item active">Main</li>
+                <li class="wy-breadcrumbs-aside">
+                  <a href="_sources/index.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+                </li>
+              </ul>
+              <hr/>
+            </div>
+            <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+              <div itemprop="articleBody">
+                <section id="main">
+                  <h1>Main<a class="headerlink" href="#main" title="Link to this heading"></a></h1>
+                  <p>Les fonctions concernant le main se trouvent dans le fichier "main_sprint1.py".</p>
+
+                  <h2 class="h2">Fonctions</h2>
+                  <ul>
+
+                    <li class="functions"> <strong style="font-size: 1.2em;">creation_list_note(nb_image_par_vague) </strong>
+                      <p>Créer une liste de note aléatoire pour permettre de tester nos fonctions sans l'IHM.</p>
+                      <ul>
+
+                        <li class="li">Paramètres></li>
+                          <ol>
+                            <li> nb_image_par_vague : int:  donne le nombre d'image dans une vague et donc le nombre de note à générer.</li>
+
+                        <li class="li">Retourne<p>note : list:  Liste d'entiers qui serviront de notes.</p></li>
+                      </ul>
+                    </li>
+
+                    <li class="functions"> <strong style="font-size: 1.2em;">encoded_image (path_im_vague)  </strong>
+                      <p>Encode toutes les images de la vague en vecteur grace à l'autoencodeur.</p>
+                      <ul>
+
+                        <li class="li">Paramètres></li>
+                          <ol>
+                            <li>  path_im_vague : str : lien vers le dossier contenant les images de la vague en cours.</li>
+
+                        <li class="li">Retourne<p> encoded_image_list : list: liste de vecteurs correspondant aux images encodées (pas de note).</p></li>
+                      </ul>
+                    </li>
+
+                    <li class="functions"> <strong style="font-size: 1.2em;">data_structure_note_image(encoded_image_list, note) </strong>
+                      <p>Creation de la structure de données qui va etre utilisée pour l'algorithme genetique soit : une list contenant pour
+    chaque image 2 vecteurs de meme taille (taille du vecteur de l'image encodée) un avec la note comme premier élément
+    puis Nan et le 2eme vecteur contenant l'image encodée.</p>
+                      <ul>
+
+                        <li class="li">Paramètres></li>
+                          <ol>
+                            <li>   encoded_image_liste : list : liste de vecteurs des images encodées.</li>
+                            <li>    note : list de int: list de int contenant les notes dans l'ordre correspondant à encoded_image_list. </li>
+
+                        <li class="li">Retourne<p>  image_note_list : list: list contenant pour chaque image une list avec 2 vecteurs : le 1er element du 1er vecteur contient la note puis le
+        reste de ce vecteur contient des Nan (afin d'avoir un vecteur de la meme taille que le vecteur de l'image encodée) et le 2e vecteur correspond à l'image encodée.</p></li>
+                      </ul>
+                    </li>
+
+                    <li class="functions"> <strong style="font-size: 1.2em;">algo_genetique_avec_note (image_note_list, taux_cross_over, taux_mutation) </strong>
+                      <p>Créer de nouveau vecteur d'image avec le cross over</p>
+                      <ul>
+
+                        <li class="li">Paramètres></li>
+                          <ol>
+                            <li>  image_note_list : list: list contenat la note et l'image encodée obtenue par data_structure_note_image.</li>
+                            <li>   taux_cross_over : int: probabilite que le cross over se fasse.</li>
+                            <li>   taux_mutation: int: probabilite que les mutations se fassent.</li>
+
+                        <li class="li">Retourne<p>  new_image_encoded : list:  liste de vecteurs correspondant aux nouvelles images encodées apres cross over (pas de note).</p></li>
+                      </ul>
+                    </li>
+
+                    <li class="functions"> <strong style="font-size: 1.2em;">sauv_img (new_image_encoded, path_result_vague)</strong>
+                      <p>décode les nouvelles images obtenues puis les sauvegarde dans un dossier et repertorie les liens,
+    ajoute egalement dans ce dossier des nouvelles images issues de l DB.</p>
+                      <ul>
+
+                        <li class="li">Paramètres></li>
+                          <ol>
+                            <li>   new_image_encoded : list:  list des vecteurs des nouvelles images encodées apres cross over (pas de note).</li>
+                            <li>   path_result_vague : str: lien vers le dossier contenant les nouvelles images crées</li>
+                        <li class="li">Retourne<p>   list_path : list de str:  list des chemin vers chacune des nouvelles images d ela vague suivante.</p></li>
+                      </ul>
+                    </li>
+
+                    <li class="functions"> <strong style="font-size: 1.2em;">add_Suspect_from_DB()</strong>
+                      <p>Renvoie un chemin vers une images en choisissant un nb_aleatoirement dans la db.</p>
+                      <ul>
+                        <li class="li">Retourne<p> path : str: chemin vers une image de la DB.</p></li>
+                      </ul>
+                    </li>
+
+                    <li class="functions"> <strong style="font-size: 1.2em;">IHM_loop (numero_vague,note)</strong>
+                      <p>A partir du numero de vague et des notes données par l'utilisateur, cette boucle renverra des nouvelles images
+    à lui proposer afin de s'approcher au mieux de ces attentes. Ces 12 noooooouvelles images seront issus des favoris
+    de la vague precedentes modifiées par l'algorithme genetique (cross over et mutation), de nouvelles images de la DB
+    seront également inclus afin d'introduire de nouveaux profils.</p>
+                      <ul>
+
+                        <li class="li">Paramètres></li>
+                          <ol>
+                            <li>   numero_vague : int:    numero de la vague pour savoir ou l'on se situe et quel dossier prendre en compte.</li>
+                            <li>     note : liste de int: liste des notes qui seront attribuées par l'utilisateur.</li>
+                        <li class="li">Retourne<p>  list_path_img : list de str:  list des chemins vers l'image que l'on proposera à l'utilisateur pour la vague suivante.</p></li>
+                      </ul>
+                    </li>
+
+
+
+
+
+
+                  </ul>
+
+
+
+
+
+
+                </section>
+              </div>
+            </div>
+            <footer>
+              <hr/>
+              <div role="contentinfo">
+                <p>&#169; Copyright 2024, S.KADIRI , T.CHALAS , A.LE HOUSSEL , M.GILLARD , T.DUCASSE  </p>
+              </div>
+              <p>Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+                <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+                fourni par <a href="https://readthedocs.org">Read the Docs</a>.</p>
+            </footer>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script>
+      jQuery(function () {
+        SphinxRtdTheme.Navigation.enable(true);
+      });
+    </script>
+  </body>
+</html>

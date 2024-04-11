@@ -1,0 +1,448 @@
+DOCTYPE html>
+<html class="writer-html5" lang="Français" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Documentation interface &mdash; Documentation SPhinx</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+    <script src="_static/jquery.js?v=5d32c60e"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="_static/documentation_options.js?v=bc5246f3"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="prev" title="Documentation l'algorithme génétique" href="algorithme_genetique.html" />
+    <link rel="next" title="Mode d'emploi du logiciel" href="mode_emploi.html" />
+  </head>
+  <body class="wy-body-for-nav">
+    <div class="wy-grid-for-nav">
+      <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+        <div class="wy-side-scroll">
+          <div class="wy-side-nav-search">
+            <a href="index.html" class="icon icon-home">SPhinx</a>
+            <div role="search">
+              <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+                <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+            </div>
+          </div>
+          <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+            <ul class="current">
+              <li class="toctree-l1"><a class="reference internal" href="autoencodeur.html">Documentation autoencodeur</a></li>
+              <li class="toctree-l1"><a class="reference internal" href="algorithme_genetique.html">Documentation algorithme génétique</a></li>
+              <li class="toctree-l1 current"><a class="current reference internal" href="#">Documentation interface</a></li>
+              <li class="toctree-l1"><a class="reference internal" href="mode_emploi.html">Mode d'emploi du logiciel</a></li>
+              <li class="toctree-l1"><a class="current reference internal" href="main.html">Main</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+        <nav class="wy-nav-top" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">SPhinx</a>
+        </nav>
+        <div class="wy-nav-content">
+          <div class="rst-content">
+            <div role="navigation" aria-label="Page navigation">
+              <ul class="wy-breadcrumbs">
+                <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+                <li class="breadcrumb-item active">Documentation interface</li>
+                <li class="wy-breadcrumbs-aside">
+                  <a href="_sources/index.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+                </li>
+              </ul>
+              <hr/>
+            </div>
+            <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+              <div itemprop="articleBody">
+                <section id="documentation-interface">
+                  <h1>Documentation interface<a class="headerlink" href="#documentation-interface" title="Link to this heading"></a></h1>
+                  <p>Les fonctions concernant l'interface se trouvent dans le fichier "interface.py".</p>
+                  <h2 class="h2">Fonctions</h2>
+                  <ul>
+                  <li class="functions"> <strong style="font-size: 1.2em;">toggle_fullscreen(event=None)</strong>
+                      <p>Bascule l'application en mode plein écran.</p>
+                      <ul>
+                        <li class="li">Paramètres<p> event: tkinter.Event: L'événement qui a déclenché l'appel de cette fonction ( par défaut, None).</p></li>
+                        <li class="li">Retourne<p>None</p></li>
+                      </ul>
+                    </li>
+
+                    <h2 class="h2">classe "Favori"</h2>
+
+                    <li class="functions"> <strong style="font-size: 1.2em;">__init__(self,position, wide,column, row,r,c, **kwargs)</strong>
+                        <p>  Permet de spécifier les dimensions de l'encadré contenant une image favorite sur l'interface.</p>
+                        <ul>
+                           <li class="li2">Paramètres</li>
+                            <ol>
+                              <li>event: tkinter.Event: L'événement qui a déclenché l'appel de cette fonction (par défaut, None).</li>
+                              <li>size (int): La taille de l'objet, en pixels.</li>
+                              <li>column (int): La colonne dans laquelle l'objet doit être placé.</li>
+                              <li>row (int): La ligne dans laquelle l'objet doit être placé.</li>
+                              <li> **kwargs (dict): Tout argument supplémentaire.</li>
+                            </ol>
+
+                            <li class="li2">Attributs</li>
+                            <ol>
+                              <li>wd (int): La largeur de l'objet, en pixels.</li>
+                              <li> ht (int): La hauteur de l'objet, en pixels.</li>
+                              <li>large (int): La taille de l'objet agrandie, en pixels.</li>
+                              <li>photo_image (tkinter.PhotoImage): L'image associée à l'objet.</li>
+                              <li> note (str): Une note associée à l'objet.</li>
+                              <li> id (int): L'identifiant unique de l'objet.</li>
+                              <li> col (int): La colonne dans laquelle l'objet est placé.</li>
+                              <li> row (int): La ligne dans laquelle l'objet est placé.</li>
+                            </ol>
+
+                            <li class="li">Retourne<p>None</p></li>
+                          </ul>
+
+                      </li>
+
+
+
+                      <li class="functions"> <strong style="font-size: 1.2em;">Make_favorite (self,id, note, image )</strong>
+                          <p> Définit une image favorite. Elle charge l'image grace à son identifiant `id`, la redimensionne à la taille souhaitée, et l'associe à l'objet.</p>
+                          <ul>
+                             <li class="li2">Paramètres</li>
+                              <ol>
+                                <li>id (str): Identifiant l'image favorite.</li>
+                                <li>note (str): Une note associée à l'image favorite.</li>
+                                <li>image (PIL.Image.Image): L'image favorite.</li>
+                              </ol>
+                              <li class="li">Retourne<p>None</p></li>
+                             </ul>
+
+                         </li>
+
+
+                         <li class="functions"> <strong style="font-size: 1.2em;">Update_Fav (Dico_note)</strong>
+                             <p> Met à jour les images favorites en fonction des notes fournies dans le dictionnaire.</p>
+                             <ul>
+                                <li class="li2">Paramètres</li>
+                                 <ol>
+                                   <li>Dico_note (dict): Dictionnaire contenant les notes associées aux ID des images.</li>
+                                 </ol>
+                                 <li class="li">Retourne<p>None</p></li>
+                                </ul>
+
+                            </li>
+
+                            <li class="functions"> <strong style="font-size: 1.2em;">get_first_non_fav(dico_sorted)</strong>
+                                <p>Trouve la position du premier élément non favori dans un dictionnaire trié par note.</p>
+                                <ul>
+                                   <li class="li2">Paramètres</li>
+                                    <ol>
+                                      <li> dico_sorted (list): Liste de tuples (ID, note) triés par note.</li>
+                                    </ol>
+                                    <li class="li">Retourne<p>int: La position du premier élément non favori.</p></li>
+                                   </ul>
+
+                               </li>
+
+                               <li class="functions"> <strong style="font-size: 1.2em;">Clear_fav (self)</strong>
+                                   <p> Efface les informations de l'élément favori en réinitialisant son affichage.</p>
+                                   <ul>
+
+                                       <li class="li">Retourne<p>None</p></li>
+                                      </ul>
+
+                                  </li>
+
+                                  <li class="functions"> <strong style="font-size: 1.2em;">update_color(self)</strong>
+                                      <p>Surcharge de la méthode Suspect.update_color qui ne fait rien pour que l'on puisse call increment/decrement note sur un favori sans bug.</p>
+                                      <ul>
+                                         <li class="li2">Paramètres</li>
+                                          <ol>
+                                            <li> self : instance de favori</li>
+                                          </ol>
+                                          <li class="li">Retourne<p>None</p></li>
+                                         </ul>
+
+                                     </li>
+
+                                     <li class="functions"> <strong style="font-size: 1.2em;"> Ajout_Favori(self)</strong>
+                                         <p>Surcharge de la méthode Suspect.update_color qui ne fait rien pour que l'on puisse call increment/decrement note sur un favori sans bug.</p>
+                                         <ul>
+                                            <li class="li2">Paramètres</li>
+                                             <ol>
+                                               <li> self : instance de favori</li>
+                                             </ol>
+                                             <li class="li">Retourne<p>None</p></li>
+                                            </ul>
+
+                                        </li>
+
+
+
+                                  <li class="functions"> <strong style="font-size: 1.2em;">selected_suspect_event(self)</strong>
+                                      <p>Fonction appelée par les boutons suspects en haut à droite pour sélectionner un suspect.</p>
+                                      <ul>
+
+                                          <li class="li">Retourne<p>int: La position du premier élément non favori.</p></li>
+                                         </ul>
+
+                                     </li>
+
+                                <h2 class="h2">classe "Suspect"</h2>
+
+                                <li class="functions"> <strong style="font-size: 1.2em;">__init__(self, master, image_path, note, width, height, row, col, **kwargs)</strong>
+                                    <p>Initialise un élément avec une image d’un suspect, une note et des dimensions spécifiées.</p>
+                                    <ul>
+                                       <li class="li2">Paramètres</li>
+                                        <ol>
+                                          <li>  master: Le frame dans lequel on crée le suspect.</li>
+                                          <li>  image_path (str): Le chemin de l'image d’un suspect.</li>
+                                          <li>  note (int): La note associée à l'image du suspect.</li>
+                                          <li>  width (int): Largeur de l'image du suspect.</li>
+                                          <li>  height (int): Hauteur de l'image du suspect.</li>
+                                          <li>  **kwargs: Arguments supplémentaires</li>
+                                        </ol>
+                                        <li class="li">Retourne<p>None</p></li>
+                                       </ul>
+
+                                   </li>
+
+                                   <li class="functions"> <strong style="font-size: 1.2em;">selected_suspect_event(self)</strong>
+                                       <p> Fonction appelée par les boutons suspects en haut à droite pour sélectionner un suspect.</p>
+                                       <ul>
+                                           <li class="li">Retourne<p>None</p></li>
+                                          </ul>
+
+                                      </li>
+
+
+                                      <li class="functions"> <strong style="font-size: 1.2em;">increment_note(self)</strong>
+                                          <p>Incrémente la note du suspect actuel s'il est inférieur à 10, met à jour la couleur et les informations.</p>
+                                          <ul>
+                                              <li class="li">Retourne<p>None</p></li>
+                                             </ul>
+                                         </li>
+
+                                         <li class="functions"> <strong style="font-size: 1.2em;">decrement_note(self)</strong>
+                                             <p>Décrémente la note du suspect actuel s'il est supérieur à 0, met à jour la couleur et les informations.</p>
+                                             <ul>
+                                                 <li class="li">Retourne<p>None</p></li>
+                                                </ul>
+                                            </li>
+
+
+                                            <li class="functions"> <strong style="font-size: 1.2em;"> fav(self)</strong>
+                                                <p>Change la note du suspect actuel à 7, met à jour la couleur et les informations.</p>
+                                                <ul>
+
+                                                    <li class="li">Retourne<p>None</p></li>
+                                                   </ul>
+
+                                               </li>
+
+                                               <li class="functions"> <strong style="font-size: 1.2em;">update_color(self)</strong>
+                                                   <p>Met à jour la couleur de la bordure du bouton qui encadre l’image d’un suspect en fonction de la note qu’on lui attribue.</p>
+                                                   <ul>
+                                                       <li class="li">Retourne<p>None</p></li>
+                                                      </ul>
+                                                  </li>
+
+                                                  <li class="functions"> <strong style="font-size: 1.2em;">ranking(self)</strong>
+                                                      <p>Calcule le classement du suspect actuel en fonction de sa note parmi tous les suspects.</p>
+                                                      <ul>
+                                                          <li class="li">Retourne<p>int: Le classement du suspect actuel.</p></li>
+                                                         </ul>
+                                                     </li>
+
+                                                  <li class="functions"> <strong style="font-size: 1.2em;">Ajout_Favori(self)</strong>
+                                                      <p>Ajoute le suspect actuel aux favoris si sa note appartient à ]6;10[.</p>
+                                                      <ul>
+                                                          <li class="li">Retourne<p>None</p></li>
+                                                         </ul>
+                                                     </li>
+
+
+                                                     <li class="functions"> <strong style="font-size: 1.2em;">Restart_event(event)</strong>
+                                                         <p> Réinitialise l'application à son état d'origine.</p>
+                                                         <ul>
+                                                            <li class="li2">Paramètres</li>
+                                                             <ol>
+                                                               <li>  event: L'événement déclencheur du redémarrage.</li>
+                                                             </ol>
+                                                             <li class="li">Retourne<p>None</p></li>
+                                                            </ul>
+
+                                                        </li>
+
+                                                        <li class="functions"> <strong style="font-size: 1.2em;">Refresh_event(event)</strong>
+                                                            <p> Met à jour l'affichage en générant de nouveaux suspects pour la vague actuelle.</p>
+                                                            <ul>
+                                                               <li class="li2">Paramètres</li>
+                                                                <ol>
+                                                                  <li>      event: L'événement déclencheur</li>
+                                                                </ol>
+                                                                <li class="li">Retourne<p>None</p></li>
+                                                               </ul>
+
+                                                           </li>
+
+                                                           <li class="functions"> <strong style="font-size: 1.2em;">Genere_Suspect(Dico, Vague_actuelle)</strong>
+                                                               <p> Génère 12 nouvelles images de suspects pour une vague donnée.</p>
+                                                               <ul>
+                                                                  <li class="li2">Paramètres</li>
+                                                                   <ol>
+                                                                     <li> Dico (dict): Dictionnaire contenant les chemins des images et les notes associées.</li>
+                                                                      <li>  Vague_actuelle (int): Le numéro de la vague pour laquelle on génère nouveaux suspects.</li>
+                                                                   </ol>
+                                                                   <li class="li">Retourne<p>list: Liste contenant les chemins des 12 nouvelles images générées.</p></li>
+                                                                  </ul>
+
+                                                              </li>
+
+                                                              <li class="functions"> <strong style="font-size: 1.2em;">Init_suspects(choices_container_frame,Liste_img,photo_width,photo_height)</strong>
+                                                                  <p> Initialise les suspects avec leurs images et positions dans l’encadré dédié.</p>
+                                                                  <ul>
+                                                                     <li class="li2">Paramètres</li>
+                                                                      <ol>
+                                                                        <li> choices_container_frame: L’encadré contenant les choix des suspects.</li>
+                                                                         <li>  Liste_img (list): Liste des chemins des images des suspects.</li>
+                                                                         <li> photo_width (int): Largeur des images des suspects.</li>
+                                                                        <li>  photo_height (int): Hauteur des images des suspects.</li>
+                                                                      </ol>
+                                                                      <li class="li">Retourne<p>None</p></li>
+                                                                     </ul>
+
+                                                                 </li>
+
+                                                                 <li class="functions"> <strong style="font-size: 1.2em;">Init_favori(fav_dim,pad)</strong>
+                                                                     <p> Initialise les éléments favoris avec leurs dimensions et positions dans la grille.</p>
+                                                                     <ul>
+                                                                        <li class="li2">Paramètres</li>
+                                                                         <ol>
+                                                                           <li> fav_dim: La dimension des éléments favoris.</li>
+                                                                         </ol>
+                                                                         <li class="li">Retourne<p>dict: Dictionnaire contenant les éléments favoris indexés par leur rang.</p></li>
+                                                                        </ul>
+
+                                                                    </li>
+
+                                                                    <li class="functions"> <strong style="font-size: 1.2em;"> Start_Over()</strong>
+                                                                        <p> Réinitialise l'application en remettant la vague actuelle à 1, réinitialisant les suspects et les favoris, et affichant un message par défaut.</p>
+                                                                        <ul>
+                                                                            <li class="li">Retourne<p>None</p></li>
+                                                                           </ul>
+                                                                       </li>
+
+
+                                                                         <h2 class="h2">Gestion du drag and drop</h2>
+
+                                                                         <li class="functions"> <strong style="font-size: 1.2em;">make_draggable_fav(widget)</strong>
+                                                                             <p>  Attache les méthodes de gestion du DND aux favoris.</p>
+                                                                             <ul>
+                                                                                <li class="li2">Paramètres</li>
+                                                                                 <ol>
+                                                                                   <li> f widget : instance de favori</li>
+                                                                                 </ol>
+                                                                                 <li class="li">Retourne<p>None</p></li>
+                                                                                </ul>
+                                                                          </li>
+
+
+                                                                          <li class="functions"> <strong style="font-size: 1.2em;">switch_frames(fram1,fram2)</strong>
+                                                                              <p> Passe à la frame de resultats.</p>
+                                                                              <ul>
+                                                                                 <li class="li2">Paramètres</li>
+                                                                                  <ol>
+                                                                                    <li> fram1: La frame à masquer.</li>
+                                                                                    <li> fram2: La frame à afficher.</li>
+                                                                                  </ol>
+                                                                                  <li class="li">Retourne<p>None</p></li>
+                                                                                 </ul>
+
+
+
+                                                                          <li class="functions"> <strong style="font-size: 1.2em;">on_fav_drag_start(event)</strong>
+                                                                              <p>  Démarre la chaîne DND sur le favori. Met à jour le suspect actuel.</p>
+                                                                              <ul>
+                                                                                 <li class="li2">Paramètres</li>
+                                                                                  <ol>
+                                                                                    <li> event : instance de event. Clique gauche sur une instance de Favori</li>
+                                                                                  </ol>
+                                                                                  <li class="li">Retourne<p>None</p></li>
+                                                                                 </ul>
+                                                                           </li>
+
+
+                                                                           <li class="functions"> <strong style="font-size: 1.2em;">on_fav_drag_motion(event)</strong>
+                                                                               <p> Met à jour à chaque instant la position à laquelle afficher l'image du favori en cours de DND.</p>
+                                                                               <ul>
+                                                                                  <li class="li2">Paramètres</li>
+                                                                                   <ol>
+                                                                                     <li>    event : instance de event. Déplacement de la souris avec clique gauche mainten</li>
+                                                                                   </ol>
+                                                                                   <li class="li">Retourne<p>None</p></li>
+                                                                                  </ul>
+                                                                            </li>
+
+                                                                            <li class="functions"> <strong style="font-size: 1.2em;">on_fav_drag_release(event)</strong>
+                                                                                <p>   Met à jour l'environnment selon la zone de laché du favori. Peut déclencher un changement de note et de position selon la position de l'event.</p>
+                                                                                <ul>
+                                                                                   <li class="li2">Paramètres</li>
+                                                                                    <ol>
+                                                                                      <li> event : instance de event. Relachement du bouton gauche de la souris.</li>
+                                                                                    </ol>
+                                                                                    <li class="li">Retourne<p>None</p></li>
+                                                                                   </ul>
+                                                                             </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  </ul>
+
+
+
+
+
+
+                </section>
+
+
+              </div>
+            </div>
+            <footer>
+              <hr/>
+              <div role="contentinfo">
+                <p>&#169; Copyright 2024, S.KADIRI , T.CHALAS , A.LE HOUSSEL , M.GILLARD , T.DUCASSE  </p>
+              </div>
+              <p>Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+                <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+                fourni par <a href="https://readthedocs.org">Read the Docs</a>.</p>
+            </footer>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script>
+      jQuery(function () {
+        SphinxRtdTheme.Navigation.enable(true);
+      });
+    </script>
+  </body>
+</html>
