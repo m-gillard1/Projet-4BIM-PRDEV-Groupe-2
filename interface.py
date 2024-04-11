@@ -3,7 +3,7 @@ from tkinter import PhotoImage
 from PIL import Image,ImageTk
 import os
 
-import main_sprint1
+#import main_sprint1
 
 ########## __FONCTIONS__ ##########
 
@@ -617,7 +617,7 @@ def Genere_Suspect(Dico, Vague_actuelle ):
         # va chercher les images de la vague correspondante
         # génère les nouvelles images
         # renvoie la liste des path svers les nouvelles images
-    Liste_Path_nouvelle_vague=main_sprint1.IHM_loop(Vague_actuelle, note_list, fav_list)
+    #Liste_Path_nouvelle_vague=main_sprint1.IHM_loop(Vague_actuelle, note_list, fav_list)
 
     print(Liste_Path_nouvelle_vague)
     return (Liste_Path_nouvelle_vague)
@@ -844,11 +844,11 @@ frame_depart.pack(fill = 'both',expand=True,anchor='center')
 frame_depart.pack_propagate(False)
 
 #contenu du frame de l'écran d'accueil
-titre_depart = tk.Label(frame_depart,text = 'FACE RECOGNITION SOFTWARE',fg = 'white', font = ('Ubuntu',50),bg = 'midnight blue')
-titre_depart.pack(anchor="center", pady=(150, 0) )
+titre_depart = tk.Label(frame_depart,text = 'FACE RECOGNITION SOFTWARE',fg = 'white', font = ('Ubuntu',60),bg = 'midnight blue')
+titre_depart.pack(anchor="center", pady=(300, 0) )
 
-button = tk.Button(frame_depart, width = 20, height = 5, text="Start Working", font = ('Ubuntu',30), bg = 'gold',command=lambda: switch_frames(frame_depart,frame_interface))
-button.place(relx=0.5, rely=0.5, anchor="center")
+button = tk.Button(frame_depart, width = 20, height = 5, text="Start Working", font = ('Ubuntu',35), bg = 'gold',command=lambda: switch_frames(frame_depart,frame_interface))
+button.place(relx=0.5, rely=0.6, anchor="center")
 
 legend_depart = tk.Label(frame_depart,text = 'Made by Martin Gillard, Thibald Chalas, Aurore Le Houssel, Selma Kadiri, Théo Ducasse',fg = 'white', font = ('Dyuthi',15),bg = 'midnight blue')
 legend_depart.pack(anchor="center", pady=(0, 150) )
