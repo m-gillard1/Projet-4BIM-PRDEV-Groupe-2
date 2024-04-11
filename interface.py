@@ -3,7 +3,7 @@ from tkinter import PhotoImage
 from PIL import Image,ImageTk
 import os
 
-#import main_sprint1
+import main_sprint1
 
 ########## __FONCTIONS__ ##########
 
@@ -562,7 +562,7 @@ def Genere_Suspect(Dico, Vague_actuelle ):
         # va chercher les images de la vague correspondante
         # génère les nouvelles images
         # renvoie la liste des path svers les nouvelles images
-    #Liste_Path_nouvelle_vague=main_sprint1.IHM_loop(Vague_actuelle, note_list, fav_list)
+    Liste_Path_nouvelle_vague=main_sprint1.IHM_loop(Vague_actuelle, note_list, fav_list)
 
     #print(Liste_Path_nouvelle_vague)
     return (Liste_Path_nouvelle_vague)
