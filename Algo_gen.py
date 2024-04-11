@@ -24,9 +24,7 @@ def pop_sort(image_list):
 
     sorted_image_list = []
 
-
-
-    # Trier la liste de listes selon la note de chaque image
+    # Trier la liste de listes dans l'ordre decroissant selon la note de chaque image
     sorted_image_list = sorted(image_list, key=lambda x: x[0][0], reverse=True)
 
     return sorted_image_list
@@ -102,8 +100,8 @@ def mutations(best_image_list, Tm) :
             img_muta = new_P[i][1]
 
             for i in range(len(img_muta)) :
-                if random() < Tm :
-                    img_muta[i]=img_muta[i]+1
+                if random() < 0.6 :
+                    img_muta[i]=img_muta[i]+1 # essayer d'autre type de mutation
 
     return new_P
 
