@@ -68,7 +68,7 @@ class Favori(tk.Button):
         super().__init__(best_choices_container_frame,width=self.wd, height = self.ht,compound='top', anchor='center', pady = 20,**kwargs)
         #compound='bottom', anchor='n',
 
-    def Make_favorite (self,id, note, image ):
+    def Make_favorite (self,id, note ):
         """
         Définit une image favorite. Elle charge l'image grace à son identifiant `id`, la redimensionne à la taille souhaitée, et l'associe à l'objet.
 
@@ -123,7 +123,6 @@ class Favori(tk.Button):
             if (la_note<4):
                 le_fav.note=None
                 le_fav.id=None
-                name = str(le_fav.winfo_name())
                 text_to_print='favori ' +  str (j+1)
                 le_fav.config(text=text_to_print, image='',height=le_fav.ht, width=le_fav.wd)
 
