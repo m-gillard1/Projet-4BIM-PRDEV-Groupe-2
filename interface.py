@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import PhotoImage
 from PIL import Image,ImageTk
+import os
 
 import main_sprint1
 
@@ -18,8 +19,11 @@ def toggle_fullscreen(event=None):
     """
     root.attributes('-fullscreen', not root.attributes('-fullscreen'))
 
+#Dico_note : keys = id d'un suspect (path) / value : 0<int<10
 Dico_note ={}
+#Sus_Being_dragged : variable globale qui enregistre le dernier objet ayant déclenche une méthode drag_start
 Sus_Being_Dragged = None
+#Dico_suspect : dico global pour faciliter l'accès aux boutons suspect :  keys = suspect_n / value : int n
 Dico_suspect= {}
 
 
@@ -153,8 +157,22 @@ class Favori(tk.Button):
         self.config(text= str(self.winfo_name()), image='', height=self.large, width=self.large)
 
     def update_color(self):
+        """ 
+        Surcharge de la méthode Suspect.update_color qui ne fait rien pour que l'on puisse call increment/decrement note sur un favori sans bug
+        Parameters
+        self : instance de favori
+        Returns :
+        None
+        """
         return
     def Ajout_Favori(self):
+        """ 
+        Surcharge de la méthode Suspect.update_color qui ne fait rien pour que l'on puisse call increment/decrement note sur un favori sans bug
+        Parameters
+        self : instance de favori
+        Returns :
+        None
+        """
         return
 
     def selected_suspect_event(self):
@@ -351,11 +369,25 @@ class Suspect(tk.Button):
 
 ### GESTION DU DND ###
 def make_draggable_fav(widget):
+    """ 
+    Attache les méthodes de gestion du DND aux favoris.
+    Parameters:
+    widget : instance de favori
+    Returns :
+    None
+    """
     widget.bind("<Button-1>", on_fav_drag_start)
     widget.bind("<B1-Motion>", on_fav_drag_motion)
     widget.bind("<ButtonRelease-1>", on_fav_drag_release)
 
 def on_fav_drag_start(event):
+    """ 
+    Démarre la chaîne DND sur le favori. Met à jour le suspect actuel.
+    Parameters:
+    event : instance de event. Clique gauche sur une instance de Favori
+    Returns :
+    None
+    """
     widget = event.widget
     widget.lift()
     widget.drag_start_x = event.x
@@ -366,6 +398,13 @@ def on_fav_drag_start(event):
         Favori.Update_Fav(Dico_note)
 
 def on_fav_drag_motion(event):
+    """ 
+    Met à jour à chaque instant la position à laquelle afficher l'image du favori en cours de DND.
+    Parameters:
+    event : instance de event. Déplacement de la souris avec clique gauche maintenu.
+    Returns :
+    None
+    """
     widget = event.widget
     x = widget.winfo_x() - widget.drag_start_x + event.x
     y = widget.winfo_y() - widget.drag_start_y + event.y
@@ -373,6 +412,13 @@ def on_fav_drag_motion(event):
 
 
 def on_fav_drag_release(event):
+    """ 
+    Met à jour l'environnment selon la zone de laché du favori. Peut déclencher un changement de note et de position selon la position de l'event.
+    Parameters:
+    event : instance de event. Relachement du bouton gauche de la souris.
+    Returns :
+    None
+    """
     widget = event.widget
     widget.grid(row=widget.r, column=widget.c)
     global Dico_note
@@ -450,6 +496,8 @@ def on_fav_drag_release(event):
 
 
 """
+ATTENTION: CODE FANTOME: 
+Méthodes de gestion du drag and drop sus les objets suspects. Remplacées temporairement par l'ajout d'un bouton 'mettre en favori'.
 
 def make_draggable_suspect(widget):
     widget.bind("<Button-1>", on_suspect_drag_start)
@@ -492,10 +540,11 @@ def on_suspect_drag_release(event):
     ### mettre un suspect à la poubelle
     #if (x < -20 and x > -900 and y > 350 and y < 800):
     #    print()
+""" 
+
+
 #fonction appelée par le bouton restart
 # réinitialise à l'état d'origine (affichage, contenu des dossiers, numérotation vague, notations)
-"""
-
 def Restart_event(event):
 
     """
@@ -510,6 +559,7 @@ def Restart_event(event):
 
     suspect_principal.configure(image=Image_Instruction)
     Start_Over()
+    global Vague_actuelle
     Vague_actuelle=1
 
 
@@ -571,7 +621,7 @@ def Genere_Suspect(Dico, Vague_actuelle ):
 def Init_suspects(choices_container_frame,Liste_img,photo_width,photo_height):
     """
     Initialise les suspects avec leurs images et positions dans l’encadré dédié.
-
+    Les suspects sont les images en haut à droite.
     Parameters:
     choices_container_frame: L’encadré contenant les choix des suspects.
     Liste_img (list): Liste des chemins des images des suspects.
@@ -634,6 +684,7 @@ def Init_suspects(choices_container_frame,Liste_img,photo_width,photo_height):
 def Init_favori(fav_dim,pad):
     """
     Initialise les éléments favoris avec leurs dimensions et positions dans la grille.
+    Les favoris sont les images en bas à gauche. Ce sont des suspects qui ont reçus une note supérieur à 7 et qui se placent parmi les 10 notes les plus élevées.
 
     Parameters:
     fav_dim: La dimension des éléments favoris.
@@ -712,7 +763,10 @@ def Start_Over():
     Returns:
     None
     """
+    global Dico_note
+    Dico_note={}
     global Dico_rang_fav
+    global Vague_actuelle
     Vague_actuelle = 1
     global Dico_suspect
     for sus in Dico_suspect.keys():
@@ -734,8 +788,31 @@ def Start_Over():
     #    le_fav.config(text=text_to_print, image='', padx=11, pady=11,height=le_fav.ht, width=le_fav.wd)
 
 def switch_frames(fram1,fram2):
+    """ 
+    Passe à la frame de resultats
+    Parameters:
+    fram1, fram2: respectivement la frame à masquer et la frame à afficher
+    Returns :
+    None
+    """
     fram1.pack_forget()
     fram2.place(x=0, y=0, relwidth=1, relheight=1)
+    if not os.path.exists("resultats"):
+        os.makedirs("resultats")
+    for i in range (2):
+        for j in range (5):
+            fav = Dico_rang_fav[i*5 + j + 1]
+            print(fav)
+            if (fav.photo_image is not None):
+                temp = tk.Label(frame_favori_fin, image = fav.photo_image)
+                temp.grid(column = j, row=i)
+                img = ImageTk.getimage( fav.photo_image )
+                le_path = "resultats/" + str (i*5 + j + 1)+str(".png")
+                print('le path est le suivant : '  + str (le_path))
+                img.save(le_path)
+
+    
+    
 
 # Ceate the main window
 root = tk.Tk()
@@ -752,11 +829,12 @@ top_left_width = left_width * 1 // 4
 #jauge_width = top_left_width * 2 // 15
 # Create frames for left and right sections
 
-
+#frame de l'écran d'accueil
 frame_depart = tk.Frame(root, width=screen_width, height=screen_height, bg="midnight blue")
 frame_depart.pack(fill = 'both',expand=True,anchor='center')
 frame_depart.pack_propagate(False)
 
+#contenu du frame de l'écran d'accueil
 titre_depart = tk.Label(frame_depart,text = 'FACE RECOGNITION SOFTWARE',fg = 'white', font = ('Ubuntu',50),bg = 'midnight blue')
 titre_depart.pack(anchor="center", pady=(150, 0) )
 
@@ -766,10 +844,11 @@ button.place(relx=0.5, rely=0.5, anchor="center")
 legend_depart = tk.Label(frame_depart,text = 'Made by Martin Gillard, Thibald Chalas, Aurore Le Houssel, Selma Kadiri, Théo Ducasse',fg = 'white', font = ('Dyuthi',15),bg = 'midnight blue')
 legend_depart.pack(anchor="center", pady=(0, 150) )
 
+#frame de l'écran principal
 frame_interface = tk.Frame(root, width=screen_width, height=screen_height, bg="gray80")
 frame_interface.pack(expand=True,fill='both')
 
-
+#déclaration et définition des sous-frame de l'écran principal
 left_frame = tk.Frame(frame_interface, width=left_width, height=screen_height, bg="gray80")
 right_frame = tk.Frame(frame_interface, width=right_width, height=screen_height, bg="black")
 left_frame.pack(side=tk.LEFT, fill=tk.Y)
@@ -814,18 +893,22 @@ Menu_Option_Frame.grid_rowconfigure(1, weight=1)
 Menu_Option_Frame.grid_columnconfigure(0, weight=1)
 Menu_Option_Frame.grid_columnconfigure(1, weight=1)
 
+#bouton qui permet de réinitialiser les favoris, les notes etc à l'état initial
 Bouton_restart = tk.Button(Menu_Option_Frame,text='     Start Over     ',background='red', command=lambda: Restart_event)
 Bouton_restart.grid(column=1, row=0, sticky="nswe",padx=pad_horizontal, pady=pad_vertical)
 Bouton_restart.bind("<Button-1>", Restart_event)
 
+#bouton qui permet de générer les 12 nouveaux suspects(nouvelle vague)
 Bouton_refresh = tk.Button(Menu_Option_Frame,text='Refresh', background='lightblue')
 Bouton_refresh.grid(column=0, row=1, sticky="nswe",padx=pad_horizontal, pady=pad_vertical)
 Bouton_refresh.bind("<Button-1>", Refresh_event)
 
+#bouton qui permet de faire passer le suspect selectionné chez les favoris
 Bouton_fav= tk.Button(Menu_Option_Frame,text='Mettre en Favori', background='lightgreen')
 Bouton_fav.grid(column=0, row=0, sticky="nswe",padx=pad_horizontal, pady=pad_vertical)
 Bouton_fav.bind("<Button-1>" , Suspect.fav )
 
+#bouton qui déclenche l'évènement de fin. Affichage de l'écran final et des suspects retenus
 Bouton_FIN= tk.Button(Menu_Option_Frame,text='Finish', background='yellow',command=lambda: switch_frames(frame_interface,frame_fin))
 Bouton_FIN.grid(column=1, row=1, sticky="nswe",padx=pad_horizontal, pady=pad_vertical)
 
@@ -919,13 +1002,7 @@ frame_favori_fin = tk.Frame(frame_fin, width = screen_width* 1//2, height = scre
 frame_favori_fin.place(anchor = 'center',relx = 0.5,rely = 0.6)
 frame_favori_fin.pack_propagate(False)
 
-frame_favori_fin.grid_rowconfigure(0, weight=1)
-frame_favori_fin.grid_rowconfigure(1, weight=1)
-frame_favori_fin.grid_columnconfigure(0, weight=1)
-frame_favori_fin.grid_columnconfigure(1, weight=1)
-frame_favori_fin.grid_columnconfigure(2, weight=1)
-frame_favori_fin.grid_columnconfigure(3, weight=1)
-frame_favori_fin.grid_columnconfigure(4, weight=1)
+
 
 
 
