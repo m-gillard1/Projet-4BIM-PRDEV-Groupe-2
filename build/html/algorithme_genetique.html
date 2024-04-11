@@ -75,13 +75,15 @@
 
 
                       <li class="functions"><strong style="font-size: 1.2em;">cross_over_avec_note(best_image_list, Tc)</strong>
-                         <p>  Fait des croisements entre vecteurs d'image. </p>
+                         <p>   Fait des croisements entre vecteurs d'image afin d'obtenir un nouveau vecteur qui sera transformé en image. </p>
                          <ul>
-                           <li class="li">Paramètres<p>  - image_list: list de vecteurs comprenant la note de l'image et le vecteur issue de celle-ci.
-                             -  Tc:  float : Taux de croisement.
+                           <li class="li">Paramètres<p> <ol><li> best_image_list: list:  liste de vecteurs comprenant la note de l'image et le vecteur issue de celle-ci pour les meilleures images.</li>
+
+                                              <li>   Tc: float:  Taux de croisement.</li>
+                                            </ol>
                                          </p>
                            </li>
-                           <li class="li">Retourne<p> new_P :Liste contenant les vecteurs d'images ayant ou non subis des croisement. </p></li>
+                           <li class="li">Retourne<p> new_P : Liste contenant les vecteurs d'images + note ayant ou non subis des croisements. </p></li>
                          </ul>
                        </li>
 
