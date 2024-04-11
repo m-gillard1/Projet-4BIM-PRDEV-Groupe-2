@@ -141,6 +141,21 @@
                       </ul>
                     </li>
 
+                    <li class="functions"> <strong style="font-size: 1.2em;">IHM_loop (numero_vague,note)</strong>
+                      <p>A partir du numero de vague et des notes données par l'utilisateur, cette boucle renverra des nouvelles images
+    à lui proposer afin de s'approcher au mieux de ces attentes. Ces 12 noooooouvelles images seront issus des favoris
+    de la vague precedentes modifiées par l'algorithme genetique (cross over et mutation), de nouvelles images de la DB
+    seront également inclus afin d'introduire de nouveaux profils.</p>
+                      <ul>
+
+                        <li class="li">Paramètres></li>
+                          <ol>
+                            <li>   numero_vague : int:    numero de la vague pour savoir ou l'on se situe et quel dossier prendre en compte.</li>
+                            <li>     note : liste de int: liste des notes qui seront attribuées par l'utilisateur.</li>
+                        <li class="li">Retourne<p>  list_path_img : list de str:  list des chemin vers l'image que l'on proposera à l'utilisateur pour la vague suivante.</p></li>
+                      </ul>
+                    </li>
+
 
 
 
