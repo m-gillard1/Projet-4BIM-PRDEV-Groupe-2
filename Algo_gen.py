@@ -31,27 +31,8 @@ def pop_sort(image_list):
 
     return sorted_image_list
 
-## n'est pas utile dans la version sans note
-def lowest_cost_pop(sorted_image_list):
-    """
-    Retourne la première moitié de vecteurs (ceux ayant le plus faible cout = la meilleure note).
 
-    Paramètres :
-    ----------
 
-    sorted_image_list: list
-        image_list ordonnées par ordre decroissant selon les notes (couts)
-
-    Retourne :
-    ---------
-    low_pop : list
-        Listes contenant les images + notes ayant le plus faible cout.
-
-    """
-    nombre_image=len(sorted_image_list)
-    Ns = nombre_image // 2
-    low_pop = sorted_image_list[0:Ns]
-    return low_pop
 
 def cross_over_avec_note(best_image_list, Tc):
     """
@@ -181,31 +162,27 @@ def one_loop_avec_note(image_list, Tc, Tm):
     ---------
     list: Liste contenant les nouvelles images modifiées par le croos over
     """
-    #nombre_image=len(image_list)
-    #taille_vect_image=len(image_list[0][1])
 
-    # Trie la population et sélectionne les Ns = N/2 meilleurs vecteurs en fonction du coût
+    # Trie la population de façon à ce que les 6 premiers soient les 6 meilleurs
     sorted_image_list = pop_sort(image_list)
-    best_popu = lowest_cost_pop(sorted_image_list)
+    print('sorted popu')
+    print(sorted_image_list)
 
     # Applique des croisements aux meilleurs vecteurs
-    popu_cross = cross_over_avec_note(best_popu, Tc)
+    popu_cross = cross_over_avec_note(sorted_image_list, Tc)
     print("cross")
     print(popu_cross)
 
     # Applique des mutations aux meilleurs vecteurs
-    popu_muta = mutations(best_popu, Tm)
+    popu_muta = mutations(sorted_image_list, Tm)
     print("muta")
     print(popu_muta)
 
-    # # Crée une nouvelle population en fusionnant les meilleurs vecteurs et les vecteurs mutés
-    # popu_final = np.concatenate((popu_cross, best_popu), axis=0)
-
-    pop = np.concatenate((popu_cross, popu_muta), axis=0) ## retourne seulement les images issues du cross over les autres osnt deja conservées dans les favoris
+    # Crée une nouvelle population en fusionnant les vecteurs cross et les vecteurs mutés
+    pop = np.concatenate((popu_cross, popu_muta), axis=0)
     print("tot")
     print(pop)
     return pop
-
 
 
 
