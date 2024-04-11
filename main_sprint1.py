@@ -14,14 +14,12 @@ import numpy as np
 import os
 from PIL import Image
 import pickle
-#import interface.py
 
 
-############################
-### Récupérer les notes ###
-###########################
+#############
+### Notes ###
+#############
 
-#inutile
 def creation_list_note(nb_image_par_vague) :
     """
     Créer une liste de note aléatoire pour permettre de tester nos fonctions sans l'IHM
@@ -37,12 +35,12 @@ def creation_list_note(nb_image_par_vague) :
         Liste d'entier qui serviront de note
     """
 
-    # liste de note aléatoire en attendant lien fonctionnel avec l'IHM
+    # liste de note aléatoire pour tester sans l'IHM
     note = np.zeros(nb_image_par_vague)
     count_0=0
     for count_0 in range(nb_image_par_vague):
         #print(count_0)
-        note[count_0] = int(uniform(0, 11)) # note aléatoire en attendant le lien avec l'IHM
+        note[count_0] = int(uniform(0, 11)) # note aléatoire le lien sans l'IHM
     return note
 
 ##########################
@@ -76,11 +74,10 @@ def encoded_image (path_im_vague) :
 
     return encoded_image_list
 
-###########################################################################################################
-### Créer structure de données pour l'algorithme génétique [[[float note],[np.array image encodée]],[]] ###
-###########################################################################################################
+##############################################################################################################################
+### Créer structure de données pour l'algorithme génétique [[[float note, Nan, Nan ... Nan ],[np.array image encodée]],[]] ###
+##############################################################################################################################
 
-### on utilise directement ceux labelisés comme favoris plus besoin de note
 def data_structure_note_image(encoded_image_list, note) :
 
     """
@@ -122,30 +119,12 @@ def data_structure_note_image(encoded_image_list, note) :
             print(note)
             note_numpy[0] = note[count_2]
             note_numpy [1:taille_vecteur_image] = None
-            element=np.array([note_numpy, numpy]) ##flatten_numpy_image])
+            element=np.array([note_numpy, numpy])
             image_note_list.append(element)
             count_2+=1
 
     return image_note_list
 
-#########################################
-### Algorithme génétique (cross over) ###
-#########################################
-
-def algo_genetique_sans_note (encoded_image_list, taux_cross_over) :
-
-    image_after_algo_list=Algo_gen.cross_over_sans_note(encoded_image_list,taux_cross_over)
-
-    new_image_encoded=[]
-    count_3=0
-
-    ## création de la liste avec uniquement les numpy a décoder pour la prochaine vague
-    for image_numpy in image_after_algo_list :
-        image_reshape=image_numpy.reshape(1,256,32,32) # remettre sous forme matricielle
-        new_image_encoded.append(image_reshape)
-        count_3+=1
-
-    return new_image_encoded
 
 #########################################
 ### Algorithme génétique (cross over) ###
