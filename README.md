@@ -32,7 +32,7 @@ Le jeu de test contient initialement 3000 images mais afin d'alléger le dépot 
 
 ## Comment démarrer l'application ?
 
-Il faut run le fichier "interface.py" en éxécutant "python3 interface.py " dans un terminal linux.
+Il faut run le fichier "interface.py" en éxécutant "python3 ./interface.py " dans un terminal linux.
 
 ## git
 
