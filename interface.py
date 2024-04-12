@@ -102,6 +102,8 @@ class Favori(tk.Button):
 
         sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
         lim = 1
+        print('note:\n')
+        print (sorted_id_by_note)
         for i in sorted_id_by_note :
             if lim < 11 :
                 if (i[1]>3):
@@ -420,10 +422,14 @@ def on_fav_drag_release(event):
     global Dico_note
     global Dico_rang_fav
     for fav in Dico_rang_fav.values():
+        print(fav.winfo_geometry())
         if (widget.note is not None and widget.note >= 4):
             string =fav.winfo_geometry()
+            print(fav.winfo_geometry())
             part = string.split("+")
+            print(part)
             dim = part[0].split('x')
+            print(dim)
             w=int(dim[0])
             h=int(dim[1])
             x=int(part[1])
@@ -432,11 +438,18 @@ def on_fav_drag_release(event):
             bot_bound=y+h
             left_bound=x
             right_bound=x+w
+            print(top_bound)
+            print(bot_bound)
+            print(left_bound)
+            print(right_bound)
+
             if (widget.winfo_x()+event.x > left_bound and widget.winfo_x()+event.x < right_bound and (widget.winfo_y()+event.y)>top_bound and (widget.winfo_y()+event.y)<bot_bound):
                 sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
-                if (sorted_id_by_note[0][1]>=4):
-                    Dico_note[widget.id] = sorted_id_by_note[0][1]
-                    Favori.Update_Fav(Dico_note)
+                if(fav.note is not None):
+                    print(fav.note)
+                    if (fav.note >=4):
+                        Dico_note[widget.id] = fav.note
+                        Favori.Update_Fav(Dico_note)
 
 
        
