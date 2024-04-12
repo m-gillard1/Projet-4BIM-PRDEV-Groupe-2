@@ -32,7 +32,22 @@ Le jeu de test contient initialement 3000 images mais afin d'alléger le dépot 
 
 ## Comment démarrer l'application ?
 
-Il faut run le fichier "interface.py" en éxécutant "python3 ./interface.py " dans un terminal linux.
+* Ouvrir un terminal linux
+* Taper la commande suivante  : python3 -m pip install --index-url https://test.pypi.org/simple/ --no-deps software-project-g2
+* Taper python3 pour ouvrir une console python3
+* Taper from software_project_g2 import run
+* Taper run.run()
+
+
+Si il y a un éventuel problème concernant les packages :
+* Se placer dans le dossier .local/lib/python[version selon votre ordinateur]/site-packages/software_project_g2
+* Lancer pip install -r requirements.text
+* Taper python3 pour ouvrir une console python3
+* Taper from software_project_g2 import interface
+
+Sinon:
+* Installer les packages demandés.
+* run le fichier "interface.py" en éxécutant "python3 interface.py " dans un terminal linux.
 
 ## git
 
