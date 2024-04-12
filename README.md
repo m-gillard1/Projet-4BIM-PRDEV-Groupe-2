@@ -33,7 +33,7 @@ Le jeu de test contient initialement 3000 images mais afin d'alléger le dépot 
 ## Comment démarrer l'application ?
 
 * Ouvrir un terminal
-* pip install -i https://test.pypi.org/simple/ software-project-groupe-2==0.0.1
+* python3 -m pip install --index-url https://test.pypi.org/simple/ --no-deps software_project_g2   
 * cd $(find . -type d -name 'software_project_g2' -print -quit)
 * python3 run.py
 
