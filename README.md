@@ -10,7 +10,7 @@ Ce projet a été réalisé par le Groupe 2 (4 BIM) formé par :
 
 ## Description du Projet
 
-Notre projet vise à créer une expérience interactive où l'utilisateur est invité à découvrir une série d'images de portraits robots. Au fur et à mesure de la progression, ces images convergent progressivement vers le portrait de la personne à laquelle l'utilisateur pense.
+Notre projet vise à créer un logiciel qui permet à l'utilisateur de sélectionner des images parmis une série d'images de portraits robots. Au fur et à mesure de la progression, ces images convergent progressivement vers le portrait de la personne à laquelle l'utilisateur pense.
 
 
 ## Emplacement de la documentation
