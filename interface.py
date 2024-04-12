@@ -6,7 +6,7 @@ import webbrowser
 import pyautogui
 import time
 
-#import main_sprint1
+import main_sprint1
 
 ########## __FONCTIONS__ ##########
 
@@ -283,7 +283,7 @@ class Suspect(tk.Button):
         note_label.config(text="Note: "+str(suspect_actuel.note))
 
         if (suspect_actuel.note==3):
-            
+
             note_label.config(text="Pas d'image selectionnée")
             suspect_actuel = None
             suspect_principal.configure(image=Image_Instruction)
@@ -439,7 +439,7 @@ def on_fav_drag_release(event):
                     Favori.Update_Fav(Dico_note)
 
 
-       
+
 
 
 
@@ -565,7 +565,7 @@ def Genere_Suspect(Dico, Vague_actuelle ):
         # va chercher les images de la vague correspondante
         # génère les nouvelles images
         # renvoie la liste des path svers les nouvelles images
-    #Liste_Path_nouvelle_vague=main_sprint1.IHM_loop(Vague_actuelle, note_list, fav_list)
+    Liste_Path_nouvelle_vague=main_sprint1.IHM_loop(Vague_actuelle, note_list, fav_list)
 
     #print(Liste_Path_nouvelle_vague)
     return (Liste_Path_nouvelle_vague)
@@ -770,9 +770,9 @@ def switch_frames(fram1,fram2):
 def open_html():
     path = 'build/html/index.html'
     webbrowser.open(path)
-    
 
-    time.sleep(3) 
+
+    time.sleep(3)
     pyautogui.hotkey('alt','tab')
 
 
