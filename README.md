@@ -8,6 +8,11 @@ Ce projet a été réalisé par le Groupe 2 (4 BIM) formé par :
 - M.GILLARD
 - T.DUCASSE
 
+## Description du Projet
+
+Notre projet vise à créer une expérience interactive où l'utilisateur est invité à découvrir une série d'images de portraits robots. Au fur et à mesure de la progression, ces images convergent progressivement vers le portrait de la personne à laquelle l'utilisateur pense.
+
+
 ## Emplacement de la documentation
 
 La documentation a été réalisée grâce à l'outil "Sphinx". Pour y accéder, il faut se rendre dans le dossier "build" puis dans le dossier "html".
@@ -30,4 +35,5 @@ Le jeu de test contient initialement 3000 images mais afin d'alléger le dépot 
 Il faut run le fichier "interface.py" en éxécutant "python3 interface.py " dans un terminal linux.
 
 ## git
+
 IL faut se mettre sur la branche "final_project" qui est la branche finale de notre projet.
