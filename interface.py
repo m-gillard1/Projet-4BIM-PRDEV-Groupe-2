@@ -99,33 +99,70 @@ class Favori(tk.Button):
         Returns:
         None
         """
+        global suspect_actuel
+        if (type(suspect_actuel)==Favori):
+            id_cherche = suspect_actuel.id
 
-        sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
-        lim = 1
-        print('note:\n')
-        print (sorted_id_by_note)
-        for i in sorted_id_by_note :
-            if lim < 11 :
-                if (i[1]>3):
-                    path = i[0]
-                    #print(path)
-                    photo = Image.open(path)
-                    photo_resized = photo.resize((Dico_rang_fav[lim].large, Dico_rang_fav[lim].large,))
-                    Dico_rang_fav[lim].photo_image = ImageTk.PhotoImage(photo_resized)
-                    #print(Dico_rang_fav[lim])
-                    Dico_rang_fav[lim].id=path
-                    Dico_rang_fav[lim].note=i[1]
-                    Dico_rang_fav[lim].config(height=Dico_rang_fav[lim].large,width=Dico_rang_fav[lim].large, image=Dico_rang_fav[lim].photo_image, text=Dico_rang_fav[lim].note , pady = 20)
-                    lim+=1
+            sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
+            lim = 1
+            print('note:\n')
+            print (sorted_id_by_note)
+            for i in sorted_id_by_note :
+                if lim < 11 :
+                    if (i[1]>3):
+                        path = i[0]
+                        #print(path)
+                        photo = Image.open(path)
+                        photo_resized = photo.resize((Dico_rang_fav[lim].large, Dico_rang_fav[lim].large,))
+                        Dico_rang_fav[lim].photo_image = ImageTk.PhotoImage(photo_resized)
+                        #print(Dico_rang_fav[lim])
+                        Dico_rang_fav[lim].id=path
+                        Dico_rang_fav[lim].note=i[1]
+                        Dico_rang_fav[lim].config(height=Dico_rang_fav[lim].large,width=Dico_rang_fav[lim].large, image=Dico_rang_fav[lim].photo_image, text=Dico_rang_fav[lim].note , pady = 20)
+                        lim+=1
 
-        for j in range (10):
-            le_fav = Dico_rang_fav[j+1]
-            la_note = sorted_id_by_note[j][1]
-            if (la_note<4):
-                le_fav.note=None
-                le_fav.id=None
-                text_to_print='favori ' +  str (j+1)
-                le_fav.config(text=text_to_print, image='',height=le_fav.ht, width=le_fav.wd)
+            for j in range (10):
+                le_fav = Dico_rang_fav[j+1]
+                la_note = sorted_id_by_note[j][1]
+                if (la_note<4):
+                    le_fav.note=None
+                    le_fav.id=None
+                    text_to_print='favori ' +  str (j+1)
+                    le_fav.config(text=text_to_print, image='',height=le_fav.ht, width=le_fav.wd)
+            nouvelle_pos_id=0
+            for k in range (10):
+                if Dico_rang_fav[k+1].id==id_cherche: 
+                    nouvelle_pos_id=Dico_rang_fav[k+1]
+            Favori.selected_suspect_event(nouvelle_pos_id)
+
+        else:
+            sorted_id_by_note =  sorted(Dico_note.items(), reverse=True, key=lambda x:x[1])
+            lim = 1
+            print('note:\n')
+            print (sorted_id_by_note)
+            for i in sorted_id_by_note :
+                if lim < 11 :
+                    if (i[1]>3):
+                        path = i[0]
+                        #print(path)
+                        photo = Image.open(path)
+                        photo_resized = photo.resize((Dico_rang_fav[lim].large, Dico_rang_fav[lim].large,))
+                        Dico_rang_fav[lim].photo_image = ImageTk.PhotoImage(photo_resized)
+                        #print(Dico_rang_fav[lim])
+                        Dico_rang_fav[lim].id=path
+                        Dico_rang_fav[lim].note=i[1]
+                        Dico_rang_fav[lim].config(height=Dico_rang_fav[lim].large,width=Dico_rang_fav[lim].large, image=Dico_rang_fav[lim].photo_image, text=Dico_rang_fav[lim].note , pady = 20)
+                        lim+=1
+
+            for j in range (10):
+                le_fav = Dico_rang_fav[j+1]
+                la_note = sorted_id_by_note[j][1]
+                if (la_note<4):
+                    le_fav.note=None
+                    le_fav.id=None
+                    text_to_print='favori ' +  str (j+1)
+                    le_fav.config(text=text_to_print, image='',height=le_fav.ht, width=le_fav.wd)  
+
 
     def get_first_non_fav(dico_sorted):
         """
@@ -186,7 +223,6 @@ class Favori(tk.Button):
         None
         """
         if (type(self)==Favori):
-
             global suspect_actuel
             suspect_actuel = self
             note_label.config(text = 'Note: ' + str(self.note))
@@ -265,7 +301,13 @@ class Suspect(tk.Button):
         global note_label
         note_label.config(text="Note: "+str(suspect_actuel.note))
         Dico_note[suspect_actuel.id]= suspect_actuel.note
-        Favori.Update_Fav(Dico_note=Dico_note)
+        if (type(suspect_actuel)==Favori):
+            id = suspect_actuel.id
+            Favori.Update_Fav(Dico_note)
+        else : 
+            id=None
+            Favori.Update_Fav(Dico_note)
+        
 
     def decrement_note(self):
         """
@@ -285,7 +327,7 @@ class Suspect(tk.Button):
         note_label.config(text="Note: "+str(suspect_actuel.note))
 
         if (suspect_actuel.note==3):
-
+            
             note_label.config(text="Pas d'image selectionnée")
             suspect_actuel = None
             suspect_principal.configure(image=Image_Instruction)
@@ -452,7 +494,7 @@ def on_fav_drag_release(event):
                         Favori.Update_Fav(Dico_note)
 
 
-
+       
 
 
 
@@ -783,9 +825,9 @@ def switch_frames(fram1,fram2):
 def open_html():
     path = 'build/html/index.html'
     webbrowser.open(path)
+    
 
-
-    time.sleep(3)
+    time.sleep(3) 
     pyautogui.hotkey('alt','tab')
 
 
