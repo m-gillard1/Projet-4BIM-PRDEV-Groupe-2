@@ -36,4 +36,4 @@ Il faut run le fichier "interface.py" en éxécutant "python3 interface.py " dan
 
 ## git
 
-IL faut se mettre sur la branche "final_project" qui est la branche finale de notre projet.
+Il faut se mettre sur la branche "final_project" qui est la branche finale de notre projet.
