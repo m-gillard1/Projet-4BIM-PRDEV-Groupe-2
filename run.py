@@ -1,6 +1,6 @@
 import subprocess
 
-def run()
+def run():
   commande = "pip install -r requirements.txt"
   subprocess.run(commande, shell=True)
   import main_sprint1
@@ -8,3 +8,5 @@ def run()
   import Autoencoder_to_use
   import Training_autoencoder
   import interface
+
+run()
